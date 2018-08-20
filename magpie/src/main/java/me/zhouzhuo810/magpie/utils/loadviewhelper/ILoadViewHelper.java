@@ -9,13 +9,19 @@ import android.view.View;
 public interface ILoadViewHelper {
     void loadWidthHeightFont(View view);
 
-     void loadPadding(View view);
+    void loadPadding(View view);
 
-     void loadLayoutMargin(View view);
+    void loadLayoutMargin(View view);
 
-     void loadMaxWidthAndHeight(View view);
+    void loadMaxWidthAndHeight(View view);
 
-     void loadMinWidthAndHeight(View view);
+    void loadMinWidthAndHeight(View view);
 
-     int loadCustomAttrValue(int px);
+    /**
+     * 动态计算数值大小
+     *
+     * @param px 原始数据
+     * @return 缩放数据
+     */
+    int getScaledValue(int px);
 }

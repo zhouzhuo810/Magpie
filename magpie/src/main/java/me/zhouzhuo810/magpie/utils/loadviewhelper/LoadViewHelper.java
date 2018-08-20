@@ -72,12 +72,6 @@ public class LoadViewHelper extends AbsLoadViewHelper {
         ViewUtil.setMinHeight(view, setValue(ViewUtil.getMinHeight(view)));
     }
 
-    @Override
-    public int loadCustomAttrValue(int px) {
-        return setValue(px);
-    }
-
-
     private int setValue(int value) {
         if (value == 0) {
             return 0;
@@ -104,4 +98,8 @@ public class LoadViewHelper extends AbsLoadViewHelper {
     }
 
 
+    @Override
+    public int getScaledValue(int px) {
+        return setValue(px);
+    }
 }

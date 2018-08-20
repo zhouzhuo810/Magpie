@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TitleBar">
+        <attr name="ttb_showLeftLayout" format="boolean" />
+        <attr name="ttb_showTitle" format="boolean" />
+        <attr name="ttb_showRightLayout" format="boolean" />
+        <attr name="ttb_showLeftImg" format="boolean" />
+        <attr name="ttb_showLeftText" format="boolean" />
+        <attr name="ttb_showLeftMarkView" format="boolean" />
+        <attr name="ttb_showRightImg" format="boolean" />
+        <attr name="ttb_showRightText" format="boolean" />
+        <attr name="ttb_showRightMarkView" format="boolean" />
+        <attr name="ttb_leftImg" format="reference" />
+        <attr name="ttb_leftText" format="string|reference" />
+        <attr name="ttb_titleText" format="string|reference" />
+        <attr name="ttb_rightImg" format="reference" />
+        <attr name="ttb_rightText" format="string|reference" />
+        <attr name="ttb_textSizeTitle" format="dimension|reference" />
+        <attr name="ttb_textSizeTwoSide" format="dimension|reference" />
+        <attr name="ttb_textColorAll" format="color|reference" />
+    </declare-styleable>
+
+    <declare-styleable name="MarkView">
+        <attr name="mv_textSize" format="dimension|reference" />
+        <attr name="mv_textColor" format="color|reference" />
+        <attr name="mv_markNumber" format="integer" />
+        <attr name="mv_maxMarkNumber" format="integer" />
+        <attr name="mv_bgShape" format="enum">
+            <enum name="oval" value="0" />
+            <enum name="rect" value="1" />
+            <enum name="point" value="2" />
+        </attr>
+        <attr name="mv_bgColor" format="color|reference" />
+        <attr name="mv_point_size" format="dimension|reference" />
+    </declare-styleable>
+
+    <declare-styleable name="TabBar">
+        <attr name="tb_showMarkView" format="boolean" />
+        <attr name="tb_tabCount" format="enum">
+            <enum name="ONE" value="1" />
+            <enum name="TWO" value="2" />
+            <enum name="THREE" value="3" />
+            <enum name="FOUR" value="4" />
+            <enum name="FIVE" value="5" />
+        </attr>
+        <attr name="tb_tabNames" format="reference" />
+        <attr name="tb_show_img" format="boolean" />
+        <attr name="tb_show_text" format="boolean" />
+        <attr name="tb_show_underline" format="boolean" />
+        <attr name="tb_textSize" format="dimension|reference" />
+        <attr name="tb_imageSize" format="dimension|reference" />
+        <attr name="tb_textTopMargin" format="dimension|reference" />
+        <attr name="tb_markTextSize" format="dimension|reference" />
+        <attr name="tb_markPointSize" format="dimension|reference" />
+        <attr name="tb_markTextColor" format="color|reference" />
+        <attr name="tb_markBgColor" format="color|reference" />
+        <attr name="tb_textColorNormal" format="color|reference" />
+        <attr name="tb_textColorPress" format="color|reference" />
+
+    </declare-styleable>
+
+
+    <declare-styleable name="PagerIndicator">
+        <attr name="pi_indicator_type" format="enum">
+            <enum name="round_point" value="0" />
+            <enum name="tab_with_text" value="1" />
+            <enum name="tab_with_icon" value="2" />
+            <enum name="tab_with_icon_and_text" value="3" />
+        </attr>
+
+        <!--for tab-->
+        <attr name="pi_unselect_tab_text_size" format="dimension|reference" />
+        <attr name="pi_unselect_tab_text_color" format="color|reference" />
+        <attr name="pi_select_tab_text_size" format="dimension|reference" />
+        <attr name="pi_select_tab_text_color" format="color|reference" />
+        <attr name="pi_underline_color" format="color|reference" />
+        <attr name="pi_underline_height" format="dimension|reference" />
+        <attr name="pi_underline_padding" format="dimension|reference" />
+        <attr name="pi_tab_padding" format="dimension|reference" />
+        <attr name="pi_tab_icon_size" format="dimension|reference" />
+        <attr name="pi_show_underline" format="boolean" />
+        <attr name="pi_should_tab_expand" format="boolean" />
+        <attr name="pi_normal_tab_bg" format="reference" />
+        <attr name="pi_select_tab_bg" format="reference" />
+        <!--for tab with text and icon-->
+        <attr name="pi_tab_orientation" format="enum">
+            <enum name="vertical" value="0" />
+            <enum name="horizontal" value="1" />
+        </attr>
+        <attr name="pi_tab_icon_text_margin" format="dimension|reference" />
+        <attr name="pi_tab_is_horizontal_hide_icon" format="boolean" />
+
+        <!--for point-->
+        <attr name="pi_select_point_size" format="dimension|reference" />
+        <attr name="pi_unselect_point_size" format="dimension|reference" />
+        <attr name="pi_select_point_color" format="color|reference" />
+        <attr name="pi_unselect_point_color" format="color|reference" />
+        <attr name="pi_point_spacing" format="dimension|reference" />
+
+        <attr name="pi_is_need_scale_in_px" format="boolean" />
+
+    </declare-styleable>
+
+</resources>

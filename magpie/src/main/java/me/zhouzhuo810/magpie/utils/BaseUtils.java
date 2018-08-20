@@ -15,6 +15,7 @@ public class BaseUtils {
     private BaseUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
+
     /**
      * 在自定义的Application的onCreate方法中调用
      *
@@ -22,6 +23,8 @@ public class BaseUtils {
      */
     public static void init(Application app) {
         mApp = app;
+        //顺便初始化屏幕适配工具类
+        ScreenAdapterUtil.init(mApp);
     }
 
     public static Application getApp() {

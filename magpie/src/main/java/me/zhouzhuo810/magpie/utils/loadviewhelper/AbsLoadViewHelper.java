@@ -12,7 +12,7 @@ import me.zhouzhuo810.magpie.utils.conversion.SimpleConversion;
  * Created by yosemite on 2018/3/21.
  */
 
-public abstract class AbsLoadViewHelper implements ILoadViewHelper{
+public abstract class AbsLoadViewHelper implements ILoadViewHelper {
 
     protected float actualDensity;
     protected float actualDensityDpi;
@@ -67,4 +67,5 @@ public abstract class AbsLoadViewHelper implements ILoadViewHelper{
         }
 
     }
+
 }

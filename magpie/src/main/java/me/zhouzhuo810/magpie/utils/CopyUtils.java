@@ -16,8 +16,8 @@ public class CopyUtils {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
-    public static boolean copyPlainText(Context context, CharSequence label, String text) {
-        ClipboardManager cm = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+    public static boolean copyPlainText(CharSequence label, String text) {
+        ClipboardManager cm = (ClipboardManager) BaseUtils.getApp().getSystemService(Context.CLIPBOARD_SERVICE);
         if (cm == null) {
             return false;
         }
@@ -29,8 +29,8 @@ public class CopyUtils {
         }
     }
 
-    public static CharSequence getCopyPlainText(Context context) {
-        ClipboardManager cm = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+    public static CharSequence getCopyPlainText() {
+        ClipboardManager cm = (ClipboardManager) BaseUtils.getApp().getSystemService(Context.CLIPBOARD_SERVICE);
         if (cm == null) {
             return null;
         }
@@ -41,8 +41,8 @@ public class CopyUtils {
         }
     }
 
-    public static boolean copyUrl(Context context, CharSequence label, String url) {
-        ClipboardManager cm = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+    public static boolean copyUrl(CharSequence label, String url) {
+        ClipboardManager cm = (ClipboardManager) BaseUtils.getApp().getSystemService(Context.CLIPBOARD_SERVICE);
         if (cm == null) {
             return false;
         }
@@ -54,8 +54,8 @@ public class CopyUtils {
         }
     }
 
-    public static boolean copyUri(Context context, CharSequence label, Uri uri) {
-        ClipboardManager cm = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+    public static boolean copyUri(CharSequence label, Uri uri) {
+        ClipboardManager cm = (ClipboardManager) BaseUtils.getApp().getSystemService(Context.CLIPBOARD_SERVICE);
         if (cm == null) {
             return false;
         }
@@ -68,8 +68,8 @@ public class CopyUtils {
     }
 
 
-    public static Uri getCopyUri(Context context) {
-        ClipboardManager cm = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+    public static Uri getCopyUri() {
+        ClipboardManager cm = (ClipboardManager) BaseUtils.getApp().getSystemService(Context.CLIPBOARD_SERVICE);
         if (cm == null) {
             return null;
         }
@@ -81,8 +81,8 @@ public class CopyUtils {
     }
 
     @RequiresApi(value = 16)
-    public static boolean copyHtml(Context context, CharSequence label, String text, String html) {
-        ClipboardManager cm = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+    public static boolean copyHtml(CharSequence label, String text, String html) {
+        ClipboardManager cm = (ClipboardManager) BaseUtils.getApp().getSystemService(Context.CLIPBOARD_SERVICE);
         if (cm == null) {
             return false;
         }
@@ -95,8 +95,8 @@ public class CopyUtils {
     }
 
     @RequiresApi(value = 16)
-    public static CharSequence getCopyHtmlText(Context context) {
-        ClipboardManager cm = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+    public static CharSequence getCopyHtmlText() {
+        ClipboardManager cm = (ClipboardManager) BaseUtils.getApp().getSystemService(Context.CLIPBOARD_SERVICE);
         if (cm == null) {
             return null;
         }
@@ -107,8 +107,8 @@ public class CopyUtils {
         }
     }
 
-    public static boolean copyIntent(Context context, CharSequence label, Intent intent) {
-        ClipboardManager cm = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+    public static boolean copyIntent(CharSequence label, Intent intent) {
+        ClipboardManager cm = (ClipboardManager) BaseUtils.getApp().getSystemService(Context.CLIPBOARD_SERVICE);
         if (cm == null) {
             return false;
         }
@@ -121,8 +121,8 @@ public class CopyUtils {
 
     }
 
-    public static Intent getCopyIntent(Context context) {
-        ClipboardManager cm = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+    public static Intent getCopyIntent() {
+        ClipboardManager cm = (ClipboardManager) BaseUtils.getApp().getSystemService(Context.CLIPBOARD_SERVICE);
         if (cm == null) {
             return null;
         }
