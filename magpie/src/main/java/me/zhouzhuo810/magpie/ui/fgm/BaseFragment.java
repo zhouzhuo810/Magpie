@@ -103,11 +103,6 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
     }
 
     @Override
-    public void updateLanguage() {
-
-    }
-
-    @Override
     public void showLoadingDialog(String title, String msg) {
 
     }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Magpie</string>
+    <string name="search_text">Search</string>
+    <string name="language_setting">Language Settings</string>
+    <string name="dialog_text">Dialog</string>
+    <string-array name="language">
+        <item>Simple Chinese</item>
+        <item>Traditional Chinese</item>
+        <item>English</item>
+    </string-array>
+</resources>

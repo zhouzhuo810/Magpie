@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="me.zhouzhuo810.magpiedemo">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".MyApplication"
@@ -48,6 +48,11 @@
             </intent-filter>
 
         </activity>
+        <activity
+            android:name=".DialogActivity"
+            android:configChanges="screenSize|screenLayout|smallestScreenSize|fontScale|density|touchscreen"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

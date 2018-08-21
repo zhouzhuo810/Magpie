@@ -7,6 +7,56 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <me.zhouzhuo810.magpie.ui.widget.TitleBar
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_title_height"
+        android:background="@color/colorPrimary"
+        app:ttb_leftImg="@drawable/ic_arrow_back_black_24dp"
+        app:ttb_rightImg="@drawable/ic_more_horiz_black_24dp"
+        app:ttb_showLeftImg="true"
+        app:ttb_showLeftLayout="true"
+        app:ttb_showLeftMarkView="false"
+        app:ttb_showLeftText="false"
+        app:ttb_showRightImg="true"
+        app:ttb_showRightLayout="true"
+        app:ttb_showRightMarkView="false"
+        app:ttb_showRightText="false"
+        app:ttb_textSizeTitle="@dimen/base_title_text_size"
+        app:ttb_titleText="@string/app_name" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:layout_width="540px"
+            android:layout_height="100px"
+            android:background="#0f0" />
+
+        <View
+            android:layout_width="540px"
+            android:layout_height="100px"
+            android:background="#f00" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_language"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10px"
+        android:text="@string/language_setting"
+        android:textColor="@color/colorPrimary"
+        android:textSize="40px" />
+
+    <Button
+        android:id="@+id/btn_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10px"
+        android:text="@string/dialog_text"
+        android:textColor="@color/colorPrimary"
+        android:textSize="40px" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,7 +79,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10px"
-            android:text="Go"
+            android:text="@string/search_text"
             android:textColor="@color/colorPrimary"
             android:textSize="40px" />
 
@@ -39,6 +89,6 @@
         android:id="@+id/tv_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="40px"
-        android:textColor="@color/colorPrimary"/>
+        android:textColor="@color/colorPrimary"
+        android:textSize="40px" />
 </LinearLayout>

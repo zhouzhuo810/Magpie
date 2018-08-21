@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Magpie</string>
+    <string name="search_text">搜索</string>
+    <string name="language_setting">语言设定</string>
+    <string name="dialog_text">对话框</string>
+    <string-array name="language">
+        <item>简体中文</item>
+        <item>繁体中文</item>
+        <item>英语</item>
+    </string-array>
 </resources>

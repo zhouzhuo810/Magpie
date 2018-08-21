@@ -47,8 +47,6 @@ public interface IBaseFragment {
 
     public void overridePendingTransition(int enterAnim, int exitAnim);
 
-    public void updateLanguage();
-
     public void showLoadingDialog(String title, String msg);
 
     public void showLoadingDialog(String title, String msg, DialogInterface.OnDismissListener listener);

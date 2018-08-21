@@ -1,8 +1,7 @@
 package me.zhouzhuo810.magpiedemo;
 
-import android.content.DialogInterface;
-import android.support.annotation.Nullable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,32 +17,38 @@ import java.util.Collections;
 import java.util.List;
 
 import me.zhouzhuo810.magpie.ui.act.BaseActivity;
+import me.zhouzhuo810.magpie.ui.dialog.ListDialog;
 import me.zhouzhuo810.magpie.utils.CollectionUtil;
+import me.zhouzhuo810.magpie.utils.LanguageUtil;
 import me.zhouzhuo810.magpie.utils.ToastUtil;
 import me.zhouzhuo810.magpiedemo.api.Api;
 import me.zhouzhuo810.magpiedemo.api.entity.GetWeatherList;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private EditText etCity;
     private Button btnGo;
     private TextView tvResult;
+    private Button btnLanguage;
+    private Button btnDialog;
 
+    @Override
+    public boolean shouldSupportMultiLanguage() {
+        return true;
+    }
 
     @Override
     public int getLayoutId() {
         return R.layout.activity_main;
     }
 
-    @Override
-    public View getDecorView() {
-        return getWindow().getDecorView();
-    }
 
     @Override
     public void initView(@Nullable Bundle savedInstanceState) {
+        btnLanguage = findViewById(R.id.btn_language);
+        btnDialog = findViewById(R.id.btn_dialog);
         etCity = (EditText) findViewById(R.id.et_city);
         btnGo = (Button) findViewById(R.id.btn_go);
         tvResult = (TextView) findViewById(R.id.tv_result);
@@ -65,9 +70,23 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initEvent() {
-        btnGo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+
+        btnLanguage.setOnClickListener(this);
+
+        btnDialog.setOnClickListener(this);
+
+        btnGo.setOnClickListener(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_go:
                 String city = etCity.getText().toString().trim();
                 Kalle.get(Api.URL)
                         .param("city", city)
@@ -81,114 +100,32 @@ public class MainActivity extends BaseActivity {
                                 }
                             }
                         });
-            }
-        });
+                break;
+            case R.id.btn_language:
+                String[] items = getResources().getStringArray(R.array.language);
+                showListDialog(items, false, new ListDialog.OnItemClick() {
+                    @Override
+                    public void onItemClick(int position, String item) {
+                        switch (position) {
+                            case 0:
+                                LanguageUtil.setGlobalLanguage(LanguageUtil.SIMPLE_CHINESE);
+                                recreate();
+                                break;
+                            case 1:
+                                LanguageUtil.setGlobalLanguage(LanguageUtil.TRADITIONAL_CHINESE);
+                                recreate();
+                                break;
+                            case 2:
+                                LanguageUtil.setGlobalLanguage(LanguageUtil.ENGLISH);
+                                recreate();
+                                break;
+                        }
+                    }
+                });
+                break;
+            case R.id.btn_dialog:
+                startAct(DialogActivity.class);
+                break;
+        }
     }
-
-
-    @Override
-    public void updateLanguage() {
-
-    }
-
-    @Override
-    public void showLoadingDialog(String title, String msg) {
-
-    }
-
-    @Override
-    public void showLoadingDialog(String title, String msg, DialogInterface.OnDismissListener listener) {
-
-    }
-
-    @Override
-    public void showLoadingDialog(String title, String msg, boolean iosStyle, DialogInterface.OnDismissListener onDismissListener) {
-
-    }
-
-    @Override
-    public void hideLoadingDialog() {
-
-    }
-
-    @Override
-    public void showProgressDialog(String title, String msg, OnProgressListener onProgressListener) {
-
-    }
-
-    @Override
-    public void hideProgressDialog() {
-
-    }
-
-    @Override
-    public void showTwoBtnDialog(String title, String msg, boolean cancelable, OnTwoBtnClick onTwoBtnClick) {
-
-    }
-
-    @Override
-    public void showTwoBtnDialog(String title, String msg, boolean cancelable, OnTwoBtnClick onTwoBtnClick, DialogInterface.OnDismissListener onDismissListener) {
-
-    }
-
-    @Override
-    public void hideTwoBtnDialog() {
-
-    }
-
-    @Override
-    public void showEditDialog(String title, String msg, String hint, boolean cancelable, OnTwoBtnEditClick onTwoBtnEditClick) {
-
-    }
-
-    @Override
-    public void showEditDialog(String title, String msg, String hint, boolean cancelable, OnTwoBtnEditClick onTwoBtnEditClick, DialogInterface.OnDismissListener onDismissListener) {
-
-    }
-
-    @Override
-    public void hideEditDialog() {
-
-    }
-
-    @Override
-    public void showListDialog(List<String> items, boolean cancelable, boolean checkable, OnItemClick onItemClick, DialogInterface.OnDismissListener onDismissListener) {
-
-    }
-
-    @Override
-    public void hideListDialog() {
-
-    }
-
-    @Override
-    public void showBottomSheet(List<String> items, boolean cancelable, boolean iosStyle) {
-
-    }
-
-    @Override
-    public void showBottomSheet(List<String> items, boolean cancelable, boolean iosStyle, DialogInterface.OnDismissListener onDismissListener) {
-
-    }
-
-    @Override
-    public void hideBottomSheet() {
-
-    }
-
-    @Override
-    public void refreshData(String... params) {
-
-    }
-
-    @Override
-    public void loadMoreData(String... params) {
-
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
 }

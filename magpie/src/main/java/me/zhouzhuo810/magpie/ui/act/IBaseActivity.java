@@ -1,5 +1,7 @@
 package me.zhouzhuo810.magpie.ui.act;
 
+import android.app.Activity;
+import android.app.Application;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +13,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import me.zhouzhuo810.magpie.ui.dialog.ListDialog;
+import me.zhouzhuo810.magpie.utils.LanguageUtil;
+
 public interface IBaseActivity {
 
     /**
@@ -19,6 +24,28 @@ public interface IBaseActivity {
      * @return 默认false，即使用框架提供的动画
      */
     public boolean useSysFinishAnim();
+
+    /**
+     * 是否支持多语言
+     *
+     * @return true/false, 默认返回false
+     * <p>
+     * 如果返回false，表示您的app不需要支持多语言；
+     * <p>
+     * 如果返回true，表示您的app需要支持多语言
+     * <p>
+     * 可以使用{@link Application#onCreate()}中调用
+     * {@link me.zhouzhuo810.magpie.utils.LanguageUtil#setGlobalLanguage(int)}
+     * 方法设置默认语言
+     * <p>
+     * 参数值请参考：
+     * <ul>
+     * <li>{@link LanguageUtil#SIMPLE_CHINESE}</li>
+     * <li>{@link LanguageUtil#TRADITIONAL_CHINESE }</li>
+     * <li>{@link LanguageUtil#ENGLISH }</li>
+     * </ul>
+     */
+    public boolean shouldSupportMultiLanguage();
 
     /**
      * 获取布局的id
@@ -30,7 +57,7 @@ public interface IBaseActivity {
     /**
      * 屏幕适配需要返回getWindow().getDecorView();
      *
-     * @return getWindow().getDecorView()
+     * @return {@link android.app.Activity#getWindow()#getDecorView()}
      */
     public View getDecorView();
 
@@ -40,11 +67,7 @@ public interface IBaseActivity {
 
     public void initEvent();
 
-    public void closeAct();
-
-    public void closeAct(boolean defaultBack);
-
-    public void closeAllAct();
+    public void startAct(Class<? extends Activity> clazz);
 
     public void startActWithIntent(Intent intent);
 
@@ -54,8 +77,15 @@ public interface IBaseActivity {
 
     public void startActWithIntentForResult(Intent intent, int requestCode, boolean defaultAnim);
 
-    public void overridePendingTransition(int enterAnim, int exitAnim);
+    public void restart();
 
+    public void closeAct();
+
+    public void closeAct(boolean defaultBack);
+
+    public void closeAllAct();
+
+    public void overridePendingTransition(int enterAnim, int exitAnim);
 
     /**
      * 启动Activity进入动画
@@ -85,8 +115,6 @@ public interface IBaseActivity {
      */
     int closeOutAnimation();
 
-    public void updateLanguage();
-
     public void showLoadingDialog(String title, String msg);
 
     public void showLoadingDialog(String title, String msg, DialogInterface.OnDismissListener listener);
@@ -101,17 +129,21 @@ public interface IBaseActivity {
 
     public void showTwoBtnDialog(String title, String msg, boolean cancelable, OnTwoBtnClick onTwoBtnClick);
 
-    public void showTwoBtnDialog(String title, String msg, boolean cancelable, OnTwoBtnClick onTwoBtnClick, DialogInterface.OnDismissListener onDismissListener);
+    public void showTwoBtnDialog(String title, String msg, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, OnTwoBtnClick onTwoBtnClick);
 
     public void hideTwoBtnDialog();
 
     public void showEditDialog(String title, String msg, String hint, boolean cancelable, OnTwoBtnEditClick onTwoBtnEditClick);
 
-    public void showEditDialog(String title, String msg, String hint, boolean cancelable, OnTwoBtnEditClick onTwoBtnEditClick, DialogInterface.OnDismissListener onDismissListener);
+    public void showEditDialog(String title, String msg, String hint, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, OnTwoBtnEditClick onTwoBtnEditClick);
 
     public void hideEditDialog();
 
-    public void showListDialog(List<String> items, boolean cancelable, boolean checkable, OnItemClick onItemClick, DialogInterface.OnDismissListener onDismissListener);
+    public void showListDialog(String[] items, boolean cancelable, ListDialog.OnItemClick onItemClick);
+
+    public void showListDialog(List<String> items, boolean cancelable, ListDialog.OnItemClick onItemClick);
+
+    public void showListDialog(List<String> items, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, ListDialog.OnItemClick onItemClick);
 
     public void hideListDialog();
 
@@ -125,9 +157,6 @@ public interface IBaseActivity {
 
     public void loadMoreData(String... params);
 
-    public interface OnItemClick {
-        void onItemClick(int position, String item);
-    }
 
     public interface OnTwoBtnEditClick {
         void onOk(String etContent);

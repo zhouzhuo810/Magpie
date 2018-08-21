@@ -136,9 +136,9 @@ public class TabBar extends LinearLayout {
         if (attrs != null) {
             TypedArray t = context.obtainStyledAttributes(attrs, R.styleable.TabBar);
             int imageSize = t.getDimensionPixelSize(R.styleable.TabBar_tb_imageSize, 60);
-            setImageSize(imageSize);
+            setImageSize(imageSize, false);
             int textTopMargin = t.getDimensionPixelSize(R.styleable.TabBar_tb_textTopMargin, 5);
-            setTextTopMargin(textTopMargin);
+            setTextTopMargin(textTopMargin, false);
             textSize = t.getDimensionPixelSize(R.styleable.TabBar_tb_textSize, 40);
             int markPointSize = t.getDimensionPixelSize(R.styleable.TabBar_tb_markPointSize, 24);
             setMarkPointSize(markPointSize);
@@ -255,7 +255,7 @@ public class TabBar extends LinearLayout {
         } else {
             textSize = 40;
         }
-        textSize = ScreenAdapterUtil.getInstance().getScaledValue(textSize);
+//        textSize = ScreenAdapterUtil.getInstance().getScaledValue(textSize);
         tv0.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         tv1.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         tv2.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
@@ -268,7 +268,15 @@ public class TabBar extends LinearLayout {
     }
 
     public TabBar setTextTopMargin(int marginTop) {
-        int size = ScreenAdapterUtil.getInstance().getScaledValue(marginTop);
+        setTextTopMargin(marginTop, true);
+        return this;
+    }
+
+    private TabBar setTextTopMargin(int marginTop, boolean autoSize) {
+        int size = marginTop;
+        if (autoSize) {
+            size = ScreenAdapterUtil.getInstance().getScaledValue(marginTop);
+        }
         LayoutParams lp0 = (LayoutParams) tv0.getLayoutParams();
         LayoutParams lp1 = (LayoutParams) tv1.getLayoutParams();
         LayoutParams lp2 = (LayoutParams) tv2.getLayoutParams();
@@ -288,7 +296,15 @@ public class TabBar extends LinearLayout {
     }
 
     public TabBar setImageSize(int imageSize) {
-        int size = ScreenAdapterUtil.getInstance().getScaledValue(imageSize);
+        setImageSize(imageSize, true);
+        return this;
+    }
+
+    public TabBar setImageSize(int imageSize, boolean autoSize) {
+        int size = imageSize;
+        if (autoSize) {
+            size = ScreenAdapterUtil.getInstance().getScaledValue(imageSize);
+        }
         LayoutParams lp0 = (LayoutParams) iv0.getLayoutParams();
         LayoutParams lp1 = (LayoutParams) iv1.getLayoutParams();
         LayoutParams lp2 = (LayoutParams) iv2.getLayoutParams();

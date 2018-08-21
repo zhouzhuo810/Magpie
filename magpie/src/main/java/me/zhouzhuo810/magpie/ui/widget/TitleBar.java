@@ -82,8 +82,8 @@ public class TitleBar extends RelativeLayout {
         mvRight = (MarkView) root.findViewById(R.id.mv_right);
         llRight = (LinearLayout) root.findViewById(R.id.ll_right);
         initEvent();
-        addView(root);
         initAttrs(context, attrs);
+        addView(root);
         setGravity(Gravity.CENTER_VERTICAL);
     }
 
@@ -122,9 +122,7 @@ public class TitleBar extends RelativeLayout {
             }
             /*textSize*/
             int textSizeTitle = t.getDimensionPixelSize(R.styleable.TitleBar_ttb_textSizeTitle, 50);
-            textSizeTitle = ScreenAdapterUtil.getInstance().getScaledValue(textSizeTitle);
             int textSizeTwoSide = t.getDimensionPixelSize(R.styleable.TitleBar_ttb_textSizeTwoSide, 40);
-            textSizeTwoSide = ScreenAdapterUtil.getInstance().getScaledValue(textSizeTwoSide);
             tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSizeTitle);
             tvLeft.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSizeTwoSide);
             tvRight.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSizeTwoSide);
@@ -146,17 +144,17 @@ public class TitleBar extends RelativeLayout {
             setVisible(llRight, false);
             setVisible(ivLeft, false);
             setVisible(rlLeft, false);
-            setVisible(tvLeft, false);
+            setVisible(tvLeft, true);
             setVisible(tvTitle, true);
-            setVisible(ivRight, false);
+            setVisible(ivRight, true);
             setVisible(rlRight, false);
             setVisible(tvRight, false);
             setVisible(mvLeft, false);
             setVisible(mvRight, false);
 
             /*textSize*/
-            int textSizeTitle = ScreenAdapterUtil.getInstance().getScaledValue(50);
-            int textSizeTwoSide = ScreenAdapterUtil.getInstance().getScaledValue(40);
+            int textSizeTitle = 50;
+            int textSizeTwoSide = 40;
             tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSizeTitle);
             tvLeft.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSizeTwoSide);
             tvRight.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSizeTwoSide);
