@@ -7,12 +7,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
+import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.List;
 
+import me.zhouzhuo810.magpie.ui.dialog.BottomSheetDialog;
 import me.zhouzhuo810.magpie.ui.dialog.ListDialog;
 import me.zhouzhuo810.magpie.utils.LanguageUtil;
 
@@ -115,11 +120,17 @@ public interface IBaseActivity {
      */
     int closeOutAnimation();
 
+    public void showLoadingDialog(String msg);
+
     public void showLoadingDialog(String title, String msg);
 
-    public void showLoadingDialog(String title, String msg, DialogInterface.OnDismissListener listener);
+    public void showLoadingDialog(String title, String msg, boolean cancelable);
 
-    public void showLoadingDialog(String title, String msg, boolean iosStyle, DialogInterface.OnDismissListener onDismissListener);
+    public void showLoadingDialog(String title, String msg, boolean cancelable, boolean iosStyle);
+
+    public void showLoadingDialog(String title, String msg, boolean cancelable, DialogInterface.OnDismissListener listener);
+
+    public void showLoadingDialog(String title, String msg, boolean cancelable, boolean iosStyle, DialogInterface.OnDismissListener onDismissListener);
 
     public void hideLoadingDialog();
 
@@ -141,15 +152,41 @@ public interface IBaseActivity {
 
     public void showListDialog(String[] items, boolean cancelable, ListDialog.OnItemClick onItemClick);
 
-    public void showListDialog(List<String> items, boolean cancelable, ListDialog.OnItemClick onItemClick);
+    public void showListDialog(String title, String[] items, boolean cancelable, ListDialog.OnItemClick onItemClick);
 
-    public void showListDialog(List<String> items, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, ListDialog.OnItemClick onItemClick);
+    public void showListDialog(String title, String[] items, boolean alignLeft, boolean cancelable, ListDialog.OnItemClick onItemClick);
+
+    public void showListDialog(String title, List<String> items, boolean alignLeft, boolean cancelable, ListDialog.OnItemClick onItemClick);
+
+    public void showListDialog(String title, List<String> items, boolean cancelable, ListDialog.OnItemClick onItemClick);
+
+    public void showListDialog(String title, List<String> items, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, ListDialog.OnItemClick onItemClick);
+
+    /**
+     * 显示列表对话框
+     *
+     * @param title             对话框标题，传null表示不显示
+     * @param items             列表数据集合
+     * @param alignLeft         是否左对齐，否则居中对齐
+     * @param cancelable        是否可以点击空白处或点返回键取消
+     * @param onDismissListener 对话框消失回调
+     * @param onItemClick       对话框点击回调
+     */
+    public void showListDialog(String title, List<String> items, boolean alignLeft, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, ListDialog.OnItemClick onItemClick);
 
     public void hideListDialog();
 
-    public void showBottomSheet(List<String> items, boolean cancelable, boolean iosStyle);
+    public void showBottomSheet(String title, String[] items, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick);
 
-    public void showBottomSheet(List<String> items, boolean cancelable, boolean iosStyle, DialogInterface.OnDismissListener onDismissListener);
+    public void showBottomSheet(String title, String[] items, boolean alignLeft, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick);
+
+    public void showBottomSheet(String title, List<String> items, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick);
+
+    public void showBottomSheet(String title, List<String> items, boolean alignLeft, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick);
+
+    public void showBottomSheet(String title, String[] items, boolean alignLeft, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, BottomSheetDialog.OnItemClick onItemClick);
+
+    public void showBottomSheet(String title, List<String> items, boolean alignLeft, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, BottomSheetDialog.OnItemClick onItemClick);
 
     public void hideBottomSheet();
 
@@ -157,6 +194,7 @@ public interface IBaseActivity {
 
     public void loadMoreData(String... params);
 
+    public TextWatcher setEditImageListener(EditText et, ImageView iv);
 
     public interface OnTwoBtnEditClick {
         void onOk(String etContent);

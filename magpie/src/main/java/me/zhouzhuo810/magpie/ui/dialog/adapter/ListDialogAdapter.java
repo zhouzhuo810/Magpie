@@ -1,6 +1,10 @@
 package me.zhouzhuo810.magpie.ui.dialog.adapter;
 
 import android.content.Context;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -8,6 +12,17 @@ import me.zhouzhuo810.magpie.R;
 import me.zhouzhuo810.magpie.ui.adapter.RvBaseAdapter;
 
 public class ListDialogAdapter extends RvBaseAdapter<String> {
+
+    private boolean alignLeft;
+
+    public boolean isAlignLeft() {
+        return alignLeft;
+    }
+
+    public void setAlignLeft(boolean alignLeft) {
+        this.alignLeft = alignLeft;
+    }
+
 
     public ListDialogAdapter(Context context, List<String> data) {
         super(context, data);
@@ -20,6 +35,13 @@ public class ListDialogAdapter extends RvBaseAdapter<String> {
 
     @Override
     protected void fillData(ViewHolder holder, String item, int position) {
-        holder.setText(R.id.tv_name, item);
+        TextView view = holder.getView(R.id.tv_name);
+        view.setText(item);
+        holder.setVisible(R.id.line_item, position != 0);
+        if (alignLeft) {
+            view.setGravity(Gravity.CENTER_VERTICAL | Gravity.START);
+        } else {
+            view.setGravity(Gravity.CENTER);
+        }
     }
 }

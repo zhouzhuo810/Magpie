@@ -103,7 +103,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.btn_language:
                 String[] items = getResources().getStringArray(R.array.language);
-                showListDialog(items, false, new ListDialog.OnItemClick() {
+                showListDialog(getString(R.string.app_name), items, true, false, new ListDialog.OnItemClick() {
                     @Override
                     public void onItemClick(int position, String item) {
                         switch (position) {

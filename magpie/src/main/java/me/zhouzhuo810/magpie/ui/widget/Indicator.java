@@ -28,7 +28,7 @@ import me.zhouzhuo810.magpie.utils.ScreenAdapterUtil;
 /**
  * Created by zz on 2016/8/22.
  */
-public class PagerIndicator extends HorizontalScrollView implements IPagerIndicator {
+public class Indicator extends HorizontalScrollView implements IPagerIndicator {
 
     private IndicatorType indicatorType = IndicatorType.RoundPoint;
 
@@ -77,18 +77,18 @@ public class PagerIndicator extends HorizontalScrollView implements IPagerIndica
         VERTICAL, HORIZONTAL
     }
 
-    public PagerIndicator(Context context) {
+    public Indicator(Context context) {
         super(context);
         init(context, null);
     }
 
-    public PagerIndicator(Context context, AttributeSet attrs) {
+    public Indicator(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context, attrs);
 
     }
 
-    public PagerIndicator(Context context, AttributeSet attrs, int defStyleAttr) {
+    public Indicator(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
 
@@ -103,32 +103,32 @@ public class PagerIndicator extends HorizontalScrollView implements IPagerIndica
 
         //init attrs
         if (attrs != null) {
-            TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.PagerIndicator);
-            isNeedScaleInPx = a.getBoolean(R.styleable.PagerIndicator_pi_is_need_scale_in_px, false);
+            TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.Indicator);
+            isNeedScaleInPx = a.getBoolean(R.styleable.Indicator_i_is_need_scale_in_px, false);
 
-            shouldExpand = a.getBoolean(R.styleable.PagerIndicator_pi_should_tab_expand, false);
-            int indicatorInt = a.getInt(R.styleable.PagerIndicator_pi_indicator_type, 0);
-            int tabOriInt = a.getInt(R.styleable.PagerIndicator_pi_tab_orientation, 0);
-            colorSelectPoint = a.getColor(R.styleable.PagerIndicator_pi_select_point_color, 0xff438cff);
-            colorUnSelectPoint = a.getColor(R.styleable.PagerIndicator_pi_unselect_point_color, 0xff000000);
-            selectPointSize = a.getDimensionPixelSize(R.styleable.PagerIndicator_pi_select_point_size, 100);
-            unSelectPointSize = a.getDimensionPixelSize(R.styleable.PagerIndicator_pi_unselect_point_size, 90);
-            spacing = a.getDimensionPixelSize(R.styleable.PagerIndicator_pi_point_spacing, 8);
-            tabBgNormalId = a.getResourceId(R.styleable.PagerIndicator_pi_normal_tab_bg, -1);
-            tabBgSelectId = a.getResourceId(R.styleable.PagerIndicator_pi_select_tab_bg, -1);
+            shouldExpand = a.getBoolean(R.styleable.Indicator_i_should_tab_expand, false);
+            int indicatorInt = a.getInt(R.styleable.Indicator_i_indicator_type, 0);
+            int tabOriInt = a.getInt(R.styleable.Indicator_i_tab_orientation, 0);
+            colorSelectPoint = a.getColor(R.styleable.Indicator_i_select_point_color, 0xff438cff);
+            colorUnSelectPoint = a.getColor(R.styleable.Indicator_i_unselect_point_color, 0xff000000);
+            selectPointSize = a.getDimensionPixelSize(R.styleable.Indicator_i_select_point_size, 100);
+            unSelectPointSize = a.getDimensionPixelSize(R.styleable.Indicator_i_unselect_point_size, 90);
+            spacing = a.getDimensionPixelSize(R.styleable.Indicator_i_point_spacing, 8);
+            tabBgNormalId = a.getResourceId(R.styleable.Indicator_i_normal_tab_bg, -1);
+            tabBgSelectId = a.getResourceId(R.styleable.Indicator_i_select_tab_bg, -1);
 
-            tabTextColorSelect = a.getColor(R.styleable.PagerIndicator_pi_select_tab_text_color, 0xff438cff);
-            tabTextColorUnSelect = a.getColor(R.styleable.PagerIndicator_pi_unselect_tab_text_color, 0xff000000);
-            tabTextSizeSelect = a.getDimensionPixelSize(R.styleable.PagerIndicator_pi_select_tab_text_size, 40);
-            tabTextSizeUnSelect = a.getDimensionPixelSize(R.styleable.PagerIndicator_pi_unselect_tab_text_size, 40);
-            tabIconTextMargin = a.getDimensionPixelSize(R.styleable.PagerIndicator_pi_tab_icon_text_margin, 10);
-            showUnderline = a.getBoolean(R.styleable.PagerIndicator_pi_show_underline, true);
-            underlineHeight = a.getDimensionPixelSize(R.styleable.PagerIndicator_pi_underline_height, 10);
-            underlinePadding = a.getDimensionPixelSize(R.styleable.PagerIndicator_pi_underline_padding, 20);
-            tabPadding = a.getDimensionPixelSize(R.styleable.PagerIndicator_pi_tab_padding, 24);
-            tabIconSize = a.getDimensionPixelSize(R.styleable.PagerIndicator_pi_tab_icon_size, 80);
-            underlineColor = a.getColor(R.styleable.PagerIndicator_pi_underline_color, 0xff438cff);
-            horizontalHideIconMode = a.getBoolean(R.styleable.PagerIndicator_pi_tab_is_horizontal_hide_icon, false);
+            tabTextColorSelect = a.getColor(R.styleable.Indicator_i_select_tab_text_color, 0xff438cff);
+            tabTextColorUnSelect = a.getColor(R.styleable.Indicator_i_unselect_tab_text_color, 0xff000000);
+            tabTextSizeSelect = a.getDimensionPixelSize(R.styleable.Indicator_i_select_tab_text_size, 40);
+            tabTextSizeUnSelect = a.getDimensionPixelSize(R.styleable.Indicator_i_unselect_tab_text_size, 40);
+            tabIconTextMargin = a.getDimensionPixelSize(R.styleable.Indicator_i_tab_icon_text_margin, 10);
+            showUnderline = a.getBoolean(R.styleable.Indicator_i_show_underline, true);
+            underlineHeight = a.getDimensionPixelSize(R.styleable.Indicator_i_underline_height, 10);
+            underlinePadding = a.getDimensionPixelSize(R.styleable.Indicator_i_underline_padding, 20);
+            tabPadding = a.getDimensionPixelSize(R.styleable.Indicator_i_tab_padding, 24);
+            tabIconSize = a.getDimensionPixelSize(R.styleable.Indicator_i_tab_icon_size, 80);
+            underlineColor = a.getColor(R.styleable.Indicator_i_underline_color, 0xff438cff);
+            horizontalHideIconMode = a.getBoolean(R.styleable.Indicator_i_tab_is_horizontal_hide_icon, false);
 
             if (isNeedScaleInPx) {
                 selectPointSize = ScreenAdapterUtil.getInstance().getScaledValue(selectPointSize);

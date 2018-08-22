@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
     android:orientation="vertical">
 
     <TextView
@@ -26,10 +26,31 @@
         android:layout_height="1px"
         android:background="@color/colorBlack10" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:overScrollMode="never"
-        tools:listitem="@layout/item_lv_dialog" />
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="60px"
+        android:paddingLeft="60px"
+        android:paddingRight="60px"
+        android:paddingTop="60px">
+
+        <ProgressBar
+            android:id="@+id/pb_loading"
+            android:layout_width="110px"
+            android:layout_height="110px"
+            android:indeterminate="true"
+            android:indeterminateBehavior="repeat"
+            />
+
+        <TextView
+            android:id="@+id/tv_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40px"
+            android:textColor="@color/colorBaseDialogTextColor"
+            android:textSize="@dimen/base_dialog_title_text_size"
+            tools:text="消息内容" />
+    </LinearLayout>
 </LinearLayout>

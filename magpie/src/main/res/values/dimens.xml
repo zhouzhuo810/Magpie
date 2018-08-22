@@ -5,5 +5,7 @@
     <dimen name="base_title_text_size">46px</dimen>
     <dimen name="base_tab_text_size">46px</dimen>
     <dimen name="base_tab_icon_size">50px</dimen>
+    <dimen name="base_dialog_title_height">140px</dimen>
+    <dimen name="base_dialog_title_text_size">40px</dimen>
     <dimen name="base_dialog_item_height">130px</dimen>
 </resources>

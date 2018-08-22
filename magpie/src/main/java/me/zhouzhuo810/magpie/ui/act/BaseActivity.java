@@ -7,7 +7,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -18,7 +22,9 @@ import java.util.List;
 import me.zhouzhuo810.magpie.R;
 import me.zhouzhuo810.magpie.cons.Cons;
 import me.zhouzhuo810.magpie.event.CloseAllActEvent;
+import me.zhouzhuo810.magpie.ui.dialog.BottomSheetDialog;
 import me.zhouzhuo810.magpie.ui.dialog.ListDialog;
+import me.zhouzhuo810.magpie.ui.dialog.LoadingDialog;
 import me.zhouzhuo810.magpie.utils.CollectionUtil;
 import me.zhouzhuo810.magpie.utils.LanguageUtil;
 import me.zhouzhuo810.magpie.utils.ScreenAdapterUtil;
@@ -27,6 +33,8 @@ import me.zhouzhuo810.magpie.utils.SpUtils;
 public abstract class BaseActivity extends AppCompatActivity implements IBaseActivity {
 
     private ListDialog listDialog;
+    private BottomSheetDialog bsDialog;
+    private LoadingDialog loadingDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -142,23 +150,47 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     }
 
     @Override
+    public void showLoadingDialog(String msg) {
+        showLoadingDialog(null, msg);
+    }
+
+    @Override
     public void showLoadingDialog(String title, String msg) {
-
+        showLoadingDialog(title, msg, false, null);
     }
 
     @Override
-    public void showLoadingDialog(String title, String msg, DialogInterface.OnDismissListener listener) {
-
+    public void showLoadingDialog(String title, String msg, boolean cancelable) {
+        showLoadingDialog(title, msg, cancelable, false, null);
     }
 
     @Override
-    public void showLoadingDialog(String title, String msg, boolean iosStyle, DialogInterface.OnDismissListener onDismissListener) {
+    public void showLoadingDialog(String title, String msg, boolean cancelable, boolean iosStyle) {
+        showLoadingDialog(title, msg, cancelable, iosStyle, null);
+    }
 
+    @Override
+    public void showLoadingDialog(String title, String msg, boolean cancelable, DialogInterface.OnDismissListener listener) {
+        showLoadingDialog(title, msg, cancelable, false, null);
+    }
+
+    @Override
+    public void showLoadingDialog(String title, String msg, boolean cancelable, boolean iosStyle, DialogInterface.OnDismissListener onDismissListener) {
+        hideLoadingDialog();
+        loadingDialog = new LoadingDialog();
+        loadingDialog.setTitle(title)
+                .setMsg(msg)
+                .setIosStyle(iosStyle)
+                .setOnDismissListener(onDismissListener)
+                .setCancelable(cancelable);
+        loadingDialog.show(getSupportFragmentManager(), getClass().getSimpleName());
     }
 
     @Override
     public void hideLoadingDialog() {
-
+        if (loadingDialog != null) {
+            loadingDialog.dismissDialog();
+        }
     }
 
     @Override
@@ -203,19 +235,44 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
 
     @Override
     public void showListDialog(String[] items, boolean cancelable, ListDialog.OnItemClick onItemClick) {
-        showListDialog(CollectionUtil.stringToList(items), cancelable, null, onItemClick);
+        showListDialog(null, CollectionUtil.stringToList(items), cancelable, null, onItemClick);
     }
 
     @Override
-    public void showListDialog(List<String> items, boolean cancelable, ListDialog.OnItemClick onItemClick) {
-        showListDialog(items, cancelable, null, onItemClick);
+    public void showListDialog(String title, String[] items, boolean cancelable, ListDialog.OnItemClick onItemClick) {
+        showListDialog(title, CollectionUtil.stringToList(items), cancelable, null, onItemClick);
     }
 
     @Override
-    public void showListDialog(List<String> items, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, ListDialog.OnItemClick onItemClick) {
+    public void showListDialog(String title, String[] items, boolean alignLeft, boolean cancelable, ListDialog.OnItemClick onItemClick) {
+        showListDialog(title, CollectionUtil.stringToList(items), alignLeft, cancelable, null, onItemClick);
+    }
+
+    @Override
+    public void showListDialog(String title, List<String> items, boolean alignLeft, boolean cancelable, ListDialog.OnItemClick onItemClick) {
+        showListDialog(title, items, alignLeft, cancelable, null, onItemClick);
+    }
+
+    @Override
+    public void showListDialog(String title, List<String> items, boolean cancelable, ListDialog.OnItemClick onItemClick) {
+        showListDialog(title, items, cancelable, null, onItemClick);
+    }
+
+    @Override
+    public void showListDialog(String title, List<String> items, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, ListDialog.OnItemClick onItemClick) {
+        showListDialog(title, items, false, cancelable, onDismissListener, onItemClick);
+    }
+
+    @Override
+    public void showListDialog(String title, List<String> items, boolean alignLeft, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, ListDialog.OnItemClick onItemClick) {
+        hideListDialog();
         listDialog = new ListDialog();
-        listDialog.setItems(items)
+        listDialog
                 .setOnItemClick(onItemClick)
+                .setOnDismissListener(onDismissListener)
+                .setAlignLeft(alignLeft)
+                .setTitle(title)
+                .setItems(items)
                 .setCancelable(cancelable);
         listDialog.show(getSupportFragmentManager(), getClass().getSimpleName());
     }
@@ -228,18 +285,49 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     }
 
     @Override
-    public void showBottomSheet(List<String> items, boolean cancelable, boolean iosStyle) {
-
+    public void showBottomSheet(String title, List<String> items, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick) {
+        showBottomSheet(title, items, false, cancelable, onItemClick);
     }
 
     @Override
-    public void showBottomSheet(List<String> items, boolean cancelable, boolean iosStyle, DialogInterface.OnDismissListener onDismissListener) {
+    public void showBottomSheet(String title, String[] items, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick) {
+        showBottomSheet(title, CollectionUtil.stringToList(items), false, cancelable, onItemClick);
+    }
 
+    @Override
+    public void showBottomSheet(String title, List<String> items, boolean alignLeft, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick) {
+        showBottomSheet(title, items, alignLeft, cancelable, null, onItemClick);
+    }
+
+    @Override
+    public void showBottomSheet(String title, String[] items, boolean alignLeft, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick) {
+        showBottomSheet(title, CollectionUtil.stringToList(items), alignLeft, cancelable, null, onItemClick);
+    }
+
+    @Override
+    public void showBottomSheet(String title, String[] items, boolean alignLeft, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, BottomSheetDialog.OnItemClick onItemClick) {
+        showBottomSheet(title, CollectionUtil.stringToList(items), alignLeft, cancelable, onDismissListener, onItemClick);
+    }
+
+    @Override
+    public void showBottomSheet(String title, List<String> items, boolean alignLeft, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, BottomSheetDialog.OnItemClick onItemClick) {
+        hideBottomSheet();
+        bsDialog = new BottomSheetDialog();
+        bsDialog
+                .setTitle(title)
+                .setOnItemClick(onItemClick)
+                .setOnDismissListener(onDismissListener)
+                .setItems(items)
+                .setAlignLeft(alignLeft);
+        bsDialog.setCancelable(cancelable);
+        bsDialog.show(getSupportFragmentManager(), getClass().getSimpleName());
     }
 
     @Override
     public void hideBottomSheet() {
-
+        if (bsDialog != null) {
+            bsDialog.dismissDialog();
+        }
     }
 
     @Override
@@ -262,6 +350,43 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         return R.anim.mp_side_out_left;
     }
 
+
+    @Override
+    public TextWatcher setEditImageListener(final EditText et, final ImageView iv) {
+        if (et == null) {
+            throw new NullPointerException("EditText should not be null.");
+        }
+        if (iv == null) {
+            throw new NullPointerException("ImageView should not be null.");
+        }
+        iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                et.setText("");
+            }
+        });
+        TextWatcher textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() == 0) {
+                    iv.setVisibility(View.VISIBLE);
+                } else {
+                    iv.setVisibility(View.GONE);
+                }
+            }
+        };
+        et.addTextChangedListener(textWatcher);
+        return textWatcher;
+
+    }
 
     @Override
     protected void attachBaseContext(Context newBase) {

@@ -10,13 +10,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -26,13 +24,13 @@ import me.zhouzhuo810.magpie.ui.adapter.RvBaseAdapter;
 import me.zhouzhuo810.magpie.ui.dialog.adapter.ListDialogAdapter;
 import me.zhouzhuo810.magpie.utils.ScreenAdapterUtil;
 
-public class ListDialog extends DialogFragment {
+public class BottomSheetDialog extends DialogFragment {
 
     private List<String> items;
     private OnItemClick onItemClick;
-    private DialogInterface.OnDismissListener dismissListener;
     private boolean alignLeft;
     private String title;
+    private DialogInterface.OnDismissListener dismissListener;
     private ListDialogAdapter adapter;
 
     public interface OnItemClick {
@@ -45,7 +43,7 @@ public class ListDialog extends DialogFragment {
      * @param dismissListener 监听
      * @return 自己
      */
-    public ListDialog setOnDismissListener(DialogInterface.OnDismissListener dismissListener) {
+    public BottomSheetDialog setOnDismissListener(DialogInterface.OnDismissListener dismissListener) {
         this.dismissListener = dismissListener;
         return this;
     }
@@ -56,7 +54,7 @@ public class ListDialog extends DialogFragment {
      * @param onItemClick 点击回调
      * @return 自己
      */
-    public ListDialog setOnItemClick(OnItemClick onItemClick) {
+    public BottomSheetDialog setOnItemClick(OnItemClick onItemClick) {
         this.onItemClick = onItemClick;
         return this;
     }
@@ -67,7 +65,7 @@ public class ListDialog extends DialogFragment {
      * @param title 标题，为空则表示不需要标题
      * @return 自己
      */
-    public ListDialog setTitle(String title) {
+    public BottomSheetDialog setTitle(String title) {
         this.title = title;
         return this;
     }
@@ -78,7 +76,7 @@ public class ListDialog extends DialogFragment {
      * @param alignLeft 是否左对齐，否则居中对齐
      * @return 自己
      */
-    public ListDialog setAlignLeft(boolean alignLeft) {
+    public BottomSheetDialog setAlignLeft(boolean alignLeft) {
         this.alignLeft = alignLeft;
         if (adapter != null) {
             adapter.setAlignLeft(this.alignLeft);
@@ -93,7 +91,7 @@ public class ListDialog extends DialogFragment {
      * @param items 列表数据集合
      * @return 自己
      */
-    public ListDialog setItems(List<String> items) {
+    public BottomSheetDialog setItems(List<String> items) {
         this.items = items;
         if (adapter != null) {
             adapter.notifyDataSetChanged();
@@ -115,7 +113,7 @@ public class ListDialog extends DialogFragment {
         DisplayMetrics dm = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
         if (getDialog().getWindow() != null) {
-            getDialog().getWindow().setLayout(dm.widthPixels * 4 / 5, getDialog().getWindow().getAttributes().height);
+            getDialog().getWindow().setLayout(dm.widthPixels, getDialog().getWindow().getAttributes().height);
         }
     }
 
@@ -124,7 +122,12 @@ public class ListDialog extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         //添加这一行
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
-        View rootView = inflater.inflate(R.layout.layout_list_dialog, container, false);
+        //设置dialog的 进出 动画
+        if (getDialog().getWindow() != null) {
+            getDialog().getWindow().setWindowAnimations(R.style.BottomSheetDialog);
+            getDialog().getWindow().setGravity(Gravity.BOTTOM);
+        }
+        View rootView = inflater.inflate(R.layout.layout_bottom_sheet_dialog, container, false);
         ScreenAdapterUtil.getInstance().loadView(rootView);
         TextView tvTitle = rootView.findViewById(R.id.tv_title);
         View line = rootView.findViewById(R.id.line_item);

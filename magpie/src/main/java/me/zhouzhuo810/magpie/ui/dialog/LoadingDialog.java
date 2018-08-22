@@ -1,6 +1,7 @@
 package me.zhouzhuo810.magpie.ui.dialog;
 
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,13 +11,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.AdapterView;
-import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.List;
@@ -26,18 +25,15 @@ import me.zhouzhuo810.magpie.ui.adapter.RvBaseAdapter;
 import me.zhouzhuo810.magpie.ui.dialog.adapter.ListDialogAdapter;
 import me.zhouzhuo810.magpie.utils.ScreenAdapterUtil;
 
-public class ListDialog extends DialogFragment {
+/**
+ * 加载对话框
+ */
+public class LoadingDialog extends DialogFragment {
 
-    private List<String> items;
-    private OnItemClick onItemClick;
     private DialogInterface.OnDismissListener dismissListener;
-    private boolean alignLeft;
     private String title;
-    private ListDialogAdapter adapter;
-
-    public interface OnItemClick {
-        void onItemClick(int position, String item);
-    }
+    private String msg;
+    private boolean iosStyle; //是否使用菊花加载
 
     /**
      * 设置对话框关闭监听
@@ -45,19 +41,19 @@ public class ListDialog extends DialogFragment {
      * @param dismissListener 监听
      * @return 自己
      */
-    public ListDialog setOnDismissListener(DialogInterface.OnDismissListener dismissListener) {
+    public LoadingDialog setOnDismissListener(DialogInterface.OnDismissListener dismissListener) {
         this.dismissListener = dismissListener;
         return this;
     }
 
     /**
-     * 设置点击事件
+     * 是否使用iOS样式的加载框
      *
-     * @param onItemClick 点击回调
+     * @param iosStyle 是否
      * @return 自己
      */
-    public ListDialog setOnItemClick(OnItemClick onItemClick) {
-        this.onItemClick = onItemClick;
+    public LoadingDialog setIosStyle(boolean iosStyle) {
+        this.iosStyle = iosStyle;
         return this;
     }
 
@@ -67,43 +63,20 @@ public class ListDialog extends DialogFragment {
      * @param title 标题，为空则表示不需要标题
      * @return 自己
      */
-    public ListDialog setTitle(String title) {
+    public LoadingDialog setTitle(String title) {
         this.title = title;
         return this;
     }
 
     /**
-     * 设置左对齐
+     * 设置消息内容
      *
-     * @param alignLeft 是否左对齐，否则居中对齐
+     * @param msg 消息内容，为空则表示不需要消息内容
      * @return 自己
      */
-    public ListDialog setAlignLeft(boolean alignLeft) {
-        this.alignLeft = alignLeft;
-        if (adapter != null) {
-            adapter.setAlignLeft(this.alignLeft);
-            adapter.notifyDataSetChanged();
-        }
+    public LoadingDialog setMsg(String msg) {
+        this.msg = msg;
         return this;
-    }
-
-    /**
-     * 设置数据
-     *
-     * @param items 列表数据集合
-     * @return 自己
-     */
-    public ListDialog setItems(List<String> items) {
-        this.items = items;
-        if (adapter != null) {
-            adapter.notifyDataSetChanged();
-        }
-        return this;
-    }
-
-
-    public ListDialogAdapter getAdapter() {
-        return adapter;
     }
 
     @Override
@@ -124,14 +97,24 @@ public class ListDialog extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         //添加这一行
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
-        View rootView = inflater.inflate(R.layout.layout_list_dialog, container, false);
+        View rootView = inflater.inflate(R.layout.layout_loading_dialog, container, false);
         ScreenAdapterUtil.getInstance().loadView(rootView);
+        ProgressBar pb = rootView.findViewById(R.id.pb_loading);
+        if (iosStyle) {
+            if (Build.VERSION.SDK_INT >= 21) {
+                if (getActivity() != null) {
+                    getResources().getDrawable(R.drawable.loading_ios_anim, getActivity().getTheme());
+                } else {
+                    pb.setIndeterminateDrawable(getResources().getDrawable(R.drawable.loading_ios_anim));
+                }
+            } else {
+                pb.setIndeterminateDrawable(getResources().getDrawable(R.drawable.loading_ios_anim));
+            }
+        }
         TextView tvTitle = rootView.findViewById(R.id.tv_title);
+        TextView tvMsg = rootView.findViewById(R.id.tv_msg);
         View line = rootView.findViewById(R.id.line_item);
-        RecyclerView rv = rootView.findViewById(R.id.rv);
-        rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rv.setHasFixedSize(true);
-        adapter = new ListDialogAdapter(getActivity(), items);
+        tvMsg.setText(msg);
         if (TextUtils.isEmpty(title)) {
             line.setVisibility(View.GONE);
             tvTitle.setVisibility(View.GONE);
@@ -141,17 +124,6 @@ public class ListDialog extends DialogFragment {
             tvTitle.setVisibility(View.VISIBLE);
             tvTitle.setText(title);
         }
-        adapter.setAlignLeft(alignLeft);
-        adapter.setOnItemClickListener(new RvBaseAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                dismissDialog();
-                if (onItemClick != null) {
-                    onItemClick.onItemClick(position, items.get(position));
-                }
-            }
-        });
-        rv.setAdapter(adapter);
         return rootView;
     }
 

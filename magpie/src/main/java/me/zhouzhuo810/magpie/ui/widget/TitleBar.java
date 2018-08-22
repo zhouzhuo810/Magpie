@@ -51,6 +51,7 @@ public class TitleBar extends RelativeLayout {
      */
     public void setOnTitleClickListener(OnTitleClick titleClick) {
         this.titleClick = titleClick;
+        initEvent();
     }
 
     public TitleBar(Context context) {
@@ -81,7 +82,6 @@ public class TitleBar extends RelativeLayout {
         mvLeft = (MarkView) root.findViewById(R.id.mv_left);
         mvRight = (MarkView) root.findViewById(R.id.mv_right);
         llRight = (LinearLayout) root.findViewById(R.id.ll_right);
-        initEvent();
         initAttrs(context, attrs);
         addView(root);
         setGravity(Gravity.CENTER_VERTICAL);

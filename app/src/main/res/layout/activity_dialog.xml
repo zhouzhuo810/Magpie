@@ -25,7 +25,56 @@
         app:ttb_titleText="@string/dialog_text" />
 
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="listDialog"
+                android:text="@string/list_dialog_text"
+                android:textColor="@color/colorPrimary"
+                android:textSize="40px" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="twoBtnDialog"
+                android:text="@string/two_btn_dialog"
+                android:textColor="@color/colorPrimary"
+                android:textSize="40px" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="horizontalProgressDialog"
+                android:text="@string/horizontal_pro_dialog"
+                android:textColor="@color/colorPrimary"
+                android:textSize="40px" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="loadingDialog"
+                android:text="@string/loading_dialog"
+                android:textColor="@color/colorPrimary"
+                android:textSize="40px" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="bottomSheetDialog"
+                android:text="@string/bottom_sheet_dialog"
+                android:textColor="@color/colorPrimary"
+                android:textSize="40px" />
+        </LinearLayout>
+    </ScrollView>
 
 
 </LinearLayout>

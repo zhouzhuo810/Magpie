@@ -158,8 +158,10 @@ public class MarkView extends View {
             pointSize = t.getDimensionPixelSize(R.styleable.MarkView_mv_point_size, 24);
             t.recycle();
         }
-        textSize = ScreenAdapterUtil.getInstance().getScaledValue(textSize);
-        pointSize = ScreenAdapterUtil.getInstance().getScaledValue(pointSize);
+        if (!isInEditMode()) {
+            textSize = ScreenAdapterUtil.getInstance().getScaledValue(textSize);
+            pointSize = ScreenAdapterUtil.getInstance().getScaledValue(pointSize);
+        }
     }
 
     @Override
