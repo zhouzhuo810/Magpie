@@ -16,7 +16,7 @@
         android:paddingLeft="60px"
         android:paddingRight="60px"
         android:textColor="@color/colorBaseDialogTitleTextColor"
-        android:textSize="40px"
+        android:textSize="@dimen/base_dialog_title_text_size"
         android:textStyle="bold"
         tools:text="标题" />
 

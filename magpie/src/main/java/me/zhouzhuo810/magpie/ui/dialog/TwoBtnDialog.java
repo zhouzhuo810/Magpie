@@ -7,8 +7,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -18,22 +16,20 @@ import android.view.Window;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import java.util.List;
-
 import me.zhouzhuo810.magpie.R;
-import me.zhouzhuo810.magpie.ui.adapter.RvBaseAdapter;
-import me.zhouzhuo810.magpie.ui.dialog.adapter.ListDialogAdapter;
 import me.zhouzhuo810.magpie.utils.ScreenAdapterUtil;
 
 /**
- * 加载对话框
+ * 两个按钮普通对话框
  */
-public class LoadingDialog extends DialogFragment {
+public class TwoBtnDialog extends DialogFragment {
 
     private DialogInterface.OnDismissListener dismissListener;
+    private OnTwoBtnClick onTwoBtnClick;
     private String title;
     private String msg;
-    private boolean iosStyle; //是否使用菊花加载
+    private String leftText;
+    private String rightText;
 
     /**
      * 设置对话框关闭监听
@@ -41,19 +37,29 @@ public class LoadingDialog extends DialogFragment {
      * @param dismissListener 监听
      * @return 自己
      */
-    public LoadingDialog setOnDismissListener(DialogInterface.OnDismissListener dismissListener) {
+    public TwoBtnDialog setOnDismissListener(DialogInterface.OnDismissListener dismissListener) {
         this.dismissListener = dismissListener;
         return this;
     }
 
     /**
-     * 是否使用iOS样式的加载框
+     * 设置按钮点击监听
      *
-     * @param iosStyle 是否
+     * @param onTwoBtnClickListener 监听
      * @return 自己
      */
-    public LoadingDialog setIosStyle(boolean iosStyle) {
-        this.iosStyle = iosStyle;
+    public TwoBtnDialog setOnTwoBtnClickListener(OnTwoBtnClick onTwoBtnClickListener) {
+        this.onTwoBtnClick = onTwoBtnClickListener;
+        return this;
+    }
+
+    public TwoBtnDialog setLeftText(String leftBtnText) {
+        this.leftText = leftBtnText;
+        return this;
+    }
+
+    public TwoBtnDialog setRightText(String rightBtnText) {
+        this.rightText = rightBtnText;
         return this;
     }
 
@@ -63,7 +69,7 @@ public class LoadingDialog extends DialogFragment {
      * @param title 标题，为空则表示不需要标题
      * @return 自己
      */
-    public LoadingDialog setTitle(String title) {
+    public TwoBtnDialog setTitle(String title) {
         this.title = title;
         return this;
     }
@@ -74,7 +80,7 @@ public class LoadingDialog extends DialogFragment {
      * @param msg 消息内容，为空则表示不需要消息内容
      * @return 自己
      */
-    public LoadingDialog setMsg(String msg) {
+    public TwoBtnDialog setMsg(String msg) {
         this.msg = msg;
         return this;
     }
@@ -97,19 +103,29 @@ public class LoadingDialog extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         //添加这一行
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
-        View rootView = inflater.inflate(R.layout.layout_loading_dialog, container, false);
+        View rootView = inflater.inflate(R.layout.layout_two_btn_dialog, container, false);
         ScreenAdapterUtil.getInstance().loadView(rootView);
-        ProgressBar pb = rootView.findViewById(R.id.pb_loading);
-        if (iosStyle) {
-            if (Build.VERSION.SDK_INT >= 21) {
-                if (getActivity() != null) {
-                    pb.setIndeterminateDrawable(getResources().getDrawable(R.drawable.loading_ios_anim, getActivity().getTheme()));
-                } else {
-                    pb.setIndeterminateDrawable(getResources().getDrawable(R.drawable.loading_ios_anim));
+        final TextView tvLeft = rootView.findViewById(R.id.tv_left);
+        final TextView tvRight = rootView.findViewById(R.id.tv_right);
+        tvLeft.setText(leftText);
+        tvRight.setText(rightText);
+        if (onTwoBtnClick != null) {
+            tvLeft.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onTwoBtnClick != null) {
+                        onTwoBtnClick.onLeftClick(tvLeft);
+                    }
                 }
-            } else {
-                pb.setIndeterminateDrawable(getResources().getDrawable(R.drawable.loading_ios_anim));
-            }
+            });
+            tvRight.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onTwoBtnClick != null) {
+                        onTwoBtnClick.onRightClick(tvRight);
+                    }
+                }
+            });
         }
         TextView tvTitle = rootView.findViewById(R.id.tv_title);
         TextView tvMsg = rootView.findViewById(R.id.tv_msg);
@@ -154,5 +170,11 @@ public class LoadingDialog extends DialogFragment {
         if (dismissListener != null) {
             dismissListener.onDismiss(dialog);
         }
+    }
+
+    public interface OnTwoBtnClick {
+        void onLeftClick(TextView v);
+
+        void onRightClick(TextView v);
     }
 }

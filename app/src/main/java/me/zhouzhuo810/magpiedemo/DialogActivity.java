@@ -79,7 +79,8 @@ public class DialogActivity extends BaseActivity {
     }
 
     public void loadingDialog(View v) {
-        showLoadingDialog(getString(R.string.app_name), getString(R.string.loading_text), false, true);
+        showLoadingDialog(null, getString(R.string.loading_text), false, false);
+//        showLoadingDialog(getString(R.string.app_name), getString(R.string.loading_text), false, true);
 //        showLoadingDialog(getString(R.string.loading_text));
         new Handler().postDelayed(new Runnable() {
             @Override

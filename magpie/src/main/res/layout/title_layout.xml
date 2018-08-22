@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal">
 
     <LinearLayout
@@ -50,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20px"
             android:layout_marginRight="20px"
-            android:text="返回"
+            tools:text="返回"
             android:textColor="#fff"
             android:visibility="gone" />
     </LinearLayout>
@@ -65,7 +66,7 @@
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
-        android:text="标题" />
+        tools:text="标题" />
 
     <LinearLayout
         android:id="@+id/ll_right"
