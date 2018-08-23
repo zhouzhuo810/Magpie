@@ -52,7 +52,10 @@
             android:name=".DialogActivity"
             android:configChanges="screenSize|screenLayout|smallestScreenSize|fontScale|density|touchscreen"
             android:screenOrientation="portrait" />
-
+        <activity
+            android:name=".TitleActivity"
+            android:configChanges="screenSize|screenLayout|smallestScreenSize|fontScale|density|touchscreen"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

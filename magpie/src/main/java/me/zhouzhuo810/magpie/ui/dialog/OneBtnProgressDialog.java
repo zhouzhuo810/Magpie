@@ -1,7 +1,6 @@
 package me.zhouzhuo810.magpie.ui.dialog;
 
 import android.content.DialogInterface;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -20,16 +19,15 @@ import me.zhouzhuo810.magpie.R;
 import me.zhouzhuo810.magpie.utils.ScreenAdapterUtil;
 
 /**
- * 两个按钮普通对话框
+ * 单个按钮进度对话框
  */
-public class TwoBtnDialog extends DialogFragment {
+public class OneBtnProgressDialog extends DialogFragment {
 
     private DialogInterface.OnDismissListener dismissListener;
-    private OnTwoBtnClick onTwoBtnClick;
+    private OnProgressListener onProgressListener;
     private String title;
     private String msg;
-    private String leftText;
-    private String rightText;
+    private String btnText;
 
     /**
      * 设置对话框关闭监听
@@ -37,29 +35,30 @@ public class TwoBtnDialog extends DialogFragment {
      * @param dismissListener 监听
      * @return 自己
      */
-    public TwoBtnDialog setOnDismissListener(DialogInterface.OnDismissListener dismissListener) {
+    public OneBtnProgressDialog setOnDismissListener(DialogInterface.OnDismissListener dismissListener) {
         this.dismissListener = dismissListener;
         return this;
     }
 
     /**
-     * 设置按钮点击监听
+     * 设置进度改变和按钮点击监听
      *
-     * @param onTwoBtnClickListener 监听
+     * @param onProgressListener 监听
      * @return 自己
      */
-    public TwoBtnDialog setOnTwoBtnClickListener(OnTwoBtnClick onTwoBtnClickListener) {
-        this.onTwoBtnClick = onTwoBtnClickListener;
+    public OneBtnProgressDialog setProgressListener(OnProgressListener onProgressListener) {
+        this.onProgressListener = onProgressListener;
         return this;
     }
 
-    public TwoBtnDialog setLeftText(String leftBtnText) {
-        this.leftText = leftBtnText;
-        return this;
-    }
-
-    public TwoBtnDialog setRightText(String rightBtnText) {
-        this.rightText = rightBtnText;
+    /**
+     * 设置按钮文字
+     *
+     * @param btnText 按钮文字
+     * @return 自己
+     */
+    public OneBtnProgressDialog setBtnText(String btnText) {
+        this.btnText = btnText;
         return this;
     }
 
@@ -69,7 +68,7 @@ public class TwoBtnDialog extends DialogFragment {
      * @param title 标题，为空则表示不需要标题
      * @return 自己
      */
-    public TwoBtnDialog setTitle(String title) {
+    public OneBtnProgressDialog setTitle(String title) {
         this.title = title;
         return this;
     }
@@ -80,7 +79,7 @@ public class TwoBtnDialog extends DialogFragment {
      * @param msg 消息内容，为空则表示不需要消息内容
      * @return 自己
      */
-    public TwoBtnDialog setMsg(String msg) {
+    public OneBtnProgressDialog setMsg(String msg) {
         this.msg = msg;
         return this;
     }
@@ -103,32 +102,27 @@ public class TwoBtnDialog extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         //添加这一行
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
-        View rootView = inflater.inflate(R.layout.layout_two_btn_dialog, container, false);
+        View rootView = inflater.inflate(R.layout.layout_one_btn_progress_dialog, container, false);
         ScreenAdapterUtil.getInstance().loadView(rootView);
-        final TextView tvLeft = rootView.findViewById(R.id.tv_left);
-        final TextView tvRight = rootView.findViewById(R.id.tv_right);
-        tvLeft.setText(leftText);
-        tvRight.setText(rightText);
-        if (onTwoBtnClick != null) {
-            tvLeft.setOnClickListener(new View.OnClickListener() {
+        ProgressBar pb = rootView.findViewById(R.id.pb);
+        final TextView tvOk = rootView.findViewById(R.id.tv_right);
+        tvOk.setText(btnText);
+        if (onProgressListener != null) {
+            tvOk.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (onTwoBtnClick != null) {
-                        onTwoBtnClick.onLeftClick(tvLeft);
+                    if (onProgressListener != null) {
+                        onProgressListener.onBtnClick();
                     }
-                }
-            });
-            tvRight.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (onTwoBtnClick != null) {
-                        onTwoBtnClick.onRightClick(tvRight);
-                    }
+                    dismissDialog();
                 }
             });
         }
         TextView tvTitle = rootView.findViewById(R.id.tv_title);
         TextView tvMsg = rootView.findViewById(R.id.tv_msg);
+        if (onProgressListener != null) {
+            onProgressListener.onStart(pb, tvMsg, tvOk);
+        }
         View line = rootView.findViewById(R.id.line_item);
         tvMsg.setText(msg);
         if (TextUtils.isEmpty(title)) {
@@ -172,9 +166,11 @@ public class TwoBtnDialog extends DialogFragment {
         }
     }
 
-    public interface OnTwoBtnClick {
-        void onLeftClick(TextView v);
+    public interface OnProgressListener {
 
-        void onRightClick(TextView v);
+        void onStart(ProgressBar pb, TextView tvMsg, TextView tvOk);
+
+        void onBtnClick();
+
     }
 }

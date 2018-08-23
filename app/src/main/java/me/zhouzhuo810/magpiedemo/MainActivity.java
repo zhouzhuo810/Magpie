@@ -33,6 +33,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private TextView tvResult;
     private Button btnLanguage;
     private Button btnDialog;
+    private View btnTitle;
 
     @Override
     public boolean shouldSupportMultiLanguage() {
@@ -49,6 +50,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public void initView(@Nullable Bundle savedInstanceState) {
         btnLanguage = findViewById(R.id.btn_language);
         btnDialog = findViewById(R.id.btn_dialog);
+        btnTitle = findViewById(R.id.btn_title);
         etCity = (EditText) findViewById(R.id.et_city);
         btnGo = (Button) findViewById(R.id.btn_go);
         tvResult = (TextView) findViewById(R.id.tv_result);
@@ -74,6 +76,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         btnLanguage.setOnClickListener(this);
 
         btnDialog.setOnClickListener(this);
+
+        btnTitle.setOnClickListener(this);
 
         btnGo.setOnClickListener(this);
     }
@@ -125,6 +129,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.btn_dialog:
                 startAct(DialogActivity.class);
+                break;
+            case R.id.btn_title:
+                startAct(TitleActivity.class);
                 break;
         }
     }

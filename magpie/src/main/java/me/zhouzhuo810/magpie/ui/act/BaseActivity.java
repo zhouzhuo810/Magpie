@@ -5,9 +5,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
@@ -25,7 +27,11 @@ import me.zhouzhuo810.magpie.event.CloseAllActEvent;
 import me.zhouzhuo810.magpie.ui.dialog.BottomSheetDialog;
 import me.zhouzhuo810.magpie.ui.dialog.ListDialog;
 import me.zhouzhuo810.magpie.ui.dialog.LoadingDialog;
+import me.zhouzhuo810.magpie.ui.dialog.OneBtnProgressDialog;
+import me.zhouzhuo810.magpie.ui.dialog.TwoBtnEditDialog;
+import me.zhouzhuo810.magpie.ui.dialog.TwoBtnTextDialog;
 import me.zhouzhuo810.magpie.utils.CollectionUtil;
+import me.zhouzhuo810.magpie.utils.KeyboardUtil;
 import me.zhouzhuo810.magpie.utils.LanguageUtil;
 import me.zhouzhuo810.magpie.utils.ScreenAdapterUtil;
 import me.zhouzhuo810.magpie.utils.SpUtils;
@@ -35,6 +41,9 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     private ListDialog listDialog;
     private BottomSheetDialog bsDialog;
     private LoadingDialog loadingDialog;
+    private TwoBtnTextDialog twoBtnTextDialog;
+    private TwoBtnEditDialog twoBtnEditDialog;
+    private OneBtnProgressDialog progressDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -194,43 +203,116 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     }
 
     @Override
-    public void showProgressDialog(String title, String msg, OnProgressListener onProgressListener) {
-
+    public void showOneBtnProgressDialog(String title, String msg, OneBtnProgressDialog.OnProgressListener onProgressListener) {
+        showOneBtnProgressDialog(title, msg, false, null, onProgressListener);
     }
 
     @Override
-    public void hideProgressDialog() {
-
+    public void showOneBtnProgressDialog(String title, String msg, DialogInterface.OnDismissListener onDismissListener,  OneBtnProgressDialog.OnProgressListener onProgressListener) {
+        showOneBtnProgressDialog(title, msg, false, onDismissListener, onProgressListener);
     }
 
     @Override
-    public void showTwoBtnDialog(String title, String msg, boolean cancelable, OnTwoBtnClick onTwoBtnClick) {
-
+    public void showOneBtnProgressDialog(String title, String msg, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, OneBtnProgressDialog.OnProgressListener onProgressListener) {
+        showOneBtnProgressDialog(title, msg, getString(R.string.magpie_ok_text), cancelable, onDismissListener, onProgressListener);
     }
 
     @Override
-    public void showTwoBtnDialog(String title, String msg, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, OnTwoBtnClick onTwoBtnClick) {
-
+    public void showOneBtnProgressDialog(String title, String msg, String btnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, OneBtnProgressDialog.OnProgressListener onProgressListener) {
+        progressDialog = new OneBtnProgressDialog();
+        progressDialog.setTitle(title)
+                .setMsg(msg)
+                .setBtnText(btnString)
+                .setOnDismissListener(onDismissListener)
+                .setProgressListener(onProgressListener)
+                .setCancelable(cancelable);
+        progressDialog.show(getSupportFragmentManager(), getClass().getSimpleName());
     }
 
     @Override
-    public void hideTwoBtnDialog() {
-
+    public void hideOneBtnProgressDialog() {
+        if (progressDialog != null) {
+            progressDialog.dismissDialog();
+        }
     }
 
     @Override
-    public void showEditDialog(String title, String msg, String hint, boolean cancelable, OnTwoBtnEditClick onTwoBtnEditClick) {
-
+    public void showTwoBtnTextDialog(String title, String msg, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick) {
+        showTwoBtnTextDialog(title, msg, false, onTwoBtnClick);
     }
 
     @Override
-    public void showEditDialog(String title, String msg, String hint, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, OnTwoBtnEditClick onTwoBtnEditClick) {
-
+    public void showTwoBtnTextDialog(String title, String msg, boolean cancelable, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick) {
+        showTwoBtnTextDialog(title, msg, cancelable, null, onTwoBtnClick);
     }
 
     @Override
-    public void hideEditDialog() {
+    public void showTwoBtnTextDialog(String title, String msg, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick) {
+        showTwoBtnTextDialog(title, msg, getString(R.string.magpie_cancel_text), getString(R.string.magpie_ok_text), cancelable, onDismissListener, onTwoBtnClick);
+    }
 
+    @Override
+    public void showTwoBtnTextDialog(String title, String msg, String leftBtnString, String rightBtnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick) {
+        hideTwoBtnTextDialog();
+        twoBtnTextDialog = new TwoBtnTextDialog();
+        twoBtnTextDialog.setTitle(title)
+                .setMsg(msg)
+                .setLeftText(leftBtnString)
+                .setRightText(rightBtnString)
+                .setOnDismissListener(onDismissListener)
+                .setOnTwoBtnClickListener(onTwoBtnClick)
+                .setCancelable(cancelable);
+        twoBtnTextDialog.show(getSupportFragmentManager(), getClass().getSimpleName());
+    }
+
+    @Override
+    public void hideTwoBtnTextDialog() {
+        if (twoBtnTextDialog != null) {
+            twoBtnTextDialog.dismissDialog();
+        }
+    }
+
+    @Override
+    public void showTwoBtnEditDialog(String title, String msg, String hint, boolean cancelable, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick) {
+        showTwoBtnEditDialog(title, msg, hint, cancelable, null, onTwoBtnEditClick);
+    }
+
+    @Override
+    public void showTwoBtnEditDialog(String title, String msg, String hint, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick) {
+        showTwoBtnEditDialog(title, msg, hint, getString(R.string.magpie_cancel_text), getString(R.string.magpie_ok_text), cancelable, onDismissListener, onTwoBtnEditClick);
+    }
+
+    @Override
+    public void showTwoBtnEditDialog(String title, String msg, String hint, int inputType, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick) {
+        showTwoBtnEditDialog(title, msg, hint, inputType, getString(R.string.magpie_cancel_text), getString(R.string.magpie_ok_text), cancelable, onDismissListener, onTwoBtnEditClick);
+    }
+
+    @Override
+    public void showTwoBtnEditDialog(String title, String msg, String hint, String leftBtnString, String rightBtnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick) {
+        showTwoBtnEditDialog(title, msg, hint, InputType.TYPE_CLASS_TEXT, getString(R.string.magpie_cancel_text), getString(R.string.magpie_ok_text), cancelable, onDismissListener, onTwoBtnEditClick);
+    }
+
+    @Override
+    public void showTwoBtnEditDialog(String title, String msg, String hint, int inputType, String leftBtnString, String rightBtnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick) {
+        hideTwoBtnEditDialog();
+        twoBtnEditDialog = new TwoBtnEditDialog();
+        twoBtnEditDialog.setTitle(title)
+                .setMsg(msg)
+                .setHint(hint)
+                .setInputType(inputType)
+                .setLeftText(leftBtnString)
+                .setRightText(rightBtnString)
+                .setOnDismissListener(onDismissListener)
+                .setOnTwoBtnClickListener(onTwoBtnEditClick)
+                .setCancelable(cancelable);
+        twoBtnEditDialog.show(getSupportFragmentManager(), getClass().getSimpleName());
+    }
+
+    @Override
+    public void hideTwoBtnEditDialog() {
+        if (twoBtnEditDialog != null) {
+            twoBtnEditDialog.dismissDialog();
+        }
     }
 
     @Override

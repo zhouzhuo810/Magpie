@@ -9,7 +9,16 @@
     <string name="horizontal_pro_dialog">Horizontal Progress Dialog</string>
     <string name="loading_dialog">Loading Dialog</string>
     <string name="bottom_sheet_dialog">Bottom Sheet Dialog</string>
-    <string name="loading_text">Loading...</string>
+    <string name="loading_text">Loading…</string>
+    <string name="check_update_text">Install the new version now？</string>
+    <string name="please_input_text">Please input…</string>
+    <string name="two_btn_edit_dialog">Two Button Edit Dialog</string>
+    <string name="updating_text">Downloading…</string>
+    <string name="title_text_1">TitleBar</string>
+    <string name="title_text_2">TitleBar</string>
+    <string name="title_text_3">TitleBar</string>
+    <string name="title_text_4">TitleBar</string>
+    <string name="title_text_5">TitleBar</string>
     <string-array name="language">
         <item>Simple Chinese</item>
         <item>Traditional Chinese</item>

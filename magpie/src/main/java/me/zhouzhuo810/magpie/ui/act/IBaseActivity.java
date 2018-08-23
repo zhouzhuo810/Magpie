@@ -5,10 +5,8 @@ import android.app.Application;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.text.TextWatcher;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -19,6 +17,9 @@ import java.util.List;
 
 import me.zhouzhuo810.magpie.ui.dialog.BottomSheetDialog;
 import me.zhouzhuo810.magpie.ui.dialog.ListDialog;
+import me.zhouzhuo810.magpie.ui.dialog.OneBtnProgressDialog;
+import me.zhouzhuo810.magpie.ui.dialog.TwoBtnEditDialog;
+import me.zhouzhuo810.magpie.ui.dialog.TwoBtnTextDialog;
 import me.zhouzhuo810.magpie.utils.LanguageUtil;
 
 public interface IBaseActivity {
@@ -134,21 +135,37 @@ public interface IBaseActivity {
 
     public void hideLoadingDialog();
 
-    public void showProgressDialog(String title, String msg, OnProgressListener onProgressListener);
+    public void showOneBtnProgressDialog(String title, String msg, OneBtnProgressDialog.OnProgressListener onProgressListener);
 
-    public void hideProgressDialog();
+    public void showOneBtnProgressDialog(String title, String msg, DialogInterface.OnDismissListener onDismissListener,  OneBtnProgressDialog.OnProgressListener onProgressListener);
 
-    public void showTwoBtnDialog(String title, String msg, boolean cancelable, OnTwoBtnClick onTwoBtnClick);
+    public void showOneBtnProgressDialog(String title, String msg, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, OneBtnProgressDialog.OnProgressListener onProgressListener);
 
-    public void showTwoBtnDialog(String title, String msg, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, OnTwoBtnClick onTwoBtnClick);
+    public void showOneBtnProgressDialog(String title, String msg, String btnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, OneBtnProgressDialog.OnProgressListener onProgressListener);
 
-    public void hideTwoBtnDialog();
+    public void hideOneBtnProgressDialog();
 
-    public void showEditDialog(String title, String msg, String hint, boolean cancelable, OnTwoBtnEditClick onTwoBtnEditClick);
+    public void showTwoBtnTextDialog(String title, String msg, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick);
 
-    public void showEditDialog(String title, String msg, String hint, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, OnTwoBtnEditClick onTwoBtnEditClick);
+    public void showTwoBtnTextDialog(String title, String msg, boolean cancelable, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick);
 
-    public void hideEditDialog();
+    public void showTwoBtnTextDialog(String title, String msg, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick);
+
+    public void showTwoBtnTextDialog(String title, String msg, String leftBtnString, String rightBtnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick);
+
+    public void hideTwoBtnTextDialog();
+
+    public void showTwoBtnEditDialog(String title, String msg, String hint, boolean cancelable, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick);
+
+    public void showTwoBtnEditDialog(String title, String msg, String hint, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick);
+
+    public void showTwoBtnEditDialog(String title, String msg, String hint, String leftBtnString, String rightBtnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick);
+
+    public void showTwoBtnEditDialog(String title, String msg, String hint, int inputType, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick);
+
+    public void showTwoBtnEditDialog(String title, String msg, String hint, int inputType, String leftBtnString, String rightBtnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick);
+
+    public void hideTwoBtnEditDialog();
 
     public void showListDialog(String[] items, boolean cancelable, ListDialog.OnItemClick onItemClick);
 
@@ -195,22 +212,6 @@ public interface IBaseActivity {
     public void loadMoreData(String... params);
 
     public TextWatcher setEditImageListener(EditText et, ImageView iv);
-
-    public interface OnTwoBtnEditClick {
-        void onOk(String etContent);
-
-        void onCancel();
-    }
-
-    public interface OnTwoBtnClick {
-        void onOk();
-
-        void onCancel();
-    }
-
-    public interface OnProgressListener {
-        void onProgress(TextView tvMsg, ProgressBar pb);
-    }
 
     public interface OnOneBtnClick {
         void onClick();

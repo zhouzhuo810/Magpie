@@ -13,8 +13,8 @@
         android:layout_height="@dimen/base_title_height"
         android:background="@color/colorPrimary"
         android:elevation="2dp"
-        app:ttb_leftImg="@drawable/ic_arrow_back_black_24dp"
-        app:ttb_rightImg="@drawable/ic_more_horiz_black_24dp"
+        app:ttb_leftImg="@drawable/ic_arrow_back_white_24dp"
+        app:ttb_rightImg="@drawable/ic_more_horiz_white_24dp"
         app:ttb_showLeftImg="false"
         app:ttb_showLeftLayout="false"
         app:ttb_showLeftMarkView="false"
@@ -41,6 +41,15 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10px"
         android:text="@string/dialog_text"
+        android:textColor="@color/colorPrimary"
+        android:textSize="40px" />
+
+    <Button
+        android:id="@+id/btn_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10px"
+        android:text="@string/title_text_1"
         android:textColor="@color/colorPrimary"
         android:textSize="40px" />
 
