@@ -27,9 +27,9 @@
     <me.zhouzhuo810.magpie.ui.widget.TitleBar
         android:layout_width="match_parent"
         android:layout_height="@dimen/base_title_height"
+        android:layout_marginTop="20px"
         android:background="@color/colorAccent"
         android:elevation="2dp"
-        android:layout_marginTop="20px"
         app:ttb_leftImg="@drawable/ic_arrow_back_white_24dp"
         app:ttb_rightImg="@drawable/ic_more_horiz_white_24dp"
         app:ttb_showLeftImg="true"
@@ -46,9 +46,9 @@
     <me.zhouzhuo810.magpie.ui.widget.TitleBar
         android:layout_width="match_parent"
         android:layout_height="@dimen/base_title_height"
+        android:layout_marginTop="20px"
         android:background="@color/colorGreen"
         android:elevation="2dp"
-        android:layout_marginTop="20px"
         app:ttb_leftImg="@drawable/ic_arrow_back_white_24dp"
         app:ttb_rightImg="@drawable/ic_more_horiz_white_24dp"
         app:ttb_showLeftImg="true"
@@ -65,9 +65,9 @@
     <me.zhouzhuo810.magpie.ui.widget.TitleBar
         android:layout_width="match_parent"
         android:layout_height="@dimen/base_title_height"
+        android:layout_marginTop="20px"
         android:background="@color/colorRed"
         android:elevation="2dp"
-        android:layout_marginTop="20px"
         app:ttb_leftImg="@drawable/ic_arrow_back_white_24dp"
         app:ttb_rightImg="@drawable/ic_more_horiz_white_24dp"
         app:ttb_showLeftImg="true"
@@ -84,9 +84,9 @@
     <me.zhouzhuo810.magpie.ui.widget.TitleBar
         android:layout_width="match_parent"
         android:layout_height="@dimen/base_title_height"
+        android:layout_marginTop="20px"
         android:background="@color/colorWhite80"
         android:elevation="2dp"
-        android:layout_marginTop="20px"
         app:ttb_leftImg="@drawable/ic_arrow_back_black_24dp"
         app:ttb_rightImg="@drawable/ic_more_horiz_black_24dp"
         app:ttb_showLeftImg="true"

@@ -11,7 +11,7 @@ import me.zhouzhuo810.magpie.ui.act.BaseActivity;
 public class TitleActivity extends BaseActivity {
     @Override
     public boolean shouldSupportMultiLanguage() {
-        return false;
+        return true;
     }
 
     @Override
