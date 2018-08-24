@@ -3,7 +3,7 @@ apply plugin: 'com.android.library'
 android {
     compileSdkVersion 27
     defaultConfig {
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -20,9 +20,30 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //v7
+    api 'com.android.support:appcompat-v7:27.1.1'
+    //RecyclerView
+    api 'com.android.support:recyclerview-v7:27.1.1'
+    //BaseRecyclerViewAdapterHelper
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.40'
+    //EventBus
+    api 'org.greenrobot:eventbus:3.1.1'
+    //Glide
+    api 'com.github.bumptech.glide:glide:4.8.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
+    //RxJava2
+    api "io.reactivex.rxjava2:rxjava:2.2.0"
+    //RxAndroid2
+    api 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    //Retrofit2
+    api 'com.squareup.retrofit2:retrofit:2.4.0'
+    //Retrofit2+RxJava2
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+    //Retrofit2+Gson
+    api 'com.squareup.retrofit2:converter-gson:2.4.0'
+    //OkHttp打印请求数据
+    api 'com.squareup.okhttp3:logging-interceptor:3.11.0'
+    //OkHttp进度监听progressmanager
+    api 'me.jessyan:progressmanager:1.5.0'
 
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support:recyclerview-v7:27.1.1'
-    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.40'
-    implementation 'org.greenrobot:eventbus:3.1.1'
 }

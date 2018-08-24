@@ -3,6 +3,7 @@ package me.zhouzhuo810.magpie.ui.widget;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.support.annotation.IntDef;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -13,14 +14,27 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
 import me.zhouzhuo810.magpie.R;
-import me.zhouzhuo810.magpie.utils.ScreenAdapterUtil;
+
 
 /**
  * TitleBar
  * Created by zhouzhuo810 on 2017/7/25.
  */
 public class TitleBar extends RelativeLayout {
+
+
+    public static final int TITLE_GRAVITY_CENTER = 0;
+    public static final int TITLE_GRAVITY_LEFT = 1;
+
+    @Retention(RetentionPolicy.SOURCE)
+    @IntDef({TITLE_GRAVITY_CENTER, TITLE_GRAVITY_LEFT})
+    public @interface TITLE_GRAVITY {
+    }
+
 
     private ImageView ivLeft;
     private TextView tvLeft;
@@ -120,6 +134,9 @@ public class TitleBar extends RelativeLayout {
             if (rightDrawableId != -1) {
                 ivRight.setImageResource(rightDrawableId);
             }
+            /*gravity*/
+            int titleGravity = t.getInt(R.styleable.TitleBar_ttb_titleGravity, 0);
+            setTitleGravity(titleGravity);
             /*textSize*/
             int textSizeTitle = t.getDimensionPixelSize(R.styleable.TitleBar_ttb_textSizeTitle, 50);
             int textSizeTwoSide = t.getDimensionPixelSize(R.styleable.TitleBar_ttb_textSizeTwoSide, 40);
@@ -152,6 +169,8 @@ public class TitleBar extends RelativeLayout {
             setVisible(mvLeft, false);
             setVisible(mvRight, false);
 
+            /*gravity*/
+            setTitleGravity(TITLE_GRAVITY_CENTER);
             /*textSize*/
             int textSizeTitle = 50;
             int textSizeTwoSide = 40;
@@ -166,6 +185,33 @@ public class TitleBar extends RelativeLayout {
             tvLeft.setText("返回");
             tvTitle.setText("标题");
         }
+    }
+
+    /**
+     * 设置标题的对其方式
+     * 支持居中对齐
+     * <p>
+     * {@link TitleBar#TITLE_GRAVITY_CENTER}
+     * <p>
+     * 和左对齐
+     * <p>
+     * {@link TitleBar#TITLE_GRAVITY_LEFT}
+     *
+     * @param gravity 对齐方式
+     */
+    public void setTitleGravity(@TITLE_GRAVITY int gravity) {
+        switch (gravity) {
+            case TITLE_GRAVITY_CENTER:
+                tvTitle.setGravity(Gravity.CENTER);
+                break;
+            case TITLE_GRAVITY_LEFT:
+                tvTitle.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
+                break;
+            default:
+                tvTitle.setGravity(Gravity.CENTER);
+                break;
+        }
+
     }
 
     private void setVisible(View view, boolean visible) {

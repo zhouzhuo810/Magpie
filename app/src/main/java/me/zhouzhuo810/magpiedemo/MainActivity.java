@@ -8,14 +8,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.yanzhenjie.kalle.Kalle;
-import com.yanzhenjie.kalle.simple.SimpleCallback;
-import com.yanzhenjie.kalle.simple.SimpleResponse;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 import me.zhouzhuo810.magpie.ui.act.BaseActivity;
 import me.zhouzhuo810.magpie.ui.dialog.ListDialog;
 import me.zhouzhuo810.magpie.utils.CollectionUtil;
@@ -23,6 +21,7 @@ import me.zhouzhuo810.magpie.utils.LanguageUtil;
 import me.zhouzhuo810.magpie.utils.ToastUtil;
 import me.zhouzhuo810.magpiedemo.api.Api;
 import me.zhouzhuo810.magpiedemo.api.entity.GetWeatherList;
+import me.zhouzhuo810.magpie.utils.RxHelper;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
@@ -34,6 +33,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private Button btnLanguage;
     private Button btnDialog;
     private View btnTitle;
+    private Button btnDownload;
 
     @Override
     public boolean shouldSupportMultiLanguage() {
@@ -51,6 +51,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         btnLanguage = findViewById(R.id.btn_language);
         btnDialog = findViewById(R.id.btn_dialog);
         btnTitle = findViewById(R.id.btn_title);
+        btnDownload = (Button) findViewById(R.id.btn_download);
         etCity = (EditText) findViewById(R.id.et_city);
         btnGo = (Button) findViewById(R.id.btn_go);
         tvResult = (TextView) findViewById(R.id.tv_result);
@@ -79,6 +80,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         btnTitle.setOnClickListener(this);
 
+        btnDownload.setOnClickListener(this);
+
         btnGo.setOnClickListener(this);
     }
 
@@ -92,18 +95,31 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.btn_go:
                 String city = etCity.getText().toString().trim();
-                Kalle.get(Api.URL)
-                        .param("city", city)
-                        .perform(new SimpleCallback<GetWeatherList>() {
+                Api.getApi()
+                        .getWeatherList(city)
+                        .compose(RxHelper.<GetWeatherList>io_main())
+                        .subscribe(new Observer<GetWeatherList>() {
                             @Override
-                            public void onResponse(SimpleResponse<GetWeatherList, String> response) {
-                                if (response.isSucceed()) {
-                                    tvResult.setText(response.succeed().toString());
-                                } else {
-                                    ToastUtil.showShortToast(response.failed());
-                                }
+                            public void onSubscribe(Disposable d) {
+
+                            }
+
+                            @Override
+                            public void onNext(GetWeatherList getWeatherList) {
+                                tvResult.setText(getWeatherList.toString());
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                ToastUtil.showShortToast(e.getMessage());
+                            }
+
+                            @Override
+                            public void onComplete() {
+
                             }
                         });
+
                 break;
             case R.id.btn_language:
                 String[] items = getResources().getStringArray(R.array.language);
@@ -132,6 +148,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.btn_title:
                 startAct(TitleActivity.class);
+                break;
+            case R.id.btn_download:
+                startAct(DownloadActivity.class);
                 break;
         }
     }

@@ -3,6 +3,7 @@
     package="me.zhouzhuo810.magpiedemo">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".MyApplication"
@@ -54,6 +55,10 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".TitleActivity"
+            android:configChanges="screenSize|screenLayout|smallestScreenSize|fontScale|density|touchscreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DownloadActivity"
             android:configChanges="screenSize|screenLayout|smallestScreenSize|fontScale|density|touchscreen"
             android:screenOrientation="portrait" />
     </application>

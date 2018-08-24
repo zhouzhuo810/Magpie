@@ -18,6 +18,10 @@
         <attr name="ttb_textSizeTitle" format="dimension|reference" />
         <attr name="ttb_textSizeTwoSide" format="dimension|reference" />
         <attr name="ttb_textColorAll" format="color|reference" />
+        <attr name="ttb_titleGravity" format="enum">
+            <enum name="center" value="0" />
+            <enum name="left" value="1" />
+        </attr>
     </declare-styleable>
 
     <declare-styleable name="MarkView">

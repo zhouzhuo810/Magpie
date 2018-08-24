@@ -13,7 +13,7 @@
         android:layout_centerVertical="true"
         android:background="@drawable/ll_bg_selector"
         android:clickable="true"
-        android:gravity="center_vertical"
+        android:gravity="center"
         android:minWidth="180px">
 
 

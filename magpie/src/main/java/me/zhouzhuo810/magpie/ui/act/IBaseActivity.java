@@ -75,9 +75,13 @@ public interface IBaseActivity {
 
     public void startAct(Class<? extends Activity> clazz);
 
+    public void startActShared(Class<? extends Activity> clazz, final View... sharedElements);
+
     public void startActWithIntent(Intent intent);
 
     public void startActWithIntent(Intent intent, boolean defaultAnim);
+
+    public void startActWithIntentShared(Intent intent, final View... sharedElements);
 
     public void startActWithIntentForResult(Intent intent, int requestCode);
 
@@ -86,6 +90,8 @@ public interface IBaseActivity {
     public void restart();
 
     public void closeAct();
+
+    public void closeActWithOutAnim();
 
     public void closeAct(boolean defaultBack);
 
@@ -137,7 +143,7 @@ public interface IBaseActivity {
 
     public void showOneBtnProgressDialog(String title, String msg, OneBtnProgressDialog.OnProgressListener onProgressListener);
 
-    public void showOneBtnProgressDialog(String title, String msg, DialogInterface.OnDismissListener onDismissListener,  OneBtnProgressDialog.OnProgressListener onProgressListener);
+    public void showOneBtnProgressDialog(String title, String msg, DialogInterface.OnDismissListener onDismissListener, OneBtnProgressDialog.OnProgressListener onProgressListener);
 
     public void showOneBtnProgressDialog(String title, String msg, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, OneBtnProgressDialog.OnProgressListener onProgressListener);
 

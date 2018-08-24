@@ -1,11 +1,11 @@
 package me.zhouzhuo810.magpie.ui.act;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -30,8 +30,8 @@ import me.zhouzhuo810.magpie.ui.dialog.LoadingDialog;
 import me.zhouzhuo810.magpie.ui.dialog.OneBtnProgressDialog;
 import me.zhouzhuo810.magpie.ui.dialog.TwoBtnEditDialog;
 import me.zhouzhuo810.magpie.ui.dialog.TwoBtnTextDialog;
+import me.zhouzhuo810.magpie.utils.ActivityUtils;
 import me.zhouzhuo810.magpie.utils.CollectionUtil;
-import me.zhouzhuo810.magpie.utils.KeyboardUtil;
 import me.zhouzhuo810.magpie.utils.LanguageUtil;
 import me.zhouzhuo810.magpie.utils.ScreenAdapterUtil;
 import me.zhouzhuo810.magpie.utils.SpUtils;
@@ -78,9 +78,18 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         startActWithIntent(new Intent(this, clazz));
     }
 
+    public void startActShared(Class<? extends Activity> clazz, final View... sharedElements) {
+        startActWithIntentShared(new Intent(this, clazz), sharedElements);
+    }
+
     @Override
     public void startActWithIntent(Intent intent) {
         startActWithIntent(intent, false);
+    }
+
+    @Override
+    public void startActWithIntentShared(Intent intent, final View... sharedElements) {
+        startActivity(intent, ActivityUtils.getOptionsBundle(this, sharedElements));
     }
 
     @Override
@@ -88,8 +97,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         if (defaultAnim) {
             startActivity(intent);
         } else {
-            startActivity(intent);
-            overridePendingTransition(openInAnimation(), openOutAnimation());
+            startActivity(intent, ActivityUtils.getOptionsBundle(this, openInAnimation(), openOutAnimation()));
         }
     }
 
@@ -98,13 +106,13 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         startActWithIntentForResult(intent, requestCode, false);
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     public void startActWithIntentForResult(Intent intent, int requestCode, boolean defaultAnim) {
         if (defaultAnim) {
             startActivityForResult(intent, requestCode);
         } else {
-            startActivityForResult(intent, requestCode);
-            overridePendingTransition(openInAnimation(), openOutAnimation());
+            startActivityForResult(intent, requestCode, ActivityUtils.getOptionsBundle(this, openInAnimation(), openOutAnimation()));
         }
     }
 
@@ -116,6 +124,12 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     @Override
     public void closeAct() {
         closeAct(false);
+    }
+
+    @Override
+    public void closeActWithOutAnim() {
+        finish();
+        overridePendingTransition(0, 0);
     }
 
 
@@ -208,7 +222,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     }
 
     @Override
-    public void showOneBtnProgressDialog(String title, String msg, DialogInterface.OnDismissListener onDismissListener,  OneBtnProgressDialog.OnProgressListener onProgressListener) {
+    public void showOneBtnProgressDialog(String title, String msg, DialogInterface.OnDismissListener onDismissListener, OneBtnProgressDialog.OnProgressListener onProgressListener) {
         showOneBtnProgressDialog(title, msg, false, onDismissListener, onProgressListener);
     }
 
@@ -486,12 +500,14 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
                     super.attachBaseContext(LanguageUtil.attachBaseContext(newBase, Cons.ENGLISH));
                     break;
             }
+        } else {
+            super.attachBaseContext(newBase);
         }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onCloseAllActEvent(CloseAllActEvent event) {
-        finish();
+        closeActWithOutAnim();
     }
 
     @Override
