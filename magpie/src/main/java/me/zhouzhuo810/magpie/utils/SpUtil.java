@@ -6,16 +6,16 @@ import android.content.SharedPreferences;
 /**
  * SharedPreferences工具类
  */
-public class SpUtils {
+public class SpUtil {
 
-    private SpUtils() {
+    private SpUtil() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
     private static SharedPreferences getShared() {
-        String packageName = BaseUtils.getApp().getPackageName();
+        String packageName = BaseUtil.getApp().getPackageName();
         String projectName = packageName.substring(packageName.lastIndexOf(".") + 1, packageName.length());
-        return BaseUtils.getApp().getSharedPreferences(projectName, Context.MODE_PRIVATE);
+        return BaseUtil.getApp().getSharedPreferences(projectName, Context.MODE_PRIVATE);
     }
 
     /**

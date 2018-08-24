@@ -36,7 +36,7 @@ public class NoticeUtil {
                                         boolean voice, boolean vibrate,
                                         String channelId,
                                         Intent intent) {
-        NotificationCompat.Builder b = new NotificationCompat.Builder(BaseUtils.getApp(), channelId == null ? DEFAULT_CHANNEL_ID : channelId);
+        NotificationCompat.Builder b = new NotificationCompat.Builder(BaseUtil.getApp(), channelId == null ? DEFAULT_CHANNEL_ID : channelId);
         b.setContentTitle(title)
                 .setContentText(content)
                 .setWhen(System.currentTimeMillis())
@@ -46,9 +46,9 @@ public class NoticeUtil {
                 .setDefaults(voice ? Notification.DEFAULT_SOUND : Notification.DEFAULT_ALL)
                 .setVibrate(vibrate ? new long[]{200, 200} : null);
         if (intent != null) {
-            b.setContentIntent(PendingIntent.getActivity(BaseUtils.getApp(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT));
+            b.setContentIntent(PendingIntent.getActivity(BaseUtil.getApp(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT));
         }
-        NotificationManagerCompat nm = NotificationManagerCompat.from(BaseUtils.getApp());
+        NotificationManagerCompat nm = NotificationManagerCompat.from(BaseUtil.getApp());
         nm.notify(NOTICE_NORMAL, b.build());
     }
 
@@ -71,7 +71,7 @@ public class NoticeUtil {
                                                        boolean onGoing, int smallIcon,
                                                        boolean voice, int voiceId, boolean vibrate, String channelId,
                                                        Intent intent) {
-        NotificationCompat.Builder b = new NotificationCompat.Builder(BaseUtils.getApp(), channelId == null ? DEFAULT_CHANNEL_ID : channelId);
+        NotificationCompat.Builder b = new NotificationCompat.Builder(BaseUtil.getApp(), channelId == null ? DEFAULT_CHANNEL_ID : channelId);
         b.setContentTitle(title)
                 .setContentText(content)
                 .setWhen(System.currentTimeMillis())
@@ -80,14 +80,14 @@ public class NoticeUtil {
                 .setSmallIcon(smallIcon)
                 .setVibrate(vibrate ? new long[]{200, 200} : null);
         if (voice) {
-            b.setSound(Uri.parse("android.resource://" + BaseUtils.getPackageInfo(BaseUtils.getApp()).packageName + "/" + voiceId));
+            b.setSound(Uri.parse("android.resource://" + BaseUtil.getPackageInfo(BaseUtil.getApp()).packageName + "/" + voiceId));
         }
         if (intent != null) {
-            PendingIntent pi = PendingIntent.getActivity(BaseUtils.getApp(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            PendingIntent pi = PendingIntent.getActivity(BaseUtil.getApp(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
             b.setContentIntent(pi);
         }
         Notification notification = b.build();
-        NotificationManagerCompat nm = NotificationManagerCompat.from(BaseUtils.getApp());
+        NotificationManagerCompat nm = NotificationManagerCompat.from(BaseUtil.getApp());
         nm.notify(NOTICE_NORMAL, notification);
     }
 
@@ -113,7 +113,7 @@ public class NoticeUtil {
     public static void showProgressNotice(String title, int progress, int smallIcon, boolean autoCancel,
                                           boolean onGoing, String channelId, Intent intent) {
 
-        NotificationCompat.Builder b = new NotificationCompat.Builder(BaseUtils.getApp(), channelId == null ? DEFAULT_CHANNEL_ID : channelId);
+        NotificationCompat.Builder b = new NotificationCompat.Builder(BaseUtil.getApp(), channelId == null ? DEFAULT_CHANNEL_ID : channelId);
         b.setContentTitle(title)
                 .setWhen(System.currentTimeMillis())
                 .setAutoCancel(autoCancel)
@@ -123,10 +123,10 @@ public class NoticeUtil {
                 .setVibrate(null)
                 .setSound(null);
         if (intent != null) {
-            PendingIntent pi = PendingIntent.getActivity(BaseUtils.getApp(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            PendingIntent pi = PendingIntent.getActivity(BaseUtil.getApp(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
             b.setContentIntent(pi);
         }
-        NotificationManagerCompat nm = NotificationManagerCompat.from(BaseUtils.getApp());
+        NotificationManagerCompat nm = NotificationManagerCompat.from(BaseUtil.getApp());
         nm.notify(NOTICE_PROGRESS, b.build());
     }
 
@@ -134,7 +134,7 @@ public class NoticeUtil {
      * 关闭进度通知栏
      */
     public static void hideProgressNotice() {
-        NotificationManagerCompat nm = NotificationManagerCompat.from(BaseUtils.getApp());
+        NotificationManagerCompat nm = NotificationManagerCompat.from(BaseUtil.getApp());
         nm.cancel(NOTICE_PROGRESS);
     }
 

@@ -8,8 +8,6 @@ import android.widget.TextView;
 
 import java.lang.reflect.Method;
 
-import me.zhouzhuo810.magpie.R;
-
 public class ViewUtil {
     private static final String METHOD_GET_MAX_WIDTH = "getMaxWidth";
     private static final String METHOD_GET_MAX_HEIGHT = "getMaxHeight";
@@ -57,7 +55,7 @@ public class ViewUtil {
      * @param resId    颜色资源id
      */
     public static void setTextColorRes(TextView textView, @ColorRes int resId) {
-        textView.setTextColor(BaseUtils.getApp().getResources().getColor(resId));
+        textView.setTextColor(BaseUtil.getApp().getResources().getColor(resId));
     }
 
     public static void setMaxWidth(View view, int value) {

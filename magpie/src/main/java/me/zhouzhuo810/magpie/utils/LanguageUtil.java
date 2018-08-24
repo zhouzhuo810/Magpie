@@ -39,7 +39,7 @@ public class LanguageUtil {
      *                 </ul>
      */
     public static void setGlobalLanguage(@LanguageUtil.LANGUAGE int language) {
-        SpUtils.putInt(Cons.SP_KEY_OF_CHOOSED_LANGUAGE, language);
+        SpUtil.putInt(Cons.SP_KEY_OF_CHOOSED_LANGUAGE, language);
     }
 
 
@@ -90,9 +90,9 @@ public class LanguageUtil {
     public static String getLanguage() {
         Locale locale;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            locale = BaseUtils.getApp().getResources().getConfiguration().getLocales().get(0);
+            locale = BaseUtil.getApp().getResources().getConfiguration().getLocales().get(0);
         } else {
-            locale = BaseUtils.getApp().getResources().getConfiguration().locale;
+            locale = BaseUtil.getApp().getResources().getConfiguration().locale;
         }
 
         if (locale == null) {

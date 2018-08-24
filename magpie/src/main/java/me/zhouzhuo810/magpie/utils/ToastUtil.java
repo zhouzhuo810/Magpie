@@ -16,7 +16,7 @@ public class ToastUtil {
      * @param msg 消息内容
      */
     public static void showShortToast(String msg) {
-        Toast.makeText(BaseUtils.getApp(), msg, Toast.LENGTH_SHORT).show();
+        Toast.makeText(BaseUtil.getApp(), msg, Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -24,7 +24,7 @@ public class ToastUtil {
      * @param msg 消息内容
      */
     public static void showLongToast(String msg) {
-        Toast.makeText(BaseUtils.getApp(), msg, Toast.LENGTH_LONG).show();
+        Toast.makeText(BaseUtil.getApp(), msg, Toast.LENGTH_LONG).show();
     }
 
 

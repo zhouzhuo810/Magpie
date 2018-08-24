@@ -8,7 +8,7 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
 import android.view.View;
 
-public class ActivityUtils {
+public class ActivityUtil {
 
     public static Bundle getOptionsBundle(final Context context,
                                           final int enterAnim,

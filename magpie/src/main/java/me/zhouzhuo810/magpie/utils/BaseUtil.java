@@ -8,11 +8,11 @@ import android.content.pm.PackageManager;
 /**
  * 基础工具类
  */
-public class BaseUtils {
+public class BaseUtil {
 
     private static Application mApp;
 
-    private BaseUtils() {
+    private BaseUtil() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
@@ -34,7 +34,7 @@ public class BaseUtils {
 
     private static void checkContextNull() {
         if (mApp == null) {
-            throw new NullPointerException("Please invoke BaseUtils.init(Application app) method first");
+            throw new NullPointerException("Please invoke BaseUtil.init(Application app) method first");
         }
     }
 

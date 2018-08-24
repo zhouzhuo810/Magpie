@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import me.jessyan.progressmanager.ProgressManager;
+import me.zhouzhuo810.magpie.utils.ApiUtil;
 import me.zhouzhuo810.magpiedemo.api.entity.GetWeatherList;
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
@@ -40,22 +41,13 @@ public class Api {
         if (weatherApi == null) {
             synchronized (Api.class) {
                 if (weatherApi == null) {
-                    HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-                    logging.setLevel(HttpLoggingInterceptor.Level.BASIC);
-                    OkHttpClient.Builder builder = new OkHttpClient.Builder()
-                            .addInterceptor(logging)
-                            .connectTimeout(20, TimeUnit.SECONDS)
-                            .writeTimeout(20, TimeUnit.SECONDS)
-                            .readTimeout(20, TimeUnit.SECONDS);
-                    //注册上传或下载监听器
-                    OkHttpClient client = ProgressManager.getInstance().with(builder).build();
-                    Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl(URL_RETROFIT)
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                            .client(client)
-                            .build();
-                    weatherApi = retrofit.create(WeatherApi.class);
+                    weatherApi = ApiUtil.createApi(
+                            WeatherApi.class,
+                            URL_RETROFIT,
+                            20,
+                            TimeUnit.SECONDS,
+                            true
+                    );
                 }
             }
         }

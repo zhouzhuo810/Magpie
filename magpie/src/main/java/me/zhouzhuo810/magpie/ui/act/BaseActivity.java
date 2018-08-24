@@ -30,11 +30,11 @@ import me.zhouzhuo810.magpie.ui.dialog.LoadingDialog;
 import me.zhouzhuo810.magpie.ui.dialog.OneBtnProgressDialog;
 import me.zhouzhuo810.magpie.ui.dialog.TwoBtnEditDialog;
 import me.zhouzhuo810.magpie.ui.dialog.TwoBtnTextDialog;
-import me.zhouzhuo810.magpie.utils.ActivityUtils;
+import me.zhouzhuo810.magpie.utils.ActivityUtil;
 import me.zhouzhuo810.magpie.utils.CollectionUtil;
 import me.zhouzhuo810.magpie.utils.LanguageUtil;
 import me.zhouzhuo810.magpie.utils.ScreenAdapterUtil;
-import me.zhouzhuo810.magpie.utils.SpUtils;
+import me.zhouzhuo810.magpie.utils.SpUtil;
 
 public abstract class BaseActivity extends AppCompatActivity implements IBaseActivity {
 
@@ -89,7 +89,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
 
     @Override
     public void startActWithIntentShared(Intent intent, final View... sharedElements) {
-        startActivity(intent, ActivityUtils.getOptionsBundle(this, sharedElements));
+        startActivity(intent, ActivityUtil.getOptionsBundle(this, sharedElements));
     }
 
     @Override
@@ -97,7 +97,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         if (defaultAnim) {
             startActivity(intent);
         } else {
-            startActivity(intent, ActivityUtils.getOptionsBundle(this, openInAnimation(), openOutAnimation()));
+            startActivity(intent, ActivityUtil.getOptionsBundle(this, openInAnimation(), openOutAnimation()));
         }
     }
 
@@ -112,7 +112,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         if (defaultAnim) {
             startActivityForResult(intent, requestCode);
         } else {
-            startActivityForResult(intent, requestCode, ActivityUtils.getOptionsBundle(this, openInAnimation(), openOutAnimation()));
+            startActivityForResult(intent, requestCode, ActivityUtil.getOptionsBundle(this, openInAnimation(), openOutAnimation()));
         }
     }
 
@@ -488,7 +488,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     protected void attachBaseContext(Context newBase) {
         //如果支持多语言，才给切换语言
         if (shouldSupportMultiLanguage()) {
-            int language = SpUtils.getInt(Cons.SP_KEY_OF_CHOOSED_LANGUAGE);
+            int language = SpUtil.getInt(Cons.SP_KEY_OF_CHOOSED_LANGUAGE);
             switch (language) {
                 case 0:
                     super.attachBaseContext(LanguageUtil.attachBaseContext(newBase, Cons.SIMPLIFIED_CHINESE));

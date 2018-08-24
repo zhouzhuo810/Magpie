@@ -24,9 +24,9 @@ import javax.crypto.spec.SecretKeySpec;
  *     desc  : 加密解密相关的工具类
  * </pre>
  */
-public final class EncryptUtils {
+public final class EncryptUtil {
 
-    private EncryptUtils() {
+    private EncryptUtil() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
@@ -176,7 +176,7 @@ public final class EncryptUtils {
             e.printStackTrace();
             return null;
         } finally {
-            IOUtils.closeIO(fis);
+            IOUtil.closeIO(fis);
         }
     }
 

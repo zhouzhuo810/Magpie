@@ -11,9 +11,9 @@ import java.io.IOException;
  *     desc  : 关闭相关工具类
  * </pre>
  */
-public final class IOUtils {
+public final class IOUtil {
 
-    private IOUtils() {
+    private IOUtil() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 

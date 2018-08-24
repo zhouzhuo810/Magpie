@@ -11,9 +11,9 @@ import java.io.File;
 /**
  * Apk安装工具类
  */
-public class ApkUtils {
+public class ApkUtil {
 
-    private ApkUtils() {
+    private ApkUtil() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 

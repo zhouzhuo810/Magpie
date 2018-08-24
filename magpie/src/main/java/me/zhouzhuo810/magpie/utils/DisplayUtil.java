@@ -1,15 +1,9 @@
 package me.zhouzhuo810.magpie.utils;
 
-import android.app.Application;
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.os.Build;
 import android.view.WindowManager;
-
-import me.zhouzhuo810.magpie.utils.loadviewhelper.AbsLoadViewHelper;
-import me.zhouzhuo810.magpie.utils.loadviewhelper.LoadViewHelper;
 
 public class DisplayUtil {
 
@@ -23,9 +17,9 @@ public class DisplayUtil {
      * @return the width of screen, in pixel
      */
     public static int getScreenWidth() {
-        WindowManager wm = (WindowManager) BaseUtils.getApp().getSystemService(Context.WINDOW_SERVICE);
+        WindowManager wm = (WindowManager) BaseUtil.getApp().getSystemService(Context.WINDOW_SERVICE);
         if (wm == null) {
-            return BaseUtils.getApp().getResources().getDisplayMetrics().widthPixels;
+            return BaseUtil.getApp().getResources().getDisplayMetrics().widthPixels;
         }
         Point point = new Point();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
@@ -42,9 +36,9 @@ public class DisplayUtil {
      * @return the height of screen, in pixel
      */
     public static int getScreenHeight() {
-        WindowManager wm = (WindowManager) BaseUtils.getApp().getSystemService(Context.WINDOW_SERVICE);
+        WindowManager wm = (WindowManager) BaseUtil.getApp().getSystemService(Context.WINDOW_SERVICE);
         if (wm == null) {
-            return BaseUtils.getApp().getResources().getDisplayMetrics().heightPixels;
+            return BaseUtil.getApp().getResources().getDisplayMetrics().heightPixels;
         }
         Point point = new Point();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
@@ -61,7 +55,7 @@ public class DisplayUtil {
      * 将px转换为与之相等的dp
      */
     public static int px2dp(float pxValue) {
-        final float scale = BaseUtils.getApp().getResources().getDisplayMetrics().density;
+        final float scale = BaseUtil.getApp().getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
     }
 
@@ -72,7 +66,7 @@ public class DisplayUtil {
      * 将dp转换为与之相等的px
      */
     public static int dp2px(float dipValue) {
-        final float scale = BaseUtils.getApp().getResources().getDisplayMetrics().density;
+        final float scale = BaseUtil.getApp().getResources().getDisplayMetrics().density;
         return (int) (dipValue * scale + 0.5f);
     }
 
@@ -83,7 +77,7 @@ public class DisplayUtil {
      * 将px转换为sp
      */
     public static int px2sp(float pxValue) {
-        final float fontScale = BaseUtils.getApp().getResources().getDisplayMetrics().scaledDensity;
+        final float fontScale = BaseUtil.getApp().getResources().getDisplayMetrics().scaledDensity;
         return (int) (pxValue / fontScale + 0.5f);
     }
 
@@ -94,7 +88,7 @@ public class DisplayUtil {
      * 将sp转换为px
      */
     public static int sp2px(float spValue) {
-        final float fontScale = BaseUtils.getApp().getResources().getDisplayMetrics().scaledDensity;
+        final float fontScale = BaseUtil.getApp().getResources().getDisplayMetrics().scaledDensity;
         return (int) (spValue * fontScale + 0.5f);
     }
 
@@ -104,7 +98,7 @@ public class DisplayUtil {
      * @return the density of screen
      */
     public static float getScreenDensity() {
-        return BaseUtils.getApp().getResources().getDisplayMetrics().density;
+        return BaseUtil.getApp().getResources().getDisplayMetrics().density;
     }
 
     /**
@@ -113,7 +107,7 @@ public class DisplayUtil {
      * @return the screen density expressed as dots-per-inch
      */
     public static int getScreenDensityDpi() {
-        return BaseUtils.getApp().getResources().getDisplayMetrics().densityDpi;
+        return BaseUtil.getApp().getResources().getDisplayMetrics().densityDpi;
     }
 
 }
