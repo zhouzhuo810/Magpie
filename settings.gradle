@@ -1,1 +1,1 @@
-include ':app', ':magpie'
+include ':app', ':magpie', ':magpie-tv'
