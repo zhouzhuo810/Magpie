@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import me.zhouzhuo810.magpie.ui.act.IBaseActivity;
+import me.zhouzhuo810.magpietv.act.IBaseActivity;
 
 public interface IBaseFragment {
 

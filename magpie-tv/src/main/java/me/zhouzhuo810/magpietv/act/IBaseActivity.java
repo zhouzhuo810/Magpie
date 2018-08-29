@@ -13,6 +13,9 @@ import android.widget.ImageView;
 
 import java.util.List;
 
+import me.zhouzhuo810.magpietv.dialog.ListDialog;
+import me.zhouzhuo810.magpietv.dialog.OneBtnProgressDialog;
+import me.zhouzhuo810.magpietv.dialog.TwoBtnTextDialog;
 import me.zhouzhuo810.magpietv.utils.LanguageUtil;
 
 
@@ -155,18 +158,6 @@ public interface IBaseActivity {
 
     public void hideTwoBtnTextDialog();
 
-    public void showTwoBtnEditDialog(String title, String msg, String hint, boolean cancelable, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick);
-
-    public void showTwoBtnEditDialog(String title, String msg, String hint, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick);
-
-    public void showTwoBtnEditDialog(String title, String msg, String hint, String leftBtnString, String rightBtnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick);
-
-    public void showTwoBtnEditDialog(String title, String msg, String hint, int inputType, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick);
-
-    public void showTwoBtnEditDialog(String title, String msg, String hint, int inputType, String leftBtnString, String rightBtnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick);
-
-    public void hideTwoBtnEditDialog();
-
     public void showListDialog(String[] items, boolean cancelable, ListDialog.OnItemClick onItemClick);
 
     public void showListDialog(String title, String[] items, boolean cancelable, ListDialog.OnItemClick onItemClick);
@@ -192,20 +183,6 @@ public interface IBaseActivity {
     public void showListDialog(String title, List<String> items, boolean alignLeft, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, ListDialog.OnItemClick onItemClick);
 
     public void hideListDialog();
-
-    public void showBottomSheet(String title, String[] items, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick);
-
-    public void showBottomSheet(String title, String[] items, boolean alignLeft, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick);
-
-    public void showBottomSheet(String title, List<String> items, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick);
-
-    public void showBottomSheet(String title, List<String> items, boolean alignLeft, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick);
-
-    public void showBottomSheet(String title, String[] items, boolean alignLeft, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, BottomSheetDialog.OnItemClick onItemClick);
-
-    public void showBottomSheet(String title, List<String> items, boolean alignLeft, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, BottomSheetDialog.OnItemClick onItemClick);
-
-    public void hideBottomSheet();
 
     public void refreshData(String... params);
 

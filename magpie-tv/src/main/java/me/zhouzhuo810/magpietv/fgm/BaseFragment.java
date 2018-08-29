@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import me.zhouzhuo810.magpietv.R;
 import me.zhouzhuo810.magpietv.act.IBaseActivity;
 import me.zhouzhuo810.magpietv.utils.ScreenAdapterUtil;
 

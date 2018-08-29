@@ -21,14 +21,25 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
+import me.zhouzhuo810.magpietv.R;
+import me.zhouzhuo810.magpietv.cons.Cons;
+import me.zhouzhuo810.magpietv.dialog.ListDialog;
+import me.zhouzhuo810.magpietv.dialog.LoadingDialog;
+import me.zhouzhuo810.magpietv.dialog.OneBtnProgressDialog;
+import me.zhouzhuo810.magpietv.dialog.TwoBtnTextDialog;
+import me.zhouzhuo810.magpietv.event.CloseAllActEvent;
+import me.zhouzhuo810.magpietv.utils.ActivityUtil;
+import me.zhouzhuo810.magpietv.utils.CollectionUtil;
+import me.zhouzhuo810.magpietv.utils.LanguageUtil;
+import me.zhouzhuo810.magpietv.utils.ScreenAdapterUtil;
+import me.zhouzhuo810.magpietv.utils.SpUtil;
+
 
 public abstract class BaseActivity extends AppCompatActivity implements IBaseActivity {
 
     private ListDialog listDialog;
-    private BottomSheetDialog bsDialog;
     private LoadingDialog loadingDialog;
     private TwoBtnTextDialog twoBtnTextDialog;
-    private TwoBtnEditDialog twoBtnEditDialog;
     private OneBtnProgressDialog progressDialog;
 
     @Override
@@ -272,48 +283,6 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         }
     }
 
-    @Override
-    public void showTwoBtnEditDialog(String title, String msg, String hint, boolean cancelable, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick) {
-        showTwoBtnEditDialog(title, msg, hint, cancelable, null, onTwoBtnEditClick);
-    }
-
-    @Override
-    public void showTwoBtnEditDialog(String title, String msg, String hint, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick) {
-        showTwoBtnEditDialog(title, msg, hint, getString(R.string.magpie_cancel_text), getString(R.string.magpie_ok_text), cancelable, onDismissListener, onTwoBtnEditClick);
-    }
-
-    @Override
-    public void showTwoBtnEditDialog(String title, String msg, String hint, int inputType, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick) {
-        showTwoBtnEditDialog(title, msg, hint, inputType, getString(R.string.magpie_cancel_text), getString(R.string.magpie_ok_text), cancelable, onDismissListener, onTwoBtnEditClick);
-    }
-
-    @Override
-    public void showTwoBtnEditDialog(String title, String msg, String hint, String leftBtnString, String rightBtnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick) {
-        showTwoBtnEditDialog(title, msg, hint, InputType.TYPE_CLASS_TEXT, getString(R.string.magpie_cancel_text), getString(R.string.magpie_ok_text), cancelable, onDismissListener, onTwoBtnEditClick);
-    }
-
-    @Override
-    public void showTwoBtnEditDialog(String title, String msg, String hint, int inputType, String leftBtnString, String rightBtnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick) {
-        hideTwoBtnEditDialog();
-        twoBtnEditDialog = new TwoBtnEditDialog();
-        twoBtnEditDialog.setTitle(title)
-                .setMsg(msg)
-                .setHint(hint)
-                .setInputType(inputType)
-                .setLeftText(leftBtnString)
-                .setRightText(rightBtnString)
-                .setOnDismissListener(onDismissListener)
-                .setOnTwoBtnClickListener(onTwoBtnEditClick)
-                .setCancelable(cancelable);
-        twoBtnEditDialog.show(getSupportFragmentManager(), getClass().getSimpleName());
-    }
-
-    @Override
-    public void hideTwoBtnEditDialog() {
-        if (twoBtnEditDialog != null) {
-            twoBtnEditDialog.dismissDialog();
-        }
-    }
 
     @Override
     public void showListDialog(String[] items, boolean cancelable, ListDialog.OnItemClick onItemClick) {
@@ -363,52 +332,6 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     public void hideListDialog() {
         if (listDialog != null) {
             listDialog.dismissDialog();
-        }
-    }
-
-    @Override
-    public void showBottomSheet(String title, List<String> items, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick) {
-        showBottomSheet(title, items, false, cancelable, onItemClick);
-    }
-
-    @Override
-    public void showBottomSheet(String title, String[] items, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick) {
-        showBottomSheet(title, CollectionUtil.stringToList(items), false, cancelable, onItemClick);
-    }
-
-    @Override
-    public void showBottomSheet(String title, List<String> items, boolean alignLeft, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick) {
-        showBottomSheet(title, items, alignLeft, cancelable, null, onItemClick);
-    }
-
-    @Override
-    public void showBottomSheet(String title, String[] items, boolean alignLeft, boolean cancelable, BottomSheetDialog.OnItemClick onItemClick) {
-        showBottomSheet(title, CollectionUtil.stringToList(items), alignLeft, cancelable, null, onItemClick);
-    }
-
-    @Override
-    public void showBottomSheet(String title, String[] items, boolean alignLeft, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, BottomSheetDialog.OnItemClick onItemClick) {
-        showBottomSheet(title, CollectionUtil.stringToList(items), alignLeft, cancelable, onDismissListener, onItemClick);
-    }
-
-    @Override
-    public void showBottomSheet(String title, List<String> items, boolean alignLeft, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, BottomSheetDialog.OnItemClick onItemClick) {
-        hideBottomSheet();
-        bsDialog = new BottomSheetDialog();
-        bsDialog
-                .setTitle(title)
-                .setOnItemClick(onItemClick)
-                .setOnDismissListener(onDismissListener)
-                .setItems(items)
-                .setAlignLeft(alignLeft);
-        bsDialog.setCancelable(cancelable);
-        bsDialog.show(getSupportFragmentManager(), getClass().getSimpleName());
-    }
-
-    @Override
-    public void hideBottomSheet() {
-        if (bsDialog != null) {
-            bsDialog.dismissDialog();
         }
     }
 
