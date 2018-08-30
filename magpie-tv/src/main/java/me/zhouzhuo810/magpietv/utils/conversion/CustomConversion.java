@@ -2,7 +2,7 @@ package me.zhouzhuo810.magpietv.utils.conversion;
 
 import android.view.View;
 
-import me.zhouzhuo810.magpie.utils.loadviewhelper.AbsLoadViewHelper;
+import me.zhouzhuo810.magpietv.utils.loadviewhelper.AbsLoadViewHelper;
 
 
 public class CustomConversion implements IConversion {

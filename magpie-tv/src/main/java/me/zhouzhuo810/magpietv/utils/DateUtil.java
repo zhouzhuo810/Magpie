@@ -9,7 +9,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import me.zhouzhuo810.magpie.cons.Cons;
+import me.zhouzhuo810.magpietv.cons.Cons;
+
 
 public class DateUtil {
 

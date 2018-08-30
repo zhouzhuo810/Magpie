@@ -5,7 +5,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import me.zhouzhuo810.magpie.utils.ViewUtil;
+import me.zhouzhuo810.magpietv.utils.ViewUtil;
+
 
 /**
  * Created by yatoooon on 2018/2/6.

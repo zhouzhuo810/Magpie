@@ -4,8 +4,8 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
-import me.zhouzhuo810.magpie.utils.conversion.IConversion;
-import me.zhouzhuo810.magpie.utils.conversion.SimpleConversion;
+import me.zhouzhuo810.magpietv.utils.conversion.IConversion;
+import me.zhouzhuo810.magpietv.utils.conversion.SimpleConversion;
 
 
 /**
