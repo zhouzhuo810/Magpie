@@ -2,9 +2,6 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 27
-
-
-
     defaultConfig {
         applicationId "me.zhouzhuo810.magpietvdemo"
         minSdkVersion 16
