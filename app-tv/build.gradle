@@ -2,25 +2,27 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 27
+
+
+
     defaultConfig {
-        applicationId "me.zhouzhuo810.magpiedemo"
+        applicationId "me.zhouzhuo810.magpietvdemo"
         minSdkVersion 16
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-//    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
-    implementation project(':magpie')
-
-
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':magpie-tv')
 }
