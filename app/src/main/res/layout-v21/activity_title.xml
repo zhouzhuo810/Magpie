@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/base_title_height"
         android:background="@color/colorPrimary"
+        android:elevation="2dp"
         app:ttb_leftImg="@drawable/ic_arrow_back_white_24dp"
         app:ttb_rightImg="@drawable/ic_more_horiz_white_24dp"
         app:ttb_showLeftImg="true"

@@ -48,9 +48,9 @@
             <enum name="FIVE" value="5" />
         </attr>
         <attr name="tb_tabNames" format="reference" />
-        <attr name="tb_show_img" format="boolean" />
-        <attr name="tb_show_text" format="boolean" />
-        <attr name="tb_show_underline" format="boolean" />
+        <attr name="tb_showImg" format="boolean" />
+        <attr name="tb_showText" format="boolean" />
+        <attr name="tb_showUnderline" format="boolean" />
         <attr name="tb_textSize" format="dimension|reference" />
         <attr name="tb_imageSize" format="dimension|reference" />
         <attr name="tb_textTopMargin" format="dimension|reference" />
@@ -73,35 +73,36 @@
         </attr>
 
         <!--for tab-->
-        <attr name="i_unselect_tab_text_size" format="dimension|reference" />
-        <attr name="i_unselect_tab_text_color" format="color|reference" />
-        <attr name="i_select_tab_text_size" format="dimension|reference" />
-        <attr name="i_select_tab_text_color" format="color|reference" />
-        <attr name="i_underline_color" format="color|reference" />
-        <attr name="i_underline_height" format="dimension|reference" />
-        <attr name="i_underline_padding" format="dimension|reference" />
-        <attr name="i_tab_padding" format="dimension|reference" />
-        <attr name="i_tab_icon_size" format="dimension|reference" />
-        <attr name="i_show_underline" format="boolean" />
-        <attr name="i_should_tab_expand" format="boolean" />
-        <attr name="i_normal_tab_bg" format="reference" />
-        <attr name="i_select_tab_bg" format="reference" />
+        <attr name="i_selectTabTextSize" format="dimension|reference" />
+        <attr name="i_selectTabTextColor" format="color|reference" />
+        <attr name="i_normalTabTextSize" format="dimension|reference" />
+        <attr name="i_normalTabTextColor" format="color|reference" />
+        <attr name="i_normalTabBg" format="reference" />
+        <attr name="i_selectTabBg" format="reference" />
+        <attr name="i_showUnderline" format="boolean" />
+        <attr name="i_shouldTabExpand" format="boolean" />
+        <attr name="i_underlineColor" format="color|reference" />
+        <attr name="i_underlineHeight" format="dimension|reference" />
+        <attr name="i_underlinePadding" format="dimension|reference" />
+        <attr name="i_tabPadding" format="dimension|reference" />
+        <attr name="i_tabIconSize" format="dimension|reference" />
+
         <!--for tab with text and icon-->
-        <attr name="i_tab_orientation" format="enum">
+        <attr name="i_tabOrientation" format="enum">
             <enum name="vertical" value="0" />
             <enum name="horizontal" value="1" />
         </attr>
-        <attr name="i_tab_icon_text_margin" format="dimension|reference" />
-        <attr name="i_tab_is_horizontal_hide_icon" format="boolean" />
+        <attr name="i_tabIconTextMargin" format="dimension|reference" />
+        <attr name="i_tabIsHorizontalHideIcon" format="boolean" />
 
         <!--for point-->
-        <attr name="i_select_point_size" format="dimension|reference" />
-        <attr name="i_unselect_point_size" format="dimension|reference" />
-        <attr name="i_select_point_color" format="color|reference" />
-        <attr name="i_unselect_point_color" format="color|reference" />
-        <attr name="i_point_spacing" format="dimension|reference" />
+        <attr name="i_selectPointSize" format="dimension|reference" />
+        <attr name="i_normalPointSize" format="dimension|reference" />
+        <attr name="i_selectPointColor" format="color|reference" />
+        <attr name="i_normalPointColor" format="color|reference" />
+        <attr name="i_pointSpacing" format="dimension|reference" />
 
-        <attr name="i_is_need_scale_in_px" format="boolean" />
+        <attr name="i_isNeedScaleInPx" format="boolean" />
 
     </declare-styleable>
 

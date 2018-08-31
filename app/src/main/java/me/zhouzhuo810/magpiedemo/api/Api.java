@@ -46,7 +46,8 @@ public class Api {
                             URL_RETROFIT,
                             20,
                             TimeUnit.SECONDS,
-                            true
+                            true,
+                            false
                     );
                 }
             }

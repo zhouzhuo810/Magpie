@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import me.zhouzhuo810.magpie.R;
@@ -20,6 +22,7 @@ import me.zhouzhuo810.magpie.ui.act.IBaseActivity;
 import me.zhouzhuo810.magpie.ui.dialog.BottomSheetDialog;
 import me.zhouzhuo810.magpie.ui.dialog.ListDialog;
 import me.zhouzhuo810.magpie.ui.dialog.OneBtnProgressDialog;
+import me.zhouzhuo810.magpie.ui.dialog.TwoBtnEditDialog;
 import me.zhouzhuo810.magpie.ui.dialog.TwoBtnTextDialog;
 import me.zhouzhuo810.magpie.utils.CollectionUtil;
 import me.zhouzhuo810.magpie.utils.DisplayUtil;
@@ -28,6 +31,32 @@ import me.zhouzhuo810.magpie.utils.ScreenAdapterUtil;
 public abstract class BaseFragment extends Fragment implements IBaseFragment {
 
     protected View rootView;
+
+    public static <T extends BaseFragment> T newInstance(Class<T> clazz, Bundle args) {
+        String fname = clazz.getSimpleName();
+        try {
+            T t = clazz.getConstructor().newInstance();
+            if (args != null) {
+                args.setClassLoader(t.getClass().getClassLoader());
+                t.setArguments(args);
+            }
+            return t;
+        } catch (java.lang.InstantiationException e) {
+            throw new InstantiationException("Unable to instantiate fragment " + fname
+                    + ": make sure class name exists, is public, and has an"
+                    + " empty constructor that is public", e);
+        } catch (IllegalAccessException e) {
+            throw new InstantiationException("Unable to instantiate fragment " + fname
+                    + ": make sure class name exists, is public, and has an"
+                    + " empty constructor that is public", e);
+        } catch (NoSuchMethodException e) {
+            throw new InstantiationException("Unable to instantiate fragment " + fname
+                    + ": could not find Fragment constructor", e);
+        } catch (InvocationTargetException e) {
+            throw new InstantiationException("Unable to instantiate fragment " + fname
+                    + ": calling Fragment constructor caused an exception", e);
+        }
+    }
 
     @Nullable
     @Override
@@ -120,6 +149,11 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
             startActivityForResult(intent, requestCode);
             overridePendingTransition(openInAnimation(), openOutAnimation());
         }
+    }
+
+    @Override
+    public void showLoadingDialog(String msg) {
+        showLoadingDialog(null, msg);
     }
 
     @Override
@@ -218,6 +252,42 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
             return;
         }
         getBaseAct().hideTwoBtnTextDialog();
+    }
+
+    @Override
+    public void showTwoBtnEditDialog(String title, String msg, String hint, boolean cancelable, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick) {
+        showTwoBtnEditDialog(title, msg, hint, cancelable, null, onTwoBtnEditClick);
+    }
+
+    @Override
+    public void showTwoBtnEditDialog(String title, String msg, String hint, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick) {
+        showTwoBtnEditDialog(title, msg, hint, getString(R.string.magpie_cancel_text), getString(R.string.magpie_ok_text), cancelable, onDismissListener, onTwoBtnEditClick);
+    }
+
+    @Override
+    public void showTwoBtnEditDialog(String title, String msg, String hint, int inputType, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick) {
+        showTwoBtnEditDialog(title, msg, hint, inputType, getString(R.string.magpie_cancel_text), getString(R.string.magpie_ok_text), cancelable, onDismissListener, onTwoBtnEditClick);
+    }
+
+    @Override
+    public void showTwoBtnEditDialog(String title, String msg, String hint, String leftBtnString, String rightBtnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick) {
+        showTwoBtnEditDialog(title, msg, hint, InputType.TYPE_CLASS_TEXT, getString(R.string.magpie_cancel_text), getString(R.string.magpie_ok_text), cancelable, onDismissListener, onTwoBtnEditClick);
+    }
+
+    @Override
+    public void showTwoBtnEditDialog(String title, String msg, String hint, int inputType, String leftBtnString, String rightBtnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnEditDialog.OnTwoBtnEditClick onTwoBtnEditClick) {
+        if (getBaseAct() == null) {
+            return;
+        }
+        getBaseAct().showTwoBtnEditDialog(title, msg, hint, inputType, leftBtnString, rightBtnString, cancelable, onDismissListener, onTwoBtnEditClick);
+    }
+
+    @Override
+    public void hideTwoBtnEditDialog() {
+        if (getBaseAct() == null) {
+            return;
+        }
+        getBaseAct().hideTwoBtnEditDialog();
     }
 
     @Override

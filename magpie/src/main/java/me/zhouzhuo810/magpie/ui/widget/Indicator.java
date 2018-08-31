@@ -69,7 +69,7 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
 
     private int tabCount;
     private int lastScrollX = 0;
-    private boolean isNeedScaleInPx = false;
+    private boolean isNeedScaleInPx = true;
 
     private boolean horizontalHideIconMode = false;
 
@@ -104,33 +104,33 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
         //init attrs
         if (attrs != null) {
             TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.Indicator);
-            isNeedScaleInPx = a.getBoolean(R.styleable.Indicator_i_is_need_scale_in_px, false);
+            isNeedScaleInPx = a.getBoolean(R.styleable.Indicator_i_isNeedScaleInPx, true);
 
-            shouldExpand = a.getBoolean(R.styleable.Indicator_i_should_tab_expand, false);
+            shouldExpand = a.getBoolean(R.styleable.Indicator_i_shouldTabExpand, false);
             int indicatorInt = a.getInt(R.styleable.Indicator_i_indicator_type, 0);
-            int tabOriInt = a.getInt(R.styleable.Indicator_i_tab_orientation, 0);
-            colorSelectPoint = a.getColor(R.styleable.Indicator_i_select_point_color, 0xff438cff);
-            colorUnSelectPoint = a.getColor(R.styleable.Indicator_i_unselect_point_color, 0xff000000);
-            selectPointSize = a.getDimensionPixelSize(R.styleable.Indicator_i_select_point_size, 100);
-            unSelectPointSize = a.getDimensionPixelSize(R.styleable.Indicator_i_unselect_point_size, 90);
-            spacing = a.getDimensionPixelSize(R.styleable.Indicator_i_point_spacing, 8);
-            tabBgNormalId = a.getResourceId(R.styleable.Indicator_i_normal_tab_bg, -1);
-            tabBgSelectId = a.getResourceId(R.styleable.Indicator_i_select_tab_bg, -1);
+            int tabOriInt = a.getInt(R.styleable.Indicator_i_tabOrientation, 0);
+            colorSelectPoint = a.getColor(R.styleable.Indicator_i_selectPointColor, 0xff438cff);
+            colorUnSelectPoint = a.getColor(R.styleable.Indicator_i_normalPointColor, 0xff000000);
+            selectPointSize = a.getDimensionPixelSize(R.styleable.Indicator_i_selectPointSize, 100);
+            unSelectPointSize = a.getDimensionPixelSize(R.styleable.Indicator_i_normalPointSize, 90);
+            spacing = a.getDimensionPixelSize(R.styleable.Indicator_i_pointSpacing, 8);
+            tabBgNormalId = a.getResourceId(R.styleable.Indicator_i_normalTabBg, -1);
+            tabBgSelectId = a.getResourceId(R.styleable.Indicator_i_selectTabBg, -1);
 
-            tabTextColorSelect = a.getColor(R.styleable.Indicator_i_select_tab_text_color, 0xff438cff);
-            tabTextColorUnSelect = a.getColor(R.styleable.Indicator_i_unselect_tab_text_color, 0xff000000);
-            tabTextSizeSelect = a.getDimensionPixelSize(R.styleable.Indicator_i_select_tab_text_size, 40);
-            tabTextSizeUnSelect = a.getDimensionPixelSize(R.styleable.Indicator_i_unselect_tab_text_size, 40);
-            tabIconTextMargin = a.getDimensionPixelSize(R.styleable.Indicator_i_tab_icon_text_margin, 10);
-            showUnderline = a.getBoolean(R.styleable.Indicator_i_show_underline, true);
-            underlineHeight = a.getDimensionPixelSize(R.styleable.Indicator_i_underline_height, 10);
-            underlinePadding = a.getDimensionPixelSize(R.styleable.Indicator_i_underline_padding, 20);
-            tabPadding = a.getDimensionPixelSize(R.styleable.Indicator_i_tab_padding, 24);
-            tabIconSize = a.getDimensionPixelSize(R.styleable.Indicator_i_tab_icon_size, 80);
-            underlineColor = a.getColor(R.styleable.Indicator_i_underline_color, 0xff438cff);
-            horizontalHideIconMode = a.getBoolean(R.styleable.Indicator_i_tab_is_horizontal_hide_icon, false);
+            tabTextColorSelect = a.getColor(R.styleable.Indicator_i_selectTabTextColor, 0xff438cff);
+            tabTextColorUnSelect = a.getColor(R.styleable.Indicator_i_normalTabTextColor, 0xff000000);
+            tabTextSizeSelect = a.getDimensionPixelSize(R.styleable.Indicator_i_selectTabTextSize, 40);
+            tabTextSizeUnSelect = a.getDimensionPixelSize(R.styleable.Indicator_i_normalTabTextSize, 40);
+            tabIconTextMargin = a.getDimensionPixelSize(R.styleable.Indicator_i_tabIconTextMargin, 10);
+            showUnderline = a.getBoolean(R.styleable.Indicator_i_showUnderline, true);
+            underlineHeight = a.getDimensionPixelSize(R.styleable.Indicator_i_underlineHeight, 10);
+            underlinePadding = a.getDimensionPixelSize(R.styleable.Indicator_i_underlinePadding, 20);
+            tabPadding = a.getDimensionPixelSize(R.styleable.Indicator_i_tabPadding, 24);
+            tabIconSize = a.getDimensionPixelSize(R.styleable.Indicator_i_tabIconSize, 80);
+            underlineColor = a.getColor(R.styleable.Indicator_i_underlineColor, 0xff438cff);
+            horizontalHideIconMode = a.getBoolean(R.styleable.Indicator_i_tabIsHorizontalHideIcon, false);
 
-            if (isNeedScaleInPx) {
+            if (isNeedScaleInPx && !isInEditMode()) {
                 selectPointSize = ScreenAdapterUtil.getInstance().getScaledValue(selectPointSize);
                 unSelectPointSize = ScreenAdapterUtil.getInstance().getScaledValue(unSelectPointSize);
                 spacing = ScreenAdapterUtil.getInstance().getScaledValue(spacing);

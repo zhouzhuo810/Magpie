@@ -2,6 +2,7 @@ package me.zhouzhuo810.magpie.ui.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.annotation.IntDef;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -12,8 +13,12 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.lang.annotation.Retention;
+
 import me.zhouzhuo810.magpie.R;
 import me.zhouzhuo810.magpie.utils.ScreenAdapterUtil;
+
+import static java.lang.annotation.RetentionPolicy.SOURCE;
 
 
 /**
@@ -64,12 +69,14 @@ public class TabBar extends LinearLayout {
     private boolean showText;
     private boolean showUnderLine;
 
-    public enum TabCount {
-        ONE,
-        TWO,
-        THREE,
-        FOUR,
-        FIVE
+    public static final int TAB_COUNT_TWO = 2;
+    public static final int TAB_COUNT_THREE = 3;
+    public static final int TAB_COUNT_FOUR = 4;
+    public static final int TAB_COUNT_FIVE = 5;
+
+    @Retention(SOURCE)
+    @IntDef({TAB_COUNT_TWO, TAB_COUNT_THREE, TAB_COUNT_FOUR, TAB_COUNT_FIVE})
+    public @interface TabCount {
     }
 
     public interface OnTabBarClick {
@@ -149,9 +156,9 @@ public class TabBar extends LinearLayout {
             int markBgColor = t.getColor(R.styleable.TabBar_tb_markBgColor, 0xffff0000);
             setMarkBgColor(markBgColor);
             showMarkView = t.getBoolean(R.styleable.TabBar_tb_showMarkView, false);
-            showImg = t.getBoolean(R.styleable.TabBar_tb_show_img, true);
-            showText = t.getBoolean(R.styleable.TabBar_tb_show_text, true);
-            showUnderLine = t.getBoolean(R.styleable.TabBar_tb_show_underline, false);
+            showImg = t.getBoolean(R.styleable.TabBar_tb_showImg, true);
+            showText = t.getBoolean(R.styleable.TabBar_tb_showText, true);
+            showUnderLine = t.getBoolean(R.styleable.TabBar_tb_showUnderline, false);
 
             setVisible(mv0, showMarkView);
             setVisible(mv1, showMarkView);
