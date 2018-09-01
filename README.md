@@ -117,12 +117,18 @@ public class MyApplication extends Application {
 
 - ok, Just use `px` unit in your layout.
 
+- If you do not use BaseActivity, Then you should invoke the method
+ `   ScreenAdapterUtil.getInstance().loadView(getWindow().getDecorView());` in `Activity#onCreate()` method after `setContentView()`.
+
+- If you do not use BaseFragment, Then you should invoke the method
+ `   ScreenAdapterUtil.getInstance().loadView(view);` in `Fragment#onCreateView()` method after `inflate()`.
+
 - If you do not use LvBaseAdapter or RvBaseAdapter, Then you should invoke the method
  `ScreenAdapterUtil.getInstance().loadView(view);` when you create ViewHolder.
 
 #### BaseActivity
 
-it suports:
+it supports:
 - Multi-Style Dialog.
 - Multi-Language support.
 - Replace Fragment easily.
@@ -130,7 +136,7 @@ it suports:
 
 #### BaseFragment
 
-it suports:
+it supports:
 - Multi-Style Dialog.
 - Load data lazily.
 
@@ -197,6 +203,25 @@ it suports:
 
 - TitleBar
 > it's same as ToolBar.
+
+
+### License
+
+```
+Copyright © zhouzhuo810
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
 
 
 
