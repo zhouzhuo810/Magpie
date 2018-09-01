@@ -29,6 +29,7 @@
         android:layout_height="wrap_content"
         android:onClick="downloadStart"
         android:text="@string/dowload_start_text"
+        android:textAllCaps="false"
         android:textColor="@color/colorPrimary"
         android:textSize="40px" />
 

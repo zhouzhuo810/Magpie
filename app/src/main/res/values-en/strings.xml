@@ -23,6 +23,10 @@
     <string name="back_text">Back</string>
     <string name="dowload_start_text">Start Download</string>
     <string name="download_text">File Download</string>
+    <string name="pager_text">Pager Indicator</string>
+    <string name="tab_text">Bottom TabBar</string>
+    <string name="notice_tools">Notice Utils</string>
+    <string name="tools_text">Tools</string>
     <string-array name="language">
         <item>Simple Chinese</item>
         <item>Traditional Chinese</item>

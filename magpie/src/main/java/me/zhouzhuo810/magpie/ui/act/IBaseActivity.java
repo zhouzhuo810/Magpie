@@ -5,7 +5,9 @@ import android.app.Application;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
@@ -20,6 +22,7 @@ import me.zhouzhuo810.magpie.ui.dialog.ListDialog;
 import me.zhouzhuo810.magpie.ui.dialog.OneBtnProgressDialog;
 import me.zhouzhuo810.magpie.ui.dialog.TwoBtnEditDialog;
 import me.zhouzhuo810.magpie.ui.dialog.TwoBtnTextDialog;
+import me.zhouzhuo810.magpie.ui.fgm.BaseFragment;
 import me.zhouzhuo810.magpie.utils.LanguageUtil;
 
 public interface IBaseActivity {
@@ -30,6 +33,13 @@ public interface IBaseActivity {
      * @return 默认false，即使用框架提供的动画
      */
     public boolean useSysFinishAnim();
+
+    /**
+     * 获取布局的id
+     *
+     * @return layoutId
+     */
+    public int getLayoutId();
 
     /**
      * 是否支持多语言
@@ -53,12 +63,6 @@ public interface IBaseActivity {
      */
     public boolean shouldSupportMultiLanguage();
 
-    /**
-     * 获取布局的id
-     *
-     * @return
-     */
-    public int getLayoutId();
 
     /**
      * 屏幕适配需要返回getWindow().getDecorView();
@@ -219,8 +223,8 @@ public interface IBaseActivity {
 
     public TextWatcher setEditImageListener(EditText et, ImageView iv);
 
-    public interface OnOneBtnClick {
-        void onClick();
-    }
+    public Fragment findFragmentByTag(String tag);
+
+    public <T extends BaseFragment> void replaceFragment(@IdRes int containerId, Class<T> clazz, T fragment, Bundle bundle);
 
 }

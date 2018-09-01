@@ -39,6 +39,7 @@
                 android:layout_height="wrap_content"
                 android:onClick="listDialog"
                 android:text="@string/list_dialog_text"
+                android:textAllCaps="false"
                 android:textColor="@color/colorPrimary"
                 android:textSize="40px" />
 
@@ -47,6 +48,7 @@
                 android:layout_height="wrap_content"
                 android:onClick="twoBtnTextDialog"
                 android:text="@string/two_btn_dialog"
+                android:textAllCaps="false"
                 android:textColor="@color/colorPrimary"
                 android:textSize="40px" />
 
@@ -55,6 +57,7 @@
                 android:layout_height="wrap_content"
                 android:onClick="twoBtnEditDialog"
                 android:text="@string/two_btn_edit_dialog"
+                android:textAllCaps="false"
                 android:textColor="@color/colorPrimary"
                 android:textSize="40px" />
 
@@ -63,6 +66,7 @@
                 android:layout_height="wrap_content"
                 android:onClick="horizontalProgressDialog"
                 android:text="@string/horizontal_pro_dialog"
+                android:textAllCaps="false"
                 android:textColor="@color/colorPrimary"
                 android:textSize="40px" />
 
@@ -71,6 +75,7 @@
                 android:layout_height="wrap_content"
                 android:onClick="loadingDialog"
                 android:text="@string/loading_dialog"
+                android:textAllCaps="false"
                 android:textColor="@color/colorPrimary"
                 android:textSize="40px" />
 
@@ -79,6 +84,7 @@
                 android:layout_height="wrap_content"
                 android:onClick="bottomSheetDialog"
                 android:text="@string/bottom_sheet_dialog"
+                android:textAllCaps="false"
                 android:textColor="@color/colorPrimary"
                 android:textSize="40px" />
         </LinearLayout>

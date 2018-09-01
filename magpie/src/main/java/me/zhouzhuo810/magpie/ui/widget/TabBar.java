@@ -2,6 +2,7 @@ package me.zhouzhuo810.magpie.ui.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.annotation.IdRes;
 import android.support.annotation.IntDef;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
@@ -274,6 +275,34 @@ public class TabBar extends LinearLayout {
         return position;
     }
 
+    /**
+     * Set the icon resource id when tab is pressed.
+     *
+     * @param iconResIds iconResIds
+     * @return self
+     */
+    public TabBar setPressIconRes(int... iconResIds) {
+        this.pressIcons = iconResIds;
+        return this;
+    }
+
+    /**
+     * Set the icon resource id when tab is normal.
+     *
+     * @param iconResIds iconResIds
+     * @return self
+     */
+    public TabBar setNormalIconRes(int... iconResIds) {
+        this.normalIcons = iconResIds;
+        return this;
+    }
+
+    public TabBar setTextSize(int textSizePx) {
+        this.textSize = ScreenAdapterUtil.getInstance().getScaledValue(textSizePx);
+        return this;
+    }
+
+
     public TabBar setTextTopMargin(int marginTop) {
         setTextTopMargin(marginTop, true);
         return this;
@@ -494,21 +523,6 @@ public class TabBar extends LinearLayout {
         return this;
     }
 
-    public TabBar setPressIconRes(int... icons) {
-        this.pressIcons = icons;
-        return this;
-    }
-
-    public TabBar setTextSize(int textSizePx) {
-        this.textSize = ScreenAdapterUtil.getInstance().getScaledValue(textSizePx);
-        return this;
-    }
-
-    public TabBar setNormalIconRes(int... icons) {
-        this.normalIcons = icons;
-        return this;
-    }
-
     public void update() {
         mv0.update();
         mv1.update();
@@ -712,27 +726,35 @@ public class TabBar extends LinearLayout {
         return ll4;
     }
 
-    public void setSelection(int i) {
+    public void setSelection(int position) {
+        if (showImg) {
+            if (normalIcons == null) {
+                throw new RuntimeException("normalIcons can not be null if showImg = true.Please invoke the method TabBar#setNormalIconRes().");
+            }
+            if (pressIcons == null) {
+                throw new RuntimeException("pressIcons can not be null if showImg = true.Please invoke the method TabBar#setPressIconRes().");
+            }
+        }
         if (onTabBarClick != null) {
-            switch (i) {
+            switch (position) {
                 case 0:
-                    onTabBarClick.onTabClick(iv0, tv0, i, position != i);
+                    onTabBarClick.onTabClick(iv0, tv0, position, this.position != position);
                     break;
                 case 1:
-                    onTabBarClick.onTabClick(iv1, tv1, i, position != i);
+                    onTabBarClick.onTabClick(iv1, tv1, position, this.position != position);
                     break;
                 case 2:
-                    onTabBarClick.onTabClick(iv2, tv2, i, position != i);
+                    onTabBarClick.onTabClick(iv2, tv2, position, this.position != position);
                     break;
                 case 3:
-                    onTabBarClick.onTabClick(iv3, tv3, i, position != i);
+                    onTabBarClick.onTabClick(iv3, tv3, position, this.position != position);
                     break;
                 case 4:
-                    onTabBarClick.onTabClick(iv4, tv4, i, position != i);
+                    onTabBarClick.onTabClick(iv4, tv4, position, this.position != position);
                     break;
             }
         }
-        position = i;
+        this.position = position;
         update();
     }
 

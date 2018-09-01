@@ -34,6 +34,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private Button btnDialog;
     private View btnTitle;
     private Button btnDownload;
+    private Button btnPager;
+    private Button btnTab;
+    private Button btnTools;
 
     @Override
     public boolean shouldSupportMultiLanguage() {
@@ -52,8 +55,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         btnDialog = findViewById(R.id.btn_dialog);
         btnTitle = findViewById(R.id.btn_title);
         btnDownload = (Button) findViewById(R.id.btn_download);
+        btnPager = (Button) findViewById(R.id.btn_pager);
+        btnTab = (Button) findViewById(R.id.btn_tab);
         etCity = (EditText) findViewById(R.id.et_city);
         btnGo = (Button) findViewById(R.id.btn_go);
+        btnTools = (Button) findViewById(R.id.btn_tools);
         tvResult = (TextView) findViewById(R.id.tv_result);
     }
 
@@ -83,6 +89,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         btnDownload.setOnClickListener(this);
 
         btnGo.setOnClickListener(this);
+
+        btnPager.setOnClickListener(this);
+
+        btnTab.setOnClickListener(this);
+
+        btnTools.setOnClickListener(this);
     }
 
     @Override
@@ -151,6 +163,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.btn_download:
                 startAct(DownloadActivity.class);
+                break;
+            case R.id.btn_pager:
+                startAct(PagerActivity.class);
+                break;
+            case R.id.btn_tab:
+                startAct(TabActivity.class);
+                break;
+            case R.id.btn_tools:
+                startAct(ToolsActivity.class);
                 break;
         }
     }

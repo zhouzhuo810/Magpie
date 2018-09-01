@@ -3,7 +3,9 @@ package me.zhouzhuo810.magpie.ui.fgm;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
@@ -29,11 +31,13 @@ public interface IBaseFragment {
      */
     public int getLayoutId();
 
-    public View findViewById(int id);
+    public <T extends View> T findViewById(@IdRes int id);
 
     public void initView(@Nullable Bundle savedInstanceState);
 
     public void initData();
+
+    public void lazyLoadData();
 
     public void initEvent();
 
@@ -173,4 +177,6 @@ public interface IBaseFragment {
      * @return resId
      */
     int closeOutAnimation();
+
+    public Fragment findFragmentByTag(String tag);
 }

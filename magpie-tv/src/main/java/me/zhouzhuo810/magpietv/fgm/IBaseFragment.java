@@ -11,6 +11,9 @@ import android.widget.TextView;
 import java.util.List;
 
 import me.zhouzhuo810.magpietv.act.IBaseActivity;
+import me.zhouzhuo810.magpietv.dialog.ListDialog;
+import me.zhouzhuo810.magpietv.dialog.OneBtnProgressDialog;
+import me.zhouzhuo810.magpietv.dialog.TwoBtnTextDialog;
 
 public interface IBaseFragment {
 
@@ -47,39 +50,66 @@ public interface IBaseFragment {
 
     public void overridePendingTransition(int enterAnim, int exitAnim);
 
+
+    public void showLoadingDialog(String msg);
+
     public void showLoadingDialog(String title, String msg);
 
-    public void showLoadingDialog(String title, String msg, DialogInterface.OnDismissListener listener);
+    public void showLoadingDialog(String title, String msg, boolean cancelable);
 
-    public void showLoadingDialog(String title, String msg, boolean iosStyle, DialogInterface.OnDismissListener onDismissListener);
+    public void showLoadingDialog(String title, String msg, boolean cancelable, boolean iosStyle);
+
+    public void showLoadingDialog(String title, String msg, boolean cancelable, DialogInterface.OnDismissListener listener);
+
+    public void showLoadingDialog(String title, String msg, boolean cancelable, boolean iosStyle, DialogInterface.OnDismissListener onDismissListener);
 
     public void hideLoadingDialog();
 
-    public void showProgressDialog(String title, String msg, OnProgressListener onProgressListener);
+    public void showOneBtnProgressDialog(String title, String msg, OneBtnProgressDialog.OnProgressListener onProgressListener);
 
-    public void hideProgressDialog();
+    public void showOneBtnProgressDialog(String title, String msg, DialogInterface.OnDismissListener onDismissListener, OneBtnProgressDialog.OnProgressListener onProgressListener);
 
-    public void showTwoBtnDialog(String title, String msg, boolean cancelable, OnTwoBtnClick onTwoBtnClick);
+    public void showOneBtnProgressDialog(String title, String msg, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, OneBtnProgressDialog.OnProgressListener onProgressListener);
 
-    public void showTwoBtnDialog(String title, String msg, boolean cancelable, OnTwoBtnClick onTwoBtnClick, DialogInterface.OnDismissListener onDismissListener);
+    public void showOneBtnProgressDialog(String title, String msg, String btnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, OneBtnProgressDialog.OnProgressListener onProgressListener);
 
-    public void hideTwoBtnDialog();
+    public void hideOneBtnProgressDialog();
 
-    public void showEditDialog(String title, String msg, String hint, boolean cancelable, OnTwoBtnEditClick onTwoBtnEditClick);
+    public void showTwoBtnTextDialog(String title, String msg, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick);
 
-    public void showEditDialog(String title, String msg, String hint, boolean cancelable, OnTwoBtnEditClick onTwoBtnEditClick, DialogInterface.OnDismissListener onDismissListener);
+    public void showTwoBtnTextDialog(String title, String msg, boolean cancelable, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick);
 
-    public void hideEditDialog();
+    public void showTwoBtnTextDialog(String title, String msg, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick);
 
-    public void showListDialog(List<String> items, boolean cancelable, boolean checkable, OnItemClick onItemClick, DialogInterface.OnDismissListener onDismissListener);
+    public void showTwoBtnTextDialog(String title, String msg, String leftBtnString, String rightBtnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick);
+
+    public void hideTwoBtnTextDialog();
+
+    public void showListDialog(String[] items, boolean cancelable, ListDialog.OnItemClick onItemClick);
+
+    public void showListDialog(String title, String[] items, boolean cancelable, ListDialog.OnItemClick onItemClick);
+
+    public void showListDialog(String title, String[] items, boolean alignLeft, boolean cancelable, ListDialog.OnItemClick onItemClick);
+
+    public void showListDialog(String title, List<String> items, boolean alignLeft, boolean cancelable, ListDialog.OnItemClick onItemClick);
+
+    public void showListDialog(String title, List<String> items, boolean cancelable, ListDialog.OnItemClick onItemClick);
+
+    public void showListDialog(String title, List<String> items, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, ListDialog.OnItemClick onItemClick);
+
+    /**
+     * 显示列表对话框
+     *
+     * @param title             对话框标题，传null表示不显示
+     * @param items             列表数据集合
+     * @param alignLeft         是否左对齐，否则居中对齐
+     * @param cancelable        是否可以点击空白处或点返回键取消
+     * @param onDismissListener 对话框消失回调
+     * @param onItemClick       对话框点击回调
+     */
+    public void showListDialog(String title, List<String> items, boolean alignLeft, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, ListDialog.OnItemClick onItemClick);
 
     public void hideListDialog();
-
-    public void showBottomSheet(List<String> items, boolean cancelable, boolean iosStyle);
-
-    public void showBottomSheet(List<String> items, boolean cancelable, boolean iosStyle, DialogInterface.OnDismissListener onDismissListener);
-
-    public void hideBottomSheet();
 
     public void refreshData(String... params);
 

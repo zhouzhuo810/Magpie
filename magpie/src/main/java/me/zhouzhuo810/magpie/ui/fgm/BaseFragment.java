@@ -3,9 +3,11 @@ package me.zhouzhuo810.magpie.ui.fgm;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -29,8 +31,32 @@ import me.zhouzhuo810.magpie.utils.DisplayUtil;
 import me.zhouzhuo810.magpie.utils.ScreenAdapterUtil;
 
 public abstract class BaseFragment extends Fragment implements IBaseFragment {
-
+    private static final String STATE_SAVE_IS_HIDDEN = "STATE_SAVE_IS_HIDDEN";
     protected View rootView;
+    protected boolean isVisible;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            boolean isSupportHidden = savedInstanceState.getBoolean(STATE_SAVE_IS_HIDDEN);
+            if (getFragmentManager() != null) {
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                if (isSupportHidden) {
+                    ft.hide(this);
+                } else {
+                    ft.show(this);
+                }
+                ft.commit();
+            }
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(STATE_SAVE_IS_HIDDEN, isHidden());
+    }
 
     public static <T extends BaseFragment> T newInstance(Class<T> clazz, Bundle args) {
         String fname = clazz.getSimpleName();
@@ -75,6 +101,26 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
     }
 
     @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (getUserVisibleHint()) {
+            isVisible = true;
+            onVisible();
+        } else {
+            isVisible = false;
+            onInvisible();
+        }
+    }
+
+    protected void onVisible() {
+        lazyLoadData();
+    }
+
+    protected void onInvisible() {
+
+    }
+
+    @Override
     public void overridePendingTransition(int enterAnim, int exitAnim) {
         if (getBaseAct() == null) {
             return;
@@ -83,13 +129,12 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
     }
 
     @Override
-    public View findViewById(int id) {
+    public <T extends View> T findViewById(@IdRes int id) {
         if (rootView == null) {
             return null;
         }
         return rootView.findViewById(id);
     }
-
 
     @Override
     public IBaseActivity getBaseAct() {
@@ -425,5 +470,10 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
             return 0;
         }
         return getBaseAct().openOutAnimation();
+    }
+
+    @Override
+    public Fragment findFragmentByTag(String tag) {
+        return getChildFragmentManager().findFragmentByTag(tag);
     }
 }

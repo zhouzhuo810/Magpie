@@ -11,9 +11,13 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.yanzhenjie.permission.Action;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.Permission;
 
 import java.io.File;
 import java.io.InputStream;
+import java.util.List;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -45,6 +49,26 @@ public class DownloadActivity extends BaseActivity {
     }
 
     public void downloadStart(View v) {
+        AndPermission
+                .with(this)
+                .runtime()
+                .permission(Permission.WRITE_EXTERNAL_STORAGE)
+                .onDenied(new Action<List<String>>() {
+                    @Override
+                    public void onAction(List<String> data) {
+
+                    }
+                })
+                .onGranted(new Action<List<String>>() {
+                    @Override
+                    public void onAction(List<String> data) {
+                        startDownload();
+                    }
+                })
+                .start();
+    }
+
+    private void startDownload() {
         //设置下载进度监听
         ProgressManager.getInstance().addResponseListener(Api.DOWNLOAD_URL, new ProgressListener() {
             @Override
@@ -94,7 +118,6 @@ public class DownloadActivity extends BaseActivity {
 
                     }
                 });
-
     }
 
     @Override

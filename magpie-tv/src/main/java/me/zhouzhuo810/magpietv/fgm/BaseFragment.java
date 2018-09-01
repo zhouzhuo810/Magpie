@@ -10,11 +10,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.List;
+
 import me.zhouzhuo810.magpietv.R;
 import me.zhouzhuo810.magpietv.act.IBaseActivity;
+import me.zhouzhuo810.magpietv.dialog.ListDialog;
+import me.zhouzhuo810.magpietv.dialog.OneBtnProgressDialog;
+import me.zhouzhuo810.magpietv.dialog.TwoBtnTextDialog;
+import me.zhouzhuo810.magpietv.utils.CollectionUtil;
 import me.zhouzhuo810.magpietv.utils.ScreenAdapterUtil;
-
-import java.util.List;
 
 
 public abstract class BaseFragment extends Fragment implements IBaseFragment {
@@ -36,6 +41,34 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
 
         return rootView;
     }
+
+
+    public static <T extends BaseFragment> T newInstance(Class<T> clazz, Bundle args) {
+        String fname = clazz.getSimpleName();
+        try {
+            T t = clazz.getConstructor().newInstance();
+            if (args != null) {
+                args.setClassLoader(t.getClass().getClassLoader());
+                t.setArguments(args);
+            }
+            return t;
+        } catch (java.lang.InstantiationException e) {
+            throw new InstantiationException("Unable to instantiate fragment " + fname
+                    + ": make sure class name exists, is public, and has an"
+                    + " empty constructor that is public", e);
+        } catch (IllegalAccessException e) {
+            throw new InstantiationException("Unable to instantiate fragment " + fname
+                    + ": make sure class name exists, is public, and has an"
+                    + " empty constructor that is public", e);
+        } catch (NoSuchMethodException e) {
+            throw new InstantiationException("Unable to instantiate fragment " + fname
+                    + ": could not find Fragment constructor", e);
+        } catch (InvocationTargetException e) {
+            throw new InstantiationException("Unable to instantiate fragment " + fname
+                    + ": calling Fragment constructor caused an exception", e);
+        }
+    }
+
 
     @Override
     public void overridePendingTransition(int enterAnim, int exitAnim) {
@@ -103,88 +136,152 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
     }
 
     @Override
+    public void showLoadingDialog(String msg) {
+        showLoadingDialog(null, msg);
+    }
+
+    @Override
     public void showLoadingDialog(String title, String msg) {
-
+        showLoadingDialog(title, msg, false, null);
     }
 
     @Override
-    public void showLoadingDialog(String title, String msg, DialogInterface.OnDismissListener listener) {
-
+    public void showLoadingDialog(String title, String msg, boolean cancelable) {
+        showLoadingDialog(title, msg, cancelable, false, null);
     }
 
     @Override
-    public void showLoadingDialog(String title, String msg, boolean iosStyle, DialogInterface.OnDismissListener onDismissListener) {
+    public void showLoadingDialog(String title, String msg, boolean cancelable, boolean iosStyle) {
+        showLoadingDialog(title, msg, cancelable, iosStyle, null);
+    }
 
+    @Override
+    public void showLoadingDialog(String title, String msg, boolean cancelable, DialogInterface.OnDismissListener listener) {
+        showLoadingDialog(title, msg, cancelable, false, null);
+    }
+
+    @Override
+    public void showLoadingDialog(String title, String msg, boolean cancelable, boolean iosStyle, DialogInterface.OnDismissListener onDismissListener) {
+        if (getBaseAct() == null) {
+            return;
+        }
+        getBaseAct().showLoadingDialog(title, msg, cancelable, iosStyle, onDismissListener);
     }
 
     @Override
     public void hideLoadingDialog() {
-
+        if (getBaseAct() == null) {
+            return;
+        }
+        getBaseAct().hideLoadingDialog();
     }
 
     @Override
-    public void showProgressDialog(String title, String msg, OnProgressListener onProgressListener) {
-
+    public void showOneBtnProgressDialog(String title, String msg, OneBtnProgressDialog.OnProgressListener onProgressListener) {
+        showOneBtnProgressDialog(title, msg, false, null, onProgressListener);
     }
 
     @Override
-    public void hideProgressDialog() {
-
+    public void showOneBtnProgressDialog(String title, String msg, DialogInterface.OnDismissListener onDismissListener, OneBtnProgressDialog.OnProgressListener onProgressListener) {
+        showOneBtnProgressDialog(title, msg, false, onDismissListener, onProgressListener);
     }
 
     @Override
-    public void showTwoBtnDialog(String title, String msg, boolean cancelable, OnTwoBtnClick onTwoBtnClick) {
-
+    public void showOneBtnProgressDialog(String title, String msg, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, OneBtnProgressDialog.OnProgressListener onProgressListener) {
+        showOneBtnProgressDialog(title, msg, getString(R.string.magpie_ok_text), cancelable, onDismissListener, onProgressListener);
     }
 
     @Override
-    public void showTwoBtnDialog(String title, String msg, boolean cancelable, OnTwoBtnClick onTwoBtnClick, DialogInterface.OnDismissListener onDismissListener) {
-
+    public void showOneBtnProgressDialog(String title, String msg, String btnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, OneBtnProgressDialog.OnProgressListener onProgressListener) {
+        if (getBaseAct() == null) {
+            return;
+        }
+        getBaseAct().showOneBtnProgressDialog(title, msg, btnString, cancelable, onDismissListener, onProgressListener);
     }
 
     @Override
-    public void hideTwoBtnDialog() {
-
+    public void hideOneBtnProgressDialog() {
+        if (getBaseAct() == null) {
+            return;
+        }
+        getBaseAct().hideOneBtnProgressDialog();
     }
 
     @Override
-    public void showEditDialog(String title, String msg, String hint, boolean cancelable, OnTwoBtnEditClick onTwoBtnEditClick) {
-
+    public void showTwoBtnTextDialog(String title, String msg, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick) {
+        showTwoBtnTextDialog(title, msg, false, onTwoBtnClick);
     }
 
     @Override
-    public void showEditDialog(String title, String msg, String hint, boolean cancelable, OnTwoBtnEditClick onTwoBtnEditClick, DialogInterface.OnDismissListener onDismissListener) {
-
+    public void showTwoBtnTextDialog(String title, String msg, boolean cancelable, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick) {
+        showTwoBtnTextDialog(title, msg, cancelable, null, onTwoBtnClick);
     }
 
     @Override
-    public void hideEditDialog() {
-
+    public void showTwoBtnTextDialog(String title, String msg, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick) {
+        showTwoBtnTextDialog(title, msg, getString(R.string.magpie_cancel_text), getString(R.string.magpie_ok_text), cancelable, onDismissListener, onTwoBtnClick);
     }
 
     @Override
-    public void showListDialog(List<String> items, boolean cancelable, boolean checkable, OnItemClick onItemClick, DialogInterface.OnDismissListener onDismissListener) {
+    public void showTwoBtnTextDialog(String title, String msg, String leftBtnString, String rightBtnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick) {
+        if (getBaseAct() == null) {
+            return;
+        }
+        getBaseAct().showTwoBtnTextDialog(title, msg, leftBtnString, rightBtnString, cancelable, onDismissListener, onTwoBtnClick);
+    }
 
+    @Override
+    public void hideTwoBtnTextDialog() {
+        if (getBaseAct() == null) {
+            return;
+        }
+        getBaseAct().hideTwoBtnTextDialog();
+    }
+
+    @Override
+    public void showListDialog(String[] items, boolean cancelable, ListDialog.OnItemClick onItemClick) {
+        showListDialog(null, CollectionUtil.stringToList(items), cancelable, null, onItemClick);
+    }
+
+    @Override
+    public void showListDialog(String title, String[] items, boolean cancelable, ListDialog.OnItemClick onItemClick) {
+        showListDialog(title, CollectionUtil.stringToList(items), cancelable, null, onItemClick);
+    }
+
+    @Override
+    public void showListDialog(String title, String[] items, boolean alignLeft, boolean cancelable, ListDialog.OnItemClick onItemClick) {
+        showListDialog(title, CollectionUtil.stringToList(items), alignLeft, cancelable, null, onItemClick);
+    }
+
+    @Override
+    public void showListDialog(String title, List<String> items, boolean alignLeft, boolean cancelable, ListDialog.OnItemClick onItemClick) {
+        showListDialog(title, items, alignLeft, cancelable, null, onItemClick);
+    }
+
+    @Override
+    public void showListDialog(String title, List<String> items, boolean cancelable, ListDialog.OnItemClick onItemClick) {
+        showListDialog(title, items, cancelable, null, onItemClick);
+    }
+
+    @Override
+    public void showListDialog(String title, List<String> items, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, ListDialog.OnItemClick onItemClick) {
+        showListDialog(title, items, false, cancelable, onDismissListener, onItemClick);
+    }
+
+    @Override
+    public void showListDialog(String title, List<String> items, boolean alignLeft, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, ListDialog.OnItemClick onItemClick) {
+        if (getBaseAct() == null) {
+            return;
+        }
+        getBaseAct().showListDialog(title, items, alignLeft, cancelable, onDismissListener, onItemClick);
     }
 
     @Override
     public void hideListDialog() {
-
-    }
-
-    @Override
-    public void showBottomSheet(List<String> items, boolean cancelable, boolean iosStyle) {
-
-    }
-
-    @Override
-    public void showBottomSheet(List<String> items, boolean cancelable, boolean iosStyle, DialogInterface.OnDismissListener onDismissListener) {
-
-    }
-
-    @Override
-    public void hideBottomSheet() {
-
+        if (getBaseAct() == null) {
+            return;
+        }
+        getBaseAct().hideListDialog();
     }
 
     @Override
@@ -197,24 +294,36 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
 
     }
 
-
     @Override
     public int closeInAnimation() {
-        return R.anim.mp_slide_in_left;
+        if (getBaseAct() == null) {
+            return 0;
+        }
+        return getBaseAct().closeInAnimation();
     }
 
     @Override
     public int closeOutAnimation() {
-        return R.anim.mp_side_out_right;
+        if (getBaseAct() == null) {
+            return 0;
+        }
+        return getBaseAct().closeOutAnimation();
     }
 
     @Override
     public int openInAnimation() {
-        return R.anim.mp_slide_in_right;
+        if (getBaseAct() == null) {
+            return 0;
+        }
+        return getBaseAct().openInAnimation();
     }
 
     @Override
     public int openOutAnimation() {
-        return R.anim.mp_side_out_left;
+        if (getBaseAct() == null) {
+            return 0;
+        }
+        return getBaseAct().openOutAnimation();
     }
+
 }

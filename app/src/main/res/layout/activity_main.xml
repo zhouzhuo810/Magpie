@@ -32,6 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10px"
         android:text="@string/language_setting"
+        android:textAllCaps="false"
         android:textColor="@color/colorPrimary"
         android:textSize="40px" />
 
@@ -41,6 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10px"
         android:text="@string/dialog_text"
+        android:textAllCaps="false"
         android:textColor="@color/colorPrimary"
         android:textSize="40px" />
 
@@ -50,6 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10px"
         android:text="@string/title_text_1"
+        android:textAllCaps="false"
         android:textColor="@color/colorPrimary"
         android:textSize="40px" />
 
@@ -59,6 +62,34 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10px"
         android:text="@string/download_text"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimary"
+        android:textSize="40px" />
+    <Button
+        android:id="@+id/btn_pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10px"
+        android:text="@string/pager_text"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimary"
+        android:textSize="40px" />
+    <Button
+        android:id="@+id/btn_tab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10px"
+        android:text="@string/tab_text"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimary"
+        android:textSize="40px" />
+    <Button
+        android:id="@+id/btn_tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10px"
+        android:text="@string/tools_text"
+        android:textAllCaps="false"
         android:textColor="@color/colorPrimary"
         android:textSize="40px" />
 
@@ -84,6 +115,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10px"
             android:text="@string/search_text"
+            android:textAllCaps="false"
             android:textColor="@color/colorPrimary"
             android:textSize="40px" />
 

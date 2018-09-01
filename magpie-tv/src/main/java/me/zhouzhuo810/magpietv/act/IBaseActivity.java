@@ -5,7 +5,9 @@ import android.app.Application;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
@@ -16,6 +18,7 @@ import java.util.List;
 import me.zhouzhuo810.magpietv.dialog.ListDialog;
 import me.zhouzhuo810.magpietv.dialog.OneBtnProgressDialog;
 import me.zhouzhuo810.magpietv.dialog.TwoBtnTextDialog;
+import me.zhouzhuo810.magpietv.fgm.BaseFragment;
 import me.zhouzhuo810.magpietv.utils.LanguageUtil;
 
 
@@ -194,4 +197,7 @@ public interface IBaseActivity {
         void onClick();
     }
 
+    public Fragment findFragmentByTag(String tag);
+
+    public <T extends BaseFragment> void replaceFragment(@IdRes int containerId, Class<T> clazz, T fragment, Bundle bundle);
 }

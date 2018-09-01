@@ -18,10 +18,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import me.zhouzhuo810.magpie.R;
-import me.zhouzhuo810.magpie.ui.widget.adapter.ZzBasePagerAdapter;
-import me.zhouzhuo810.magpie.ui.widget.adapter.ZzFragmentPagerAdapter;
 import me.zhouzhuo810.magpie.ui.widget.en.IndicatorType;
 import me.zhouzhuo810.magpie.ui.widget.intef.IPagerIndicator;
+import me.zhouzhuo810.magpie.ui.widget.intef.IResProvider;
 import me.zhouzhuo810.magpie.utils.ScreenAdapterUtil;
 
 
@@ -326,12 +325,11 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
         if (mViewPager.getAdapter() != null) {
             for (int i = 0; i < mViewPager.getAdapter().getCount(); i++) {
                 ImageView iv = new ImageView(getContext());
-                if (mViewPager.getAdapter() instanceof ZzFragmentPagerAdapter) {
-                    int icon = ((ZzFragmentPagerAdapter) mViewPager.getAdapter()).getUnselectedIcon(i);
+                if (mViewPager.getAdapter() instanceof IResProvider) {
+                    int icon = ((IResProvider) mViewPager.getAdapter()).getUnselectedIcon(i);
                     iv.setImageResource(icon);
-                } else if (mViewPager.getAdapter() instanceof ZzBasePagerAdapter) {
-                    int icon = ((ZzBasePagerAdapter) mViewPager.getAdapter()).getUnselectedIcon(i);
-                    iv.setImageResource(icon);
+                } else {
+                    throw new RuntimeException("ViewPager 's Adapter must implement IResProvider.");
                 }
 
                 TextView tv = new TextView(getContext());
@@ -370,11 +368,15 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
         }
         if (mViewPager.getAdapter() != null) {
             for (int i = 0; i < mViewPager.getAdapter().getCount(); i++) {
-                int icon = ((ZzBasePagerAdapter) mViewPager.getAdapter()).getUnselectedIcon(i);
                 ImageView iv = new ImageView(getContext());
                 iv.setFocusable(true);
                 iv.setClickable(true);
-                iv.setImageResource(icon);
+                if (mViewPager.getAdapter() instanceof IResProvider) {
+                    int icon = ((IResProvider) mViewPager.getAdapter()).getUnselectedIcon(i);
+                    iv.setImageResource(icon);
+                } else {
+                    throw new RuntimeException("ViewPager 's Adapter must implement IResProvider.");
+                }
                 final int finalI = i;
                 iv.setOnClickListener(new OnClickListener() {
                     @Override
@@ -382,7 +384,10 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
                         setCurrentItem(finalI, true);
                     }
                 });
-                iv.setPadding(tabPadding, 0, tabPadding, 0);
+                if (!shouldExpand) {
+                    defaultTabLayoutParams.leftMargin = tabPadding;
+                    defaultTabLayoutParams.rightMargin = tabPadding;
+                }
                 mIndicatorContainer.addView(iv, i, shouldExpand ? expandedTabLayoutParams : defaultTabLayoutParams);
             }
         }
@@ -551,10 +556,10 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
             for (int i = 0; i < mViewPager.getAdapter().getCount(); i++) {
                 ImageView iv = (ImageView) getItem(i);
                 if (i == position) {
-                    int icon = ((ZzBasePagerAdapter) mViewPager.getAdapter()).getSelectedIcon(i);
+                    int icon = ((IResProvider) mViewPager.getAdapter()).getSelectedIcon(i);
                     iv.setImageResource(icon);
                 } else {
-                    int icon = ((ZzBasePagerAdapter) mViewPager.getAdapter()).getUnselectedIcon(i);
+                    int icon = ((IResProvider) mViewPager.getAdapter()).getUnselectedIcon(i);
                     iv.setImageResource(icon);
                 }
             }
@@ -649,12 +654,11 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
                     if (tabBgSelectId != -1) {
                         ll.setBackgroundResource(tabBgSelectId);
                     }
-                    if (mViewPager.getAdapter() instanceof ZzBasePagerAdapter) {
-                        int icon = ((ZzBasePagerAdapter) mViewPager.getAdapter()).getSelectedIcon(i);
+                    if (mViewPager.getAdapter() instanceof IResProvider) {
+                        int icon = ((IResProvider) mViewPager.getAdapter()).getSelectedIcon(i);
                         iv.setImageResource(icon);
                     } else {
-                        int icon = ((ZzFragmentPagerAdapter) mViewPager.getAdapter()).getSelectedIcon(i);
-                        iv.setImageResource(icon);
+                        throw new RuntimeException("ViewPager 's Adapter must implement IResProvider.");
                     }
                 } else {
                     if (horizontalHideIconMode && tabTextIconOrientation == TabOrientation.HORIZONTAL) {
@@ -667,12 +671,11 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
                     if (tabBgNormalId != -1) {
                         ll.setBackgroundResource(tabBgNormalId);
                     }
-                    if (mViewPager.getAdapter() instanceof ZzBasePagerAdapter) {
-                        int icon = ((ZzBasePagerAdapter) mViewPager.getAdapter()).getUnselectedIcon(i);
+                    if (mViewPager.getAdapter() instanceof IResProvider) {
+                        int icon = ((IResProvider) mViewPager.getAdapter()).getUnselectedIcon(i);
                         iv.setImageResource(icon);
                     } else {
-                        int icon = ((ZzFragmentPagerAdapter) mViewPager.getAdapter()).getUnselectedIcon(i);
-                        iv.setImageResource(icon);
+                        throw new RuntimeException("ViewPager 's Adapter must implement IResProvider.");
                     }
                 }
             }

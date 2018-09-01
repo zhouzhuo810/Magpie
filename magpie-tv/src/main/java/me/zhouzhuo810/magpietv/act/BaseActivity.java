@@ -6,7 +6,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.InputType;
@@ -28,6 +30,7 @@ import me.zhouzhuo810.magpietv.dialog.LoadingDialog;
 import me.zhouzhuo810.magpietv.dialog.OneBtnProgressDialog;
 import me.zhouzhuo810.magpietv.dialog.TwoBtnTextDialog;
 import me.zhouzhuo810.magpietv.event.CloseAllActEvent;
+import me.zhouzhuo810.magpietv.fgm.BaseFragment;
 import me.zhouzhuo810.magpietv.utils.ActivityUtil;
 import me.zhouzhuo810.magpietv.utils.CollectionUtil;
 import me.zhouzhuo810.magpietv.utils.LanguageUtil;
@@ -413,6 +416,29 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
             super.attachBaseContext(newBase);
         }
     }
+
+
+    @Override
+    public Fragment findFragmentByTag(String tag) {
+        if (getSupportFragmentManager() == null) {
+            return null;
+        }
+        return getSupportFragmentManager().findFragmentByTag(tag);
+    }
+
+    @Override
+    public <T extends BaseFragment> void replaceFragment(@IdRes int containerId, Class<T> clazz, T fragment, Bundle bundle) {
+        if (fragment == null) {
+            fragment = T.newInstance(clazz, bundle);
+        }
+        fragment.setArguments(bundle);
+        if (getSupportFragmentManager() != null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(containerId, fragment)
+                    .commitNow();
+        }
+    }
+
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onCloseAllActEvent(CloseAllActEvent event) {

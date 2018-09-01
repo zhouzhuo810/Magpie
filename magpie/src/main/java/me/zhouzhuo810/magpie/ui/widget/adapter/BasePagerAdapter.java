@@ -8,27 +8,29 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
+import me.zhouzhuo810.magpie.ui.widget.intef.IResProvider;
+
 /**
  * Created by zz on 2016/8/22.
  */
-public abstract class ZzBasePagerAdapter<K extends View, T> extends PagerAdapter {
+public abstract class BasePagerAdapter<V extends View, M> extends PagerAdapter implements IResProvider {
 
     protected Context context;
-    private List<K> views;
-    protected List<T> datas;
+    private List<V> views;
+    protected List<M> data;
 
-    public ZzBasePagerAdapter(final Context context, List<K> views, List<T> datas) {
+    public BasePagerAdapter(final Context context, List<V> views, List<M> data) {
         this.context = context;
         this.views = views;
-        this.datas = datas;
+        this.data = data;
     }
 
-    public void setViews(List<K> views) {
+    public void setViews(List<V> views) {
         this.views = views;
     }
 
-    public void setDatas(List<T> datas) {
-        this.datas = datas;
+    public void setData(List<M> data) {
+        this.data = data;
     }
 
     @Override
@@ -42,17 +44,17 @@ public abstract class ZzBasePagerAdapter<K extends View, T> extends PagerAdapter
     }
 
     @Override
-    public K instantiateItem(ViewGroup container, int position) {
-        K view = views.get(position);
-        if (datas != null) {
-            bindData(view, datas.get(position));
+    public V instantiateItem(ViewGroup container, int position) {
+        V view = views.get(position);
+        if (data != null) {
+            bindData(view, data.get(position));
         }
         view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         ((ViewPager) container).addView(view);
         return view;
     }
 
-    public abstract void bindData(K view, T t);
+    public abstract void bindData(V view, M m);
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
@@ -61,14 +63,10 @@ public abstract class ZzBasePagerAdapter<K extends View, T> extends PagerAdapter
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return getTabText(datas.get(position), position);
+        return getTabText(data.get(position), position);
     }
 
-    public abstract String getTabText(T t, int position);
-
-    public abstract int getSelectedIcon(int position);
-
-    public abstract int getUnselectedIcon(int position);
+    public abstract String getTabText(M m, int position);
 
 
 }
