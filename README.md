@@ -207,9 +207,9 @@ it supports:
 
 ### Thanks
 
-![AndroidUtilCode](https://github.com/Blankj/AndroidUtilCode)
+[AndroidUtilCode](https://github.com/Blankj/AndroidUtilCode)
 
-![AndroidScreenAdaptation](https://github.com/yatoooon/AndroidScreenAdaptation)
+[AndroidScreenAdaptation](https://github.com/yatoooon/AndroidScreenAdaptation)
 
 
 ### License
