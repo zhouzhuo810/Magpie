@@ -205,6 +205,13 @@ it supports:
 > it's same as ToolBar.
 
 
+### Thanks
+
+![AndroidUtilCode](https://github.com/Blankj/AndroidUtilCode)
+
+![AndroidScreenAdaptation](https://github.com/yatoooon/AndroidScreenAdaptation)
+
+
 ### License
 
 ```
