@@ -18,7 +18,7 @@ allprojects {
 }
 ```
 
-> Magpie
+> For Phone And Pad.
 
 ```
     implementation 'com.github.zhouzhuo810.Magpie:magpie:1.0.0'
@@ -53,7 +53,7 @@ If you use this. That means you added dependencies below:
     api 'me.jessyan:progressmanager:1.5.0'
 ```
 
-> Magpie-TV
+> For Android TV.
 
 ```
     implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.0.0'
@@ -156,10 +156,10 @@ it supports:
 > it's for RxJava2+Retrofit2+OkHttp3 Api Creation.
 
 - LanguageUtil
-> it's for Language setting.
+> it's for Language Setting.
 
 - KeyboardUtil
-> it's for Software Keyboard Operation.
+> it's for Software Keyboard operating.
 
 - ApkUtil
 > it's for Apk Installation.
@@ -171,13 +171,13 @@ it supports:
 > it's use for SharedPreferences.
 
 - StrUtil
-> it's use for String Operation.
+> it's use for String operating.
 
 - FileUtil
-> it's use for File Operation.
+> it's use for File operating.
 
 - DateUtil
-> it's use for Date Operation.
+> it's use for Date operating.
 
 - RxHelper
 > it's use for RxJava.
@@ -189,7 +189,7 @@ it supports:
 > it's for ClipboardManager.
 
 - ImageUtil
-> it's for bitmap Operation.
+> it's for bitmap operating.
 
 - ToastUtil
 > it's for simple Toast.
@@ -203,11 +203,24 @@ it supports:
 > it's for viewpager indicator.
 
 - TabBar
-> it's for bottom navation.
+> it's for bottom navigation.
 
 - TitleBar
 > it's same as ToolBar.
 
+- ColorUtil
+> it's for color operating.
+
+
+### Update Logs
+
+> 1.0.1 (Developing)
+
+- Add ColorUtil.
+
+> 1.0.0 (Published)
+
+- 2018/9/2 initial commit.
 
 ### Thanks
 
