@@ -12,9 +12,25 @@ public class EditUtil {
      * 获取EditText光标所在行的内容（不包括换行符）
      *
      * @param et EditText
-     * @return 内容
+     * @return 内容CharSequence
      */
     public static CharSequence getEditTextCursorLineContent(EditText et) {
+        final String content = et.getText().toString();
+        //获取行头下标
+        int lineHeadIndex = getEditTextCursorLineFirstIndex(et);
+        //获取行尾下标
+        int lineEndIndex = getEditTextCursorLineLastIndex(et);
+        //获取当前行内容
+        return content.substring(lineHeadIndex, lineEndIndex + 1);
+    }
+
+    /**
+     * 获取EditText光标所在行的内容（不包括换行符）
+     *
+     * @param et EditText
+     * @return 内容String
+     */
+    public static String getEditTextCursorLineContentString(EditText et) {
         final String content = et.getText().toString();
         //获取行头下标
         int lineHeadIndex = getEditTextCursorLineFirstIndex(et);
