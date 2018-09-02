@@ -56,14 +56,18 @@ public class EditUtil {
     public static int getEditTextCursorLineLastIndex(EditText et) {
         final String content = et.getText().toString();
         int index = et.getSelectionStart();
-        for (int i = index; i < content.length(); i++) {
-            if (content.charAt(i) == '\n') {
-                return i - 1;
-            } else if (i == content.length() - 1) {
-                return i;
+        if (index >= 0) {
+            for (int i = index; i < content.length(); i++) {
+                if (content.charAt(i) == '\n') {
+                    return i - 1;
+                } else if (i == content.length() - 1) {
+                    return i;
+                }
             }
+            return index - 1;
+        } else {
+            return 0;
         }
-        return index - 1;
     }
 
 }
