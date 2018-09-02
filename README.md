@@ -1,3 +1,5 @@
+[![](https://jitpack.io/v/zhouzhuo810/Magpie.svg)](https://jitpack.io/#zhouzhuo810/Magpie)
+
 # Magpie
  A powerful Android Develop Framework.
 
