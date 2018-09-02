@@ -1,6 +1,6 @@
 [![](https://jitpack.io/v/zhouzhuo810/Magpie.svg)](https://jitpack.io/#zhouzhuo810/Magpie)
 [![License](https://img.shields.io/badge/License%20-Apache%202-337ab7.svg)](https://www.apache.org/licenses/LICENSE-2.0)
-[![MinSdk](https://img.shields.io/badge/%20MinSdk%20-%2012%2B%20-f0ad4e.svg)](https://android-arsenal.com/api?level=16)
+[![MinSdk](https://img.shields.io/badge/MinSDK-16-orange.svg)](https://android-arsenal.com/api?level=16)
 
 # Magpie
  A powerful Android Develop Framework.
