@@ -16,6 +16,9 @@ public class EditUtil {
      */
     public static CharSequence getEditTextCursorLineContent(EditText et) {
         final String content = et.getText().toString();
+        if (content.length() == 0) {
+            return content;
+        }
         //获取行头下标
         int lineHeadIndex = getEditTextCursorLineFirstIndex(et);
         //获取行尾下标
@@ -32,6 +35,9 @@ public class EditUtil {
      */
     public static String getEditTextCursorLineContentString(EditText et) {
         final String content = et.getText().toString();
+        if (content.length() == 0) {
+            return content;
+        }
         //获取行头下标
         int lineHeadIndex = getEditTextCursorLineFirstIndex(et);
         //获取行尾下标
