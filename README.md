@@ -1,4 +1,6 @@
 [![](https://jitpack.io/v/zhouzhuo810/Magpie.svg)](https://jitpack.io/#zhouzhuo810/Magpie)
+[![License](https://img.shields.io/badge/License%20-Apache%202-337ab7.svg)](https://www.apache.org/licenses/LICENSE-2.0)
+
 
 # Magpie
  A powerful Android Develop Framework.
