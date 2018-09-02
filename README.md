@@ -150,73 +150,78 @@ it supports:
 > This is the key util.
 
 - ScreenAdapterUtil
-> it's use for screen Adapter.
+> It's use for screen Adapter.
 
 - ApiUtil
-> it's for RxJava2+Retrofit2+OkHttp3 Api Creation.
+> It's for RxJava2+Retrofit2+OkHttp3 Api Creation.
 
 - LanguageUtil
-> it's for Language Setting.
+> It's for Language Setting.
 
 - KeyboardUtil
-> it's for Software Keyboard operating.
+> It's for Software Keyboard operating.
 
 - ApkUtil
-> it's for Apk Installation.
+> It's for Apk Installation.
 
 - BarUtils
-> it's for StatusBar Setting.
+> It's for StatusBar Setting.
 
 - SpUtil
-> it's use for SharedPreferences.
+> It's use for SharedPreferences.
 
 - StrUtil
-> it's use for String operating.
+> It's use for String operating.
 
 - FileUtil
-> it's use for File operating.
+> It's use for File operating.
 
 - DateUtil
-> it's use for Date operating.
+> It's use for Date operating.
 
 - RxHelper
-> it's use for RxJava.
+> It's use for RxJava.
 
 - CrashUtils
-> it's for UncaughtExceptionHandler.
+> It's for UncaughtExceptionHandler.
 
 - CopyUtil
-> it's for ClipboardManager.
+> It's for ClipboardManager.
 
 - ImageUtil
-> it's for bitmap operating.
+> It's for bitmap operating.
 
 - ToastUtil
-> it's for simple Toast.
+> It's for simple Toast.
 
 - NoticeUtil
-> it's for Notification.
+> It's for Notification.
 
 #### Widgets
 
 - Indicator
-> it's for viewpager indicator.
+> It's for viewpager indicator.
 
 - TabBar
-> it's for bottom navigation.
+> It's for bottom navigation.
 
 - TitleBar
-> it's same as ToolBar.
+> It's same as ToolBar.
+
+( These utils is added in v1.0.1.)
 
 - ColorUtil
-> it's for color operating.
+> It's for color operating.
 
+- EditUtil
+> It's for EditText operating.
 
 ### Update Logs
 
 > 1.0.1 (Developing)
 
 - Add ColorUtil.
+- Add EditUtil.
 
 > 1.0.0 (Published)
 
