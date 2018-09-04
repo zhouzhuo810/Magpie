@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.AppCompatSpinner;
 import android.text.InputType;
 import android.view.View;
 import android.widget.ImageView;
@@ -49,7 +50,6 @@ public class DialogActivity extends BaseActivity {
 
     @Override
     public void initData() {
-
     }
 
     @Override

@@ -92,6 +92,15 @@
         android:textAllCaps="false"
         android:textColor="@color/colorPrimary"
         android:textSize="40px" />
+    <Button
+        android:id="@+id/btn_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10px"
+        android:text="@string/spinner_text"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimary"
+        android:textSize="40px" />
 
     <LinearLayout
         android:layout_width="match_parent"

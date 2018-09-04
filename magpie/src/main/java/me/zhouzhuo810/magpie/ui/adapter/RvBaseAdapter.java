@@ -21,6 +21,7 @@ import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import java.util.Arrays;
 import java.util.List;
 
 import me.zhouzhuo810.magpie.utils.ScreenAdapterUtil;
@@ -55,6 +56,11 @@ public abstract class RvBaseAdapter<T> extends RecyclerView.Adapter<RvBaseAdapte
     public RvBaseAdapter(Context context, List<T> data) {
         this.context = context;
         this.data = data;
+    }
+
+    public RvBaseAdapter(Context context, T[] data) {
+        this.context = context;
+        this.data = Arrays.asList(data);
     }
 
     @Override

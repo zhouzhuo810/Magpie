@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.annotation.LayoutRes;
 import android.text.util.Linkify;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import java.util.Arrays;
 import java.util.List;
 
 import me.zhouzhuo810.magpie.utils.ScreenAdapterUtil;
@@ -32,6 +34,7 @@ public abstract class LvBaseAdapter<T> extends BaseAdapter {
 
     protected Context context;
     protected List<T> data;
+    private int mDropdownLayoutId;
 
     private OnItemClickListener onItemClickListener;
     private OnItemLongClickListener onItemLongClickListener;
@@ -57,9 +60,18 @@ public abstract class LvBaseAdapter<T> extends BaseAdapter {
         this.data = data;
     }
 
+    public LvBaseAdapter(Context context, T[] data) {
+        this.context = context;
+        this.data = Arrays.asList(data);
+    }
+
     public void updateAll(List<T> data) {
         this.data = data;
         notifyDataSetChanged();
+    }
+
+    public void setDropdownLayoutId(@LayoutRes int dropdownLayoutId) {
+        this.mDropdownLayoutId = dropdownLayoutId;
     }
 
     @Override
@@ -109,6 +121,30 @@ public abstract class LvBaseAdapter<T> extends BaseAdapter {
         }
         fillData(holder, getItem(position), position);
         return convertView;
+    }
+
+    @Override
+    public View getDropDownView(int position, View convertView, ViewGroup viewGroup) {
+        if (mDropdownLayoutId == 0) {
+            return super.getDropDownView(position, convertView, viewGroup);
+        } else {
+            ViewHolder holder;
+            if (convertView == null) {
+                convertView = LayoutInflater.from(context).inflate(getLayoutId(), viewGroup, false);
+                ScreenAdapterUtil.getInstance().loadView(convertView);
+                holder = new ViewHolder(context, convertView, viewGroup, position);
+                holder.mLayoutId = getLayoutId();
+            } else {
+                holder = (ViewHolder) convertView.getTag();
+                holder.mPosition = position;
+            }
+            fillDropDownData(holder, getItem(position), position);
+            return convertView;
+        }
+    }
+
+    protected void fillDropDownData(ViewHolder holder, T item, int position) {
+
     }
 
     protected abstract void fillData(ViewHolder holder, T item, int position);

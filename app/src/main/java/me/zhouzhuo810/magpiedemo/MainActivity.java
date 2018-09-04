@@ -37,6 +37,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private Button btnPager;
     private Button btnTab;
     private Button btnTools;
+    private Button btnSpinner;
 
     @Override
     public boolean shouldSupportMultiLanguage() {
@@ -60,6 +61,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         etCity = (EditText) findViewById(R.id.et_city);
         btnGo = (Button) findViewById(R.id.btn_go);
         btnTools = (Button) findViewById(R.id.btn_tools);
+        btnSpinner = (Button) findViewById(R.id.btn_spinner);
         tvResult = (TextView) findViewById(R.id.tv_result);
     }
 
@@ -95,6 +97,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         btnTab.setOnClickListener(this);
 
         btnTools.setOnClickListener(this);
+
+        btnSpinner.setOnClickListener(this);
     }
 
     @Override
@@ -172,6 +176,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.btn_tools:
                 startAct(ToolsActivity.class);
+                break;
+            case R.id.btn_spinner:
+                startAct(SpinnerTestActivity.class);
                 break;
         }
     }

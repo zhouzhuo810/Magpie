@@ -216,12 +216,16 @@ it supports:
 - EditUtil
 > It's for EditText operating.
 
+- SimpleSpinner
+> It's for Spinner operating.
+
 ### Update Logs
 
 > 1.0.1 (Developing)
 
 - Add ColorUtil.
 - Add EditUtil.
+- Add SimpleSpinner.
 
 > 1.0.0 (Published)
 

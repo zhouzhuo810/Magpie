@@ -11,7 +11,6 @@ import java.io.File;
 import me.zhouzhuo810.magpie.utils.BaseUtil;
 import me.zhouzhuo810.magpie.utils.CrashUtils;
 import me.zhouzhuo810.magpie.utils.LanguageUtil;
-import me.zhouzhuo810.magpie.utils.ToastUtil;
 
 public class MyApplication extends Application {
 
@@ -38,7 +37,6 @@ public class MyApplication extends Application {
         CrashUtils.init(CRASH_PATH, new CrashUtils.OnCrashListener() {
             @Override
             public void onCrash(String crashInfo, Throwable e) {
-                ToastUtil.showLongToast("应用开小差了，稍后重启~");
                 BaseUtil.relaunchApp();
             }
         });

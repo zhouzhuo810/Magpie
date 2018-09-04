@@ -28,12 +28,7 @@ public class ToolsActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                throw new OutOfMemoryError("测试OOM异常");
-            }
-        }, 2000);
+
     }
 
     @Override
