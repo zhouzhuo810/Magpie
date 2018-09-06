@@ -15,6 +15,7 @@
         <attr name="ttb_titleText" format="string|reference" />
         <attr name="ttb_rightImg" format="reference" />
         <attr name="ttb_rightText" format="string|reference" />
+        <attr name="ttb_iconSize" format="dimension|reference" />
         <attr name="ttb_textSizeTitle" format="dimension|reference" />
         <attr name="ttb_textSizeTwoSide" format="dimension|reference" />
         <attr name="ttb_textColorAll" format="color|reference" />

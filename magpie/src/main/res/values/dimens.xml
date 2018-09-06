@@ -2,6 +2,7 @@
 <resources>
     <dimen name="base_title_height">130px</dimen>
     <dimen name="base_title_text_size">50px</dimen>
+    <dimen name="base_title_icon_size">60px</dimen>
     <dimen name="base_tab_text_size">36px</dimen>
     <dimen name="base_tab_icon_size">70px</dimen>
     <dimen name="base_tab_text_top_margin">6px</dimen>

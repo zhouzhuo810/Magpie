@@ -18,6 +18,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 import me.zhouzhuo810.magpie.R;
+import me.zhouzhuo810.magpie.utils.ScreenAdapterUtil;
 
 
 /**
@@ -115,17 +116,19 @@ public class TitleBar extends RelativeLayout {
             boolean showRightImg = t.getBoolean(R.styleable.TitleBar_ttb_showRightImg, false);
             boolean showRightText = t.getBoolean(R.styleable.TitleBar_ttb_showRightText, true);
             setVisible(llLeft, showLeftLayout);
+            setVisible(rlLeft, showLeftLayout);
             setVisible(llRight, showRightLayout);
+            setVisible(rlRight, showRightLayout);
             setVisible(ivLeft, showLeftImg);
-            setVisible(rlLeft, showLeftImg);
             setVisible(tvLeft, showLeftText);
             setVisible(tvTitle, showTitle);
             setVisible(ivRight, showRightImg);
-            setVisible(rlRight, showRightImg);
             setVisible(tvRight, showRightText);
             setVisible(mvLeft, showLeftMarkView);
             setVisible(mvRight, showRightMarkView);
             /*img*/
+            int iconSize = t.getDimensionPixelSize(R.styleable.TitleBar_ttb_iconSize, 60);
+            setImageSize(iconSize, false);
             int leftDrawableId = t.getResourceId(R.styleable.TitleBar_ttb_leftImg, -1);
             int rightDrawableId = t.getResourceId(R.styleable.TitleBar_ttb_rightImg, -1);
             if (leftDrawableId != -1) {
@@ -158,13 +161,13 @@ public class TitleBar extends RelativeLayout {
             t.recycle();
         } else {
             setVisible(llLeft, true);
+            setVisible(rlLeft, true);
             setVisible(llRight, false);
+            setVisible(rlRight, false);
             setVisible(ivLeft, false);
-            setVisible(rlLeft, false);
             setVisible(tvLeft, true);
             setVisible(tvTitle, true);
             setVisible(ivRight, true);
-            setVisible(rlRight, false);
             setVisible(tvRight, false);
             setVisible(mvLeft, false);
             setVisible(mvRight, false);
@@ -248,6 +251,21 @@ public class TitleBar extends RelativeLayout {
                 }
             }
         });
+    }
+
+    public void setImageSize(int imageSize, boolean autoSize) {
+        int size = imageSize;
+        if (autoSize) {
+            size = ScreenAdapterUtil.getInstance().getScaledValue(imageSize);
+        }
+        RelativeLayout.LayoutParams lp0 = (RelativeLayout.LayoutParams) ivLeft.getLayoutParams();
+        RelativeLayout.LayoutParams lp1 = (RelativeLayout.LayoutParams) ivRight.getLayoutParams();
+        lp0.width = size;
+        lp0.height = size;
+        lp1.width = size;
+        lp1.height = size;
+        ivLeft.setLayoutParams(lp0);
+        ivRight.setLayoutParams(lp1);
     }
 
     public ImageView getIvLeft() {

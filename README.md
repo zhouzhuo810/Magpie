@@ -221,6 +221,10 @@ it supports:
 
 ### Update Logs
 
+> 1.0.2 (Developing)
+
+- TitleBar add `ttb_iconSize` attribute.
+
 > 1.0.1 (Published)
 
 - Add ColorUtil.
