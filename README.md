@@ -224,6 +224,8 @@ it supports:
 > 1.0.2 (Developing)
 
 - TitleBar add `ttb_iconSize` attribute.
+- Add `shouldNotInvokeInitMethods` method
+  to skip invoking `initView、initData、initEvent` in BaseActivity and BaseFragment.
 
 > 1.0.1 (Published)
 

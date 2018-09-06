@@ -33,15 +33,19 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
         //屏幕适配
         ScreenAdapterUtil.getInstance().loadView(rootView);
 
-        initView(savedInstanceState);
-
-        initData();
-
-        initEvent();
+        if (!shouldNotInvokeInitMethods(savedInstanceState)) {
+            initView(savedInstanceState);
+            initData();
+            initEvent();
+        }
 
         return rootView;
     }
 
+    @Override
+    public boolean shouldNotInvokeInitMethods(Bundle savedInstanceState) {
+        return false;
+    }
 
     public static <T extends BaseFragment> T newInstance(Class<T> clazz, Bundle args) {
         String fname = clazz.getSimpleName();

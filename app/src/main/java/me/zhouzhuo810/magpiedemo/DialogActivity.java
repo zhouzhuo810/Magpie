@@ -44,6 +44,11 @@ public class DialogActivity extends BaseActivity {
     }
 
     @Override
+    public boolean shouldNotInvokeInitMethods(Bundle savedInstanceState) {
+        return true;
+    }
+
+    @Override
     public void initView(@Nullable Bundle savedInstanceState) {
 
     }
@@ -186,6 +191,10 @@ public class DialogActivity extends BaseActivity {
                 ToastUtil.showShortToast("position = " + position + ", content = " + item);
             }
         });
+    }
+
+    public void closeAll(View v) {
+        closeAllAct();
     }
 
 }

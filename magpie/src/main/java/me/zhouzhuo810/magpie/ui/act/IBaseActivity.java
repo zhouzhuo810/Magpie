@@ -77,6 +77,13 @@ public interface IBaseActivity {
 
     public void initEvent();
 
+    /**
+     * 判断是否调用initView、initData、initEvent方法。
+     *
+     * @return 是否
+     */
+    public boolean shouldNotInvokeInitMethods(Bundle savedInstanceState);
+
     public void startAct(Class<? extends Activity> clazz);
 
     public void startActShared(Class<? extends Activity> clazz, final View... sharedElements);
@@ -95,9 +102,11 @@ public interface IBaseActivity {
 
     public void closeAct();
 
+    public void closeAct(boolean defaultAnimation);
+
     public void closeActWithOutAnim();
 
-    public void closeAct(boolean defaultBack);
+    public void closeAllAct(boolean defaultAnimation);
 
     public void closeAllAct();
 

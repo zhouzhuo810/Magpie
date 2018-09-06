@@ -41,6 +41,8 @@ public interface IBaseFragment {
 
     public void initEvent();
 
+    public boolean shouldNotInvokeInitMethods(Bundle savedInstanceState);
+
     public IBaseActivity getBaseAct();
 
     public void startActWithIntent(Intent intent);

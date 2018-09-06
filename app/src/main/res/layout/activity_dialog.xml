@@ -87,6 +87,15 @@
                 android:textAllCaps="false"
                 android:textColor="@color/colorPrimary"
                 android:textSize="40px" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="closeAll"
+                android:text="关闭所有界面"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                android:textSize="40px" />
         </LinearLayout>
     </ScrollView>
 

@@ -32,6 +32,13 @@ public interface IBaseFragment {
 
     public void initEvent();
 
+    /**
+     * 判断是否调用initView、initData、initEvent方法。
+     *
+     * @return 是否
+     */
+    public boolean shouldNotInvokeInitMethods(Bundle savedInstanceState);
+
     public IBaseActivity getBaseAct();
 
     public void startActWithIntent(Intent intent);

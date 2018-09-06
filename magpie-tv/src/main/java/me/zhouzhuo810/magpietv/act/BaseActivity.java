@@ -48,14 +48,18 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        EventBus.getDefault().register(this);
+
         setContentView(getLayoutId());
+
         ScreenAdapterUtil.getInstance().loadView(getDecorView());
 
-        initView(savedInstanceState);
-
-        initData();
-
-        initEvent();
+        if (!shouldNotInvokeInitMethods(savedInstanceState)) {
+            initView(savedInstanceState);
+            initData();
+            initEvent();
+        }
     }
 
     @Override
@@ -154,7 +158,12 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
 
     @Override
     public void closeAllAct() {
-        EventBus.getDefault().post(new CloseAllActEvent());
+        closeAllAct(false);
+    }
+
+    @Override
+    public void closeAllAct(boolean defaultAnimation) {
+        EventBus.getDefault().post(new CloseAllActEvent(defaultAnimation));
     }
 
     @Override
@@ -442,24 +451,17 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onCloseAllActEvent(CloseAllActEvent event) {
-        closeActWithOutAnim();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        EventBus.getDefault().register(this);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        EventBus.getDefault().unregister(this);
+        if (event.isDefaultAnim()) {
+            finish();
+        } else {
+            closeActWithOutAnim();
+        }
     }
 
     @Override
     protected void onDestroy() {
         hideListDialog();
         super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

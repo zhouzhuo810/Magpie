@@ -91,11 +91,11 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
         //屏幕适配
         ScreenAdapterUtil.getInstance().loadView(rootView);
 
-        initView(savedInstanceState);
-
-        initData();
-
-        initEvent();
+        if (!shouldNotInvokeInitMethods(savedInstanceState)) {
+            initView(savedInstanceState);
+            initData();
+            initEvent();
+        }
 
         return rootView;
     }
@@ -110,6 +110,11 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
             isVisible = false;
             onInvisible();
         }
+    }
+
+    @Override
+    public boolean shouldNotInvokeInitMethods(Bundle savedInstanceState) {
+        return false;
     }
 
     protected void onVisible() {
