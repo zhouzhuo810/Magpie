@@ -221,7 +221,7 @@ it supports:
 
 ### Update Logs
 
-> 1.0.2 (Developing)
+> 1.0.2 (Published)
 
 - TitleBar add `ttb_iconSize` attribute.
 - Add `shouldNotInvokeInitMethods` method
