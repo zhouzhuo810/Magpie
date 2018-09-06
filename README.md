@@ -21,7 +21,7 @@ allprojects {
 > For Phone And Pad.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.0.1'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.0.2'
 ```
 
 If you use this. That means you added dependencies below:
@@ -56,7 +56,7 @@ If you use this. That means you added dependencies below:
 > For Android TV.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.0.1'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.0.2'
 ```
 
 If you use this. That means you added dependencies below:
