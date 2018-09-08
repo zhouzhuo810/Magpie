@@ -209,4 +209,8 @@ public interface IBaseActivity {
     public Fragment findFragmentByTag(String tag);
 
     public <T extends BaseFragment> void replaceFragment(@IdRes int containerId, Class<T> clazz, T fragment, Bundle bundle);
+
+    public <T extends BaseFragment> void addOrShowFragment(@IdRes int containerId, Class<T> clazz, T fragment, Bundle bundle);
+
+    public <T extends BaseFragment> void hideFragment(T fragment);
 }

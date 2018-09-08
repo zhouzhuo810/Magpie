@@ -35,7 +35,7 @@ public class TabActivity extends BaseActivity {
         tabBar = findViewById(R.id.tab_bar);
     }
 
-    private void changeToPosition(int position, Bundle bundle) {
+/*    private void changeToPosition(int position, Bundle bundle) {
         switch (position) {
             case 0:
                 replaceFragment(R.id.fgm_container, TestFragment.class, fgm1, bundle);
@@ -48,6 +48,24 @@ public class TabActivity extends BaseActivity {
                 break;
             case 3:
                 replaceFragment(R.id.fgm_container, TestFragment.class, fgm4, bundle);
+                break;
+
+        }
+    }*/
+
+    private void changeToPositionBetter(int position, Bundle bundle) {
+        switch (position) {
+            case 0:
+                addOrShowFragment(R.id.fgm_container, TestFragment.class, fgm1, bundle);
+                break;
+            case 1:
+                addOrShowFragment(R.id.fgm_container, TestFragment.class, fgm2, bundle);
+                break;
+            case 2:
+                addOrShowFragment(R.id.fgm_container, TestFragment.class, fgm3, bundle);
+                break;
+            case 3:
+                addOrShowFragment(R.id.fgm_container, TestFragment.class, fgm4, bundle);
                 break;
 
         }
@@ -76,7 +94,7 @@ public class TabActivity extends BaseActivity {
             public void onTabClick(ImageView iv, TextView tv, int position, boolean changed) {
                 Bundle bundle = new Bundle();
                 bundle.putInt("index", position);
-                changeToPosition(position, bundle);
+                changeToPositionBetter(position, bundle);
             }
         });
 

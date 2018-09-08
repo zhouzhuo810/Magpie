@@ -221,6 +221,10 @@ it supports:
 
 ### Update Logs
 
+> 1.0.3 (Developing)
+
+- Add`addOrShowFragment`and `hideFragment` methods in BaseActivity.
+
 > 1.0.2 (Published)
 
 - TitleBar add `ttb_iconSize` attribute.

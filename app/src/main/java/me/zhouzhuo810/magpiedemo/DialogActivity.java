@@ -45,7 +45,7 @@ public class DialogActivity extends BaseActivity {
 
     @Override
     public boolean shouldNotInvokeInitMethods(Bundle savedInstanceState) {
-        return true;
+        return false;
     }
 
     @Override

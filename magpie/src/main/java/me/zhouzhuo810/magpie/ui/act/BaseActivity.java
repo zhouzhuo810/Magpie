@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.InputType;
@@ -538,6 +539,58 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
             getSupportFragmentManager().beginTransaction()
                     .replace(containerId, fragment)
                     .commitNow();
+        }
+    }
+
+    @Override
+    public <T extends BaseFragment> void addOrShowFragment(@IdRes int containerId, Class<T> clazz, T fragment, Bundle bundle) {
+        if (fragment == null) {
+            fragment = T.newInstance(clazz, bundle);
+            fragment.setArguments(bundle);
+            if (getSupportFragmentManager() != null) {
+                List<Fragment> fragments = getSupportFragmentManager().getFragments();
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                if (fragments != null) {
+                    for (Fragment fgm : fragments) {
+                        if (fgm != null) {
+                            if (fgm.isAdded() && !fgm.isHidden()) {
+                                transaction.hide(fgm);
+                            }
+                        }
+                    }
+                }
+                transaction.add(containerId, fragment)
+                        .show(fragment)
+                        .commitNow();
+            }
+        } else {
+            if (getSupportFragmentManager() != null) {
+                List<Fragment> fragments = getSupportFragmentManager().getFragments();
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                if (fragments != null) {
+                    for (Fragment fgm : fragments) {
+                        if (fgm != null) {
+                            if (fgm.isAdded() && !fgm.isHidden()) {
+                                transaction.hide(fgm);
+                            }
+                        }
+                    }
+                }
+                transaction.add(containerId, fragment)
+                        .show(fragment)
+                        .commitNow();
+            }
+        }
+    }
+
+    @Override
+    public <T extends BaseFragment> void hideFragment(T fragment) {
+        if (fragment != null) {
+            if (getSupportFragmentManager() != null) {
+                getSupportFragmentManager().beginTransaction()
+                        .hide(fragment)
+                        .commitNow();
+            }
         }
     }
 
