@@ -21,7 +21,7 @@ allprojects {
 > For Phone And Pad.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.0.2'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.0.3'
 ```
 
 If you use this. That means you added dependencies below:
@@ -221,7 +221,7 @@ it supports:
 
 ### Update Logs
 
-> 1.0.3 (Developing)
+> 1.0.3 (Published)
 
 - Add`addOrShowFragment`and `hideFragment` methods in BaseActivity.
 
