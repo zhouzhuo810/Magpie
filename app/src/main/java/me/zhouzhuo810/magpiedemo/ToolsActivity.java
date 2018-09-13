@@ -5,8 +5,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import me.zhouzhuo810.magpie.ui.act.BaseActivity;
+import me.zhouzhuo810.magpie.ui.widget.MarkView;
+import me.zhouzhuo810.magpie.ui.widget.TitleBar;
 import me.zhouzhuo810.magpie.utils.BaseUtil;
 import me.zhouzhuo810.magpie.utils.NoticeUtil;
 
@@ -15,35 +19,51 @@ public class ToolsActivity extends BaseActivity {
     public int getLayoutId() {
         return R.layout.activity_tools;
     }
-
+    
     @Override
     public boolean shouldSupportMultiLanguage() {
         return false;
     }
-
+    
     @Override
     public void initView(@Nullable Bundle savedInstanceState) {
-
+    
     }
-
+    
     @Override
     public void initData() {
-
+    
     }
-
+    
     @Override
     public void initEvent() {
-
+        TitleBar titleBar = findViewById(R.id.title_bar);
+        titleBar.setOnTitleClickListener(new TitleBar.OnTitleClick() {
+            @Override
+            public void onLeftClick(ImageView ivLeft, MarkView mv, TextView tvLeft) {
+                closeAct();
+            }
+            
+            @Override
+            public void onTitleClick(TextView tvTitle) {
+            
+            }
+            
+            @Override
+            public void onRightClick(ImageView ivRight, MarkView mv, TextView tvRight) {
+            
+            }
+        });
     }
-
+    
     public void noticeTools(View v) {
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_LAUNCHER);
         intent.setClass(BaseUtil.getApp(), MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-
+        
         NoticeUtil.showNormalNotice(getString(R.string.app_name), getString(R.string.notice_tools),
-                true, false, R.mipmap.ic_launcher,
-                true, true, null, intent);
+            true, false, R.mipmap.ic_launcher,
+            true, true, null, intent);
     }
 }

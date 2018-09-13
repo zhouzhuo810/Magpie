@@ -35,26 +35,26 @@ import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
  * </pre>
  */
 public final class CrashUtils {
-
+    
     private static String defaultDir;
     private static String dir;
     private static String versionName;
     private static int versionCode;
-
+    
     private static final String FILE_SEP = System.getProperty("file.separator");
     @SuppressLint("SimpleDateFormat")
     private static final Format FORMAT = new SimpleDateFormat("MM-dd HH-mm-ss");
-
+    
     private static final UncaughtExceptionHandler DEFAULT_UNCAUGHT_EXCEPTION_HANDLER;
     private static final UncaughtExceptionHandler UNCAUGHT_EXCEPTION_HANDLER;
-
+    
     private static OnCrashListener sOnCrashListener;
-
+    
     static {
         try {
             PackageInfo pi = BaseUtil.getApp()
-                    .getPackageManager()
-                    .getPackageInfo(BaseUtil.getApp().getPackageName(), 0);
+                .getPackageManager()
+                .getPackageInfo(BaseUtil.getApp().getPackageName(), 0);
             if (pi != null) {
                 versionName = pi.versionName;
                 versionCode = pi.versionCode;
@@ -63,7 +63,7 @@ public final class CrashUtils {
             e.printStackTrace();
         }
         DEFAULT_UNCAUGHT_EXCEPTION_HANDLER = Thread.getDefaultUncaughtExceptionHandler();
-
+        
         UNCAUGHT_EXCEPTION_HANDLER = new UncaughtExceptionHandler() {
             @Override
             public void uncaughtException(final Thread t, final Throwable e) {
@@ -76,18 +76,18 @@ public final class CrashUtils {
                     }
                     return;
                 }
-
+                
                 final String time = FORMAT.format(new Date(System.currentTimeMillis()));
                 final StringBuilder sb = new StringBuilder();
                 final String head = "************* Log Head ****************" +
-                        "\nTime Of Crash      : " + time +
-                        "\nDevice Manufacturer: " + Build.MANUFACTURER +
-                        "\nDevice Model       : " + Build.MODEL +
-                        "\nAndroid Version    : " + Build.VERSION.RELEASE +
-                        "\nAndroid SDK        : " + Build.VERSION.SDK_INT +
-                        "\nApp VersionName    : " + versionName +
-                        "\nApp VersionCode    : " + versionCode +
-                        "\n************* Log Head ****************\n\n";
+                    "\nTime Of Crash      : " + time +
+                    "\nDevice Manufacturer: " + Build.MANUFACTURER +
+                    "\nDevice Model       : " + Build.MODEL +
+                    "\nAndroid Version    : " + Build.VERSION.RELEASE +
+                    "\nAndroid SDK        : " + Build.VERSION.SDK_INT +
+                    "\nApp VersionName    : " + versionName +
+                    "\nApp VersionCode    : " + versionCode +
+                    "\n************* Log Head ****************\n\n";
                 sb.append(head);
                 StringWriter sw = new StringWriter();
                 PrintWriter pw = new PrintWriter(sw);
@@ -106,22 +106,22 @@ public final class CrashUtils {
                 } else {
                     Log.e("CrashUtils", "create " + fullPath + " failed!");
                 }
-
+                
                 if (sOnCrashListener != null) {
                     sOnCrashListener.onCrash(crashInfo, e);
                 }
-
+                
                 if (DEFAULT_UNCAUGHT_EXCEPTION_HANDLER != null) {
                     DEFAULT_UNCAUGHT_EXCEPTION_HANDLER.uncaughtException(t, e);
                 }
             }
         };
     }
-
+    
     private CrashUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
-
+    
     /**
      * Initialization.
      * <p>Must hold
@@ -131,7 +131,7 @@ public final class CrashUtils {
     public static void init() {
         init("");
     }
-
+    
     /**
      * Initialization
      * <p>Must hold
@@ -143,7 +143,7 @@ public final class CrashUtils {
     public static void init(@NonNull final File crashDir) {
         init(crashDir.getAbsolutePath(), null);
     }
-
+    
     /**
      * Initialization
      * <p>Must hold
@@ -155,19 +155,19 @@ public final class CrashUtils {
     public static void init(final String crashDirPath) {
         init(crashDirPath, null);
     }
-
+    
     /**
      * Initialization
-     * <p>Must hold
-     * {@code <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />}</p>
      *
      * @param onCrashListener The crash listener.
      */
-    @RequiresPermission(WRITE_EXTERNAL_STORAGE)
     public static void init(final OnCrashListener onCrashListener) {
-        init("", onCrashListener);
+        dir = null;
+        defaultDir = BaseUtil.getApp().getCacheDir() + FILE_SEP + "crash" + FILE_SEP;
+        sOnCrashListener = onCrashListener;
+        Thread.setDefaultUncaughtExceptionHandler(UNCAUGHT_EXCEPTION_HANDLER);
     }
-
+    
     /**
      * Initialization
      * <p>Must hold
@@ -180,7 +180,7 @@ public final class CrashUtils {
     public static void init(@NonNull final File crashDir, final OnCrashListener onCrashListener) {
         init(crashDir.getAbsolutePath(), onCrashListener);
     }
-
+    
     /**
      * Initialization
      * <p>Must hold
@@ -197,7 +197,7 @@ public final class CrashUtils {
             dir = crashDirPath.endsWith(FILE_SEP) ? crashDirPath : crashDirPath + FILE_SEP;
         }
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
-                && BaseUtil.getApp().getExternalCacheDir() != null)
+            && BaseUtil.getApp().getExternalCacheDir() != null)
             defaultDir = BaseUtil.getApp().getExternalCacheDir() + FILE_SEP + "crash" + FILE_SEP;
         else {
             defaultDir = BaseUtil.getApp().getCacheDir() + FILE_SEP + "crash" + FILE_SEP;
@@ -205,19 +205,19 @@ public final class CrashUtils {
         sOnCrashListener = onCrashListener;
         Thread.setDefaultUncaughtExceptionHandler(UNCAUGHT_EXCEPTION_HANDLER);
     }
-
+    
     ///////////////////////////////////////////////////////////////////////////
     // interface
     ///////////////////////////////////////////////////////////////////////////
-
+    
     public interface OnCrashListener {
         void onCrash(String crashInfo, Throwable e);
     }
-
+    
     ///////////////////////////////////////////////////////////////////////////
     // other utils methods
     ///////////////////////////////////////////////////////////////////////////
-
+    
     private static void input2File(final String input, final String filePath) {
         Future<Boolean> submit = Executors.newSingleThreadExecutor().submit(new Callable<Boolean>() {
             @Override
@@ -242,7 +242,8 @@ public final class CrashUtils {
             }
         });
         try {
-            if (submit.get()) return;
+            if (submit.get())
+                return;
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -250,11 +251,13 @@ public final class CrashUtils {
         }
         Log.e("CrashUtils", "write crash info to " + filePath + " failed!");
     }
-
+    
     private static boolean createOrExistsFile(final String filePath) {
         File file = new File(filePath);
-        if (file.exists()) return file.isFile();
-        if (!createOrExistsDir(file.getParentFile())) return false;
+        if (file.exists())
+            return file.isFile();
+        if (!createOrExistsDir(file.getParentFile()))
+            return false;
         try {
             return file.createNewFile();
         } catch (IOException e) {
@@ -262,13 +265,14 @@ public final class CrashUtils {
             return false;
         }
     }
-
+    
     private static boolean createOrExistsDir(final File file) {
         return file != null && (file.exists() ? file.isDirectory() : file.mkdirs());
     }
-
+    
     private static boolean isSpace(final String s) {
-        if (s == null) return true;
+        if (s == null)
+            return true;
         for (int i = 0, len = s.length(); i < len; ++i) {
             if (!Character.isWhitespace(s.charAt(i))) {
                 return false;

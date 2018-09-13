@@ -51,6 +51,7 @@ public class ApiUtil {
         if (enableLog) {
             HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
             logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+            builder.addInterceptor(logging);
         }
         //注册上传或下载监听器
         OkHttpClient client = ProgressManager.getInstance().with(builder).build();
