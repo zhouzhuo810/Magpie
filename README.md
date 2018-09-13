@@ -219,7 +219,19 @@ it supports:
 - SimpleSpinner
 > It's for Spinner operating.
 
+- FontUtil
+> It's for setting custom typeface in TextView.
+
+- AssetsUtil
+> It's for converting file's content to String in Assets.
+
 ### Update Logs
+
+> 1.0.4 (Developing)
+
+- Add `MapRecyclerView` and `ShineTextView` widgets for TV framework.
+- Add `FontUtil` and `AssetsUtil` in Phone and TV.
+- Fixed several bugs.
 
 > 1.0.3 (Published)
 

@@ -9,87 +9,101 @@ import me.zhouzhuo810.magpietv.widget.map.view.MapTextView;
 /**
  */
 public class MapTextRectEntity extends BaseMapEntity {
-    
-    public String id;
-    private boolean isEmpty = false;
+
     private String name;
-    public int orientation;
+    private int orientation;
     private int textSize;
-    private int rectColor;
-    public int[] colors;
-    
-    public MapTextRectEntity(String name, int rectColor, Rect rim) {
-        this.isEmpty = true;
+    private int borderColor;
+    private int borderWidthPx;
+    private int shiningDuration;
+    private int[] shiningColors;
+
+    public MapTextRectEntity(String name, int borderColor, int borderWidthPx, Rect rim) {
         this.orientation = MapTextView.EMPTY;
         this.name = name;
-        this.rectColor = rectColor;
+        this.borderColor = borderColor;
         this.rim = rim;
-        this.textSize = ScreenAdapterUtil.getInstance().getScaledValue(30);
+        this.shiningDuration = 1;
+        if (borderWidthPx <= 0) {
+            this.borderWidthPx = ScreenAdapterUtil.getInstance().getScaledValue(2);
+        } else {
+            this.borderWidthPx = ScreenAdapterUtil.getInstance().getScaledValue(borderWidthPx);
+        }
+        this.textSize = 24;
     }
-    
-    public MapTextRectEntity(String id, int rectColor, String name, int orientation, Rect rim, int textSizePx, int[] colors) {
-        this.colors = colors;
-        this.id = id;
-        this.rectColor = rectColor;
-        this.textSize = ScreenAdapterUtil.getInstance().getScaledValue(textSizePx);
+
+    public MapTextRectEntity(String name, int orientation, int borderColor, int borderWidthPx, int textSizePx, int shiningDurationSecond, int[] shiningColors, Rect rim) {
         this.name = name;
+        this.borderColor = borderColor;
+        if (textSizePx <= 0) {
+            this.textSize = 24;
+        } else {
+            this.textSize = textSizePx;
+        }
+        if (borderWidthPx <= 0) {
+            this.borderWidthPx = ScreenAdapterUtil.getInstance().getScaledValue(2);
+        } else {
+            this.borderWidthPx = ScreenAdapterUtil.getInstance().getScaledValue(borderWidthPx);
+        }
+        this.shiningDuration = shiningDurationSecond;
         this.orientation = orientation;
+        this.shiningColors = shiningColors;
         this.rim = rim;
     }
-    
-    public int[] getColors() {
-        return colors;
+
+    public int[] getShiningColors() {
+        return shiningColors;
     }
-    
-    public void setColors(int[] colors) {
-        this.colors = colors;
+
+    public void setShiningColors(int[] shiningColors) {
+        this.shiningColors = shiningColors;
     }
-    
-    public String getId() {
-        return id;
+
+    public int getShiningDuration() {
+        return shiningDuration;
     }
-    
-    public void setId(String id) {
-        this.id = id;
+
+    public void setShiningDuration(int shiningDuration) {
+        this.shiningDuration = shiningDuration;
     }
-    
+
     public int getOrientation() {
         return orientation;
     }
-    
+
     public void setOrientation(int orientation) {
         this.orientation = orientation;
     }
-    
+
     public String getName() {
         return name;
     }
-    
+
     public void setName(String name) {
         this.name = name;
     }
-    
-    public boolean isEmpty() {
-        return isEmpty;
-    }
-    
-    public void setEmpty(boolean empty) {
-        isEmpty = empty;
-    }
-    
+
     public int getTextSize() {
         return textSize;
     }
-    
+
     public void setTextSize(int textSize) {
         this.textSize = textSize;
     }
-    
-    public int getRectColor() {
-        return rectColor;
+
+    public int getBorderColor() {
+        return borderColor;
     }
-    
-    public void setRectColor(int rectColor) {
-        this.rectColor = rectColor;
+
+    public void setBorderColor(int borderColor) {
+        this.borderColor = borderColor;
+    }
+
+    public int getBorderWidthPx() {
+        return borderWidthPx;
+    }
+
+    public void setBorderWidthPx(int borderWidthPx) {
+        this.borderWidthPx = borderWidthPx;
     }
 }

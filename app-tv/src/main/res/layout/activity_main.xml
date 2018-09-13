@@ -8,8 +8,13 @@
               tools:context=".MainActivity">
 
 
+    <View
+        android:layout_width="960px"
+        android:layout_height="20px"
+        android:background="@color/colorAccent"/>
     <me.zhouzhuo810.magpietv.widget.MapRecyclerView
         android:id="@+id/rv"
+        android:background="@color/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

@@ -8,7 +8,6 @@ import java.util.List;
 
 public class MainInfoBean {
 
-
     /**
      * code : 1
      * msg : ok
@@ -56,8 +55,6 @@ public class MainInfoBean {
         private ComInfoEntity comInfo;
         private int designWidth;
         private int designHeight;
-        private List<ReasonsEntity> reasons;
-        private List<ErrorListEntity> errorList;
         private List<MapEntity> map;
 
         public ComInfoEntity getComInfo() {
@@ -82,22 +79,6 @@ public class MainInfoBean {
 
         public void setDesignHeight(int designHeight) {
             this.designHeight = designHeight;
-        }
-
-        public List<ReasonsEntity> getReasons() {
-            return reasons;
-        }
-
-        public void setReasons(List<ReasonsEntity> reasons) {
-            this.reasons = reasons;
-        }
-
-        public List<ErrorListEntity> getErrorList() {
-            return errorList;
-        }
-
-        public void setErrorList(List<ErrorListEntity> errorList) {
-            this.errorList = errorList;
         }
 
         public List<MapEntity> getMap() {
@@ -131,87 +112,6 @@ public class MainInfoBean {
 
             public void setLogo(String logo) {
                 this.logo = logo;
-            }
-        }
-
-        public static class ReasonsEntity {
-            /**
-             * name : 设备问题
-             * color : #b61648
-             */
-
-            private String name;
-            private String color;
-
-            public String getName() {
-                return name;
-            }
-
-            public void setName(String name) {
-                this.name = name;
-            }
-
-            public String getColor() {
-                return color;
-            }
-
-            public void setColor(String color) {
-                this.color = color;
-            }
-        }
-
-        public static class ErrorListEntity {
-            /**
-             * recordId : 481
-             * audioPath : E:/MyWork/临时/fabu/bgm/481工艺问题.wav
-             * reasonName : 工艺问题
-             * content : L538 饰柱出现工艺问题
-             */
-
-            private String recordId;
-            private String audioPath;
-            private String reasonName;
-            private String content;
-            private String State;//开始维修(黄色) 呼叫维修人员(红色)
-
-            public String getRecordId() {
-                return recordId;
-            }
-
-            public void setRecordId(String recordId) {
-                this.recordId = recordId;
-            }
-
-            public String getAudioPath() {
-                return audioPath;
-            }
-
-            public void setAudioPath(String audioPath) {
-                this.audioPath = audioPath;
-            }
-
-            public String getReasonName() {
-                return reasonName;
-            }
-
-            public void setReasonName(String reasonName) {
-                this.reasonName = reasonName;
-            }
-
-            public String getContent() {
-                return content;
-            }
-
-            public void setContent(String content) {
-                this.content = content;
-            }
-
-            public String getState() {
-                return State;
-            }
-
-            public void setState(String state) {
-                State = state;
             }
         }
 

@@ -20,30 +20,26 @@ import me.zhouzhuo810.magpietv.widget.map.entity.MapTextRectEntity;
  */
 
 public class MapItemDecoration extends RecyclerView.ItemDecoration {
-    
+
     private List<MapTextRectEntity> mEntity;
     private Paint mPaint;
-    
+
     // FIXME: 2017/6/19 自定义  优化算法 By lirenhao
     private SparseArray<List<MapLine>> vertical, horizontal;
     private float[] lines;
-    
-    public MapItemDecoration(List<MapTextRectEntity> entity, int lineWidthPx) {
+
+    public MapItemDecoration(List<MapTextRectEntity> entity) {
         this.mEntity = entity;
         mPaint = new Paint();
-        mPaint.setStrokeWidth(ScreenAdapterUtil.getInstance().getScaledValue(lineWidthPx));
+        mPaint.setStrokeWidth(ScreenAdapterUtil.getInstance().getScaledValue(2));
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setColor(Color.WHITE);
     }
-    
-    public void setLineWidth(int lineWidthPx) {
-        mPaint.setStrokeWidth(ScreenAdapterUtil.getInstance().getScaledValue(lineWidthPx));
-    }
-    
+
     public void setMapTextRectEntity(List<MapTextRectEntity> entity) {
         this.mEntity = entity;
     }
-    
+
     /**
      * 计算边框,初始化时调用
      */
@@ -52,20 +48,20 @@ public class MapItemDecoration extends RecyclerView.ItemDecoration {
             throw new IllegalAccessError("Machine Entity is Empty");
         vertical = new SparseArray<>();
         horizontal = new SparseArray<>();
-        
+
         for (MapTextRectEntity entity : mEntity) {
             Rect rect = entity.getRim();
             /*计算四条直线*/
-            int color = entity.getRectColor();
+            int color = entity.getBorderColor();
             calculationVertical(rect.left, rect.top, rect.bottom, color);
             calculationVertical(rect.right, rect.top, rect.bottom, color);
             calculationHorizontal(rect.top, rect.left, rect.right, color);
             calculationHorizontal(rect.bottom, rect.left, rect.right, color);
         }
-        
+
         Log.i("MapItemDecoration", "vertical size " + vertical.size());
         Log.i("MapItemDecoration", "horizontal size " + horizontal.size());
-        
+
         /*转化成float*/
         List<Float> tempMapLines = new ArrayList<>();
         /*竖直方向上*/
@@ -99,7 +95,7 @@ public class MapItemDecoration extends RecyclerView.ItemDecoration {
         horizontal.clear();
         //Log.i("MapItemDecoration","line size "+lines.length);
     }
-    
+
     private void calculationVertical(int v, int start, int end, int color) {
         List<MapLine> vls = vertical.get(v);
         if (vls == null) {
@@ -108,7 +104,7 @@ public class MapItemDecoration extends RecyclerView.ItemDecoration {
             vls.add(new MapLine(start, end, color));
             vertical.append(v, vls);
         }
-        
+
         boolean ifAdd = false;
         for (int i = 0; i < vls.size(); i++) {
             if (vls.get(i).addLine(start, end)) {
@@ -120,7 +116,7 @@ public class MapItemDecoration extends RecyclerView.ItemDecoration {
             vls.add(new MapLine(start, end, color));
         }
     }
-    
+
     private void calculationHorizontal(int h, int start, int end, int color) {
         List<MapLine> hls = horizontal.get(h);
         if (hls == null) {
@@ -129,7 +125,7 @@ public class MapItemDecoration extends RecyclerView.ItemDecoration {
             hls.add(new MapLine(start, end, color));
             horizontal.append(h, hls);
         }
-        
+
         boolean ifAdd = false;
         for (int i = 0; i < hls.size(); i++) {
             if (hls.get(i).addLine(start, end)) {
@@ -141,15 +137,15 @@ public class MapItemDecoration extends RecyclerView.ItemDecoration {
             hls.add(new MapLine(start, end, color));
         }
     }
-    
+
     @Override
     public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
         /*初始化边框线*/
         for (MapTextRectEntity entity : mEntity) {
             Rect rect = entity.getRim();
             /*计算四条直线*/
-            int color = entity.getRectColor();
-            mPaint.setColor(color);
+            mPaint.setStrokeWidth(entity.getBorderWidthPx());
+            mPaint.setColor(entity.getBorderColor());
             c.drawRect(rect, mPaint);
         }
     }

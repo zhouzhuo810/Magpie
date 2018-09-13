@@ -18,54 +18,55 @@ import me.zhouzhuo810.magpietv.widget.map.view.MapTextView;
  * 地图Adapter
  */
 public class MapAdapter extends RecyclerView.Adapter<MapAdapter.MapViewHolder> {
-    
+
     private Context mContext;
     private List<MapTextRectEntity> mRects;
-    
+
     public MapAdapter(Context context, List<MapTextRectEntity> rects) {
         this.mContext = context;
         this.mRects = rects;
     }
-    
+
     @NonNull
     @Override
     public MapViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         MapTextRectEntity entity = mRects.get(viewType);
-        if (entity.orientation == MapTextView.EMPTY) {
-            return new MapViewHolder(new MapTextView(mContext, entity.rim.width(), entity.rim.height(), entity.getTextSize()));
+        if (entity.getOrientation() == MapTextView.EMPTY) {
+            return new MapViewHolder(
+                    new MapTextView(mContext, entity.rim.width(), entity.rim.height(), entity.getTextSize(), entity.getBorderWidthPx(), entity.getShiningDuration()));
         } else {
             return new MapViewHolder(
-                new MapTextView(mContext, entity.rim.width(), entity.rim.height(), entity.getOrientation(), entity.getTextSize()));
+                    new MapTextView(mContext, entity.rim.width(), entity.rim.height(), entity.getOrientation(), entity.getTextSize(), entity.getBorderWidthPx(), entity.getShiningDuration()));
         }
     }
-    
+
     @Override
     public void onBindViewHolder(@NonNull MapViewHolder holder, int position) {
         MapTextRectEntity entity = mRects.get(position);
         ((MapTextView) holder.itemView).setMachineName(entity.getName());
-        int[] colors = entity.getColors();
+        int[] colors = entity.getShiningColors();
         if (colors != null && colors.length > 0) {
             if (colors.length == 1) {
                 ((ShineTextView) ((MapTextView) holder.itemView).getChildAt(0)).setBackgroundColor(colors[0]);
             } else {
                 ((ShineTextView) ((MapTextView) holder.itemView).getChildAt(0)).setShiningColors(colors);
-                ((ShineTextView) ((MapTextView) holder.itemView).getChildAt(0)).startShinigs();
+                ((ShineTextView) ((MapTextView) holder.itemView).getChildAt(0)).startShining();
             }
         }
     }
-    
+
     @Override
     public int getItemViewType(int position) {
         return position;
     }
-    
+
     @Override
     public int getItemCount() {
         return mRects.size();
     }
-    
+
     public static class MapViewHolder extends RecyclerView.ViewHolder {
-        
+
         public MapViewHolder(View itemView) {
             super(itemView);
         }

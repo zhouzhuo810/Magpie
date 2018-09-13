@@ -19,19 +19,26 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        BaseUtil.init(this);
+
         initCrash();
     }
 
     private void initCrash() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            return;
+            CrashUtils.init(new CrashUtils.OnCrashListener() {
+                @Override
+                public void onCrash(String crashInfo, Throwable e) {
+                    BaseUtil.relaunchApp();
+                }
+            });
+        } else {
+            CrashUtils.init(CRASH_PATH, new CrashUtils.OnCrashListener() {
+                @Override
+                public void onCrash(String crashInfo, Throwable e) {
+                    BaseUtil.relaunchApp();
+                }
+            });
         }
-        CrashUtils.init(CRASH_PATH, new CrashUtils.OnCrashListener() {
-            @Override
-            public void onCrash(String crashInfo, Throwable e) {
-                ToastUtil.showLongToast("应用开小差了，稍后重启~");
-                BaseUtil.relaunchApp();
-            }
-        });
     }
 }
