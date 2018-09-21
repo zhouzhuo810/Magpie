@@ -8,19 +8,19 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 
-public class ListScrollLinearManager extends LinearLayoutManager {
+public class ScrollLinearLayoutManager extends LinearLayoutManager {
 
-    private final int MILLISECONDS_PER_INCH = 1000;
+    private int MILLISECONDS_PER_INCH = 50;
 
-    public ListScrollLinearManager(Context context) {
+    public ScrollLinearLayoutManager(Context context) {
         super(context);
     }
 
-    public ListScrollLinearManager(Context context, int orientation, boolean reverseLayout) {
+    public ScrollLinearLayoutManager(Context context, int orientation, boolean reverseLayout) {
         super(context, orientation, reverseLayout);
     }
 
-    public ListScrollLinearManager(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public ScrollLinearLayoutManager(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
@@ -30,7 +30,7 @@ public class ListScrollLinearManager extends LinearLayoutManager {
                 new LinearSmoothScroller(recyclerView.getContext()) {
                     @Override
                     public PointF computeScrollVectorForPosition(int targetPosition) {
-                        return ListScrollLinearManager.this
+                        return ScrollLinearLayoutManager.this
                                 .computeScrollVectorForPosition(targetPosition);
                     }
 
@@ -47,5 +47,14 @@ public class ListScrollLinearManager extends LinearLayoutManager {
                 };
         linearSmoothScroller.setTargetPosition(position);
         startSmoothScroll(linearSmoothScroller);
+    }
+    
+    @Override
+    public void onLayoutChildren(RecyclerView.Recycler recycler, RecyclerView.State state) {
+        try {
+            super.onLayoutChildren(recycler, state);
+        } catch (IndexOutOfBoundsException e) {
+            e.printStackTrace();
+        }
     }
 }

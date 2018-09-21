@@ -27,7 +27,6 @@ import me.zhouzhuo810.magpie.ui.dialog.OneBtnProgressDialog;
 import me.zhouzhuo810.magpie.ui.dialog.TwoBtnEditDialog;
 import me.zhouzhuo810.magpie.ui.dialog.TwoBtnTextDialog;
 import me.zhouzhuo810.magpie.utils.CollectionUtil;
-import me.zhouzhuo810.magpie.utils.DisplayUtil;
 import me.zhouzhuo810.magpie.utils.ScreenAdapterUtil;
 
 public abstract class BaseFragment extends Fragment implements IBaseFragment {

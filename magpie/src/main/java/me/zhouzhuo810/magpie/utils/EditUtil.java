@@ -74,7 +74,7 @@ public class EditUtil {
      */
     public static int getEditTextCursorLineFirstIndex(EditText et) {
         int index = et.getSelectionStart();
-        if (index == -1) {
+        if (index < 0) {
             index = 0;
         }
         return getEditTextLineFirstIndexWithIndex(et, index);
@@ -111,7 +111,7 @@ public class EditUtil {
      */
     public static int getEditTextCursorLineLastIndex(EditText et) {
         int index = et.getSelectionStart();
-        if (index == -1) {
+        if (index < 0) {
             index = 0;
         }
         return getEditTextLineLastIndexWithIndex(et, index);

@@ -2,9 +2,8 @@ package me.zhouzhuo810.magpietvdemo;
 
 import android.graphics.Color;
 import android.graphics.Rect;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
@@ -15,8 +14,6 @@ import java.util.List;
 import me.zhouzhuo810.magpietv.act.BaseActivity;
 import me.zhouzhuo810.magpietv.utils.AssetsUtil;
 import me.zhouzhuo810.magpietv.utils.CollectionUtil;
-import me.zhouzhuo810.magpietv.utils.ScreenAdapterUtil;
-import me.zhouzhuo810.magpietv.utils.StrUtil;
 import me.zhouzhuo810.magpietv.widget.MapRecyclerView;
 import me.zhouzhuo810.magpietv.widget.map.entity.MapEntity;
 import me.zhouzhuo810.magpietv.widget.map.entity.MapTextRectEntity;
