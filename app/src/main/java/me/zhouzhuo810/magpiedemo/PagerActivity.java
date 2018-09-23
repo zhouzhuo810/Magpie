@@ -57,6 +57,10 @@ public class PagerActivity extends BaseActivity {
         titles.add("更多更长更长");
         titles.add("更多更长更长更长");
         titles.add("更多更长更长更长更长");
+        final List<Fragment> fgms = new ArrayList<>();
+        for (int i = 0; i < titles.size(); i++) {
+            fgms.add(TestFragment.newInstance(TestFragment.class, null));
+        }
         viewPager.setOffscreenPageLimit(titles.size());
         viewPager.setAdapter(new BaseFragmentPagerAdapter(getSupportFragmentManager(), titles) {
             @Override
@@ -71,7 +75,7 @@ public class PagerActivity extends BaseActivity {
 
             @Override
             protected Fragment getFragment(int position) {
-                return TestFragment.newInstance(TestFragment.class, null);
+                return fgms.get(position);
             }
         });
         indicator.setViewPager(viewPager);

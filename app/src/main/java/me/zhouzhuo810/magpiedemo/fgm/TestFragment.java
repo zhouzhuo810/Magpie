@@ -11,6 +11,7 @@ import me.zhouzhuo810.magpiedemo.R;
 public class TestFragment extends BaseFragment {
 
     private TextView tvTab;
+    private boolean loadFinish;
 
     @Override
     public int getLayoutId() {
@@ -35,9 +36,15 @@ public class TestFragment extends BaseFragment {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                tvTab.setText("i'm new one");
+                tvTab.setText("i'm new one"+System.currentTimeMillis());
+                loadFinish = true;
             }
-        }, 2000);
+        }, 100);
+    }
+
+    @Override
+    public boolean needNotLazyLoadData() {
+        return loadFinish;
     }
 
     @Override

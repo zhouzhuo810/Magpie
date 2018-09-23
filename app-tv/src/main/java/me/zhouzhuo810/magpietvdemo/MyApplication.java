@@ -21,7 +21,7 @@ public class MyApplication extends Application {
         super.onCreate();
         BaseUtil.init(this);
 
-        initCrash();
+//        initCrash();
     }
 
     private void initCrash() {

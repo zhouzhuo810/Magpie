@@ -483,8 +483,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
                         }
                     }
                 }
-                transaction.add(containerId, fragment)
-                        .show(fragment)
+                transaction.show(fragment)
                         .commitNow();
             }
         }

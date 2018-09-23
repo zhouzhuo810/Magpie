@@ -32,6 +32,13 @@ public interface IBaseActivity {
     public boolean useSysFinishAnim();
 
     /**
+     * 获取布局的id
+     *
+     * @return
+     */
+    public int getLayoutId();
+
+    /**
      * 是否支持多语言
      *
      * @return true/false, 默认返回false
@@ -52,13 +59,6 @@ public interface IBaseActivity {
      * </ul>
      */
     public boolean shouldSupportMultiLanguage();
-
-    /**
-     * 获取布局的id
-     *
-     * @return
-     */
-    public int getLayoutId();
 
     /**
      * 屏幕适配需要返回getWindow().getDecorView();

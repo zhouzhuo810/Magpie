@@ -100,6 +100,14 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        if (!isVisible) {
+
+        }
+    }
+
+    @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (getUserVisibleHint()) {
@@ -117,7 +125,9 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
     }
 
     protected void onVisible() {
-        lazyLoadData();
+        if (!needNotLazyLoadData()) {
+            lazyLoadData();
+        }
     }
 
     protected void onInvisible() {

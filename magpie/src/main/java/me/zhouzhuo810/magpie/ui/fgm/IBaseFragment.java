@@ -39,6 +39,8 @@ public interface IBaseFragment {
 
     public void lazyLoadData();
 
+    public boolean needNotLazyLoadData();
+
     public void initEvent();
 
     public boolean shouldNotInvokeInitMethods(Bundle savedInstanceState);

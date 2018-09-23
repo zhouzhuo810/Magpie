@@ -2,15 +2,18 @@ package me.zhouzhuo810.magpietv.widget.scroll;
 
 import android.content.Context;
 import android.graphics.PointF;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSmoothScroller;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.view.View;
 
 public class ScrollLinearLayoutManager extends LinearLayoutManager {
 
-    private int MILLISECONDS_PER_INCH = 50;
+    private int MILLISECONDS_PER_PIXEL = 20;
 
     public ScrollLinearLayoutManager(Context context) {
         super(context);
@@ -22,6 +25,10 @@ public class ScrollLinearLayoutManager extends LinearLayoutManager {
 
     public ScrollLinearLayoutManager(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+    }
+
+    public void setMillsPerPixel(int millsPerPixel) {
+        this.MILLISECONDS_PER_PIXEL = millsPerPixel;
     }
 
     @Override
@@ -37,18 +44,25 @@ public class ScrollLinearLayoutManager extends LinearLayoutManager {
                     //This returns the milliseconds it takes to
                     //scroll one pixel.
                     @Override
-                    protected float calculateSpeedPerPixel
-                    (DisplayMetrics displayMetrics) {
-                        return MILLISECONDS_PER_INCH / displayMetrics.density;
+                    protected float calculateSpeedPerPixel(DisplayMetrics displayMetrics) {
+                        return MILLISECONDS_PER_PIXEL / displayMetrics.density;
                         //返回滑动一个pixel需要多少毫秒
-
                     }
 
+                    @Override
+                    protected int calculateTimeForScrolling(int dx) {
+                        return super.calculateTimeForScrolling(dx);
+                    }
+
+                    @Override
+                    protected int calculateTimeForDeceleration(int dx) {
+                        return 0;
+                    }
                 };
         linearSmoothScroller.setTargetPosition(position);
         startSmoothScroll(linearSmoothScroller);
     }
-    
+
     @Override
     public void onLayoutChildren(RecyclerView.Recycler recycler, RecyclerView.State state) {
         try {
@@ -56,5 +70,52 @@ public class ScrollLinearLayoutManager extends LinearLayoutManager {
         } catch (IndexOutOfBoundsException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onRestoreInstanceState(Parcelable state) {
+        SavedState savedState = (SavedState) state;
+        super.onRestoreInstanceState(savedState.getSuperState());
+        MILLISECONDS_PER_PIXEL = savedState.millsPerPixel;
+    }
+
+    @Override
+    public Parcelable onSaveInstanceState() {
+        Parcelable superState = super.onSaveInstanceState();
+        SavedState savedState = new SavedState(superState);
+        savedState.millsPerPixel = MILLISECONDS_PER_PIXEL;
+        return savedState;
+    }
+
+
+    static class SavedState extends View.BaseSavedState {
+        int millsPerPixel;
+
+        public SavedState(Parcelable superState) {
+            super(superState);
+        }
+
+        private SavedState(Parcel in) {
+            super(in);
+            millsPerPixel = in.readInt();
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            super.writeToParcel(dest, flags);
+            dest.writeInt(millsPerPixel);
+        }
+
+        public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() {
+            @Override
+            public SavedState createFromParcel(Parcel in) {
+                return new SavedState(in);
+            }
+
+            @Override
+            public SavedState[] newArray(int size) {
+                return new SavedState[size];
+            }
+        };
     }
 }

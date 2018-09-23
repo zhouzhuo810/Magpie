@@ -21,7 +21,7 @@ allprojects {
 > For Phone And Pad.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.0.3'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.0.4'
 ```
 
 If you use this. That means you added dependencies below:
@@ -56,7 +56,7 @@ If you use this. That means you added dependencies below:
 > For Android TV.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.0.2'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.0.4'
 ```
 
 If you use this. That means you added dependencies below:
@@ -129,6 +129,9 @@ public class MyApplication extends Application {
 
 - If you do not use LvBaseAdapter or RvBaseAdapter, Then you should invoke the method
  `ScreenAdapterUtil.getInstance().loadView(view);` when you create ViewHolder.
+
+- If you want use in custom View, you should invoke the method
+`ScreenAdapterUtil.getInstance().getScaledValue(int);` when you what to scale the dynamic value.
 
 #### BaseActivity
 
@@ -208,6 +211,12 @@ it supports:
 - TitleBar
 > It's same as ToolBar.
 
+- MarkView
+> It's for bandage.
+
+- SimpleSpinner
+> It's for using Spinner simply.
+
 ( These utils is added in v1.0.1.)
 
 - ColorUtil
@@ -227,8 +236,9 @@ it supports:
 
 ### Update Logs
 
-> 1.0.4 (Developing)
+> 1.0.4 (Published)
 
+- Add `ScrollListRecyclerView` and `ScrollGridRecyclerView` widgets for TV framework.
 - Add `MapRecyclerView` and `ShineTextView` widgets for TV framework.
 - Add `FontUtil` and `AssetsUtil` in Phone and TV.
 - Fixed several bugs.
