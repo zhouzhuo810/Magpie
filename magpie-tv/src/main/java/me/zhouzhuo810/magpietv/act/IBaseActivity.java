@@ -205,12 +205,44 @@ public interface IBaseActivity {
     public interface OnOneBtnClick {
         void onClick();
     }
-
-    public Fragment findFragmentByTag(String tag);
-
+    
+    public <T extends BaseFragment> T findFragmentByTag(String tag);
+    
+    public <T extends BaseFragment> T findFragmentByClazzAsTag(Class<T> clazz);
+    
     public <T extends BaseFragment> void replaceFragment(@IdRes int containerId, Class<T> clazz, T fragment, Bundle bundle);
-
-    public <T extends BaseFragment> void addOrShowFragment(@IdRes int containerId, Class<T> clazz, T fragment, Bundle bundle);
-
+    
+    /**
+     * 添加或显示Fragment
+     *
+     * 使用clazz.setSimpleName()作为tag，必须保证同一个Activity中使用addOrShowFragment的Fragment的的类名不相同；
+     * 如果存在相同的类名，请使用{@link BaseActivity#addOrShowFragmentCustomTag}
+     *
+     * @param containerId 容器id
+     * @param clazz       Fragment类
+     * @param bundle      参数
+     * @param <T>         Fragment
+     * @return Fragment实例
+     */
+    public <T extends BaseFragment> T addOrShowFragment(@IdRes int containerId, Class<T> clazz, Bundle bundle);
+    
+    /**
+     * 添加或显示Fragment
+     *
+     * 使用自定义Tag，可以使用{@link BaseActivity#findFragmentByTag(String)}查找Fragment实例。
+     *
+     * @param containerId 容器id
+     * @param clazz       Fragment类
+     * @param tag         自定义Tag
+     * @param bundle      参数
+     * @param <T>         Fragment
+     * @return Fragment实例
+     */
+    public <T extends BaseFragment> T addOrShowFragmentCustomTag(@IdRes int containerId, Class<T> clazz, String tag, Bundle bundle);
+    
     public <T extends BaseFragment> void hideFragment(T fragment);
+    
+    public <T extends BaseFragment> void hideFragmentByClass(Class<T> clazz);
+    
+    public void hideFragmentByTag(String tag);
 }

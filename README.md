@@ -21,7 +21,7 @@ allprojects {
 > For Phone And Pad.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.0.4'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.0.5'
 ```
 
 If you use this. That means you added dependencies below:
@@ -56,7 +56,7 @@ If you use this. That means you added dependencies below:
 > For Android TV.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.0.4'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.0.5'
 ```
 
 If you use this. That means you added dependencies below:
@@ -235,6 +235,11 @@ it supports:
 > It's for converting file's content to String in Assets.
 
 ### Update Logs
+
+> 1.0.5 (Published)
+
+- Fix `BaseActivity#addOrShowFragment` several bugs.
+- Add `BaseActivity#addOrShowFragmentCustomTag` methods.
 
 > 1.0.4 (Published)
 

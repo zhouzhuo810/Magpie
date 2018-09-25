@@ -8,7 +8,7 @@ import android.widget.TextView;
 import me.zhouzhuo810.magpie.ui.fgm.BaseFragment;
 import me.zhouzhuo810.magpiedemo.R;
 
-public class TestFragment extends BaseFragment {
+public class TestFragmentTwo extends BaseFragment {
 
     private TextView tvTab;
     private boolean loadFinish;

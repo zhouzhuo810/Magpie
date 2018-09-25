@@ -426,16 +426,23 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
             super.attachBaseContext(newBase);
         }
     }
-
-
+    
     @Override
-    public Fragment findFragmentByTag(String tag) {
+    public <T extends BaseFragment> T findFragmentByClazzAsTag(Class<T> clazz) {
         if (getSupportFragmentManager() == null) {
             return null;
         }
-        return getSupportFragmentManager().findFragmentByTag(tag);
+        return (T) getSupportFragmentManager().findFragmentByTag(clazz.getSimpleName());
     }
-
+    
+    @Override
+    public  <T extends BaseFragment> T findFragmentByTag(String tag) {
+        if (getSupportFragmentManager() == null) {
+            return null;
+        }
+        return (T) getSupportFragmentManager().findFragmentByTag(tag);
+    }
+    
     @Override
     public <T extends BaseFragment> void replaceFragment(@IdRes int containerId, Class<T> clazz, T fragment, Bundle bundle) {
         if (fragment == null) {
@@ -444,13 +451,14 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         fragment.setArguments(bundle);
         if (getSupportFragmentManager() != null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(containerId, fragment)
-                    .commitNow();
+                .replace(containerId, fragment)
+                .commitNow();
         }
     }
-
+    
     @Override
-    public <T extends BaseFragment> void addOrShowFragment(@IdRes int containerId, Class<T> clazz, T fragment, Bundle bundle) {
+    public <T extends BaseFragment> T addOrShowFragment(@IdRes int containerId, Class<T> clazz, Bundle bundle) {
+        T fragment = findFragmentByClazzAsTag(clazz);
         if (fragment == null) {
             fragment = T.newInstance(clazz, bundle);
             fragment.setArguments(bundle);
@@ -466,9 +474,9 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
                         }
                     }
                 }
-                transaction.add(containerId, fragment)
-                        .show(fragment)
-                        .commitNow();
+                transaction.add(containerId, fragment, clazz.getSimpleName())
+                    .show(fragment)
+                    .commitNow();
             }
         } else {
             if (getSupportFragmentManager() != null) {
@@ -484,22 +492,88 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
                     }
                 }
                 transaction.show(fragment)
-                        .commitNow();
+                    .commitNow();
             }
         }
+        return fragment;
     }
-
+    
+    public <T extends BaseFragment> T addOrShowFragmentCustomTag(@IdRes int containerId, Class<T> clazz, String tag, Bundle bundle) {
+        T fragment = findFragmentByTag(tag);
+        if (fragment == null) {
+            fragment = T.newInstance(clazz, bundle);
+            fragment.setArguments(bundle);
+            if (getSupportFragmentManager() != null) {
+                List<Fragment> fragments = getSupportFragmentManager().getFragments();
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                if (fragments != null) {
+                    for (Fragment fgm : fragments) {
+                        if (fgm != null) {
+                            if (fgm.isAdded() && !fgm.isHidden()) {
+                                transaction.hide(fgm);
+                            }
+                        }
+                    }
+                }
+                transaction.add(containerId, fragment, tag)
+                    .show(fragment)
+                    .commitNow();
+            }
+        } else {
+            if (getSupportFragmentManager() != null) {
+                List<Fragment> fragments = getSupportFragmentManager().getFragments();
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                if (fragments != null) {
+                    for (Fragment fgm : fragments) {
+                        if (fgm != null) {
+                            if (fgm.isAdded() && !fgm.isHidden()) {
+                                transaction.hide(fgm);
+                            }
+                        }
+                    }
+                }
+                transaction.show(fragment)
+                    .commitNow();
+            }
+        }
+        return fragment;
+    }
+    
     @Override
     public <T extends BaseFragment> void hideFragment(T fragment) {
         if (fragment != null) {
             if (getSupportFragmentManager() != null) {
                 getSupportFragmentManager().beginTransaction()
-                        .hide(fragment)
-                        .commitNow();
+                    .hide(fragment)
+                    .commitNow();
             }
         }
     }
-
+    
+    @Override
+    public <T extends BaseFragment> void hideFragmentByClass(Class<T> clazz) {
+        T fragment = findFragmentByClazzAsTag(clazz);
+        if (fragment != null) {
+            if (getSupportFragmentManager() != null) {
+                getSupportFragmentManager().beginTransaction()
+                    .hide(fragment)
+                    .commitNow();
+            }
+        }
+    }
+    
+    @Override
+    public void hideFragmentByTag(String tag) {
+        Fragment fgm = findFragmentByTag(tag);
+        if (fgm != null) {
+            if (getSupportFragmentManager() != null) {
+                getSupportFragmentManager().beginTransaction()
+                    .hide(fgm)
+                    .commitNow();
+            }
+        }
+    }
+    
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onCloseAllActEvent(CloseAllActEvent event) {
         if (event.isDefaultAnim()) {

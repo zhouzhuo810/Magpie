@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +11,7 @@ import java.util.List;
 import me.zhouzhuo810.magpie.ui.act.BaseActivity;
 import me.zhouzhuo810.magpie.ui.widget.Indicator;
 import me.zhouzhuo810.magpie.ui.widget.adapter.BaseFragmentPagerAdapter;
-import me.zhouzhuo810.magpiedemo.fgm.TestFragment;
+import me.zhouzhuo810.magpiedemo.fgm.TestFragmentOne;
 
 public class PagerActivity extends BaseActivity {
 
@@ -59,7 +58,7 @@ public class PagerActivity extends BaseActivity {
         titles.add("更多更长更长更长更长");
         final List<Fragment> fgms = new ArrayList<>();
         for (int i = 0; i < titles.size(); i++) {
-            fgms.add(TestFragment.newInstance(TestFragment.class, null));
+            fgms.add(TestFragmentOne.newInstance(TestFragmentOne.class, null));
         }
         viewPager.setOffscreenPageLimit(titles.size());
         viewPager.setAdapter(new BaseFragmentPagerAdapter(getSupportFragmentManager(), titles) {
