@@ -236,6 +236,10 @@ it supports:
 
 ### Update Logs
 
+> 1.0.6 (Developing)
+
+- Upgrade the version of `ZzHorizontalProgressBar` to `1.0.9` for TV framework.
+
 > 1.0.5 (Published)
 
 - Fix `BaseActivity#addOrShowFragment` several bugs.
