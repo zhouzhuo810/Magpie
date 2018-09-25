@@ -29,7 +29,14 @@ public interface IBaseFragment {
     public void initView(@Nullable Bundle savedInstanceState);
 
     public void initData();
-
+    
+    /**
+     * 使用ViewPager+Fragment时使用此方法实现懒加载
+     */
+    public void lazyLoadData();
+    
+    public boolean needLazyLoadData();
+    
     public void initEvent();
 
     /**

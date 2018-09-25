@@ -11,7 +11,6 @@ import me.zhouzhuo810.magpiedemo.R;
 public class TestFragmentFour extends BaseFragment {
 
     private TextView tvTab;
-    private boolean loadFinish;
 
     @Override
     public int getLayoutId() {
@@ -37,14 +36,8 @@ public class TestFragmentFour extends BaseFragment {
             @Override
             public void run() {
                 tvTab.setText("i'm new one"+System.currentTimeMillis());
-                loadFinish = true;
             }
         }, 100);
-    }
-
-    @Override
-    public boolean needNotLazyLoadData() {
-        return loadFinish;
     }
 
     @Override

@@ -25,7 +25,10 @@ import me.zhouzhuo810.magpietv.utils.ScreenAdapterUtil;
 public abstract class BaseFragment extends Fragment implements IBaseFragment {
 
     protected View rootView;
-
+    protected boolean isVisible;
+    private long mCallLazyLoadCount;
+    private boolean mLazeLoaded = true;
+    
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -279,7 +282,36 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
         }
         getBaseAct().showListDialog(title, items, alignLeft, cancelable, onDismissListener, onItemClick);
     }
-
+    
+    
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (isVisible && isVisible() && mCallLazyLoadCount == 0) {
+            // 界面第一次显示且未调用过数据懒加载方法
+            mCallLazyLoadCount++;
+            onVisible();
+        }
+    }
+    
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            // 只能表明界面可能初始化并显示
+            isVisible = true;
+            if (isVisible()) {
+                // 界面显示
+                mCallLazyLoadCount++;
+                onVisible();
+            }
+        } else if (isVisible) {
+            // 界面退出
+            isVisible = false;
+            onInvisible();
+        }
+    }
+    
     @Override
     public void hideListDialog() {
         if (getBaseAct() == null) {
@@ -287,7 +319,23 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
         }
         getBaseAct().hideListDialog();
     }
-
+    
+    protected void onVisible() {
+        if (needLazyLoadData()) {
+            lazyLoadData();
+        }
+    }
+    
+    
+    protected void onInvisible() {
+    
+    }
+    
+    @Override
+    public void lazyLoadData() {
+    
+    }
+    
     @Override
     public void refreshData(String... params) {
 
@@ -329,5 +377,21 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
         }
         return getBaseAct().openOutAnimation();
     }
-
+    
+    
+    /**
+     * 判断是否需要懒加载数据，此方法只会允许调用一次懒加载，如果需要界面每次重绘时都加载数据，覆写该方法，一直返回true即可
+     *
+     * @return {@code true} 需要懒加载，则方法{@link #lazyLoadData()}将被调用
+     *         {@code false} 不需要懒加载
+     */
+    @Override
+    public boolean needLazyLoadData() {
+        final boolean needLoad = mLazeLoaded;
+        if (mLazeLoaded) {
+            mLazeLoaded = false;
+        }
+        return needLoad;
+    }
+    
 }
