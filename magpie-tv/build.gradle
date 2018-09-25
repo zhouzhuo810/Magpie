@@ -62,5 +62,5 @@ dependencies {
     //Retrofit2
     api 'com.squareup.retrofit2:retrofit:2.4.0'
     //zz-horizontal-progressbar
-    api 'me.zhouzhuo.zzhorizontalprogressbar:zz-horizontal-progressbar:1.0.7'
+    api 'me.zhouzhuo.zzhorizontalprogressbar:zz-horizontal-progressbar:1.0.9'
 }
