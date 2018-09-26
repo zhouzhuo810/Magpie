@@ -21,7 +21,7 @@ allprojects {
 > For Phone And Pad.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.0.6'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.0.7'
 ```
 
 If you use this. That means you added dependencies below:
@@ -56,7 +56,7 @@ If you use this. That means you added dependencies below:
 > For Android TV.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.0.6'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.0.7'
 ```
 
 If you use this. That means you added dependencies below:
@@ -72,7 +72,7 @@ If you use this. That means you added dependencies below:
     //Retrofit2
     api 'com.squareup.retrofit2:retrofit:2.4.0'
     //zz-horizontal-progressbar
-    api 'me.zhouzhuo.zzhorizontalprogressbar:zz-horizontal-progressbar:1.0.7'
+    api 'me.zhouzhuo.zzhorizontalprogressbar:zz-horizontal-progressbar:1.0.9'
 ```
 
 #### Screen Adapter
@@ -235,6 +235,10 @@ it supports:
 > It's for converting file's content to String in Assets.
 
 ### Update Logs
+
+> 1.0.7 (Published)
+
+- Fix `LoadingDialog` several bugs.
 
 > 1.0.6 (Published)
 

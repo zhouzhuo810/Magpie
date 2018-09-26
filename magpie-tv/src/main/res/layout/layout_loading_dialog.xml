@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center_horizontal"
-    android:orientation="vertical">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center_horizontal"
+              android:orientation="vertical">
 
     <TextView
         android:id="@+id/tv_title"
@@ -18,13 +18,13 @@
         android:textColor="@color/colorBaseDialogTitleTextColor"
         android:textSize="@dimen/base_dialog_title_text_size"
         android:textStyle="bold"
-        tools:text="标题" />
+        tools:text="标题"/>
 
     <View
         android:id="@+id/line_item"
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/colorBlack10" />
+        android:background="@color/colorBlack10"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -38,8 +38,9 @@
 
         <ProgressBar
             android:id="@+id/pb_loading"
-            android:layout_width="110px"
-            android:layout_height="110px"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="90px"
+            android:layout_height="90px"
             android:indeterminate="true"
             android:indeterminateBehavior="repeat"
             />
@@ -51,6 +52,6 @@
             android:layout_marginLeft="40px"
             android:textColor="@color/colorBaseDialogTextColor"
             android:textSize="@dimen/base_dialog_title_text_size"
-            tools:text="消息内容" />
+            tools:text="消息内容"/>
     </LinearLayout>
 </LinearLayout>
