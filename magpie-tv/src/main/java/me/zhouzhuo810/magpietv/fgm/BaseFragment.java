@@ -26,8 +26,8 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
 
     protected View rootView;
     protected boolean isVisible;
-    private long mCallLazyLoadCount;
-    private boolean mLazeLoaded = true;
+    protected long mCallLazyLoadCount;
+    protected boolean mLazeLoaded = true;
     
     @Nullable
     @Override
@@ -394,4 +394,11 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
         return needLoad;
     }
     
+    public long getCallLazyLoadCount() {
+        return mCallLazyLoadCount;
+    }
+    
+    public void clearCallLazyLoadCount() {
+        mCallLazyLoadCount = 0;
+    }
 }

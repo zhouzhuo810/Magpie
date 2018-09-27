@@ -28,11 +28,11 @@ import me.zhouzhuo810.magpie.utils.ScreenAdapterUtil;
  * Created by zz on 2016/8/22.
  */
 public class Indicator extends HorizontalScrollView implements IPagerIndicator {
-
+    
     private IndicatorType indicatorType = IndicatorType.RoundPoint;
-
+    
     private ViewPager mViewPager;
-
+    
     private LinearLayout mIndicatorContainer;
     private boolean shouldExpand = false;
     private Paint selectPaint;
@@ -43,7 +43,7 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
     private int selectPointSize = 100;
     private int unSelectPointSize = 90;
     private int spacing = 8;
-
+    
     private boolean showUnderline = true;
     private int tabTextColorSelect = 0xff438cff;
     private int tabTextColorUnSelect = 0xff000000;
@@ -56,55 +56,56 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
     private int tabBgNormalId;
     private int tabBgSelectId;
     private TabOrientation tabTextIconOrientation = TabOrientation.VERTICAL;
-
+    
     private int tabPadding = 24;
     private int tabIconSize = 80;
-
+    
     private LinearLayout.LayoutParams defaultTabLayoutParams;
     private LinearLayout.LayoutParams expandedTabLayoutParams;
-
+    
     private int currentPosition = 0;
     private float currentPositionOffset = 0f;
-
+    
     private int tabCount;
     private int lastScrollX = 0;
     private boolean isNeedScaleInPx = true;
-
+    
     private boolean horizontalHideIconMode = false;
-
+    private ViewPager.OnPageChangeListener mOnPageChangeListener;
+    
     public static enum TabOrientation {
         VERTICAL, HORIZONTAL
     }
-
+    
     public Indicator(Context context) {
         super(context);
         init(context, null);
     }
-
+    
     public Indicator(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context, attrs);
-
+        
     }
-
+    
     public Indicator(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
-
+        
     }
-
+    
     private void init(Context context, AttributeSet attrs) {
-
+        
         setHorizontalScrollBarEnabled(false);
-
+        
         setFillViewport(true);
         setWillNotDraw(false);
-
+        
         //init attrs
         if (attrs != null) {
             TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.Indicator);
             isNeedScaleInPx = a.getBoolean(R.styleable.Indicator_i_isNeedScaleInPx, true);
-
+            
             shouldExpand = a.getBoolean(R.styleable.Indicator_i_shouldTabExpand, false);
             int indicatorInt = a.getInt(R.styleable.Indicator_i_indicator_type, 0);
             int tabOriInt = a.getInt(R.styleable.Indicator_i_tabOrientation, 0);
@@ -115,7 +116,7 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
             spacing = a.getDimensionPixelSize(R.styleable.Indicator_i_pointSpacing, 8);
             tabBgNormalId = a.getResourceId(R.styleable.Indicator_i_normalTabBg, -1);
             tabBgSelectId = a.getResourceId(R.styleable.Indicator_i_selectTabBg, -1);
-
+            
             tabTextColorSelect = a.getColor(R.styleable.Indicator_i_selectTabTextColor, 0xff438cff);
             tabTextColorUnSelect = a.getColor(R.styleable.Indicator_i_normalTabTextColor, 0xff000000);
             tabTextSizeSelect = a.getDimensionPixelSize(R.styleable.Indicator_i_selectTabTextSize, 40);
@@ -128,7 +129,7 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
             tabIconSize = a.getDimensionPixelSize(R.styleable.Indicator_i_tabIconSize, 80);
             underlineColor = a.getColor(R.styleable.Indicator_i_underlineColor, 0xff438cff);
             horizontalHideIconMode = a.getBoolean(R.styleable.Indicator_i_tabIsHorizontalHideIcon, false);
-
+            
             if (isNeedScaleInPx && !isInEditMode()) {
                 selectPointSize = ScreenAdapterUtil.getInstance().getScaledValue(selectPointSize);
                 unSelectPointSize = ScreenAdapterUtil.getInstance().getScaledValue(unSelectPointSize);
@@ -141,7 +142,7 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
                 tabPadding = ScreenAdapterUtil.getInstance().getScaledValue(tabPadding);
                 tabIconSize = ScreenAdapterUtil.getInstance().getScaledValue(tabIconSize);
             }
-
+            
             switch (indicatorInt) {
                 case 0:
                     indicatorType = IndicatorType.RoundPoint;
@@ -175,9 +176,9 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
         initContainer(context);
         //initial child layout params
         initParams();
-
+        
     }
-
+    
     private void initPaints() {
         unSelectPaint = new Paint();
         unSelectPaint.setAntiAlias(true);
@@ -191,7 +192,7 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
         underlinePaint.setStyle(Paint.Style.FILL);
         underlinePaint.setAntiAlias(true);
     }
-
+    
     private void initContainer(Context context) {
         mIndicatorContainer = new LinearLayout(context);
         mIndicatorContainer.setOrientation(LinearLayout.HORIZONTAL);
@@ -199,7 +200,7 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
         mIndicatorContainer.setGravity(Gravity.CENTER_VERTICAL);
         addView(mIndicatorContainer);
     }
-
+    
     private void initParams() {
         if (indicatorType == IndicatorType.TabWithIcon) {
             defaultTabLayoutParams = new LinearLayout.LayoutParams(tabIconSize, tabIconSize);
@@ -209,7 +210,7 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
             expandedTabLayoutParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1.0f);
         }
     }
-
+    
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -225,21 +226,21 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
                 break;
         }
     }
-
+    
     private void drawUnderline(Canvas canvas) {
         if (mViewPager != null) {
             View currentTab = getItem(currentPosition);
             if (currentTab != null) {
                 float lineLeft = currentTab.getLeft() + underlinePadding;
                 float lineRight = currentTab.getRight() - underlinePadding;
-
+                
                 // if there is an offset, start interpolating left and right coordinates between current and next tab
                 if (currentPositionOffset > 0f && currentPosition < tabCount - 1) {
-
+                    
                     View nextTab = getItem(currentPosition + 1);
                     final float nextTabLeft = nextTab.getLeft() + underlinePadding;
                     final float nextTabRight = nextTab.getRight() - underlinePadding;
-
+                    
                     lineLeft = (currentPositionOffset * nextTabLeft + (1f - currentPositionOffset) * lineLeft);
                     lineRight = (currentPositionOffset * nextTabRight + (1f - currentPositionOffset) * lineRight);
                 }
@@ -247,7 +248,7 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
             }
         }
     }
-
+    
     private void drawPoints(Canvas canvas) {
         if (mViewPager != null && mViewPager.getAdapter() != null) {
             int count = mViewPager.getAdapter().getCount();
@@ -264,14 +265,14 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
             canvas.drawCircle(uX, y, sR, selectPaint);
         }
     }
-
+    
     @Override
     public void setCurrentItem(int position, boolean animate) {
         if (mViewPager != null) {
             mViewPager.setCurrentItem(position, animate);
         }
     }
-
+    
     /**
      * bind indicator to your viewpager.
      *
@@ -291,20 +292,20 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
                 break;
             case TabWithText:
                 setUpText();
-                selectText(0);
+                selectText(this.mViewPager.getCurrentItem());
                 break;
             case TabWithIcon:
                 setUpIcons();
-                selectIcon(0);
+                selectIcon(this.mViewPager.getCurrentItem());
                 break;
             case TabWithIconAndText:
                 setUpIconsAndText();
-                selectIconAndText(0);
+                selectIconAndText(this.mViewPager.getCurrentItem());
                 break;
         }
     }
-
-
+    
+    
     private void setUpIconsAndText() {
         mIndicatorContainer.removeAllViews();
         LinearLayout.LayoutParams ivParams = new LinearLayout.LayoutParams(tabIconSize, tabIconSize);
@@ -318,7 +319,7 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
             tvParams.topMargin = 0;
             tvParams.leftMargin = tabIconTextMargin;
         }
-
+        
         if (mViewPager == null) {
             return;
         }
@@ -331,14 +332,14 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
                 } else {
                     throw new RuntimeException("ViewPager 's Adapter must implement IResProvider.");
                 }
-
+                
                 TextView tv = new TextView(getContext());
                 tv.setGravity(Gravity.CENTER);
                 tv.setSingleLine();
                 tv.setTextColor(tabTextColorUnSelect);
                 tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, tabTextSizeUnSelect);
                 tv.setText(mViewPager.getAdapter().getPageTitle(i));
-
+                
                 LinearLayout ll = new LinearLayout(getContext());
                 ll.setGravity(Gravity.CENTER);
                 if (tabTextIconOrientation == TabOrientation.VERTICAL) {
@@ -360,7 +361,7 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
             }
         }
     }
-
+    
     private void setUpIcons() {
         mIndicatorContainer.removeAllViews();
         if (mViewPager == null) {
@@ -391,9 +392,9 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
                 mIndicatorContainer.addView(iv, i, shouldExpand ? expandedTabLayoutParams : defaultTabLayoutParams);
             }
         }
-
+        
     }
-
+    
     private void setUpText() {
         mIndicatorContainer.removeAllViews();
         if (mViewPager == null) {
@@ -415,60 +416,63 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
                     }
                 });
                 tv.setPadding(tabPadding, 0, tabPadding, 0);
-
+                
                 mIndicatorContainer.addView(tv, i, shouldExpand ? expandedTabLayoutParams : defaultTabLayoutParams);
             }
         }
     }
-
+    
     private void addPageChangeListener() {
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                currentPosition = position;
-                currentPositionOffset = positionOffset;
-
-                switch (indicatorType) {
-                    case TabWithIcon:
-                    case TabWithText:
-                    case TabWithIconAndText:
-                        scrollToChild(position, (int) (positionOffset * mIndicatorContainer.getChildAt(position).getWidth()));
-                        break;
+        if (mOnPageChangeListener == null) {
+            mOnPageChangeListener = new ViewPager.OnPageChangeListener() {
+                @Override
+                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                    currentPosition = position;
+                    currentPositionOffset = positionOffset;
+                    
+                    switch (indicatorType) {
+                        case TabWithIcon:
+                        case TabWithText:
+                        case TabWithIconAndText:
+                            scrollToChild(position, (int) (positionOffset * mIndicatorContainer.getChildAt(position).getWidth()));
+                            break;
+                    }
+                    
+                    invalidate();
                 }
-
-                invalidate();
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                switch (indicatorType) {
-                    case TabWithIcon:
-                        selectIcon(position);
-                        break;
-                    case TabWithText:
-                        selectText(position);
-                        break;
-                    case TabWithIconAndText:
-                        selectIconAndText(position);
-                        break;
+                
+                @Override
+                public void onPageSelected(int position) {
+                    switch (indicatorType) {
+                        case TabWithIcon:
+                            selectIcon(position);
+                            break;
+                        case TabWithText:
+                            selectText(position);
+                            break;
+                        case TabWithIconAndText:
+                            selectIconAndText(position);
+                            break;
+                    }
                 }
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-                switch (indicatorType) {
-                    case TabWithIcon:
-                    case TabWithText:
-                    case TabWithIconAndText:
-                        if (state == ViewPager.SCROLL_STATE_IDLE) {
-                            scrollToChild(mViewPager.getCurrentItem(), 0);
-                        }
-                        break;
+                
+                @Override
+                public void onPageScrollStateChanged(int state) {
+                    switch (indicatorType) {
+                        case TabWithIcon:
+                        case TabWithText:
+                        case TabWithIconAndText:
+                            if (state == ViewPager.SCROLL_STATE_IDLE) {
+                                scrollToChild(mViewPager.getCurrentItem(), 0);
+                            }
+                            break;
+                    }
                 }
-            }
-        });
+            };
+            mViewPager.addOnPageChangeListener(mOnPageChangeListener);
+        }
     }
-
+    
     @Override
     protected Parcelable onSaveInstanceState() {
         Parcelable superState = super.onSaveInstanceState();
@@ -476,7 +480,7 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
         saveState.position = currentPosition;
         return saveState;
     }
-
+    
     @Override
     protected void onRestoreInstanceState(Parcelable state) {
         SaveState savedState = (SaveState) state;
@@ -494,61 +498,61 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
                 break;
         }
     }
-
+    
     static class SaveState extends BaseSavedState {
         int position;
-
+        
         @Override
         public int describeContents() {
             return 0;
         }
-
+        
         @Override
         public void writeToParcel(Parcel dest, int flags) {
             super.writeToParcel(dest, flags);
             dest.writeInt(this.position);
         }
-
+        
         public SaveState(Parcelable superState) {
             super(superState);
         }
-
+        
         protected SaveState(Parcel in) {
             super(in);
             this.position = in.readInt();
         }
-
+        
         public static final Creator<SaveState> CREATOR = new Creator<SaveState>() {
             @Override
             public SaveState createFromParcel(Parcel source) {
                 return new SaveState(source);
             }
-
+            
             @Override
             public SaveState[] newArray(int size) {
                 return new SaveState[size];
             }
         };
     }
-
+    
     private void scrollToChild(int position, int offset) {
-
+        
         if (tabCount == 0) {
             return;
         }
-
+        
         if (getItem(position) != null) {
             int newScrollX = getItem(position).getLeft() + offset;
-
+            
             if (newScrollX != lastScrollX) {
                 lastScrollX = newScrollX;
                 scrollTo(newScrollX, 0);
             }
         }
-
+        
     }
-
-    private void selectIcon(int position) {
+    
+    public void selectIcon(int position) {
         if (mViewPager == null) {
             return;
         }
@@ -565,9 +569,9 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
             }
         }
     }
-
-
-    private void selectText(int position) {
+    
+    
+    public void selectText(int position) {
         if (mViewPager == null) {
             return;
         }
@@ -590,7 +594,7 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
             }
         }
     }
-
+    
     public void setTabTextIconOrientation(TabOrientation orientation) {
         this.tabTextIconOrientation = orientation;
         switch (orientation) {
@@ -630,15 +634,15 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
                     }
                 }
                 break;
-
+            
         }
     }
-
+    
     public TabOrientation getTabTextIconOrientation() {
         return tabTextIconOrientation;
     }
-
-    private void selectIconAndText(int position) {
+    
+    public void selectIconAndText(int position) {
         if (mViewPager == null) {
             return;
         }
@@ -681,7 +685,7 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
             }
         }
     }
-
+    
     private View getItem(int position) {
         return mIndicatorContainer.getChildAt(position);
     }

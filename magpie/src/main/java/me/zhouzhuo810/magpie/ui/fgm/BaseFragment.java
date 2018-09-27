@@ -33,8 +33,8 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
     private static final String STATE_SAVE_IS_HIDDEN = "STATE_SAVE_IS_HIDDEN";
     protected View rootView;
     protected boolean isVisible;
-    private long mCallLazyLoadCount;
-    private boolean mLazeLoaded = true;
+    protected long mCallLazyLoadCount;
+    protected boolean mLazeLoaded = true;
     
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -512,7 +512,7 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
      * 判断是否需要懒加载数据，此方法只会允许调用一次懒加载，如果需要界面每次重绘时都加载数据，覆写该方法，一直返回true即可
      *
      * @return {@code true} 需要懒加载，则方法{@link #lazyLoadData()}将被调用
-     *         {@code false} 不需要懒加载
+     * {@code false} 不需要懒加载
      */
     @Override
     public boolean needLazyLoadData() {
@@ -525,5 +525,9 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
     
     public long getCallLazyLoadCount() {
         return mCallLazyLoadCount;
+    }
+    
+    public void clearCallLazyLoadCount() {
+        mCallLazyLoadCount = 0;
     }
 }
