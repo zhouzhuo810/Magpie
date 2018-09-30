@@ -215,15 +215,38 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     
     @Override
     public void showLoadingDialog(String title, String msg, boolean cancelable, boolean iosStyle, DialogInterface.OnDismissListener onDismissListener) {
-        hideLoadingDialog();
-        loadingDialog = new LoadingDialog();
-        loadingDialog.setTitle(title)
-            .setMsg(msg)
-            .setIosStyle(iosStyle)
-            .setOnDismissListener(onDismissListener)
-            .setCancelable(cancelable);
-        loadingDialog.show(getSupportFragmentManager(), getClass().getSimpleName());
+        if (loadingDialog != null && loadingDialog.isLoading()) {
+            loadingDialog.setCancelable(cancelable);
+            loadingDialog.setTitle(title)
+                .setMsg(msg)
+                .setIosStyle(iosStyle)
+                .setOnDismissListener(onDismissListener)
+                .update();
+        } else {
+            hideLoadingDialog();
+            loadingDialog = new LoadingDialog();
+            loadingDialog.setTitle(title)
+                .setMsg(msg)
+                .setIosStyle(iosStyle)
+                .setOnDismissListener(onDismissListener)
+                .setCancelable(cancelable);
+            loadingDialog.show(getSupportFragmentManager(), getClass().getSimpleName());
+        }
     }
+    
+    public LoadingDialog getLoadingDialog() {
+        return loadingDialog;
+    }
+    
+    /**
+     * LoadingDialog是否正在加载
+     *
+     * @return 是否
+     */
+    public boolean isLoading() {
+        return loadingDialog != null && loadingDialog.isLoading();
+    }
+    
     
     @Override
     public void hideLoadingDialog() {
@@ -530,7 +553,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     }
     
     @Override
-    public  <T extends BaseFragment> T findFragmentByTag(String tag) {
+    public <T extends BaseFragment> T findFragmentByTag(String tag) {
         if (getSupportFragmentManager() == null) {
             return null;
         }
@@ -679,6 +702,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     
     @Override
     protected void onDestroy() {
+        hideLoadingDialog();
         hideListDialog();
         super.onDestroy();
         EventBus.getDefault().unregister(this);

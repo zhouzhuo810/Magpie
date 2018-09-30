@@ -11,29 +11,29 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class RxHelper {
-
+    
     public static <T> ObservableTransformer<T, T> io_main() {
         return new ObservableTransformer<T, T>() {
             @Override
             public Observable<T> apply(Observable<T> tObservable) {
                 return tObservable
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread());
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread());
             }
         };
     }
-
+    
     public static <T> ObservableTransformer<T, T> io_io() {
         return new ObservableTransformer<T, T>() {
             @Override
             public Observable<T> apply(Observable<T> tObservable) {
                 return tObservable
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(Schedulers.io());
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(Schedulers.io());
             }
         };
     }
-
+    
     /**
      * 倒计时
      *
@@ -41,10 +41,10 @@ public class RxHelper {
      * @param onNext 监听
      * @return 用于取消订阅
      */
-    public static Disposable countDown(int count, Consumer<Long> onNext) {
-        return countDown(count, null, null, onNext);
+    public static Disposable countDown(int count, Consumer<Long> onNext, Action onComplete) {
+        return countDown(count, null, onComplete, onNext);
     }
-
+    
     /**
      * 倒计时
      *
@@ -56,15 +56,15 @@ public class RxHelper {
      */
     public static Disposable countDown(int count, Consumer<Disposable> onStart, Action onComplete, Consumer<Long> onNext) {
         Observable<Long> longObservable = Observable.intervalRange(0, count, 0, 1, TimeUnit.SECONDS)
-                .compose(RxHelper.<Long>io_main());
+            .compose(RxHelper.<Long>io_main());
         if (onStart != null) {
-            longObservable.doOnSubscribe(onStart);
+            longObservable = longObservable.doOnSubscribe(onStart);
         }
         if (onComplete != null) {
-            longObservable.doOnComplete(onComplete);
+            longObservable = longObservable.doOnComplete(onComplete);
         }
         return longObservable.subscribe(onNext);
     }
-
-
+    
+    
 }
