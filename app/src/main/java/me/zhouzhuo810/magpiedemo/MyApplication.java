@@ -22,10 +22,10 @@ public class MyApplication extends Application {
         
         //工具类初始化，包括屏幕适配
         BaseUtil.init(this);
-        
+
         //初始化语言
         LanguageUtil.setGlobalLanguage(LanguageUtil.SIMPLE_CHINESE);
-        
+
         //Crash Handler
         initCrash();
     }

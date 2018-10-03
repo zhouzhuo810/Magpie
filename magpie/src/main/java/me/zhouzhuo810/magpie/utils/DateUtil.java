@@ -1403,7 +1403,13 @@ public class DateUtil {
         return millis / unit;
     }
 
-    private static String millis2FitTimeSpan(long millis, int precision) {
+    /**
+     *
+     * @param millis
+     * @param precision
+     * @return
+     */
+    public static String millis2FitTimeSpan(long millis, int precision) {
         if (precision <= 0) return null;
         precision = Math.min(precision, 5);
         String[] units = {"天", "小时", "分钟", "秒", "毫秒"};

@@ -234,7 +234,14 @@ it supports:
 - AssetsUtil
 > It's for converting file's content to String in Assets.
 
+- SimpleUtil
+> It's for converting file's content to String in Assets.
+
 ### Update Logs
+
+> 1.1.0 (Developing)
+
+- Add SimpleUtil.
 
 > 1.0.9 (Published)
 
