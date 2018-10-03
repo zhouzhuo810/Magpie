@@ -88,7 +88,12 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     public void startAct(Class<? extends Activity> clazz) {
         startActWithIntent(new Intent(this, clazz));
     }
-    
+
+    @Override
+    public void startActForResult(Class<? extends Activity> clazz, int requestCode) {
+        startActWithIntentForResult(new Intent(this, clazz), requestCode);
+    }
+
     public void startActShared(Class<? extends Activity> clazz, final View... sharedElements) {
         startActWithIntentShared(new Intent(this, clazz), sharedElements);
     }

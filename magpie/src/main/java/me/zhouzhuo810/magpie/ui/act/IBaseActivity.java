@@ -85,6 +85,8 @@ public interface IBaseActivity {
     public boolean shouldNotInvokeInitMethods(Bundle savedInstanceState);
     
     public void startAct(Class<? extends Activity> clazz);
+
+    public void startActForResult(Class<? extends Activity> clazz, int requestCode);
     
     public void startActShared(Class<? extends Activity> clazz, final View... sharedElements);
     

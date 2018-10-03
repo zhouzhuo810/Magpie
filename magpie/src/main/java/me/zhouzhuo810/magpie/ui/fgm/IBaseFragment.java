@@ -1,5 +1,6 @@
 package me.zhouzhuo810.magpie.ui.fgm;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -47,7 +48,11 @@ public interface IBaseFragment {
     public boolean shouldNotInvokeInitMethods(Bundle savedInstanceState);
     
     public IBaseActivity getBaseAct();
-    
+
+    public void startAct(Class<? extends Activity> clazz);
+
+    public void startActForResult(Class<? extends Activity> clazz, int requestCode);
+
     public void startActWithIntent(Intent intent);
     
     public void startActWithIntent(Intent intent, boolean defaultAnim);

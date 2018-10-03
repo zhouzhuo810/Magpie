@@ -1,5 +1,6 @@
 package me.zhouzhuo810.magpie.ui.fgm;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -195,7 +196,22 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
         }
         getBaseAct().closeAllAct();
     }
-    
+
+    /**
+     * 跳转到目标Activity
+     *
+     * @param clazz 目标界面
+     */
+    @Override
+    public void startAct(Class<? extends Activity> clazz) {
+        startActWithIntent(new Intent(getContext(), clazz));
+    }
+
+    @Override
+    public void startActForResult(Class<? extends Activity> clazz, int requestCode) {
+        startActWithIntentForResult(new Intent(getContext(), clazz), requestCode);
+    }
+
     @Override
     public void startActWithIntent(Intent intent) {
         startActWithIntent(intent, false);

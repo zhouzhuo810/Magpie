@@ -242,6 +242,7 @@ it supports:
 > 1.1.0 (Developing)
 
 - Add SimpleUtil.
+- Add `startAct` and `startActForResult` methods in BaseFragment and BaseActivity.
 
 > 1.0.9 (Published)
 

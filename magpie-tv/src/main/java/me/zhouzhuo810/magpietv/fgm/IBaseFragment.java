@@ -1,5 +1,6 @@
 package me.zhouzhuo810.magpietv.fgm;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -48,6 +49,10 @@ public interface IBaseFragment {
 
     public IBaseActivity getBaseAct();
 
+    public void startAct(Class<? extends Activity> clazz);
+
+    public void startActForResult(Class<? extends Activity> clazz, int requestCode);
+
     public void startActWithIntent(Intent intent);
 
     public void startActWithIntent(Intent intent, boolean defaultAnim);
@@ -63,7 +68,6 @@ public interface IBaseFragment {
     public void closeAllAct();
 
     public void overridePendingTransition(int enterAnim, int exitAnim);
-
 
     public void showLoadingDialog(String msg);
 
