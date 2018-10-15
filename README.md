@@ -21,7 +21,7 @@ allprojects {
 > For Phone And Pad.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.0.9'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.1.0'
 ```
 
 If you use this. That means you added dependencies below:
@@ -56,7 +56,7 @@ If you use this. That means you added dependencies below:
 > For Android TV.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.0.9'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.1.0'
 ```
 
 If you use this. That means you added dependencies below:
@@ -130,8 +130,10 @@ public class MyApplication extends Application {
 - If you do not use LvBaseAdapter or RvBaseAdapter, Then you should invoke the method
  `ScreenAdapterUtil.getInstance().loadView(view);` when you create ViewHolder.
 
-- If you want use in custom View, you should invoke the method
+- If you want to use in custom View, you should invoke the method
 `ScreenAdapterUtil.getInstance().getScaledValue(int);` when you what to scale the dynamic value.
+
+- If you don't want to use `ScreenAdapterUtil.getInstance()`, just replace it with `SimpleUtil`.
 
 #### BaseActivity
 
@@ -239,10 +241,11 @@ it supports:
 
 ### Update Logs
 
-> 1.1.0 (Developing)
+> 1.1.0 (Published)
 
 - Add SimpleUtil.
 - Add `startAct` and `startActForResult` methods in BaseFragment and BaseActivity.
+- Add several methods in `FileUtil`.
 
 > 1.0.9 (Published)
 
