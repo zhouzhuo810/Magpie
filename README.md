@@ -21,7 +21,7 @@ allprojects {
 > For Phone And Pad.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.1.0'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.1.1'
 ```
 
 If you use this. That means you added dependencies below:
@@ -56,7 +56,7 @@ If you use this. That means you added dependencies below:
 > For Android TV.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.1.0'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.1.1'
 ```
 
 If you use this. That means you added dependencies below:
@@ -239,11 +239,24 @@ it supports:
 - SimpleUtil
 > It's for converting file's content to String in Assets.
 
+- ShellUtils
+> It's for running shell command.
+
+- NetworkUtils
+> It's for network status monitoring.
+
 ### Update Logs
+
+> 1.1.1 (Published)
+
+- Add `NetworkUtils`.
+- Add `ShellUtils`.
+- Add `getFontFromAssets` and `getFileContentFromAssets` methods in `SimpleUtil`.
+
 
 > 1.1.0 (Published)
 
-- Add SimpleUtil.
+- Add `SimpleUtil`.
 - Add `startAct` and `startActForResult` methods in BaseFragment and BaseActivity.
 - Add several methods in `FileUtil`.
 

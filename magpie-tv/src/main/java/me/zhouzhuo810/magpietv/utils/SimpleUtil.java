@@ -1,5 +1,6 @@
 package me.zhouzhuo810.magpietv.utils;
 
+import android.graphics.Typeface;
 import android.support.annotation.ArrayRes;
 import android.support.annotation.ColorRes;
 import android.support.annotation.StringRes;
@@ -57,5 +58,25 @@ public class SimpleUtil {
      */
     public String[] getStringArray(@ArrayRes int resId) {
         return BaseUtil.getApp().getResources().getStringArray(resId);
+    }
+    
+    /**
+     * 获取assets文件夹中的字体
+     *
+     * @param path 路径，如fonts/xxx.ttf
+     * @return Typeface对象，没有则返回null
+     */
+    public Typeface getFontFromAssets(String path) {
+        return FontUtil.getTypeFaceFromAssets(path);
+    }
+    
+    /**
+     * 获取assets文件夹中的文件的字符串内容
+     *
+     * @param path 路径，如json/test.json
+     * @return 文件内容字符串
+     */
+    public String getFileContentFromAssets(String path) {
+        return AssetsUtil.getFileToStringFromAssets(path);
     }
 }
