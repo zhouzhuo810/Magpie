@@ -9,7 +9,7 @@
     <string name="loading_dialog">加载圆圈对话框</string>
     <string name="bottom_sheet_dialog">底部弹出列表对话框</string>
     <string name="loading_text">加载中...</string>
-    <string name="check_update_text">检查到新版本现在安装么？</string>
+    <string name="check_update_text">检查到新版本现在安装么？检查到新版本现在安装么</string>
     <string name="please_input_text">请输入</string>
     <string name="two_btn_edit_dialog">两个按钮输入对话框</string>
     <string name="updating_text">正在下载，下载进度：</string>

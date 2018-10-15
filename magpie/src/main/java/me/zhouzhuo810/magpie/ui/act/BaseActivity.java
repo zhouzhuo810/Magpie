@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -88,12 +89,12 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     public void startAct(Class<? extends Activity> clazz) {
         startActWithIntent(new Intent(this, clazz));
     }
-
+    
     @Override
     public void startActForResult(Class<? extends Activity> clazz, int requestCode) {
         startActWithIntentForResult(new Intent(this, clazz), requestCode);
     }
-
+    
     public void startActShared(Class<? extends Activity> clazz, final View... sharedElements) {
         startActWithIntentShared(new Intent(this, clazz), sharedElements);
     }
@@ -305,18 +306,33 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     }
     
     @Override
+    public void showTwoBtnTextDialog(String title, String msg, boolean msgCenter, boolean cancelable, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick) {
+        showTwoBtnTextDialog(title, msg, msgCenter, cancelable, null, onTwoBtnClick);
+    }
+    
+    @Override
     public void showTwoBtnTextDialog(String title, String msg, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick) {
         showTwoBtnTextDialog(title, msg, getString(R.string.magpie_cancel_text), getString(R.string.magpie_ok_text), cancelable, onDismissListener, onTwoBtnClick);
     }
     
+    public void showTwoBtnTextDialog(String title, String msg, boolean msgCenter, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick) {
+        showTwoBtnTextDialog(title, msg, msgCenter, getString(R.string.magpie_cancel_text), getString(R.string.magpie_ok_text), cancelable, onDismissListener, onTwoBtnClick);
+    }
+    
     @Override
     public void showTwoBtnTextDialog(String title, String msg, String leftBtnString, String rightBtnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick) {
+        showTwoBtnTextDialog(title, msg, true, getString(R.string.magpie_cancel_text), getString(R.string.magpie_ok_text), cancelable, onDismissListener, onTwoBtnClick);
+    }
+    
+    @Override
+    public void showTwoBtnTextDialog(String title, String msg, boolean msgCenter, String leftBtnString, String rightBtnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick) {
         hideTwoBtnTextDialog();
         twoBtnTextDialog = new TwoBtnTextDialog();
         twoBtnTextDialog.setTitle(title)
             .setMsg(msg)
             .setLeftText(leftBtnString)
             .setRightText(rightBtnString)
+            .setGravity(msgCenter ? Gravity.CENTER : Gravity.CENTER_VERTICAL | Gravity.START)
             .setOnDismissListener(onDismissListener)
             .setOnTwoBtnClickListener(onTwoBtnClick)
             .setCancelable(cancelable);

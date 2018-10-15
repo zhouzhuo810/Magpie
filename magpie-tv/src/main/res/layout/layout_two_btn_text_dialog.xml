@@ -26,15 +26,13 @@
         android:layout_height="1px"
         android:background="@color/colorBlack10" />
 
+
     <TextView
         android:id="@+id/tv_msg"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/base_dialog_title_height"
-        android:ellipsize="end"
+        android:layout_height="wrap_content"
         android:gravity="center"
-        android:maxLines="1"
-        android:paddingLeft="60px"
-        android:paddingRight="60px"
+        android:padding="60px"
         android:textColor="@color/colorBaseDialogTitleTextColor"
         android:textSize="@dimen/base_dialog_title_text_size"
         tools:text="消息" />

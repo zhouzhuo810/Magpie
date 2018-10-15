@@ -8,6 +8,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ public class TwoBtnTextDialog extends DialogFragment {
     private String msg;
     private String leftText;
     private String rightText;
+    private int gravity = Gravity.CENTER;
 
     /**
      * 设置对话框关闭监听
@@ -53,6 +55,11 @@ public class TwoBtnTextDialog extends DialogFragment {
 
     public TwoBtnTextDialog setLeftText(String leftBtnText) {
         this.leftText = leftBtnText;
+        return this;
+    }
+    
+    public TwoBtnTextDialog setGravity(int gravity) {
+        this.gravity = gravity;
         return this;
     }
 
@@ -129,6 +136,7 @@ public class TwoBtnTextDialog extends DialogFragment {
         }
         TextView tvTitle = rootView.findViewById(R.id.tv_title);
         TextView tvMsg = rootView.findViewById(R.id.tv_msg);
+        tvMsg.setGravity(gravity);
         View line = rootView.findViewById(R.id.line_item);
         tvMsg.setText(msg);
         if (TextUtils.isEmpty(title)) {
