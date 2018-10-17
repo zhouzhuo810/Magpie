@@ -34,7 +34,7 @@ import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
  *     desc  : utils about crash
  * </pre>
  */
-public final class CrashUtils {
+public final class CrashUtil {
     
     private static String defaultDir;
     private static String dir;
@@ -104,7 +104,7 @@ public final class CrashUtils {
                 if (createOrExistsFile(fullPath)) {
                     input2File(crashInfo, fullPath);
                 } else {
-                    Log.e("CrashUtils", "create " + fullPath + " failed!");
+                    Log.e("CrashUtil", "create " + fullPath + " failed!");
                 }
                 
                 if (sOnCrashListener != null) {
@@ -118,7 +118,7 @@ public final class CrashUtils {
         };
     }
     
-    private CrashUtils() {
+    private CrashUtil() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
     
@@ -249,7 +249,7 @@ public final class CrashUtils {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        Log.e("CrashUtils", "write crash info to " + filePath + " failed!");
+        Log.e("CrashUtil", "write crash info to " + filePath + " failed!");
     }
     
     private static boolean createOrExistsFile(final String filePath) {

@@ -1424,7 +1424,134 @@ public class DateUtil {
         }
         return sb.toString();
     }
-
-
-
+    
+    
+    public static String get_yMd() {
+        return new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+    }
+    
+    public static String get_yMdHms() {
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
+    }
+    
+    public static String get_yMdHm() {
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).format(new Date());
+    }
+    
+    public static String get_MdHs() {
+        return new SimpleDateFormat("MM-dd HH:mm", Locale.getDefault()).format(new Date());
+    }
+    
+    public static int getCurHour() {
+        Calendar calendar = Calendar.getInstance();
+        return calendar.get(Calendar.HOUR_OF_DAY);
+    }
+    
+    public static int getCurMinute() {
+        Calendar calendar = Calendar.getInstance();
+        return calendar.get(Calendar.MINUTE);
+    }
+    
+    public static String get_Hms() {
+        return new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+    }
+    
+    public static int getCurrentYear() {
+        Calendar calendar = Calendar.getInstance();
+        return calendar.get(Calendar.YEAR);
+    }
+    
+    public static int getCurrentMonth() {
+        Calendar calendar = Calendar.getInstance();
+        return calendar.get(Calendar.MONTH) + 1;
+    }
+    
+    public static int getCurrentDay() {
+        Calendar calendar = Calendar.getInstance();
+        return calendar.get(Calendar.DAY_OF_MONTH);
+    }
+    
+    public static int getCurrentWeek() {
+        return getWeekOfDay(getCurrentYear(), getCurrentMonth(), getCurrentDay());
+    }
+    
+    /**
+     * 获取某天是星期几
+     * @param y 年
+     * @param m 月
+     * @param d 日
+     * @return 星期几
+     */
+    public static int getWeekOfDay(int y, int m, int d) {
+        int day = getPassDaysOfYear(y, m, d);
+        int s = (y - 1) + (y - 1) / 4 - (y - 1) / 100 + (y - 1) / 400 + day;
+        return s % 7;
+    }
+    
+    /**
+     * 获取某天距离该年元旦的天数
+     * @param y 年
+     * @param m 月
+     * @param d 日
+     * @return 天数
+     */
+    public static int getPassDaysOfYear(int y, int m, int d) {
+        int passDay = 0;
+        for (int i = 0; i <= m - 1; i++) {
+            passDay += getDaysOfMonth(y, i);
+        }
+        return passDay + d;
+    }
+    
+    
+    /**
+     * 获取某月份的天数
+     * @param y 年
+     * @param m 月
+     * @return 天数
+     */
+    public static int getDaysOfMonth(int y, int m) {
+        int day = 0;
+        switch (m) {
+            case 12:
+                day = 31;
+                break;
+            case 11:
+                day = 30;
+                break;
+            case 10:
+                day = 31;
+                break;
+            case 9:
+                day = 30;
+                break;
+            case 8:
+                day = 31;
+                break;
+            case 7:
+                day = 31;
+                break;
+            case 6:
+                day = 30;
+                break;
+            case 5:
+                day = 31;
+                break;
+            case 4:
+                day = 30;
+                break;
+            case 3:
+                day = 31;
+                break;
+            case 2:
+                day = isLeapYear(y) ? 29 : 28;
+                break;
+            case 1:
+                day = 31;
+                break;
+        }
+        return day;
+    }
+    
+    
 }

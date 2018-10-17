@@ -1,4 +1,4 @@
-package me.zhouzhuo810.magpietv.utils;
+package me.zhouzhuo810.magpie.utils;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -14,11 +14,11 @@ import java.util.List;
  *     desc  : utils about shell
  * </pre>
  */
-public final class ShellUtils {
+public final class ShellUtil {
     
     private static final String LINE_SEP = System.getProperty("line.separator");
     
-    private ShellUtils() {
+    private ShellUtil() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
     

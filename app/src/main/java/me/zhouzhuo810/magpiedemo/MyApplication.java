@@ -9,7 +9,7 @@ import android.support.v4.app.ActivityCompat;
 import java.io.File;
 
 import me.zhouzhuo810.magpie.utils.BaseUtil;
-import me.zhouzhuo810.magpie.utils.CrashUtils;
+import me.zhouzhuo810.magpie.utils.CrashUtil;
 import me.zhouzhuo810.magpie.utils.LanguageUtil;
 
 public class MyApplication extends Application {
@@ -32,14 +32,14 @@ public class MyApplication extends Application {
     
     private void initCrash() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            CrashUtils.init(new CrashUtils.OnCrashListener() {
+            CrashUtil.init(new CrashUtil.OnCrashListener() {
                 @Override
                 public void onCrash(String crashInfo, Throwable e) {
                     BaseUtil.relaunchApp();
                 }
             });
         } else {
-            CrashUtils.init(CRASH_PATH, new CrashUtils.OnCrashListener() {
+            CrashUtil.init(CRASH_PATH, new CrashUtil.OnCrashListener() {
                 @Override
                 public void onCrash(String crashInfo, Throwable e) {
                     BaseUtil.relaunchApp();

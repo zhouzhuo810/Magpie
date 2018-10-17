@@ -26,7 +26,7 @@ public class SimpleUtil {
      * @param px 原来值
      * @return 缩放后的值
      */
-    public int getScaledValue(int px) {
+    public static int getScaledValue(int px) {
         return ScreenAdapterUtil.getInstance().getScaledValue(px);
     }
 
@@ -36,7 +36,7 @@ public class SimpleUtil {
      * @param resId 资源ID
      * @return 字符串
      */
-    public String getString(@StringRes int resId) {
+    public static String getString(@StringRes int resId) {
         return BaseUtil.getApp().getString(resId);
     }
 
@@ -46,7 +46,7 @@ public class SimpleUtil {
      * @param resId 资源ID
      * @return 颜色值
      */
-    public int getColor(@ColorRes int resId) {
+    public static int getColor(@ColorRes int resId) {
         return BaseUtil.getApp().getResources().getColor(resId);
     }
 
@@ -56,7 +56,7 @@ public class SimpleUtil {
      * @param resId 资源ID
      * @return 字符串数组
      */
-    public String[] getStringArray(@ArrayRes int resId) {
+    public static String[] getStringArray(@ArrayRes int resId) {
         return BaseUtil.getApp().getResources().getStringArray(resId);
     }
     
@@ -66,7 +66,7 @@ public class SimpleUtil {
      * @param path 路径，如fonts/xxx.ttf
      * @return Typeface对象，没有则返回null
      */
-    public Typeface getFontFromAssets(String path) {
+    public static Typeface getFontFromAssets(String path) {
         return FontUtil.getTypeFaceFromAssets(path);
     }
     
@@ -76,7 +76,7 @@ public class SimpleUtil {
      * @param path 路径，如json/test.json
      * @return 文件内容字符串
      */
-    public String getFileContentFromAssets(String path) {
+    public static String getFileContentFromAssets(String path) {
         return AssetsUtil.getFileToStringFromAssets(path);
     }
 }

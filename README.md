@@ -21,7 +21,7 @@ allprojects {
 > For Phone And Pad.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.1.2'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.1.3'
 ```
 
 If you use this. That means you added dependencies below:
@@ -56,7 +56,7 @@ If you use this. That means you added dependencies below:
 > For Android TV.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.1.2'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.1.3'
 ```
 
 If you use this. That means you added dependencies below:
@@ -187,7 +187,7 @@ it supports:
 - RxHelper
 > It's use for RxJava.
 
-- CrashUtils
+- CrashUtil
 > It's for UncaughtExceptionHandler.
 
 - CopyUtil
@@ -239,13 +239,26 @@ it supports:
 - SimpleUtil
 > It's for converting file's content to String in Assets.
 
-- ShellUtils
+- ShellUtil
 > It's for running shell command.
 
-- NetworkUtils
+- NetworkUtil
 > It's for network status monitoring.
 
+- CRC16
+> It's for CRC16 encryption.
+
+- ByteUtil
+> It's for Byte operating.
+
 ### Update Logs
+
+> 1.1.3 (Published)
+
+- Fix several Bugs.
+- Add several methods in `DateUtil`.
+- Add `CRC16`.
+- Add `ByteUtil`.
 
 > 1.1.2 (Published)
 

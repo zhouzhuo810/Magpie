@@ -37,9 +37,9 @@ import static android.content.Context.WIFI_SERVICE;
  *     desc  : utils about network
  * </pre>
  */
-public final class NetworkUtils {
+public final class NetworkUtil {
     
-    private NetworkUtils() {
+    private NetworkUtil() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
     
@@ -100,13 +100,13 @@ public final class NetworkUtils {
         if (ip == null || ip.length() <= 0) {
             ip = "223.5.5.5";// default ping ip
         }
-        ShellUtils.CommandResult result = ShellUtils.execCmd(String.format("ping -c 1 %s", ip), false);
+        ShellUtil.CommandResult result = ShellUtil.execCmd(String.format("ping -c 1 %s", ip), false);
         boolean ret = result.result == 0;
         if (result.errorMsg != null) {
-            Log.d("NetworkUtils", "isAvailableByPing() called" + result.errorMsg);
+            Log.d("NetworkUtil", "isAvailableByPing() called" + result.errorMsg);
         }
         if (result.successMsg != null) {
-            Log.d("NetworkUtils", "isAvailableByPing() called" + result.successMsg);
+            Log.d("NetworkUtil", "isAvailableByPing() called" + result.successMsg);
         }
         return ret;
     }
@@ -270,13 +270,13 @@ public final class NetworkUtils {
      *
      * @return type of network
      * <ul>
-     * <li>{@link NetworkUtils.NetworkType#NETWORK_ETHERNET} </li>
-     * <li>{@link NetworkUtils.NetworkType#NETWORK_WIFI    } </li>
-     * <li>{@link NetworkUtils.NetworkType#NETWORK_4G      } </li>
-     * <li>{@link NetworkUtils.NetworkType#NETWORK_3G      } </li>
-     * <li>{@link NetworkUtils.NetworkType#NETWORK_2G      } </li>
-     * <li>{@link NetworkUtils.NetworkType#NETWORK_UNKNOWN } </li>
-     * <li>{@link NetworkUtils.NetworkType#NETWORK_NO      } </li>
+     * <li>{@link NetworkUtil.NetworkType#NETWORK_ETHERNET} </li>
+     * <li>{@link NetworkUtil.NetworkType#NETWORK_WIFI    } </li>
+     * <li>{@link NetworkUtil.NetworkType#NETWORK_4G      } </li>
+     * <li>{@link NetworkUtil.NetworkType#NETWORK_3G      } </li>
+     * <li>{@link NetworkUtil.NetworkType#NETWORK_2G      } </li>
+     * <li>{@link NetworkUtil.NetworkType#NETWORK_UNKNOWN } </li>
+     * <li>{@link NetworkUtil.NetworkType#NETWORK_NO      } </li>
      * </ul>
      */
     @RequiresPermission(ACCESS_NETWORK_STATE)

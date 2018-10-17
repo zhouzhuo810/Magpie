@@ -12,9 +12,9 @@ import java.util.Locale;
 import me.zhouzhuo810.magpie.cons.Cons;
 
 public class DateUtil {
-
+    
     private static final ThreadLocal<SimpleDateFormat> SDF_THREAD_LOCAL = new ThreadLocal<>();
-
+    
     private static SimpleDateFormat getDefaultFormat() {
         SimpleDateFormat simpleDateFormat = SDF_THREAD_LOCAL.get();
         if (simpleDateFormat == null) {
@@ -23,11 +23,11 @@ public class DateUtil {
         }
         return simpleDateFormat;
     }
-
+    
     private DateUtil() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
-
+    
     /**
      * Milliseconds to the formatted time string.
      * <p>The pattern is {@code yyyy-MM-dd HH:mm:ss}.</p>
@@ -38,7 +38,7 @@ public class DateUtil {
     public static String millis2String(final long millis) {
         return millis2String(millis, getDefaultFormat());
     }
-
+    
     /**
      * Milliseconds to the formatted time string.
      *
@@ -49,7 +49,7 @@ public class DateUtil {
     public static String millis2String(final long millis, @NonNull final DateFormat format) {
         return format.format(new Date(millis));
     }
-
+    
     /**
      * Formatted time string to the milliseconds.
      * <p>The pattern is {@code yyyy-MM-dd HH:mm:ss}.</p>
@@ -60,7 +60,7 @@ public class DateUtil {
     public static long string2Millis(final String time) {
         return string2Millis(time, getDefaultFormat());
     }
-
+    
     /**
      * Formatted time string to the milliseconds.
      *
@@ -76,7 +76,7 @@ public class DateUtil {
         }
         return -1;
     }
-
+    
     /**
      * Formatted time string to the date.
      * <p>The pattern is {@code yyyy-MM-dd HH:mm:ss}.</p>
@@ -87,7 +87,7 @@ public class DateUtil {
     public static Date string2Date(final String time) {
         return string2Date(time, getDefaultFormat());
     }
-
+    
     /**
      * Formatted time string to the date.
      *
@@ -103,7 +103,7 @@ public class DateUtil {
         }
         return null;
     }
-
+    
     /**
      * Date to the formatted time string.
      * <p>The pattern is {@code yyyy-MM-dd HH:mm:ss}.</p>
@@ -114,7 +114,7 @@ public class DateUtil {
     public static String date2String(final Date date) {
         return date2String(date, getDefaultFormat());
     }
-
+    
     /**
      * Date to the formatted time string.
      *
@@ -125,7 +125,7 @@ public class DateUtil {
     public static String date2String(final Date date, @NonNull final DateFormat format) {
         return format.format(date);
     }
-
+    
     /**
      * Date to the milliseconds.
      *
@@ -135,7 +135,7 @@ public class DateUtil {
     public static long date2Millis(final Date date) {
         return date.getTime();
     }
-
+    
     /**
      * Milliseconds to the date.
      *
@@ -145,7 +145,7 @@ public class DateUtil {
     public static Date millis2Date(final long millis) {
         return new Date(millis);
     }
-
+    
     /**
      * Return the time span, in unit.
      * <p>The pattern is {@code yyyy-MM-dd HH:mm:ss}.</p>
@@ -167,7 +167,7 @@ public class DateUtil {
                                    @Cons.Unit final int unit) {
         return getTimeSpan(time1, time2, getDefaultFormat(), unit);
     }
-
+    
     /**
      * Return the time span, in unit.
      *
@@ -190,7 +190,7 @@ public class DateUtil {
                                    @Cons.Unit final int unit) {
         return millis2TimeSpan(string2Millis(time1, format) - string2Millis(time2, format), unit);
     }
-
+    
     /**
      * Return the time span, in unit.
      *
@@ -211,7 +211,7 @@ public class DateUtil {
                                    @Cons.Unit final int unit) {
         return millis2TimeSpan(date2Millis(date1) - date2Millis(date2), unit);
     }
-
+    
     /**
      * Return the time span, in unit.
      *
@@ -232,7 +232,7 @@ public class DateUtil {
                                    @Cons.Unit final int unit) {
         return millis2TimeSpan(millis1 - millis2, unit);
     }
-
+    
     /**
      * Return the fit time span.
      * <p>The pattern is {@code yyyy-MM-dd HH:mm:ss}.</p>
@@ -256,7 +256,7 @@ public class DateUtil {
         long delta = string2Millis(time1, getDefaultFormat()) - string2Millis(time2, getDefaultFormat());
         return millis2FitTimeSpan(delta, precision);
     }
-
+    
     /**
      * Return the fit time span.
      *
@@ -281,7 +281,7 @@ public class DateUtil {
         long delta = string2Millis(time1, format) - string2Millis(time2, format);
         return millis2FitTimeSpan(delta, precision);
     }
-
+    
     /**
      * Return the fit time span.
      *
@@ -301,7 +301,7 @@ public class DateUtil {
     public static String getFitTimeSpan(final Date date1, final Date date2, final int precision) {
         return millis2FitTimeSpan(date2Millis(date1) - date2Millis(date2), precision);
     }
-
+    
     /**
      * Return the fit time span.
      *
@@ -323,7 +323,7 @@ public class DateUtil {
                                         final int precision) {
         return millis2FitTimeSpan(millis1 - millis2, precision);
     }
-
+    
     /**
      * Return the current time in milliseconds.
      *
@@ -332,7 +332,7 @@ public class DateUtil {
     public static long getNowMills() {
         return System.currentTimeMillis();
     }
-
+    
     /**
      * Return the current formatted time string.
      * <p>The pattern is {@code yyyy-MM-dd HH:mm:ss}.</p>
@@ -342,7 +342,7 @@ public class DateUtil {
     public static String getNowString() {
         return millis2String(System.currentTimeMillis(), getDefaultFormat());
     }
-
+    
     /**
      * Return the current formatted time string.
      *
@@ -352,7 +352,7 @@ public class DateUtil {
     public static String getNowString(@NonNull final DateFormat format) {
         return millis2String(System.currentTimeMillis(), format);
     }
-
+    
     /**
      * Return the current date.
      *
@@ -361,7 +361,7 @@ public class DateUtil {
     public static Date getNowDate() {
         return new Date();
     }
-
+    
     /**
      * Return the time span by now, in unit.
      * <p>The pattern is {@code yyyy-MM-dd HH:mm:ss}.</p>
@@ -380,7 +380,7 @@ public class DateUtil {
     public static long getTimeSpanByNow(final String time, @Cons.Unit final int unit) {
         return getTimeSpan(time, getNowString(), getDefaultFormat(), unit);
     }
-
+    
     /**
      * Return the time span by now, in unit.
      *
@@ -401,7 +401,7 @@ public class DateUtil {
                                         @Cons.Unit final int unit) {
         return getTimeSpan(time, getNowString(format), format, unit);
     }
-
+    
     /**
      * Return the time span by now, in unit.
      *
@@ -419,7 +419,7 @@ public class DateUtil {
     public static long getTimeSpanByNow(final Date date, @Cons.Unit final int unit) {
         return getTimeSpan(date, new Date(), unit);
     }
-
+    
     /**
      * Return the time span by now, in unit.
      *
@@ -437,7 +437,7 @@ public class DateUtil {
     public static long getTimeSpanByNow(final long millis, @Cons.Unit final int unit) {
         return getTimeSpan(millis, System.currentTimeMillis(), unit);
     }
-
+    
     /**
      * Return the fit time span by now.
      * <p>The pattern is {@code yyyy-MM-dd HH:mm:ss}.</p>
@@ -457,7 +457,7 @@ public class DateUtil {
     public static String getFitTimeSpanByNow(final String time, final int precision) {
         return getFitTimeSpan(time, getNowString(), getDefaultFormat(), precision);
     }
-
+    
     /**
      * Return the fit time span by now.
      *
@@ -479,7 +479,7 @@ public class DateUtil {
                                              final int precision) {
         return getFitTimeSpan(time, getNowString(format), format, precision);
     }
-
+    
     /**
      * Return the fit time span by now.
      *
@@ -498,7 +498,7 @@ public class DateUtil {
     public static String getFitTimeSpanByNow(final Date date, final int precision) {
         return getFitTimeSpan(date, getNowDate(), precision);
     }
-
+    
     /**
      * Return the fit time span by now.
      *
@@ -517,7 +517,7 @@ public class DateUtil {
     public static String getFitTimeSpanByNow(final long millis, final int precision) {
         return getFitTimeSpan(millis, System.currentTimeMillis(), precision);
     }
-
+    
     /**
      * Return the friendly time span by now.
      * <p>The pattern is {@code yyyy-MM-dd HH:mm:ss}.</p>
@@ -537,7 +537,7 @@ public class DateUtil {
     public static String getFriendlyTimeSpanByNow(final String time) {
         return getFriendlyTimeSpanByNow(time, getDefaultFormat());
     }
-
+    
     /**
      * Return the friendly time span by now.
      *
@@ -558,7 +558,7 @@ public class DateUtil {
                                                   @NonNull final DateFormat format) {
         return getFriendlyTimeSpanByNow(string2Millis(time, format));
     }
-
+    
     /**
      * Return the friendly time span by now.
      *
@@ -577,7 +577,7 @@ public class DateUtil {
     public static String getFriendlyTimeSpanByNow(final Date date) {
         return getFriendlyTimeSpanByNow(date.getTime());
     }
-
+    
     /**
      * Return the friendly time span by now.
      *
@@ -616,7 +616,7 @@ public class DateUtil {
             return String.format("%tF", millis);
         }
     }
-
+    
     private static long getWeeOfToday() {
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.HOUR_OF_DAY, 0);
@@ -625,7 +625,7 @@ public class DateUtil {
         cal.set(Calendar.MILLISECOND, 0);
         return cal.getTimeInMillis();
     }
-
+    
     /**
      * Return the milliseconds differ time span.
      *
@@ -646,7 +646,7 @@ public class DateUtil {
                                  @Cons.Unit final int unit) {
         return millis + timeSpan2Millis(timeSpan, unit);
     }
-
+    
     /**
      * Return the milliseconds differ time span.
      * <p>The pattern is {@code yyyy-MM-dd HH:mm:ss}.</p>
@@ -668,7 +668,7 @@ public class DateUtil {
                                  @Cons.Unit final int unit) {
         return getMillis(time, getDefaultFormat(), timeSpan, unit);
     }
-
+    
     /**
      * Return the milliseconds differ time span.
      *
@@ -691,7 +691,7 @@ public class DateUtil {
                                  @Cons.Unit final int unit) {
         return string2Millis(time, format) + timeSpan2Millis(timeSpan, unit);
     }
-
+    
     /**
      * Return the milliseconds differ time span.
      *
@@ -712,7 +712,7 @@ public class DateUtil {
                                  @Cons.Unit final int unit) {
         return date2Millis(date) + timeSpan2Millis(timeSpan, unit);
     }
-
+    
     /**
      * Return the formatted time string differ time span.
      * <p>The pattern is {@code yyyy-MM-dd HH:mm:ss}.</p>
@@ -734,7 +734,7 @@ public class DateUtil {
                                    @Cons.Unit final int unit) {
         return getString(millis, getDefaultFormat(), timeSpan, unit);
     }
-
+    
     /**
      * Return the formatted time string differ time span.
      *
@@ -757,7 +757,7 @@ public class DateUtil {
                                    @Cons.Unit final int unit) {
         return millis2String(millis + timeSpan2Millis(timeSpan, unit), format);
     }
-
+    
     /**
      * Return the formatted time string differ time span.
      * <p>The pattern is {@code yyyy-MM-dd HH:mm:ss}.</p>
@@ -779,7 +779,7 @@ public class DateUtil {
                                    @Cons.Unit final int unit) {
         return getString(time, getDefaultFormat(), timeSpan, unit);
     }
-
+    
     /**
      * Return the formatted time string differ time span.
      *
@@ -802,7 +802,7 @@ public class DateUtil {
                                    @Cons.Unit final int unit) {
         return millis2String(string2Millis(time, format) + timeSpan2Millis(timeSpan, unit), format);
     }
-
+    
     /**
      * Return the formatted time string differ time span.
      * <p>The pattern is {@code yyyy-MM-dd HH:mm:ss}.</p>
@@ -824,7 +824,7 @@ public class DateUtil {
                                    @Cons.Unit final int unit) {
         return getString(date, getDefaultFormat(), timeSpan, unit);
     }
-
+    
     /**
      * Return the formatted time string differ time span.
      *
@@ -847,7 +847,7 @@ public class DateUtil {
                                    @Cons.Unit final int unit) {
         return millis2String(date2Millis(date) + timeSpan2Millis(timeSpan, unit), format);
     }
-
+    
     /**
      * Return the date differ time span.
      *
@@ -868,7 +868,7 @@ public class DateUtil {
                                @Cons.Unit final int unit) {
         return millis2Date(millis + timeSpan2Millis(timeSpan, unit));
     }
-
+    
     /**
      * Return the date differ time span.
      * <p>The pattern is {@code yyyy-MM-dd HH:mm:ss}.</p>
@@ -890,7 +890,7 @@ public class DateUtil {
                                @Cons.Unit final int unit) {
         return getDate(time, getDefaultFormat(), timeSpan, unit);
     }
-
+    
     /**
      * Return the date differ time span.
      *
@@ -913,7 +913,7 @@ public class DateUtil {
                                @Cons.Unit final int unit) {
         return millis2Date(string2Millis(time, format) + timeSpan2Millis(timeSpan, unit));
     }
-
+    
     /**
      * Return the date differ time span.
      *
@@ -934,7 +934,7 @@ public class DateUtil {
                                @Cons.Unit final int unit) {
         return millis2Date(date2Millis(date) + timeSpan2Millis(timeSpan, unit));
     }
-
+    
     /**
      * Return the milliseconds differ time span by now.
      *
@@ -952,7 +952,7 @@ public class DateUtil {
     public static long getMillisByNow(final long timeSpan, @Cons.Unit final int unit) {
         return getMillis(getNowMills(), timeSpan, unit);
     }
-
+    
     /**
      * Return the formatted time string differ time span by now.
      * <p>The pattern is {@code yyyy-MM-dd HH:mm:ss}.</p>
@@ -971,7 +971,7 @@ public class DateUtil {
     public static String getStringByNow(final long timeSpan, @Cons.Unit final int unit) {
         return getStringByNow(timeSpan, getDefaultFormat(), unit);
     }
-
+    
     /**
      * Return the formatted time string differ time span by now.
      *
@@ -992,7 +992,7 @@ public class DateUtil {
                                         @Cons.Unit final int unit) {
         return getString(getNowMills(), format, timeSpan, unit);
     }
-
+    
     /**
      * Return the date differ time span by now.
      *
@@ -1010,7 +1010,7 @@ public class DateUtil {
     public static Date getDateByNow(final long timeSpan, @Cons.Unit final int unit) {
         return getDate(getNowMills(), timeSpan, unit);
     }
-
+    
     /**
      * Return whether it is today.
      * <p>The pattern is {@code yyyy-MM-dd HH:mm:ss}.</p>
@@ -1021,7 +1021,7 @@ public class DateUtil {
     public static boolean isToday(final String time) {
         return isToday(string2Millis(time, getDefaultFormat()));
     }
-
+    
     /**
      * Return whether it is today.
      *
@@ -1032,7 +1032,7 @@ public class DateUtil {
     public static boolean isToday(final String time, @NonNull final DateFormat format) {
         return isToday(string2Millis(time, format));
     }
-
+    
     /**
      * Return whether it is today.
      *
@@ -1042,7 +1042,7 @@ public class DateUtil {
     public static boolean isToday(final Date date) {
         return isToday(date.getTime());
     }
-
+    
     /**
      * Return whether it is today.
      *
@@ -1053,7 +1053,7 @@ public class DateUtil {
         long wee = getWeeOfToday();
         return millis >= wee && millis < wee + Cons.DAY;
     }
-
+    
     /**
      * Return whether it is leap year.
      * <p>The pattern is {@code yyyy-MM-dd HH:mm:ss}.</p>
@@ -1064,7 +1064,7 @@ public class DateUtil {
     public static boolean isLeapYear(final String time) {
         return isLeapYear(string2Date(time, getDefaultFormat()));
     }
-
+    
     /**
      * Return whether it is leap year.
      *
@@ -1075,7 +1075,7 @@ public class DateUtil {
     public static boolean isLeapYear(final String time, @NonNull final DateFormat format) {
         return isLeapYear(string2Date(time, format));
     }
-
+    
     /**
      * Return whether it is leap year.
      *
@@ -1088,7 +1088,7 @@ public class DateUtil {
         int year = cal.get(Calendar.YEAR);
         return isLeapYear(year);
     }
-
+    
     /**
      * Return whether it is leap year.
      *
@@ -1098,7 +1098,7 @@ public class DateUtil {
     public static boolean isLeapYear(final long millis) {
         return isLeapYear(millis2Date(millis));
     }
-
+    
     /**
      * Return whether it is leap year.
      *
@@ -1108,7 +1108,7 @@ public class DateUtil {
     public static boolean isLeapYear(final int year) {
         return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
     }
-
+    
     /**
      * Return the day of week in Chinese.
      * <p>The pattern is {@code yyyy-MM-dd HH:mm:ss}.</p>
@@ -1119,7 +1119,7 @@ public class DateUtil {
     public static String getChineseWeek(final String time) {
         return getChineseWeek(string2Date(time, getDefaultFormat()));
     }
-
+    
     /**
      * Return the day of week in Chinese.
      *
@@ -1130,7 +1130,7 @@ public class DateUtil {
     public static String getChineseWeek(final String time, @NonNull final DateFormat format) {
         return getChineseWeek(string2Date(time, format));
     }
-
+    
     /**
      * Return the day of week in Chinese.
      *
@@ -1140,7 +1140,7 @@ public class DateUtil {
     public static String getChineseWeek(final Date date) {
         return new SimpleDateFormat("E", Locale.CHINA).format(date);
     }
-
+    
     /**
      * Return the day of week in Chinese.
      *
@@ -1150,7 +1150,7 @@ public class DateUtil {
     public static String getChineseWeek(final long millis) {
         return getChineseWeek(new Date(millis));
     }
-
+    
     /**
      * Return the day of week in US.
      * <p>The pattern is {@code yyyy-MM-dd HH:mm:ss}.</p>
@@ -1161,7 +1161,7 @@ public class DateUtil {
     public static String getUSWeek(final String time) {
         return getUSWeek(string2Date(time, getDefaultFormat()));
     }
-
+    
     /**
      * Return the day of week in US.
      *
@@ -1172,7 +1172,7 @@ public class DateUtil {
     public static String getUSWeek(final String time, @NonNull final DateFormat format) {
         return getUSWeek(string2Date(time, format));
     }
-
+    
     /**
      * Return the day of week in US.
      *
@@ -1182,7 +1182,7 @@ public class DateUtil {
     public static String getUSWeek(final Date date) {
         return new SimpleDateFormat("EEEE", Locale.US).format(date);
     }
-
+    
     /**
      * Return the day of week in US.
      *
@@ -1192,7 +1192,7 @@ public class DateUtil {
     public static String getUSWeek(final long millis) {
         return getUSWeek(new Date(millis));
     }
-
+    
     /**
      * Returns the value of the given calendar field.
      * <p>The pattern is {@code yyyy-MM-dd HH:mm:ss}.</p>
@@ -1211,7 +1211,7 @@ public class DateUtil {
     public static int getValueByCalendarField(final String time, final int field) {
         return getValueByCalendarField(string2Date(time, getDefaultFormat()), field);
     }
-
+    
     /**
      * Returns the value of the given calendar field.
      *
@@ -1232,7 +1232,7 @@ public class DateUtil {
                                               final int field) {
         return getValueByCalendarField(string2Date(time, format), field);
     }
-
+    
     /**
      * Returns the value of the given calendar field.
      *
@@ -1252,7 +1252,7 @@ public class DateUtil {
         cal.setTime(date);
         return cal.get(field);
     }
-
+    
     /**
      * Returns the value of the given calendar field.
      *
@@ -1272,10 +1272,10 @@ public class DateUtil {
         cal.setTimeInMillis(millis);
         return cal.get(field);
     }
-
+    
     private static final String[] CHINESE_ZODIAC =
-            {"猴", "鸡", "狗", "猪", "鼠", "牛", "虎", "兔", "龙", "蛇", "马", "羊"};
-
+        {"猴", "鸡", "狗", "猪", "鼠", "牛", "虎", "兔", "龙", "蛇", "马", "羊"};
+    
     /**
      * Return the Chinese zodiac.
      * <p>The pattern is {@code yyyy-MM-dd HH:mm:ss}.</p>
@@ -1286,7 +1286,7 @@ public class DateUtil {
     public static String getChineseZodiac(final String time) {
         return getChineseZodiac(string2Date(time, getDefaultFormat()));
     }
-
+    
     /**
      * Return the Chinese zodiac.
      *
@@ -1297,7 +1297,7 @@ public class DateUtil {
     public static String getChineseZodiac(final String time, @NonNull final DateFormat format) {
         return getChineseZodiac(string2Date(time, format));
     }
-
+    
     /**
      * Return the Chinese zodiac.
      *
@@ -1309,7 +1309,7 @@ public class DateUtil {
         cal.setTime(date);
         return CHINESE_ZODIAC[cal.get(Calendar.YEAR) % 12];
     }
-
+    
     /**
      * Return the Chinese zodiac.
      *
@@ -1319,7 +1319,7 @@ public class DateUtil {
     public static String getChineseZodiac(final long millis) {
         return getChineseZodiac(millis2Date(millis));
     }
-
+    
     /**
      * Return the Chinese zodiac.
      *
@@ -1329,13 +1329,13 @@ public class DateUtil {
     public static String getChineseZodiac(final int year) {
         return CHINESE_ZODIAC[year % 12];
     }
-
-    private static final int[]    ZODIAC_FLAGS = {20, 19, 21, 21, 21, 22, 23, 23, 23, 24, 23, 22};
-    private static final String[] ZODIAC       = {
-            "水瓶座", "双鱼座", "白羊座", "金牛座", "双子座", "巨蟹座",
-            "狮子座", "处女座", "天秤座", "天蝎座", "射手座", "魔羯座"
+    
+    private static final int[] ZODIAC_FLAGS = {20, 19, 21, 21, 21, 22, 23, 23, 23, 24, 23, 22};
+    private static final String[] ZODIAC = {
+        "水瓶座", "双鱼座", "白羊座", "金牛座", "双子座", "巨蟹座",
+        "狮子座", "处女座", "天秤座", "天蝎座", "射手座", "魔羯座"
     };
-
+    
     /**
      * Return the zodiac.
      * <p>The pattern is {@code yyyy-MM-dd HH:mm:ss}.</p>
@@ -1346,7 +1346,7 @@ public class DateUtil {
     public static String getZodiac(final String time) {
         return getZodiac(string2Date(time, getDefaultFormat()));
     }
-
+    
     /**
      * Return the zodiac.
      *
@@ -1357,7 +1357,7 @@ public class DateUtil {
     public static String getZodiac(final String time, @NonNull final DateFormat format) {
         return getZodiac(string2Date(time, format));
     }
-
+    
     /**
      * Return the zodiac.
      *
@@ -1371,7 +1371,7 @@ public class DateUtil {
         int day = cal.get(Calendar.DAY_OF_MONTH);
         return getZodiac(month, day);
     }
-
+    
     /**
      * Return the zodiac.
      *
@@ -1381,7 +1381,7 @@ public class DateUtil {
     public static String getZodiac(final long millis) {
         return getZodiac(millis2Date(millis));
     }
-
+    
     /**
      * Return the zodiac.
      *
@@ -1391,18 +1391,18 @@ public class DateUtil {
      */
     public static String getZodiac(final int month, final int day) {
         return ZODIAC[day >= ZODIAC_FLAGS[month - 1]
-                ? month - 1
-                : (month + 10) % 12];
+            ? month - 1
+            : (month + 10) % 12];
     }
-
+    
     private static long timeSpan2Millis(final long timeSpan, @Cons.Unit final int unit) {
         return timeSpan * unit;
     }
-
+    
     private static long millis2TimeSpan(final long millis, @Cons.Unit final int unit) {
         return millis / unit;
     }
-
+    
     /**
      *
      * @param millis
@@ -1410,10 +1410,12 @@ public class DateUtil {
      * @return
      */
     public static String millis2FitTimeSpan(long millis, int precision) {
-        if (precision <= 0) return null;
+        if (precision <= 0)
+            return null;
         precision = Math.min(precision, 5);
         String[] units = {"天", "小时", "分钟", "秒", "毫秒"};
-        if (millis == 0) return 0 + units[precision - 1];
+        if (millis == 0)
+            return 0 + units[precision - 1];
         StringBuilder sb = new StringBuilder();
         if (millis < 0) {
             sb.append("-");
@@ -1429,7 +1431,132 @@ public class DateUtil {
         }
         return sb.toString();
     }
-
-
-
+    
+    public static String get_yMd() {
+        return new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+    }
+    
+    public static String get_yMdHms() {
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
+    }
+    
+    public static String get_yMdHm() {
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).format(new Date());
+    }
+    
+    public static String get_MdHs() {
+        return new SimpleDateFormat("MM-dd HH:mm", Locale.getDefault()).format(new Date());
+    }
+    
+    public static int getCurHour() {
+        Calendar calendar = Calendar.getInstance();
+        return calendar.get(Calendar.HOUR_OF_DAY);
+    }
+    
+    public static int getCurMinute() {
+        Calendar calendar = Calendar.getInstance();
+        return calendar.get(Calendar.MINUTE);
+    }
+    
+    public static String get_Hms() {
+        return new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+    }
+    
+    public static int getCurrentYear() {
+        Calendar calendar = Calendar.getInstance();
+        return calendar.get(Calendar.YEAR);
+    }
+    
+    public static int getCurrentMonth() {
+        Calendar calendar = Calendar.getInstance();
+        return calendar.get(Calendar.MONTH) + 1;
+    }
+    
+    public static int getCurrentDay() {
+        Calendar calendar = Calendar.getInstance();
+        return calendar.get(Calendar.DAY_OF_MONTH);
+    }
+    
+    public static int getCurrentWeek() {
+        return getWeekOfDay(getCurrentYear(), getCurrentMonth(), getCurrentDay());
+    }
+    
+    /**
+     * 获取某天是星期几
+     * @param y 年
+     * @param m 月
+     * @param d 日
+     * @return 星期几
+     */
+    public static int getWeekOfDay(int y, int m, int d) {
+        int day = getPassDaysOfYear(y, m, d);
+        int s = (y - 1) + (y - 1) / 4 - (y - 1) / 100 + (y - 1) / 400 + day;
+        return s % 7;
+    }
+    
+    /**
+     * 获取某天距离该年元旦的天数
+     * @param y 年
+     * @param m 月
+     * @param d 日
+     * @return 天数
+     */
+    public static int getPassDaysOfYear(int y, int m, int d) {
+        int passDay = 0;
+        for (int i = 0; i <= m - 1; i++) {
+            passDay += getDaysOfMonth(y, i);
+        }
+        return passDay + d;
+    }
+    
+    
+    /**
+     * 获取某月份的天数
+     * @param y 年
+     * @param m 月
+     * @return 天数
+     */
+    public static int getDaysOfMonth(int y, int m) {
+        int day = 0;
+        switch (m) {
+            case 12:
+                day = 31;
+                break;
+            case 11:
+                day = 30;
+                break;
+            case 10:
+                day = 31;
+                break;
+            case 9:
+                day = 30;
+                break;
+            case 8:
+                day = 31;
+                break;
+            case 7:
+                day = 31;
+                break;
+            case 6:
+                day = 30;
+                break;
+            case 5:
+                day = 31;
+                break;
+            case 4:
+                day = 30;
+                break;
+            case 3:
+                day = 31;
+                break;
+            case 2:
+                day = isLeapYear(y) ? 29 : 28;
+                break;
+            case 1:
+                day = 31;
+                break;
+        }
+        return day;
+    }
+    
 }
