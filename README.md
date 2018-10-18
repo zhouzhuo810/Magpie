@@ -21,7 +21,7 @@ allprojects {
 > For Phone And Pad.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.1.3'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.1.4'
 ```
 
 If you use this. That means you added dependencies below:
@@ -56,7 +56,7 @@ If you use this. That means you added dependencies below:
 > For Android TV.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.1.3'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.1.4'
 ```
 
 If you use this. That means you added dependencies below:
@@ -67,10 +67,10 @@ If you use this. That means you added dependencies below:
     api 'com.android.support:recyclerview-v7:27.1.1'
     //EventBus
     api 'org.greenrobot:eventbus:3.1.1'
+    //RxJava2
+    api "io.reactivex.rxjava2:rxjava:2.2.0"
     //RxAndroid2
     api 'io.reactivex.rxjava2:rxandroid:2.1.0'
-    //Retrofit2
-    api 'com.squareup.retrofit2:retrofit:2.4.0'
     //zz-horizontal-progressbar
     api 'me.zhouzhuo.zzhorizontalprogressbar:zz-horizontal-progressbar:1.0.9'
 ```
@@ -252,6 +252,11 @@ it supports:
 > It's for Byte operating.
 
 ### Update Logs
+
+> 1.1.4 (Published)
+
+- Remove `Retrofit2` in TV framework.
+- Add `Rxjava2` to TV framework.
 
 > 1.1.3 (Published)
 
