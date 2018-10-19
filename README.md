@@ -21,7 +21,7 @@ allprojects {
 > For Phone And Pad.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.1.4'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.1.5'
 ```
 
 If you use this. That means you added dependencies below:
@@ -56,7 +56,7 @@ If you use this. That means you added dependencies below:
 > For Android TV.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.1.4'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.1.5'
 ```
 
 If you use this. That means you added dependencies below:
@@ -253,11 +253,12 @@ it supports:
 
 ### Update Logs
 
-> 1.1.5 (Developing)
+> 1.1.5 (Published)
 
 - Add `cancelDisposable` method in `BaseActivity`.
 - Add `timer` method in `RxHelper`.
 - Add `interval` method in `RxHelper`.
+- Add several methods in `ShineTextView`.
 
 > 1.1.4 (Published)
 

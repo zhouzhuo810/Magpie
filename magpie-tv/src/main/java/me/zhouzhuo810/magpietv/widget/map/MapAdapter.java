@@ -49,8 +49,8 @@ public class MapAdapter extends RecyclerView.Adapter<MapAdapter.MapViewHolder> {
             if (colors.length == 1) {
                 ((ShineTextView) ((MapTextView) holder.itemView).getChildAt(0)).setBackgroundColor(colors[0]);
             } else {
-                ((ShineTextView) ((MapTextView) holder.itemView).getChildAt(0)).setShiningColors(colors);
-                ((ShineTextView) ((MapTextView) holder.itemView).getChildAt(0)).startShining();
+                ((ShineTextView) ((MapTextView) holder.itemView).getChildAt(0)).setShiningBgColors(colors);
+                ((ShineTextView) ((MapTextView) holder.itemView).getChildAt(0)).startShiningBg();
             }
         }
     }

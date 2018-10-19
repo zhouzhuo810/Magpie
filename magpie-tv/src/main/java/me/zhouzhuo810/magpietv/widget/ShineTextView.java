@@ -19,72 +19,126 @@ import me.zhouzhuo810.magpietv.utils.RxHelper;
  */
 public class ShineTextView extends AppCompatTextView {
     public static final boolean DEBUG = true;
-
-    private boolean mAnimating = false;
+    
+    private boolean mAnimatingBg = false;
+    private boolean mAnimatingTextColor = false;
     private int mDuration = 1;
-    private int[] colors;
-    private Disposable subscribe;
-
+    private int[] colorsBg;
+    private int[] colorsText;
+    private Disposable subscribeBg;
+    private Disposable subscribeTextColor;
+    private int originTextColor;
+    
     public ShineTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
-
+    
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
     }
-
+    
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
     }
-
-    public void setShiningColors(int... colors) {
-        this.colors = colors;
+    
+    public void setShiningBgColors(int... colors) {
+        this.colorsBg = colors;
     }
-
+    
+    public void setShiningTextColors(int... colors) {
+        this.colorsText = colors;
+    }
+    
     @SuppressLint("CheckResult")
-    public void startShining() {
-        if (mAnimating)
+    public void startShiningBg() {
+        if (mAnimatingBg)
             return;
-        mAnimating = true;
+        mAnimatingBg = true;
         /*定时器闪烁*/
         if (mDuration == 0) {
             mDuration = 1;
         }
-        subscribe = Observable.interval(0, mDuration, TimeUnit.SECONDS)
-                .compose(RxHelper.<Long>io_main())
-                .subscribe(new Consumer<Long>() {
-                    @Override
-                    public void accept(Long aLong) throws Exception {
-                        int i = (int) (aLong % colors.length);
-                        setBackgroundColor(colors[i]);
-                    }
-                });
+        subscribeBg = Observable.interval(0, mDuration, TimeUnit.SECONDS)
+            .compose(RxHelper.<Long>io_main())
+            .subscribe(new Consumer<Long>() {
+                @Override
+                public void accept(Long aLong) throws Exception {
+                    int i = (int) (aLong % colorsBg.length);
+                    setBackgroundColor(colorsBg[i]);
+                }
+            });
     }
-
-    public void stopShining() {
-        mAnimating = false;
-        if (subscribe != null && !subscribe.isDisposed()) {
-            subscribe.dispose();
+    
+    public void stopShiningBg() {
+        mAnimatingBg = false;
+        if (subscribeBg != null && !subscribeBg.isDisposed()) {
+            subscribeBg.dispose();
         }
         setBackgroundColor(Color.TRANSPARENT);
     }
-
+    
+    public void stopShiningBg(int bgColor) {
+        mAnimatingBg = false;
+        if (subscribeBg != null && !subscribeBg.isDisposed()) {
+            subscribeBg.dispose();
+        }
+        setBackgroundColor(bgColor);
+    }
+    
+    @SuppressLint("CheckResult")
+    public void startShiningTextColor() {
+        if (mAnimatingTextColor)
+            return;
+        originTextColor = getCurrentTextColor();
+        mAnimatingTextColor = true;
+        /*定时器闪烁*/
+        if (mDuration == 0) {
+            mDuration = 1;
+        }
+        subscribeTextColor = Observable.interval(0, mDuration, TimeUnit.SECONDS)
+            .compose(RxHelper.<Long>io_main())
+            .subscribe(new Consumer<Long>() {
+                @Override
+                public void accept(Long aLong) throws Exception {
+                    int i = (int) (aLong % colorsText.length);
+                    setTextColor(colorsText[i]);
+                }
+            });
+    }
+    
+    public void stopShiningTextColor() {
+        mAnimatingTextColor = false;
+        if (subscribeTextColor != null && !subscribeTextColor.isDisposed()) {
+            subscribeTextColor.dispose();
+        }
+        setTextColor(originTextColor);
+    }
+    
+    public void stopShiningTextColor(int textColor) {
+        mAnimatingTextColor = false;
+        if (subscribeTextColor != null && !subscribeTextColor.isDisposed()) {
+            subscribeTextColor.dispose();
+        }
+        setTextColor(textColor);
+    }
+    
     public int getDurationSeconds() {
         return mDuration;
     }
-
+    
     public void setDurationWithSeconds(int duration) {
         if (duration <= 0) {
             duration = 1;
         }
         mDuration = duration;
     }
-
+    
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        stopShining();
+        stopShiningBg();
+        stopShiningTextColor();
     }
 }
