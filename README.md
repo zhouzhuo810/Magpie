@@ -259,6 +259,7 @@ it supports:
 - Add `timer` method in `RxHelper`.
 - Add `interval` method in `RxHelper`.
 - Add several methods in `ShineTextView`.
+- Fix several bugs in TV framework.
 
 > 1.1.4 (Published)
 

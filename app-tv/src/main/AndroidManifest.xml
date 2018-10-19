@@ -61,6 +61,10 @@
             android:name=".MapActivity"
             android:configChanges="touchscreen|smallestScreenSize|screenLayout|screenSize|layoutDirection|keyboard|keyboardHidden"
             android:screenOrientation="landscape" />
+        <activity
+            android:name=".DialogActivity"
+            android:configChanges="touchscreen|smallestScreenSize|screenLayout|screenSize|layoutDirection|keyboard|keyboardHidden"
+            android:screenOrientation="landscape" />
     </application>
 
 </manifest>

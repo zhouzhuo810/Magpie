@@ -29,8 +29,8 @@ public class LoadingDialog extends DialogFragment {
     private String title;
     private String msg;
     private boolean iosStyle; //是否使用菊花加载
-    private View mRootView;
     private boolean isLoading;
+    private View mRootView;
     
     /**
      * 设置对话框关闭监听
@@ -76,7 +76,6 @@ public class LoadingDialog extends DialogFragment {
         return this;
     }
     
-    
     /**
      * 如果想动态改变对话框内容而不关闭对话框，调用此方法
      */
@@ -119,7 +118,7 @@ public class LoadingDialog extends DialogFragment {
         DisplayMetrics dm = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
         if (getDialog().getWindow() != null) {
-            getDialog().getWindow().setLayout(dm.widthPixels * 4 / 5, getDialog().getWindow().getAttributes().height);
+            getDialog().getWindow().setLayout(dm.widthPixels * 2 / 5, getDialog().getWindow().getAttributes().height);
         }
     }
     
@@ -163,6 +162,7 @@ public class LoadingDialog extends DialogFragment {
     public void show(FragmentManager manager, String tag) {
         try {
             super.show(manager, tag);
+            isLoading = true;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -171,7 +171,6 @@ public class LoadingDialog extends DialogFragment {
     public boolean isLoading() {
         return isLoading;
     }
-    
     
     /**
      * 注意,不要用super.dismiss(),bug 同上show()

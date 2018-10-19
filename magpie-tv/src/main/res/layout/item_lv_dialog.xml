@@ -22,7 +22,7 @@
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
-        android:textColor="@color/colorBaseDialogTextColor"
+        android:textColor="@color/dialog_item_text_color_selector"
         android:textSize="@dimen/base_dialog_title_text_size" />
 
 </LinearLayout>

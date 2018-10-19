@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="listDialog"
+                android:text="@string/list_dialog_text"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                android:textSize="40px"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="twoBtnTextDialog"
+                android:text="@string/two_btn_dialog"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                android:textSize="40px"/>
+
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="horizontalProgressDialog"
+                android:text="@string/horizontal_pro_dialog"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                android:textSize="40px"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="loadingDialog"
+                android:text="@string/loading_dialog"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                android:textSize="40px"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="closeAll"
+                android:text="关闭所有界面"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                android:textSize="40px"/>
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

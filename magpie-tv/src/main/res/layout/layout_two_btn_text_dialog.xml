@@ -53,8 +53,9 @@
             android:layout_height="@dimen/base_dialog_item_height"
             android:layout_weight="1"
             android:gravity="center"
+            android:focusable="true"
             android:background="@drawable/dialog_item_bg_selector"
-            android:textColor="@color/colorBaseDialogTitleTextColor"
+            android:textColor="@color/dialog_item_text_color_selector"
             android:textSize="@dimen/base_dialog_title_text_size"
             tools:text="取消" />
 
@@ -69,8 +70,9 @@
             android:layout_height="@dimen/base_dialog_item_height"
             android:layout_weight="1"
             android:gravity="center"
+            android:focusable="true"
             android:background="@drawable/dialog_item_bg_selector"
-            android:textColor="@color/colorBaseDialogTitleTextColor"
+            android:textColor="@color/dialog_item_text_color_selector"
             android:textSize="@dimen/base_dialog_title_text_size"
             tools:text="确定" />
     </LinearLayout>

@@ -8,6 +8,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,14 +22,15 @@ import me.zhouzhuo810.magpietv.utils.ScreenAdapterUtil;
  * 两个按钮普通对话框
  */
 public class TwoBtnTextDialog extends DialogFragment {
-
+    
     private DialogInterface.OnDismissListener dismissListener;
     private OnTwoBtnTextClick onTwoBtnClick;
     private String title;
     private String msg;
     private String leftText;
     private String rightText;
-
+    private int gravity = Gravity.CENTER;
+    
     /**
      * 设置对话框关闭监听
      *
@@ -39,7 +41,7 @@ public class TwoBtnTextDialog extends DialogFragment {
         this.dismissListener = dismissListener;
         return this;
     }
-
+    
     /**
      * 设置按钮点击监听
      *
@@ -50,17 +52,22 @@ public class TwoBtnTextDialog extends DialogFragment {
         this.onTwoBtnClick = onTwoBtnClickListener;
         return this;
     }
-
+    
     public TwoBtnTextDialog setLeftText(String leftBtnText) {
         this.leftText = leftBtnText;
         return this;
     }
-
+    
+    public TwoBtnTextDialog setGravity(int gravity) {
+        this.gravity = gravity;
+        return this;
+    }
+    
     public TwoBtnTextDialog setRightText(String rightBtnText) {
         this.rightText = rightBtnText;
         return this;
     }
-
+    
     /**
      * 设置标题
      *
@@ -71,7 +78,7 @@ public class TwoBtnTextDialog extends DialogFragment {
         this.title = title;
         return this;
     }
-
+    
     /**
      * 设置消息内容
      *
@@ -82,7 +89,7 @@ public class TwoBtnTextDialog extends DialogFragment {
         this.msg = msg;
         return this;
     }
-
+    
     @Override
     public void onStart() {
         super.onStart();
@@ -92,10 +99,10 @@ public class TwoBtnTextDialog extends DialogFragment {
         DisplayMetrics dm = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
         if (getDialog().getWindow() != null) {
-            getDialog().getWindow().setLayout(dm.widthPixels * 4 / 5, getDialog().getWindow().getAttributes().height);
+            getDialog().getWindow().setLayout(dm.widthPixels * 2 / 5, getDialog().getWindow().getAttributes().height);
         }
     }
-
+    
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -129,6 +136,7 @@ public class TwoBtnTextDialog extends DialogFragment {
         }
         TextView tvTitle = rootView.findViewById(R.id.tv_title);
         TextView tvMsg = rootView.findViewById(R.id.tv_msg);
+        tvMsg.setGravity(gravity);
         View line = rootView.findViewById(R.id.line_item);
         tvMsg.setText(msg);
         if (TextUtils.isEmpty(title)) {
@@ -142,8 +150,8 @@ public class TwoBtnTextDialog extends DialogFragment {
         }
         return rootView;
     }
-
-
+    
+    
     @Override
     public void show(FragmentManager manager, String tag) {
         try {
@@ -152,8 +160,8 @@ public class TwoBtnTextDialog extends DialogFragment {
             e.printStackTrace();
         }
     }
-
-
+    
+    
     /**
      * 注意,不要用super.dismiss(),bug 同上show()
      * super.onDismiss就没问题
@@ -163,7 +171,7 @@ public class TwoBtnTextDialog extends DialogFragment {
             super.dismissAllowingStateLoss();
         }
     }
-
+    
     @Override
     public void onDismiss(DialogInterface dialog) {
         super.onDismiss(dialog);
@@ -171,10 +179,10 @@ public class TwoBtnTextDialog extends DialogFragment {
             dismissListener.onDismiss(dialog);
         }
     }
-
+    
     public interface OnTwoBtnTextClick {
         void onLeftClick(TextView v);
-
+        
         void onRightClick(TextView v);
     }
 }
