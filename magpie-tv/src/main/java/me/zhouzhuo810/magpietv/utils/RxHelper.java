@@ -11,25 +11,25 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class RxHelper {
-
+    
     public static <T> ObservableTransformer<T, T> io_main() {
         return new ObservableTransformer<T, T>() {
             @Override
             public Observable<T> apply(Observable<T> tObservable) {
                 return tObservable
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread());
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread());
             }
         };
     }
-
+    
     public static <T> ObservableTransformer<T, T> io_io() {
         return new ObservableTransformer<T, T>() {
             @Override
             public Observable<T> apply(Observable<T> tObservable) {
                 return tObservable
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(Schedulers.io());
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(Schedulers.io());
             }
         };
     }
@@ -79,5 +79,20 @@ public class RxHelper {
             .compose(RxHelper.<Long>io_main())
             .subscribe(consumer);
     }
+    
+    /**
+     * 无限循环定时器
+     *
+     * @param count    时长
+     * @param timeUnit 单位
+     * @param consumer 订阅
+     * @return 用户取消订阅
+     */
+    public static Disposable interval(int count, TimeUnit timeUnit, Consumer<Long> consumer) {
+        return Observable.interval(0, count, timeUnit)
+            .compose(RxHelper.<Long>io_main())
+            .subscribe(consumer);
+    }
+    
     
 }

@@ -257,6 +257,7 @@ it supports:
 
 - Add `cancelDisposable` method in `BaseActivity`.
 - Add `timer` method in `RxHelper`.
+- Add `interval` method in `RxHelper`.
 
 > 1.1.4 (Published)
 
