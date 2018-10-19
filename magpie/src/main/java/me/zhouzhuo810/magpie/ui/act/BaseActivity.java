@@ -25,6 +25,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
+import io.reactivex.disposables.Disposable;
 import me.zhouzhuo810.magpie.R;
 import me.zhouzhuo810.magpie.cons.Cons;
 import me.zhouzhuo810.magpie.event.CloseAllActEvent;
@@ -727,5 +728,12 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         hideListDialog();
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+    }
+    
+    @Override
+    public void cancelDisposable(Disposable disposable) {
+        if (disposable != null && !disposable.isDisposed()) {
+            disposable.dispose();
+        }
     }
 }

@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import io.reactivex.disposables.Disposable;
 import me.zhouzhuo810.magpie.ui.dialog.BottomSheetDialog;
 import me.zhouzhuo810.magpie.ui.dialog.ListDialog;
 import me.zhouzhuo810.magpie.ui.dialog.OneBtnProgressDialog;
@@ -277,4 +278,6 @@ public interface IBaseActivity {
     public <T extends BaseFragment> void hideFragmentByClass(Class<T> clazz);
     
     public void hideFragmentByTag(String tag);
+    
+    public void cancelDisposable(Disposable disposable);
 }

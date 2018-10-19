@@ -253,6 +253,10 @@ it supports:
 
 ### Update Logs
 
+> 1.1.5 (Developing)
+
+- Add `cancelDisposable` method in `BaseActivity`.
+
 > 1.1.4 (Published)
 
 - Remove `Retrofit2` in TV framework.

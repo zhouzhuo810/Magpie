@@ -15,6 +15,7 @@ import android.widget.ImageView;
 
 import java.util.List;
 
+import io.reactivex.disposables.Disposable;
 import me.zhouzhuo810.magpietv.dialog.ListDialog;
 import me.zhouzhuo810.magpietv.dialog.OneBtnProgressDialog;
 import me.zhouzhuo810.magpietv.dialog.TwoBtnTextDialog;
@@ -23,21 +24,19 @@ import me.zhouzhuo810.magpietv.utils.LanguageUtil;
 
 
 public interface IBaseActivity {
-
+    
     /**
      * 是否使用系统默认的finish动画
      *
      * @return 默认false，即使用框架提供的动画
      */
     public boolean useSysFinishAnim();
-
+    
     /**
      * 获取布局的id
-     *
-     * @return
      */
     public int getLayoutId();
-
+    
     /**
      * 是否支持多语言
      *
@@ -59,129 +58,129 @@ public interface IBaseActivity {
      * </ul>
      */
     public boolean shouldSupportMultiLanguage();
-
+    
     /**
      * 屏幕适配需要返回getWindow().getDecorView();
      *
      * @return {@link Activity#getWindow()#getDecorView()}
      */
     public View getDecorView();
-
+    
     public void initView(@Nullable Bundle savedInstanceState);
-
+    
     public void initData();
-
+    
     public void initEvent();
-
+    
     /**
      * 判断是否调用initView、initData、initEvent方法。
      *
      * @return 是否
      */
     public boolean shouldNotInvokeInitMethods(Bundle savedInstanceState);
-
+    
     public void startAct(Class<? extends Activity> clazz);
-
+    
     public void startActShared(Class<? extends Activity> clazz, final View... sharedElements);
-
+    
     public void startActWithIntent(Intent intent);
-
+    
     public void startActWithIntent(Intent intent, boolean defaultAnim);
-
+    
     public void startActWithIntentShared(Intent intent, final View... sharedElements);
-
+    
     public void startActWithIntentForResult(Intent intent, int requestCode);
-
+    
     public void startActWithIntentForResult(Intent intent, int requestCode, boolean defaultAnim);
-
+    
     public void restart();
-
+    
     public void closeAct();
-
+    
     public void closeActWithOutAnim();
-
+    
     public void closeAct(boolean defaultBack);
-
+    
     public void closeAllAct();
-
+    
     public void closeAllAct(boolean defaultAnimation);
-
+    
     public void overridePendingTransition(int enterAnim, int exitAnim);
-
+    
     /**
      * 启动Activity进入动画
      *
      * @return resId
      */
     int openInAnimation();
-
+    
     /**
      * 启动Activity退出动画
      *
      * @return resId
      */
     int openOutAnimation();
-
+    
     /**
      * 关闭Activity进入动画
      *
      * @return resId
      */
     int closeInAnimation();
-
+    
     /**
      * 关闭Activity退出动画
      *
      * @return resId
      */
     int closeOutAnimation();
-
+    
     public void showLoadingDialog(String msg);
-
+    
     public void showLoadingDialog(String title, String msg);
-
+    
     public void showLoadingDialog(String title, String msg, boolean cancelable);
-
+    
     public void showLoadingDialog(String title, String msg, boolean cancelable, boolean iosStyle);
-
+    
     public void showLoadingDialog(String title, String msg, boolean cancelable, DialogInterface.OnDismissListener listener);
-
+    
     public void showLoadingDialog(String title, String msg, boolean cancelable, boolean iosStyle, DialogInterface.OnDismissListener onDismissListener);
-
+    
     public void hideLoadingDialog();
-
+    
     public void showOneBtnProgressDialog(String title, String msg, OneBtnProgressDialog.OnProgressListener onProgressListener);
-
+    
     public void showOneBtnProgressDialog(String title, String msg, DialogInterface.OnDismissListener onDismissListener, OneBtnProgressDialog.OnProgressListener onProgressListener);
-
+    
     public void showOneBtnProgressDialog(String title, String msg, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, OneBtnProgressDialog.OnProgressListener onProgressListener);
-
+    
     public void showOneBtnProgressDialog(String title, String msg, String btnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, OneBtnProgressDialog.OnProgressListener onProgressListener);
-
+    
     public void hideOneBtnProgressDialog();
-
+    
     public void showTwoBtnTextDialog(String title, String msg, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick);
-
+    
     public void showTwoBtnTextDialog(String title, String msg, boolean cancelable, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick);
-
+    
     public void showTwoBtnTextDialog(String title, String msg, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick);
-
+    
     public void showTwoBtnTextDialog(String title, String msg, String leftBtnString, String rightBtnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick);
-
+    
     public void hideTwoBtnTextDialog();
-
+    
     public void showListDialog(String[] items, boolean cancelable, ListDialog.OnItemClick onItemClick);
-
+    
     public void showListDialog(String title, String[] items, boolean cancelable, ListDialog.OnItemClick onItemClick);
-
+    
     public void showListDialog(String title, String[] items, boolean alignLeft, boolean cancelable, ListDialog.OnItemClick onItemClick);
-
+    
     public void showListDialog(String title, List<String> items, boolean alignLeft, boolean cancelable, ListDialog.OnItemClick onItemClick);
-
+    
     public void showListDialog(String title, List<String> items, boolean cancelable, ListDialog.OnItemClick onItemClick);
-
+    
     public void showListDialog(String title, List<String> items, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, ListDialog.OnItemClick onItemClick);
-
+    
     /**
      * 显示列表对话框
      *
@@ -193,15 +192,15 @@ public interface IBaseActivity {
      * @param onItemClick       对话框点击回调
      */
     public void showListDialog(String title, List<String> items, boolean alignLeft, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, ListDialog.OnItemClick onItemClick);
-
+    
     public void hideListDialog();
-
+    
     public void refreshData(String... params);
-
+    
     public void loadMoreData(String... params);
-
+    
     public TextWatcher setEditImageListener(EditText et, ImageView iv);
-
+    
     public interface OnOneBtnClick {
         void onClick();
     }
@@ -245,4 +244,6 @@ public interface IBaseActivity {
     public <T extends BaseFragment> void hideFragmentByClass(Class<T> clazz);
     
     public void hideFragmentByTag(String tag);
+    
+    public void cancelDisposable(Disposable disposable);
 }
