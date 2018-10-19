@@ -256,6 +256,7 @@ it supports:
 > 1.1.5 (Developing)
 
 - Add `cancelDisposable` method in `BaseActivity`.
+- Add `timer` method in `RxHelper`.
 
 > 1.1.4 (Published)
 

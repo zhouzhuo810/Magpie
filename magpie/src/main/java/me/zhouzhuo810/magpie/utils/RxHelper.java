@@ -66,5 +66,18 @@ public class RxHelper {
         return longObservable.subscribe(onNext);
     }
     
+    /**
+     * 定时器
+     * @param count 时长
+     * @param timeUnit 单位
+     * @param consumer 订阅
+     * @return 用户取消订阅
+     */
+    public static Disposable timer(int count, TimeUnit timeUnit, Consumer<Long> consumer) {
+        return Observable.timer(count, timeUnit)
+            .compose(RxHelper.<Long>io_main())
+            .subscribe(consumer);
+    }
+    
     
 }

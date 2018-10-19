@@ -41,8 +41,8 @@ public class RxHelper {
      * @param onNext 监听
      * @return 用于取消订阅
      */
-    public static Disposable countDown(int count, Consumer<Long> onNext) {
-        return countDown(count, null, null, onNext);
+    public static Disposable countDown(int count, Consumer<Long> onNext, Action onComplete) {
+        return countDown(count, null, onComplete, onNext);
     }
     
     /**
@@ -58,14 +58,26 @@ public class RxHelper {
         Observable<Long> longObservable = Observable.intervalRange(0, count, 0, 1, TimeUnit.SECONDS)
             .compose(RxHelper.<Long>io_main());
         if (onStart != null) {
-            longObservable.doOnSubscribe(onStart);
+            longObservable = longObservable.doOnSubscribe(onStart);
         }
         if (onComplete != null) {
-            longObservable.doOnComplete(onComplete);
+            longObservable = longObservable.doOnComplete(onComplete);
         }
         return longObservable.subscribe(onNext);
     }
     
-    
+    /**
+     * 定时器
+     *
+     * @param count    时长
+     * @param timeUnit 单位
+     * @param consumer 订阅
+     * @return 用户取消订阅
+     */
+    public static Disposable timer(int count, TimeUnit timeUnit, Consumer<Long> consumer) {
+        return Observable.timer(count, timeUnit)
+            .compose(RxHelper.<Long>io_main())
+            .subscribe(consumer);
+    }
     
 }
