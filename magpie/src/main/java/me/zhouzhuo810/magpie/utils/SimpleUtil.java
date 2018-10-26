@@ -6,6 +6,9 @@ import android.support.annotation.ColorRes;
 import android.support.annotation.StringRes;
 import android.view.View;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+
 /**
  * 常用方法简化
  */
@@ -78,5 +81,25 @@ public class SimpleUtil {
      */
     public static String getFileContentFromAssets(String path) {
         return AssetsUtil.getFileToStringFromAssets(path);
+    }
+    
+    /**
+     * 格式化浮点数为字符串
+     *
+     * @param f 浮点数
+     * @param n 保留小数位
+     * @return 字符串
+     */
+    public static String formatFloatWithDecimal(float f, int n) {
+        StringBuilder pattern = new StringBuilder();
+        pattern.append("#0.");
+        if (n <= 1) {
+            pattern.append("0");
+        } else {
+            for (int i = 0; i < n; i++) {
+                pattern.append("0");
+            }
+        }
+        return new DecimalFormat(pattern.toString()).format(f);
     }
 }

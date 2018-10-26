@@ -68,13 +68,13 @@ public class RxHelper {
     
     /**
      * 定时器
-     * @param count 时长
+     * @param period 时长
      * @param timeUnit 单位
      * @param consumer 订阅
      * @return 用户取消订阅
      */
-    public static Disposable timer(int count, TimeUnit timeUnit, Consumer<Long> consumer) {
-        return Observable.timer(count, timeUnit)
+    public static Disposable timer(int period, TimeUnit timeUnit, Consumer<Long> consumer) {
+        return Observable.timer(period, timeUnit)
             .compose(RxHelper.<Long>io_main())
             .subscribe(consumer);
     }
@@ -82,13 +82,13 @@ public class RxHelper {
     /**
      * 无限循环定时器
      *
-     * @param count    时长
+     * @param period    时长
      * @param timeUnit 单位
      * @param consumer 订阅
      * @return 用户取消订阅
      */
-    public static Disposable interval(int count, TimeUnit timeUnit, Consumer<Long> consumer) {
-        return Observable.interval(0, count, timeUnit)
+    public static Disposable interval(int period, TimeUnit timeUnit, Consumer<Long> consumer) {
+        return Observable.interval(0, period, timeUnit)
             .compose(RxHelper.<Long>io_main())
             .subscribe(consumer);
     }

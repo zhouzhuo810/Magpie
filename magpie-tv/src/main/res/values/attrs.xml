@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="ScrollGridRecyclerView">
-        <attr name="sgr_spanCount" format="integer" />
-        <attr name="sgr_scrollSpeed" format="integer" />
-        <attr name="sgr_topBottomDelay" format="integer" />
+        <attr name="sgr_scrollEnable" format="boolean"/>
+        <attr name="sgr_spanCount" format="integer"/>
+        <attr name="sgr_scrollSpeed" format="integer"/>
+        <attr name="sgr_topBottomDelay" format="integer"/>
     </declare-styleable>
     <declare-styleable name="ScrollListRecyclerView">
-        <attr name="slr_scrollSpeed" format="integer" />
-        <attr name="slr_topBottomDelay" format="integer" />
+        <attr name="slr_scrollEnable" format="boolean"/>
+        <attr name="slr_scrollSpeed" format="integer"/>
+        <attr name="slr_topBottomDelay" format="integer"/>
     </declare-styleable>
 </resources>

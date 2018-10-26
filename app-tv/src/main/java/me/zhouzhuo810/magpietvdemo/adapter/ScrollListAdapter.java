@@ -24,6 +24,7 @@ public class ScrollListAdapter extends RvBaseAdapter<TestListEntity> {
         holder.setText(R.id.tv_name, item.getName())
                 .setText(R.id.tv_sex, item.getSex())
                 .setText(R.id.tv_email, item.getEmail())
-                .setText(R.id.tv_phone, item.getPhone());
+                .setText(R.id.tv_phone, item.getPhone())
+                .setBackgroundColor(R.id.tv_phone, item.getBgColor());
     }
 }

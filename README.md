@@ -251,7 +251,13 @@ it supports:
 - ByteUtil
 > It's for Byte operating.
 
+- RandomUtil
+> It's for generate a random number.
+
 ### Update Logs
+
+> 1.1.6 (Developing)
+- Add `RandomUtil`.
 
 > 1.1.5 (Published)
 

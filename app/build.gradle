@@ -23,6 +23,7 @@ dependencies {
 //    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     implementation 'com.yanzhenjie:permission:2.0.0-rc12'
     implementation project(':magpie')
-
+    //bugly
+    implementation 'com.tencent.bugly:crashreport:2.6.6'
 
 }

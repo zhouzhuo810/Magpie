@@ -6,6 +6,8 @@ import android.content.pm.PackageManager;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 
+import com.tencent.bugly.crashreport.CrashReport;
+
 import java.io.File;
 
 import me.zhouzhuo810.magpietv.utils.BaseUtil;
@@ -19,7 +21,13 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         BaseUtil.init(this);
-
+    
+        try {
+            CrashReport.initCrashReport(this, "98d7438e50", false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
 //        initCrash();
     }
 

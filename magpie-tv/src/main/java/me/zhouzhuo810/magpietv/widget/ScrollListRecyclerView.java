@@ -22,7 +22,7 @@ import me.zhouzhuo810.magpietv.widget.scroll.ScrollLinearLayoutManager;
  * 滚动列表
  */
 public class ScrollListRecyclerView<T> extends RecyclerView {
-
+    
     protected boolean mIsScrolling;
     protected boolean mScrollEnable;
     private ScrollLinearLayoutManager mScrollLinearLayoutManager;
@@ -30,22 +30,22 @@ public class ScrollListRecyclerView<T> extends RecyclerView {
     private List<T> mData;
     private boolean mIsTouched;
     private int mTopBottomDelay = 3000;
-
+    
     public ScrollListRecyclerView(Context context) {
         super(context);
         init(context, null);
     }
-
+    
     public ScrollListRecyclerView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init(context, attrs);
     }
-
+    
     public ScrollListRecyclerView(Context context, @Nullable AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init(context, attrs);
     }
-
+    
     /**
      * 设置能否滚动
      *
@@ -54,7 +54,7 @@ public class ScrollListRecyclerView<T> extends RecyclerView {
     public void setScrollEnable(boolean enable) {
         this.mScrollEnable = enable;
     }
-
+    
     /**
      * 设置滚动速度
      *
@@ -68,7 +68,7 @@ public class ScrollListRecyclerView<T> extends RecyclerView {
             mScrollLinearLayoutManager.setMillsPerPixel(millsPerPx);
         }
     }
-
+    
     /**
      * 设置滚动到顶部和底部停留时间
      *
@@ -77,12 +77,12 @@ public class ScrollListRecyclerView<T> extends RecyclerView {
     public void setTopBottomDelay(int topBottomDelay) {
         this.mTopBottomDelay = topBottomDelay;
     }
-
+    
     private void init(Context context, AttributeSet attrs) {
-        mScrollEnable = true;
         setLayoutManager(getScrollLayoutManager(context));
         if (attrs != null) {
             TypedArray t = context.obtainStyledAttributes(attrs, R.styleable.ScrollListRecyclerView);
+            mScrollEnable = t.getBoolean(R.styleable.ScrollListRecyclerView_slr_scrollEnable, true);
             mTopBottomDelay = t.getInteger(R.styleable.ScrollListRecyclerView_slr_topBottomDelay, 3000);
             if (mTopBottomDelay < 0) {
                 throw new RuntimeException("The 'slr_topBottomDelay' value must >= 0");
@@ -90,18 +90,21 @@ public class ScrollListRecyclerView<T> extends RecyclerView {
             int mScrollSpeed = t.getInteger(R.styleable.ScrollListRecyclerView_slr_scrollSpeed, 20);
             setScrollSpeed(mScrollSpeed);
             t.recycle();
+        } else {
+            mScrollEnable = true;
+            setScrollSpeed(20);
         }
         addOnScrollListener(new OnVerticalScrollListener() {
             @Override
             protected void onScrolledToTop() {
                 scrollTop();
             }
-
+            
             @Override
             protected void onScrolledToBottom() {
                 scrollBottom();
             }
-
+            
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
@@ -112,7 +115,7 @@ public class ScrollListRecyclerView<T> extends RecyclerView {
             }
         });
     }
-
+    
     /**
      * 刷新数据
      *
@@ -124,14 +127,14 @@ public class ScrollListRecyclerView<T> extends RecyclerView {
         }
         setNewData(mData, true);
     }
-
+    
     public void setNewData(List<T> mData, boolean forceUpdate) {
         if (mAdapter == null) {
             throw new RuntimeException("you must invoke ScrollListRecyclerView#setAdapter() method first.");
         }
         setNewData(mData, forceUpdate, false);
     }
-
+    
     private void setNewData(List<T> mData, boolean forceUpdate, boolean delay) {
         this.mData = mData;
         if (forceUpdate) {
@@ -152,7 +155,7 @@ public class ScrollListRecyclerView<T> extends RecyclerView {
             }
         }
     }
-
+    
     @Override
     public void setAdapter(Adapter adapter) {
         super.setAdapter(adapter);
@@ -162,14 +165,14 @@ public class ScrollListRecyclerView<T> extends RecyclerView {
             throw new RuntimeException("your adapter must extends RvBaseAdapter.");
         }
     }
-
+    
     public ScrollLinearLayoutManager getScrollLayoutManager(Context context) {
         if (mScrollLinearLayoutManager == null) {
             mScrollLinearLayoutManager = new ScrollLinearLayoutManager(context);
         }
         return mScrollLinearLayoutManager;
     }
-
+    
     public void scrollTop() {
         if (mScrollEnable && !mIsTouched) {
             try {
@@ -179,7 +182,7 @@ public class ScrollListRecyclerView<T> extends RecyclerView {
             }
         }
     }
-
+    
     public void scrollBottom() {
         if (mScrollEnable && !mIsTouched) {
             setNewData(mData, false);
@@ -195,9 +198,10 @@ public class ScrollListRecyclerView<T> extends RecyclerView {
             }, mTopBottomDelay);
         }
     }
-
+    
     @Override
     public void stopScroll() {
+        super.stopScroll();
         if (mAdapter != null) {
             post(new Runnable() {
                 @Override
@@ -208,9 +212,8 @@ public class ScrollListRecyclerView<T> extends RecyclerView {
                 }
             });
         }
-        super.stopScroll();
     }
-
+    
     public void startScrollDelay(int mills) {
         if (mScrollEnable) {
             if (!mIsScrolling) {//滚动刷新
@@ -231,7 +234,7 @@ public class ScrollListRecyclerView<T> extends RecyclerView {
             }
         }
     }
-
+    
     public void startScrollImmediately() {
         if (mScrollEnable) {
             try {
@@ -248,7 +251,7 @@ public class ScrollListRecyclerView<T> extends RecyclerView {
             }
         }
     }
-
+    
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent e) {
@@ -265,20 +268,20 @@ public class ScrollListRecyclerView<T> extends RecyclerView {
         }
         return super.onTouchEvent(e);
     }
-
+    
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         stopScroll();
     }
-
+    
     @Override
     public void onRestoreInstanceState(Parcelable state) {
         SavedState savedState = (SavedState) state;
         super.onRestoreInstanceState(savedState.getSuperState());
         mTopBottomDelay = savedState.delay;
     }
-
+    
     @Override
     public Parcelable onSaveInstanceState() {
         Parcelable superState = super.onSaveInstanceState();
@@ -286,32 +289,32 @@ public class ScrollListRecyclerView<T> extends RecyclerView {
         savedState.delay = mTopBottomDelay;
         return savedState;
     }
-
-
+    
+    
     static class SavedState extends View.BaseSavedState {
         int delay;
-
+        
         public SavedState(Parcelable superState) {
             super(superState);
         }
-
+        
         private SavedState(Parcel in) {
             super(in);
             delay = in.readInt();
         }
-
+        
         @Override
         public void writeToParcel(Parcel dest, int flags) {
             super.writeToParcel(dest, flags);
             dest.writeInt(delay);
         }
-
+        
         public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() {
             @Override
             public SavedState createFromParcel(Parcel in) {
                 return new SavedState(in);
             }
-
+            
             @Override
             public SavedState[] newArray(int size) {
                 return new SavedState[size];

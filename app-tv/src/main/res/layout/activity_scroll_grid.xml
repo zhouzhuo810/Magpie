@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
     <me.zhouzhuo810.magpietv.widget.ScrollGridRecyclerView
         android:id="@+id/rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:sgr_scrollSpeed="60"
+        app:sgr_scrollEnable="true"
+        app:sgr_scrollSpeed="4"
         app:sgr_spanCount="2"
-        app:sgr_topBottomDelay="500" />
+        app:sgr_topBottomDelay="500"/>
 </LinearLayout>
