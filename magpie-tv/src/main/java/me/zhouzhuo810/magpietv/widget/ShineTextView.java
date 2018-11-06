@@ -31,11 +31,18 @@ public class ShineTextView extends AppCompatTextView {
     
     public ShineTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        originTextColor = getCurrentTextColor();
     }
     
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
+    }
+    
+    @Override
+    public void setTextColor(int color) {
+        super.setTextColor(color);
+        originTextColor = color;
     }
     
     @Override

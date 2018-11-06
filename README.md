@@ -21,7 +21,7 @@ allprojects {
 > For Phone And Pad.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.1.5'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.1.6'
 ```
 
 If you use this. That means you added dependencies below:
@@ -56,7 +56,7 @@ If you use this. That means you added dependencies below:
 > For Android TV.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.1.5'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.1.6'
 ```
 
 If you use this. That means you added dependencies below:
@@ -256,8 +256,9 @@ it supports:
 
 ### Update Logs
 
-> 1.1.6 (Developing)
+> 1.1.6 (Published)
 - Add `RandomUtil`.
+- Fix several bugs of `ShineTextView`.
 
 > 1.1.5 (Published)
 
