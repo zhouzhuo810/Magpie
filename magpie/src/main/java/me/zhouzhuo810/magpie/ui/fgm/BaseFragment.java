@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
+import io.reactivex.disposables.Disposable;
 import me.zhouzhuo810.magpie.R;
 import me.zhouzhuo810.magpie.ui.act.IBaseActivity;
 import me.zhouzhuo810.magpie.ui.dialog.BottomSheetDialog;
@@ -545,5 +546,13 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
     
     public void clearCallLazyLoadCount() {
         mCallLazyLoadCount = 0;
+    }
+    
+    
+    @Override
+    public void cancelDisposable(Disposable disposable) {
+        if (disposable != null && !disposable.isDisposed()) {
+            disposable.dispose();
+        }
     }
 }

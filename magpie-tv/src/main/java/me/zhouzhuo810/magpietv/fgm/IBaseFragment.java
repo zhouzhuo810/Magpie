@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import io.reactivex.disposables.Disposable;
 import me.zhouzhuo810.magpietv.act.IBaseActivity;
 import me.zhouzhuo810.magpietv.dialog.ListDialog;
 import me.zhouzhuo810.magpietv.dialog.OneBtnProgressDialog;
@@ -185,4 +186,6 @@ public interface IBaseFragment {
      * @return resId
      */
     int closeOutAnimation();
+    
+    public void cancelDisposable(Disposable disposable);
 }

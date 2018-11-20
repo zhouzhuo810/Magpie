@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import io.reactivex.disposables.Disposable;
 import me.zhouzhuo810.magpie.ui.act.IBaseActivity;
 import me.zhouzhuo810.magpie.ui.dialog.BottomSheetDialog;
 import me.zhouzhuo810.magpie.ui.dialog.ListDialog;
@@ -190,4 +191,6 @@ public interface IBaseFragment {
     int closeOutAnimation();
     
     public Fragment findFragmentByTag(String tag);
+    
+    public void cancelDisposable(Disposable disposable);
 }

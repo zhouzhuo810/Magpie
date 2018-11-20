@@ -256,6 +256,10 @@ it supports:
 
 ### Update Logs
 
+> 1.1.7 (Developing)
+
+- Add `cancelDisposable` method in `BaseFragment`.
+
 > 1.1.6 (Published)
 - Add `RandomUtil`.
 - Fix several bugs of `ShineTextView`.
