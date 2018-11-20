@@ -94,5 +94,20 @@ public class RxHelper {
             .subscribe(consumer);
     }
     
+    /**
+     * 无限循环定时器
+     *
+     * @param initialDelay 首次执行延时时长
+     * @param period       时长
+     * @param timeUnit     单位
+     * @param consumer     订阅
+     * @return 用户取消订阅
+     */
+    public static Disposable interval(int initialDelay, int period, TimeUnit timeUnit, Consumer<Long> consumer) {
+        return Observable.interval(initialDelay, period, timeUnit)
+            .compose(RxHelper.<Long>io_main())
+            .subscribe(consumer);
+    }
+    
     
 }
