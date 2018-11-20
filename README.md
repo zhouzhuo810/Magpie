@@ -38,7 +38,7 @@ If you use this. That means you added dependencies below:
     api 'com.github.bumptech.glide:glide:4.8.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
     //RxJava2
-    api "io.reactivex.rxjava2:rxjava:2.2.0"
+    api "io.reactivex.rxjava2:rxjava:2.2.2"
     //RxAndroid2
     api 'io.reactivex.rxjava2:rxandroid:2.1.0'
     //Retrofit2
@@ -68,7 +68,7 @@ If you use this. That means you added dependencies below:
     //EventBus
     api 'org.greenrobot:eventbus:3.1.1'
     //RxJava2
-    api "io.reactivex.rxjava2:rxjava:2.2.0"
+    api "io.reactivex.rxjava2:rxjava:2.2.2"
     //RxAndroid2
     api 'io.reactivex.rxjava2:rxandroid:2.1.0'
     //zz-horizontal-progressbar
