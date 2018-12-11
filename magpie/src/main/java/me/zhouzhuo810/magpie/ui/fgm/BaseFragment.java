@@ -36,7 +36,7 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
     protected View rootView;
     protected boolean isVisible;
     protected long mCallLazyLoadCount;
-    protected boolean mLazeLoaded = true;
+    protected boolean mNeedLazeLoaded = true;
     
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -197,7 +197,7 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
         }
         getBaseAct().closeAllAct();
     }
-
+    
     /**
      * 跳转到目标Activity
      *
@@ -207,12 +207,12 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
     public void startAct(Class<? extends Activity> clazz) {
         startActWithIntent(new Intent(getContext(), clazz));
     }
-
+    
     @Override
     public void startActForResult(Class<? extends Activity> clazz, int requestCode) {
         startActWithIntentForResult(new Intent(getContext(), clazz), requestCode);
     }
-
+    
     @Override
     public void startActWithIntent(Intent intent) {
         startActWithIntent(intent, false);
@@ -531,13 +531,16 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
      * @return {@code true} 需要懒加载，则方法{@link #lazyLoadData()}将被调用
      * {@code false} 不需要懒加载
      */
-    @Override
-    public boolean needLazyLoadData() {
-        final boolean needLoad = mLazeLoaded;
-        if (mLazeLoaded) {
-            mLazeLoaded = false;
+    private boolean needLazyLoadData() {
+        final boolean needLoad = mNeedLazeLoaded;
+        if (mNeedLazeLoaded) {
+            mNeedLazeLoaded = false;
         }
         return needLoad;
+    }
+    
+    public boolean isNeedLazyLoad() {
+        return mNeedLazeLoaded;
     }
     
     public long getCallLazyLoadCount() {
@@ -547,7 +550,6 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
     public void clearCallLazyLoadCount() {
         mCallLazyLoadCount = 0;
     }
-    
     
     @Override
     public void cancelDisposable(Disposable disposable) {

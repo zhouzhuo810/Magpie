@@ -1,4 +1,4 @@
-package me.zhouzhuo810.magpie.ui.widget;
+package me.zhouzhuo810.magpietv.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -19,11 +19,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import me.zhouzhuo810.magpie.R;
-import me.zhouzhuo810.magpie.ui.widget.en.IndicatorType;
-import me.zhouzhuo810.magpie.ui.widget.intef.IPagerIndicator;
-import me.zhouzhuo810.magpie.ui.widget.intef.IResProvider;
-import me.zhouzhuo810.magpie.utils.ScreenAdapterUtil;
+import me.zhouzhuo810.magpietv.R;
+import me.zhouzhuo810.magpietv.utils.ScreenAdapterUtil;
+import me.zhouzhuo810.magpietv.widget.en.IndicatorType;
+import me.zhouzhuo810.magpietv.widget.intef.IPagerIndicator;
+import me.zhouzhuo810.magpietv.widget.intef.IResProvider;
 
 
 /**
@@ -346,6 +346,7 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
                 break;
         }
     }
+    
     
     private void setUpIconsAndText() {
         mIndicatorContainer.removeAllViews();

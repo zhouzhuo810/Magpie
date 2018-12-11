@@ -29,7 +29,7 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
     protected View rootView;
     protected boolean isVisible;
     protected long mCallLazyLoadCount;
-    protected boolean mLazeLoaded = true;
+    protected boolean mNeedLazeLoaded = true;
     
     @Nullable
     @Override
@@ -354,6 +354,11 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
     }
     
     @Override
+    public boolean isNeedLazyLoad() {
+        return mNeedLazeLoaded;
+    }
+    
+    @Override
     public void refreshData(String... params) {
 
     }
@@ -402,11 +407,10 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
      * @return {@code true} 需要懒加载，则方法{@link #lazyLoadData()}将被调用
      *         {@code false} 不需要懒加载
      */
-    @Override
-    public boolean needLazyLoadData() {
-        final boolean needLoad = mLazeLoaded;
-        if (mLazeLoaded) {
-            mLazeLoaded = false;
+    private boolean needLazyLoadData() {
+        final boolean needLoad = mNeedLazeLoaded;
+        if (mNeedLazeLoaded) {
+            mNeedLazeLoaded = false;
         }
         return needLoad;
     }

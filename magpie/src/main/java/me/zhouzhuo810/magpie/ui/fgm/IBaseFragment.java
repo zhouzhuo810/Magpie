@@ -11,8 +11,6 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import java.util.List;
 
@@ -42,18 +40,21 @@ public interface IBaseFragment {
      */
     public void lazyLoadData();
     
-    public boolean needLazyLoadData();
+    /**
+     * 是否需要调用{@link #lazyLoadData()}
+     */
+    public boolean isNeedLazyLoad();
     
     public void initEvent();
     
     public boolean shouldNotInvokeInitMethods(Bundle savedInstanceState);
     
     public IBaseActivity getBaseAct();
-
+    
     public void startAct(Class<? extends Activity> clazz);
-
+    
     public void startActForResult(Class<? extends Activity> clazz, int requestCode);
-
+    
     public void startActWithIntent(Intent intent);
     
     public void startActWithIntent(Intent intent, boolean defaultAnim);

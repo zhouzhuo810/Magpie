@@ -39,6 +39,18 @@
                 android:layout_height="wrap_content"
                 android:text="对话框"/>
 
+            <Button
+                android:id="@+id/tv_indicator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="指示器"/>
+
+            <Button
+                android:id="@+id/tv_tab"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tab"/>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

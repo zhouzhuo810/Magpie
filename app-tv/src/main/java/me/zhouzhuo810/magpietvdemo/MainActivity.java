@@ -13,6 +13,8 @@ public class MainActivity extends BaseActivity {
     private Button tvScrollList;
     private Button tvScrollGrid;
     private View tvDialog;
+    private View tvIndicator;
+    private View tvTab;
     
     @Override
     public boolean shouldSupportMultiLanguage() {
@@ -30,6 +32,8 @@ public class MainActivity extends BaseActivity {
         tvScrollList = findViewById(R.id.tv_scroll_list);
         tvScrollGrid = findViewById(R.id.tv_scroll_grid);
         tvDialog = findViewById(R.id.tv_dialog);
+        tvIndicator = findViewById(R.id.tv_indicator);
+        tvTab = findViewById(R.id.tv_tab);
     }
     
     @Override
@@ -64,6 +68,20 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 startAct(DialogActivity.class);
+            }
+        });
+        
+        tvIndicator.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startAct(PagerActivity.class);
+            }
+        });
+        
+        tvTab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startAct(TabActivity.class);
             }
         });
     }

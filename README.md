@@ -21,7 +21,7 @@ allprojects {
 > For Phone And Pad.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.1.6'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.1.7'
 ```
 
 If you use this. That means you added dependencies below:
@@ -51,12 +51,15 @@ If you use this. That means you added dependencies below:
     api 'com.squareup.okhttp3:logging-interceptor:3.11.0'
     //OkHttp进度监听progressmanager
     api 'me.jessyan:progressmanager:1.5.0'
+    //AndPermission
+    api 'com.yanzhenjie:permission:2.0.0-rc12'
+
 ```
 
 > For Android TV.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.1.6'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.1.7'
 ```
 
 If you use this. That means you added dependencies below:
@@ -72,7 +75,10 @@ If you use this. That means you added dependencies below:
     //RxAndroid2
     api 'io.reactivex.rxjava2:rxandroid:2.1.0'
     //zz-horizontal-progressbar
-    api 'me.zhouzhuo.zzhorizontalprogressbar:zz-horizontal-progressbar:1.0.9'
+    api 'me.zhouzhuo.zzhorizontalprogressbar:zz-horizontal-progressbar:1.1.0'
+    //AndPermission
+    api 'com.yanzhenjie:permission:2.0.0-rc12'
+
 ```
 
 #### Screen Adapter

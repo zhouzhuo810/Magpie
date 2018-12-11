@@ -18,18 +18,16 @@ import me.zhouzhuo810.magpietv.dialog.OneBtnProgressDialog;
 import me.zhouzhuo810.magpietv.dialog.TwoBtnTextDialog;
 
 public interface IBaseFragment {
-
+    
     /**
      * 获取布局的id
-     *
-     * @return
      */
     public int getLayoutId();
-
+    
     public View findViewById(int id);
-
+    
     public void initView(@Nullable Bundle savedInstanceState);
-
+    
     public void initData();
     
     /**
@@ -37,85 +35,88 @@ public interface IBaseFragment {
      */
     public void lazyLoadData();
     
-    public boolean needLazyLoadData();
-    
     public void initEvent();
-
+    
+    /**
+     * 是否需要调用{@link #lazyLoadData()}
+     */
+    public boolean isNeedLazyLoad();
+    
     /**
      * 判断是否调用initView、initData、initEvent方法。
      *
      * @return 是否
      */
     public boolean shouldNotInvokeInitMethods(Bundle savedInstanceState);
-
+    
     public IBaseActivity getBaseAct();
-
+    
     public void startAct(Class<? extends Activity> clazz);
-
+    
     public void startActForResult(Class<? extends Activity> clazz, int requestCode);
-
+    
     public void startActWithIntent(Intent intent);
-
+    
     public void startActWithIntent(Intent intent, boolean defaultAnim);
-
+    
     public void startActWithIntentForResult(Intent intent, int requestCode);
-
+    
     public void startActWithIntentForResult(Intent intent, int requestCode, boolean defaultAnim);
-
+    
     public void closeAct();
-
+    
     public void closeAct(boolean defaultAnimation);
-
+    
     public void closeAllAct();
-
+    
     public void overridePendingTransition(int enterAnim, int exitAnim);
-
+    
     public void showLoadingDialog(String msg);
-
+    
     public void showLoadingDialog(String title, String msg);
-
+    
     public void showLoadingDialog(String title, String msg, boolean cancelable);
-
+    
     public void showLoadingDialog(String title, String msg, boolean cancelable, boolean iosStyle);
-
+    
     public void showLoadingDialog(String title, String msg, boolean cancelable, DialogInterface.OnDismissListener listener);
-
+    
     public void showLoadingDialog(String title, String msg, boolean cancelable, boolean iosStyle, DialogInterface.OnDismissListener onDismissListener);
-
+    
     public void hideLoadingDialog();
-
+    
     public void showOneBtnProgressDialog(String title, String msg, OneBtnProgressDialog.OnProgressListener onProgressListener);
-
+    
     public void showOneBtnProgressDialog(String title, String msg, DialogInterface.OnDismissListener onDismissListener, OneBtnProgressDialog.OnProgressListener onProgressListener);
-
+    
     public void showOneBtnProgressDialog(String title, String msg, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, OneBtnProgressDialog.OnProgressListener onProgressListener);
-
+    
     public void showOneBtnProgressDialog(String title, String msg, String btnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, OneBtnProgressDialog.OnProgressListener onProgressListener);
-
+    
     public void hideOneBtnProgressDialog();
-
+    
     public void showTwoBtnTextDialog(String title, String msg, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick);
-
+    
     public void showTwoBtnTextDialog(String title, String msg, boolean cancelable, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick);
-
+    
     public void showTwoBtnTextDialog(String title, String msg, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick);
-
+    
     public void showTwoBtnTextDialog(String title, String msg, String leftBtnString, String rightBtnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick);
-
+    
     public void hideTwoBtnTextDialog();
-
+    
     public void showListDialog(String[] items, boolean cancelable, ListDialog.OnItemClick onItemClick);
-
+    
     public void showListDialog(String title, String[] items, boolean cancelable, ListDialog.OnItemClick onItemClick);
-
+    
     public void showListDialog(String title, String[] items, boolean alignLeft, boolean cancelable, ListDialog.OnItemClick onItemClick);
-
+    
     public void showListDialog(String title, List<String> items, boolean alignLeft, boolean cancelable, ListDialog.OnItemClick onItemClick);
-
+    
     public void showListDialog(String title, List<String> items, boolean cancelable, ListDialog.OnItemClick onItemClick);
-
+    
     public void showListDialog(String title, List<String> items, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, ListDialog.OnItemClick onItemClick);
-
+    
     /**
      * 显示列表对话框
      *
@@ -127,59 +128,59 @@ public interface IBaseFragment {
      * @param onItemClick       对话框点击回调
      */
     public void showListDialog(String title, List<String> items, boolean alignLeft, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, ListDialog.OnItemClick onItemClick);
-
+    
     public void hideListDialog();
-
+    
     public void refreshData(String... params);
-
+    
     public void loadMoreData(String... params);
-
+    
     public interface OnItemClick {
         void onItemClick(int position, String item);
     }
-
+    
     public interface OnTwoBtnEditClick {
         void onOk(String etContent);
-
+        
         void onCancel();
     }
-
+    
     public interface OnTwoBtnClick {
         void onOk();
-
+        
         void onCancel();
     }
-
+    
     public interface OnProgressListener {
         void onProgress(TextView tvMsg, ProgressBar pb);
     }
-
+    
     public interface OnOneBtnClick {
         void onClick();
     }
-
-
+    
+    
     /**
      * 启动Activity进入动画
      *
      * @return resId
      */
     int openInAnimation();
-
+    
     /**
      * 启动Activity退出动画
      *
      * @return resId
      */
     int openOutAnimation();
-
+    
     /**
      * 关闭Activity进入动画
      *
      * @return resId
      */
     int closeInAnimation();
-
+    
     /**
      * 关闭Activity退出动画
      *
