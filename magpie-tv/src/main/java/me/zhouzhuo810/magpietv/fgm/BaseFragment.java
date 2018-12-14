@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -83,16 +84,15 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
     public void overridePendingTransition(int enterAnim, int exitAnim) {
         getBaseAct().overridePendingTransition(enterAnim, exitAnim);
     }
-
+    
     @Override
-    public View findViewById(int id) {
+    public <T extends View> T findViewById(@IdRes int id) {
         if (rootView == null) {
             return null;
         }
         return rootView.findViewById(id);
     }
-
-
+    
     @Override
     public IBaseActivity getBaseAct() {
         return (IBaseActivity) getActivity();

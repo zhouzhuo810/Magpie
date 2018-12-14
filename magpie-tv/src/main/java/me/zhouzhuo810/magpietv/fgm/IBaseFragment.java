@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -24,7 +25,7 @@ public interface IBaseFragment {
      */
     public int getLayoutId();
     
-    public View findViewById(int id);
+    public <T extends View> T findViewById(@IdRes int id);
     
     public void initView(@Nullable Bundle savedInstanceState);
     

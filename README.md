@@ -21,7 +21,7 @@ allprojects {
 > For Phone And Pad.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.1.7'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.1.8'
 ```
 
 If you use this. That means you added dependencies below:
@@ -59,7 +59,7 @@ If you use this. That means you added dependencies below:
 > For Android TV.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.1.7'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.1.8'
 ```
 
 If you use this. That means you added dependencies below:
@@ -262,7 +262,11 @@ it supports:
 
 ### Update Logs
 
-> 1.1.7 (Developing)
+> 1.1.8 (Published)
+
+- Fix `findViewById` method in `BaseFragment` of TV framework.
+
+> 1.1.7 (Published)
 
 - Add `cancelDisposable` method in `BaseFragment`.
 
