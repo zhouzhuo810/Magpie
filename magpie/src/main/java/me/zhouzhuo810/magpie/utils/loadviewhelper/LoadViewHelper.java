@@ -19,11 +19,6 @@ public class LoadViewHelper extends AbsLoadViewHelper {
     }
     
     @Override
-    public void loadWidthHeightFont(View view) {
-        loadWidthHeightFont(view, false);
-    }
-    
-    @Override
     public void loadWidthHeightFont(View view, boolean forceWidthHeight) {
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         if (forceWidthHeight) {
@@ -75,11 +70,6 @@ public class LoadViewHelper extends AbsLoadViewHelper {
     }
     
     @Override
-    public void loadPadding(View view) {
-        loadPadding(view, false);
-    }
-    
-    @Override
     public void loadPadding(View view, boolean forceWidthHeight) {
         if (forceWidthHeight) {
             view.setPadding(setValue(view.getPaddingLeft()), setValueByHeight(view.getPaddingTop()),
@@ -90,11 +80,6 @@ public class LoadViewHelper extends AbsLoadViewHelper {
                 setValue(view.getPaddingRight()), scaleWidthAndHeight ? setValueByHeight(view.getPaddingBottom()) :
                     setValue(view.getPaddingBottom()));
         }
-    }
-    
-    @Override
-    public void loadLayoutMargin(View view) {
-        loadLayoutMargin(view, false);
     }
     
     @Override
@@ -120,11 +105,6 @@ public class LoadViewHelper extends AbsLoadViewHelper {
     }
     
     @Override
-    public void loadMaxWidthAndHeight(View view) {
-        loadMaxWidthAndHeight(view, false);
-    }
-    
-    @Override
     public void loadMaxWidthAndHeight(View view, boolean forceWidthHeight) {
         ViewUtil.setMaxWidth(view, setValue(ViewUtil.getMaxWidth(view)));
         if (forceWidthHeight) {
@@ -133,11 +113,6 @@ public class LoadViewHelper extends AbsLoadViewHelper {
             ViewUtil.setMaxHeight(view, scaleWidthAndHeight ? setValueByHeight(ViewUtil.getMaxHeight(view)) :
                 setValue(ViewUtil.getMaxHeight(view)));
         }
-    }
-    
-    @Override
-    public void loadMinWidthAndHeight(View view) {
-        loadMinWidthAndHeight(view, false);
     }
     
     @Override

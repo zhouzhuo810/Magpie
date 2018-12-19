@@ -8,24 +8,14 @@ import android.view.View;
 
 public interface ILoadViewHelper {
     
-    void loadWidthHeightFont(View view);
-    
     void loadWidthHeightFont(View view, boolean forceWidthHeight);
 
-    void loadPadding(View view);
-    
     void loadPadding(View view, boolean forceWidthHeight);
 
-    void loadLayoutMargin(View view);
-    
     void loadLayoutMargin(View view, boolean forceWidthHeight);
 
-    void loadMaxWidthAndHeight(View view);
-    
     void loadMaxWidthAndHeight(View view, boolean forceWidthHeight);
 
-    void loadMinWidthAndHeight(View view);
-    
     void loadMinWidthAndHeight(View view, boolean forceWidthHeight);
 
     /**
