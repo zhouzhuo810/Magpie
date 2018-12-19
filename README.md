@@ -21,7 +21,7 @@ allprojects {
 > For Phone And Pad.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.1.8'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.1.9'
 ```
 
 If you use this. That means you added dependencies below:
@@ -59,7 +59,7 @@ If you use this. That means you added dependencies below:
 > For Android TV.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.1.8'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.1.9'
 ```
 
 If you use this. That means you added dependencies below:
@@ -86,10 +86,14 @@ If you use this. That means you added dependencies below:
 - Add UI Design size in your AndroidManifest.xml.
 
 ```xml
-        <!--设计图的宽,单位是像素,推荐用markman测量,量出来如果是750px那么请尽量去找ui设计师要一份android的设计图.-->
+        <!--设计图的宽,单位是像素,推荐用markman测量-->
         <meta-data
             android:name="design_width"
             android:value="1080" />
+        <!--设计图的高,单位是像素,推荐用markman测量，（可选配置项，配置了design_height则按宽高缩放，否则只按design_width缩放）-->
+        <meta-data
+            android:name="design_height"
+            android:value="1920"/>
         <!--设计图对应的标准dpi,根据下面的那张图找到对应的dpi,比如1080就对应480dpi,如果拿到的是其他宽度的设计图,那么选择一个相近的dpi就好了-->
         <!--
             宽         	    240 	320 	480 	720     1080 	1440
@@ -261,6 +265,11 @@ it supports:
 > It's for generate a random number.
 
 ### Update Logs
+
+> 1.1.9 (Published)
+
+- Add `design_height` meta-data option.
+- Fix `TabBar` several bugs.
 
 > 1.1.8 (Published)
 

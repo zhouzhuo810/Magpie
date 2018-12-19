@@ -21,7 +21,7 @@ public class ScreenAdapterUtil {
     public static AbsLoadViewHelper getInstance() {
         return sLoadViewHelper;
     }
-
+    
     /**
      * 在Application的onCreate中调用此方法
      *
@@ -30,32 +30,34 @@ public class ScreenAdapterUtil {
     public static void init(Application context) {
         init(context, new ScreenAdapterUtil.IProvider() {
             @Override
-            public AbsLoadViewHelper provide(Context context, int designWidth, int designDpi,
-                                             float fontSize, String unit) {
-                return new LoadViewHelper(context, designWidth, designDpi, fontSize, unit);
+            public AbsLoadViewHelper provide(Context context, boolean scaleWidthAndHeight, int designWidth, int designHeight, int designDpi, float fontSize, String unit) {
+                return new LoadViewHelper(context, scaleWidthAndHeight, designWidth, designHeight, designDpi, fontSize, unit);
             }
         });
     }
-
+    
     public static void init(Context context, ScreenAdapterUtil.IProvider provider) {
         ApplicationInfo applicationInfo = null;
         try {
             applicationInfo = context.getPackageManager().getApplicationInfo(context
-                    .getPackageName(), PackageManager.GET_META_DATA);
+                .getPackageName(), PackageManager.GET_META_DATA);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
         if (applicationInfo == null || applicationInfo.metaData == null) {
             throw new RuntimeException("Please add 'design_width', 'design_dpi', 'font_size' and 'unit' meta-data tag in your application.");
         }
-        int designwidth = applicationInfo.metaData.getInt("design_width");
-        int designdpi = applicationInfo.metaData.getInt("design_dpi");
-        float fontsize = applicationInfo.metaData.getFloat("font_size");
+        int designWidth = applicationInfo.metaData.getInt("design_width");
+        int designHeight = applicationInfo.metaData.getInt("design_height");
+        boolean scaleWidthAndHeight = (designHeight > 0);
+        int designDpi = applicationInfo.metaData.getInt("design_dpi");
+        float fontSize = applicationInfo.metaData.getFloat("font_size");
         String unit = applicationInfo.metaData.getString("unit");
-        sLoadViewHelper = provider.provide(context, designwidth, designdpi, fontsize, unit);
+        sLoadViewHelper = provider.provide(context, scaleWidthAndHeight, designWidth, designHeight, designDpi, fontSize, unit);
     }
-
+    
     public interface IProvider {
-        AbsLoadViewHelper provide(Context context, int designWidth, int designDpi, float fontSize, String unit);
+        AbsLoadViewHelper provide(Context context, boolean scaleWidthAndHeight, int designWidth, int designheight,
+                                  int designDpi, float fontSize, String unit);
     }
 }

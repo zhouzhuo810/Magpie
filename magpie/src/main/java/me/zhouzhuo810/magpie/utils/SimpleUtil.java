@@ -7,7 +7,6 @@ import android.support.annotation.StringRes;
 import android.view.View;
 
 import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 
 /**
  * 常用方法简化
@@ -24,13 +23,32 @@ public class SimpleUtil {
     }
     
     /**
-     * 缩放值
+     * 缩放View
+     *
+     * @param v 要缩放的View
+     */
+    public static void scaleViewByWidthHeight(View v) {
+        ScreenAdapterUtil.getInstance().loadView(v, true);
+    }
+    
+    /**
+     * 缩放值按宽度（默认）
      *
      * @param px 原来值
      * @return 缩放后的值
      */
     public static int getScaledValue(int px) {
         return ScreenAdapterUtil.getInstance().getScaledValue(px);
+    }
+    
+    /**
+     * 缩放值
+     *
+     * @param px 原来值
+     * @return 缩放后的值
+     */
+    public static int getScaledValueByHeight(int px) {
+        return ScreenAdapterUtil.getInstance().getScaledValueByHeight(px);
     }
     
     /**

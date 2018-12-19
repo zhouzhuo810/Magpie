@@ -6,16 +6,21 @@ import me.zhouzhuo810.magpie.utils.loadviewhelper.AbsLoadViewHelper;
 
 
 public class CustomConversion implements IConversion {
-
+    
     @Override
     public void transform(View view, AbsLoadViewHelper loadViewHelper) {
+        transform(view, loadViewHelper, false);
+    }
+    
+    @Override
+    public void transform(View view, AbsLoadViewHelper loadViewHelper, boolean forceWidthHeight) {
         if (view.getLayoutParams() != null) {
-            loadViewHelper.loadWidthHeightFont(view);
-            loadViewHelper.loadPadding(view);
-            loadViewHelper.loadLayoutMargin(view);
-            loadViewHelper.loadMaxWidthAndHeight(view);
-            loadViewHelper.loadMinWidthAndHeight(view);
+            loadViewHelper.loadWidthHeightFont(view, forceWidthHeight);
+            loadViewHelper.loadPadding(view, forceWidthHeight);
+            loadViewHelper.loadLayoutMargin(view, forceWidthHeight);
+            loadViewHelper.loadMaxWidthAndHeight(view, forceWidthHeight);
+            loadViewHelper.loadMinWidthAndHeight(view, forceWidthHeight);
         }
     }
-
+    
 }

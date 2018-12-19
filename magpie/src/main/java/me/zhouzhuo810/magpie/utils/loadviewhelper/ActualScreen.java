@@ -12,6 +12,9 @@ public class ActualScreen {
     public static float[] screenInfo(Context context) {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         WindowManager windowManager = (WindowManager) context.getSystemService(WINDOW_SERVICE);
+        if (windowManager == null) {
+            return null;
+        }
         windowManager.getDefaultDisplay().getMetrics(displayMetrics);
         return new float[]{displayMetrics.widthPixels, displayMetrics.heightPixels, displayMetrics.density, displayMetrics.densityDpi};
     }

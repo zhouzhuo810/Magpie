@@ -263,12 +263,13 @@ public class TabBar extends LinearLayout {
         } else {
             textSize = 40;
         }
-//        textSize = ScreenAdapterUtil.getInstance().getScaledValue(textSize);
         tv0.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         tv1.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         tv2.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         tv3.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         tv4.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+    
+        textSize = ScreenAdapterUtil.getInstance().getScaledValue(textSize);
     }
 
     public int getSelection() {
