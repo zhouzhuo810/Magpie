@@ -21,7 +21,7 @@ allprojects {
 > For Phone And Pad.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.2.1'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.2.2'
 ```
 
 If you use this. That means you added dependencies below:
@@ -59,7 +59,7 @@ If you use this. That means you added dependencies below:
 > For Android TV.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.2.1'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.2.2'
 ```
 
 If you use this. That means you added dependencies below:
@@ -270,6 +270,10 @@ it supports:
 > It's for generate a random number.
 
 ### Update Logs
+
+> 1.2.2 (Published)
+
+- Add `BaseUtil#init(this)` to `BaseApplication`;
 
 
 > 1.2.1 (Published)

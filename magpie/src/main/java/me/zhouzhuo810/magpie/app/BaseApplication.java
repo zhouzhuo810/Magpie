@@ -5,11 +5,19 @@ import android.content.Context;
 import android.content.res.Configuration;
 
 import me.zhouzhuo810.magpie.cons.Cons;
+import me.zhouzhuo810.magpie.utils.BaseUtil;
 import me.zhouzhuo810.magpie.utils.LanguageUtil;
 import me.zhouzhuo810.magpie.utils.SimpleUtil;
 import me.zhouzhuo810.magpie.utils.SpUtil;
 
 public abstract class BaseApplication extends Application {
+    
+    @Override
+    public void onCreate() {
+        super.onCreate();
+    
+        BaseUtil.init(this);
+    }
     
     @Override
     protected void attachBaseContext(Context base) {
@@ -37,7 +45,9 @@ public abstract class BaseApplication extends Application {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        LanguageUtil.updateApplicationLanguage();
+        if (shouldSupportMultiLanguage()) {
+            LanguageUtil.updateApplicationLanguage();
+        }
         SimpleUtil.resetScale(this);
     }
     

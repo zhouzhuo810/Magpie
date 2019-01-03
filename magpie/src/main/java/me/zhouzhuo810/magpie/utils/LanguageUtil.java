@@ -129,14 +129,15 @@ public class LanguageUtil {
         Resources resources = context.getResources();
         Configuration configuration = resources.getConfiguration();
         Locale locale = getSupportLanguage(newLanguage);
-        
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            DisplayMetrics dm = resources.getDisplayMetrics();
             // apply locale
             configuration.setLocale(locale);
+            resources.updateConfiguration(configuration, dm);
         } else {
             // updateConfiguration
-            configuration.locale = locale;
             DisplayMetrics dm = resources.getDisplayMetrics();
+            configuration.locale = locale;
             resources.updateConfiguration(configuration, dm);
         }
     }
@@ -154,6 +155,7 @@ public class LanguageUtil {
     private static Context createConfigurationResources(Context context, String language) {
         Resources resources = context.getResources();
         Configuration configuration = resources.getConfiguration();
+        DisplayMetrics dm = resources.getDisplayMetrics();
         Locale locale;
         if (TextUtils.isEmpty(language)) {//如果没有指定语言使用系统首选语言
             locale = getSystemPreferredLanguage();
@@ -161,7 +163,9 @@ public class LanguageUtil {
             locale = getSupportLanguage(language);
         }
         configuration.setLocale(locale);
-        return context.createConfigurationContext(configuration);
+        Context configurationContext = context.createConfigurationContext(configuration);
+        configurationContext.getResources().updateConfiguration(configuration, dm);
+        return configurationContext;
     }
     
     /**

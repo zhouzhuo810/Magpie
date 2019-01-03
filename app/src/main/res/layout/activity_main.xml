@@ -85,10 +85,11 @@
         android:textSize="40px" />
     <Button
         android:id="@+id/btn_tools"
-        android:layout_width="match_parent"
+        android:layout_width="540px"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10px"
         android:text="@string/tools_text"
+        android:background="@color/colorBlack80"
         android:textAllCaps="false"
         android:textColor="@color/colorPrimary"
         android:textSize="40px" />

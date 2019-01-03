@@ -10,17 +10,17 @@ import com.tencent.bugly.crashreport.CrashReport;
 
 import java.io.File;
 
+import me.zhouzhuo810.magpietv.app.BaseApplication;
 import me.zhouzhuo810.magpietv.utils.BaseUtil;
 import me.zhouzhuo810.magpietv.utils.CrashUtil;
 
-public class MyApplication extends Application {
+public class MyApplication extends BaseApplication {
 
     private static final String CRASH_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "Magpie-TV" + File.separator + "Log";
 
     @Override
     public void onCreate() {
         super.onCreate();
-        BaseUtil.init(this);
     
         try {
             CrashReport.initCrashReport(this, "98d7438e50", false);
@@ -47,5 +47,10 @@ public class MyApplication extends Application {
                 }
             });
         }
+    }
+    
+    @Override
+    public boolean shouldSupportMultiLanguage() {
+        return true;
     }
 }
