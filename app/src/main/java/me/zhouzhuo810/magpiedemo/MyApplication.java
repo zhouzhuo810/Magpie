@@ -32,9 +32,6 @@ public class MyApplication extends BaseApplication {
         
         instance = this;
         
-        //初始化语言
-        LanguageUtil.setGlobalLanguage(LanguageUtil.SIMPLE_CHINESE);
-        
         try {
             CrashReport.initCrashReport(this, "cf6f26c47c", false);
         } catch (Exception e) {

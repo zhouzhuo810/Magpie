@@ -154,8 +154,8 @@ public class LanguageUtil {
     @TargetApi(Build.VERSION_CODES.N)
     private static Context createConfigurationResources(Context context, String language) {
         Resources resources = context.getResources();
-        Configuration configuration = resources.getConfiguration();
-        DisplayMetrics dm = resources.getDisplayMetrics();
+        final Configuration configuration = resources.getConfiguration();
+        final DisplayMetrics dm = resources.getDisplayMetrics();
         Locale locale;
         if (TextUtils.isEmpty(language)) {//如果没有指定语言使用系统首选语言
             locale = getSystemPreferredLanguage();
@@ -163,9 +163,9 @@ public class LanguageUtil {
             locale = getSupportLanguage(language);
         }
         configuration.setLocale(locale);
-        Context configurationContext = context.createConfigurationContext(configuration);
-        configurationContext.getResources().updateConfiguration(configuration, dm);
-        return configurationContext;
+        //        Context configurationContext = context.createConfigurationContext(configuration);
+        resources.updateConfiguration(configuration, dm);
+        return context;
     }
     
     /**
