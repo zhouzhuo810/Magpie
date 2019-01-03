@@ -32,6 +32,7 @@
         <item>Simple Chinese</item>
         <item>Traditional Chinese</item>
         <item>English</item>
+        <item>Vietnamese</item>
     </string-array>
     <string-array name="list_test_data">
         <item>Test content 1</item>

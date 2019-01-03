@@ -465,6 +465,9 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
                 case 2:
                     super.attachBaseContext(LanguageUtil.attachBaseContext(newBase, Cons.ENGLISH));
                     break;
+                case 3:
+                    super.attachBaseContext(LanguageUtil.attachBaseContext(newBase, Cons.VI));
+                    break;
             }
         } else {
             super.attachBaseContext(newBase);

@@ -26,17 +26,19 @@ public class LanguageUtil {
     public static final int SIMPLE_CHINESE = 0;
     public static final int TRADITIONAL_CHINESE = 1;
     public static final int ENGLISH = 2;
+    public static final int VI = 3;
 
-    @IntDef({SIMPLE_CHINESE, TRADITIONAL_CHINESE, ENGLISH})
+    @IntDef({SIMPLE_CHINESE, TRADITIONAL_CHINESE, ENGLISH, VI})
     @Retention(RetentionPolicy.SOURCE)
     public @interface LANGUAGE {
     }
 
 
-    private static Map<String, Locale> mSupportLanguages = new HashMap<String, Locale>(3) {{
+    private static Map<String, Locale> mSupportLanguages = new HashMap<String, Locale>(4) {{
         put(Cons.SIMPLIFIED_CHINESE, Locale.SIMPLIFIED_CHINESE);
         put(Cons.TRADITIONAL_CHINESE, Locale.TRADITIONAL_CHINESE);
         put(Cons.ENGLISH, Locale.ENGLISH);
+        put(Cons.VI, new Locale("vi"));
     }};
 
 
@@ -48,6 +50,7 @@ public class LanguageUtil {
      *                 <li>{@link LanguageUtil#SIMPLE_CHINESE}</li>
      *                 <li>{@link LanguageUtil#TRADITIONAL_CHINESE }</li>
      *                 <li>{@link LanguageUtil#ENGLISH }</li>
+     *                 <li>{@link LanguageUtil#VI }</li>
      *                 </ul>
      */
     public static void setGlobalLanguage(@LanguageUtil.LANGUAGE int language) {

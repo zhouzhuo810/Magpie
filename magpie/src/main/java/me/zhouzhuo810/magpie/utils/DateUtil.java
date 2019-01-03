@@ -1447,6 +1447,22 @@ public class DateUtil {
     public static String get_MdHs() {
         return new SimpleDateFormat("MM-dd HH:mm", Locale.getDefault()).format(new Date());
     }
+
+    public static String get_yMd(Date date) {
+        return new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(date);
+    }
+    
+    public static String get_yMdHms(Date date) {
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(date);
+    }
+    
+    public static String get_yMdHm(Date date) {
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).format(date);
+    }
+    
+    public static String get_MdHs(Date date) {
+        return new SimpleDateFormat("MM-dd HH:mm", Locale.getDefault()).format(date);
+    }
     
     public static int getCurHour() {
         Calendar calendar = Calendar.getInstance();

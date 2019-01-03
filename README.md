@@ -21,7 +21,7 @@ allprojects {
 > For Phone And Pad.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.1.9'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.2.0'
 ```
 
 If you use this. That means you added dependencies below:
@@ -59,7 +59,7 @@ If you use this. That means you added dependencies below:
 > For Android TV.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.1.9'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.2.0'
 ```
 
 If you use this. That means you added dependencies below:
@@ -265,6 +265,10 @@ it supports:
 > It's for generate a random number.
 
 ### Update Logs
+
+> 1.2.0 (Published)
+
+- Add `vi` language support.
 
 > 1.1.9 (Published)
 
