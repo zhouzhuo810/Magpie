@@ -55,8 +55,77 @@ public class LanguageUtil {
      */
     public static void setGlobalLanguage(@LanguageUtil.LANGUAGE int language) {
         SpUtil.putInt(Cons.SP_KEY_OF_CHOOSED_LANGUAGE, language);
+        updateApplicationLanguage();
     }
-
+    
+    public static void updateApplicationLanguage() {
+        Resources resources = BaseUtil.getApp().getResources();
+        DisplayMetrics dm = resources.getDisplayMetrics();
+        Configuration config = resources.getConfiguration();
+        int code = SpUtil.getInt(Cons.SP_KEY_OF_CHOOSED_LANGUAGE);
+        Locale locale = null;
+        switch (code) {
+            case LanguageUtil.SIMPLE_CHINESE:
+                locale = LanguageUtil.getSupportLanguage(Cons.SIMPLIFIED_CHINESE);
+                break;
+            case LanguageUtil.TRADITIONAL_CHINESE:
+                locale = LanguageUtil.getSupportLanguage(Cons.TRADITIONAL_CHINESE);
+                break;
+            case LanguageUtil.ENGLISH:
+                locale = LanguageUtil.getSupportLanguage(Cons.ENGLISH);
+                break;
+            case LanguageUtil.VI:
+                locale = LanguageUtil.getSupportLanguage(Cons.VI);
+                break;
+        }
+        if (locale == null) {
+            return;
+        }
+        config.locale = locale;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            LocaleList localeList = new LocaleList(locale);
+            LocaleList.setDefault(localeList);
+            config.setLocales(localeList);
+            BaseUtil.getApp().createConfigurationContext(config);
+            Locale.setDefault(locale);
+        }
+        resources.updateConfiguration(config, dm);
+    }
+    
+    public static void updateActivityLanguage(Context context) {
+        Resources resources = context.getResources();
+        DisplayMetrics dm = resources.getDisplayMetrics();
+        Configuration config = resources.getConfiguration();
+        int code = SpUtil.getInt(Cons.SP_KEY_OF_CHOOSED_LANGUAGE);
+        Locale locale = null;
+        switch (code) {
+            case LanguageUtil.SIMPLE_CHINESE:
+                locale = LanguageUtil.getSupportLanguage(Cons.SIMPLIFIED_CHINESE);
+                break;
+            case LanguageUtil.TRADITIONAL_CHINESE:
+                locale = LanguageUtil.getSupportLanguage(Cons.TRADITIONAL_CHINESE);
+                break;
+            case LanguageUtil.ENGLISH:
+                locale = LanguageUtil.getSupportLanguage(Cons.ENGLISH);
+                break;
+            case LanguageUtil.VI:
+                locale = LanguageUtil.getSupportLanguage(Cons.VI);
+                break;
+        }
+        if (locale == null) {
+            return;
+        }
+        config.locale = locale;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            LocaleList localeList = new LocaleList(locale);
+            LocaleList.setDefault(localeList);
+            config.setLocales(localeList);
+            context.createConfigurationContext(config);
+            Locale.setDefault(locale);
+        }
+        resources.updateConfiguration(config, dm);
+    }
+    
 
     public static void applyLanguage(Context context, String newLanguage) {
         Resources resources = context.getResources();

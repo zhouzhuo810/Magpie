@@ -1,5 +1,6 @@
 package me.zhouzhuo810.magpiedemo;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -18,10 +19,11 @@ import me.zhouzhuo810.magpie.ui.act.BaseActivity;
 import me.zhouzhuo810.magpie.ui.dialog.ListDialog;
 import me.zhouzhuo810.magpie.utils.CollectionUtil;
 import me.zhouzhuo810.magpie.utils.LanguageUtil;
+import me.zhouzhuo810.magpie.utils.RxHelper;
+import me.zhouzhuo810.magpie.utils.SimpleUtil;
 import me.zhouzhuo810.magpie.utils.ToastUtil;
 import me.zhouzhuo810.magpiedemo.api.Api;
 import me.zhouzhuo810.magpiedemo.api.entity.GetWeatherList;
-import me.zhouzhuo810.magpie.utils.RxHelper;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
@@ -179,11 +181,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 startAct(TabActivity.class);
                 break;
             case R.id.btn_tools:
-                startAct(ToolsActivity.class);
+                ToastUtil.showShortToast(SimpleUtil.getString(R.string.back_text));
+//                startAct(ToolsActivity.class);
                 break;
             case R.id.btn_spinner:
                 startAct(SpinnerTestActivity.class);
                 break;
         }
+    }
+    
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(newBase);
+        
     }
 }

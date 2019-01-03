@@ -2,6 +2,8 @@ package me.zhouzhuo810.magpiedemo;
 
 import android.Manifest;
 import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
@@ -10,11 +12,16 @@ import com.tencent.bugly.crashreport.CrashReport;
 
 import java.io.File;
 
+import me.zhouzhuo810.magpie.app.BaseApplication;
+import me.zhouzhuo810.magpie.cons.Cons;
 import me.zhouzhuo810.magpie.utils.BaseUtil;
 import me.zhouzhuo810.magpie.utils.CrashUtil;
 import me.zhouzhuo810.magpie.utils.LanguageUtil;
+import me.zhouzhuo810.magpie.utils.SpUtil;
 
-public class MyApplication extends Application {
+public class MyApplication extends BaseApplication {
+    
+    private static MyApplication instance;
     
     private static final String CRASH_PATH = Environment.getExternalStorageDirectory().getAbsolutePath()
         + File.separator + "Magpie" + File.separator + "Log";
@@ -22,6 +29,8 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        
+        instance = this;
         
         //工具类初始化，包括屏幕适配
         BaseUtil.init(this);
@@ -37,6 +46,15 @@ public class MyApplication extends Application {
         
         //Crash Handler
         //        initCrash();
+    }
+    
+    public static MyApplication getInstance() {
+        return instance;
+    }
+    
+    @Override
+    public boolean shouldSupportMultiLanguage() {
+        return true;
     }
     
     private void initCrash() {

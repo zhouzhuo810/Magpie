@@ -23,7 +23,7 @@ public class SpinnerTestActivity extends BaseActivity {
 
     @Override
     public boolean shouldSupportMultiLanguage() {
-        return false;
+        return true;
     }
 
     @Override

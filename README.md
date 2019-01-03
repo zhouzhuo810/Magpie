@@ -21,7 +21,7 @@ allprojects {
 > For Phone And Pad.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.2.0'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.2.1'
 ```
 
 If you use this. That means you added dependencies below:
@@ -59,7 +59,7 @@ If you use this. That means you added dependencies below:
 > For Android TV.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.2.0'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.2.1'
 ```
 
 If you use this. That means you added dependencies below:
@@ -144,6 +144,11 @@ public class MyApplication extends Application {
 `ScreenAdapterUtil.getInstance().getScaledValue(int);` when you what to scale the dynamic value.
 
 - If you don't want to use `ScreenAdapterUtil.getInstance()`, just replace it with `SimpleUtil`.
+
+#### BaseApplication
+
+it supports:
+- Multi-Language.
 
 #### BaseActivity
 
@@ -265,6 +270,12 @@ it supports:
 > It's for generate a random number.
 
 ### Update Logs
+
+
+> 1.2.1 (Published)
+
+- Add `BaseApplication`;
+- Fix Application Context multiple language.
 
 > 1.2.0 (Published)
 

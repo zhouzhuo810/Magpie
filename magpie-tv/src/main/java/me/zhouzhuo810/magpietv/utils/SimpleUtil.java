@@ -1,5 +1,6 @@
 package me.zhouzhuo810.magpietv.utils;
 
+import android.content.Context;
 import android.graphics.Typeface;
 import android.support.annotation.ArrayRes;
 import android.support.annotation.ColorRes;
@@ -20,6 +21,13 @@ public class SimpleUtil {
      */
     public static void scaleView(View v) {
         ScreenAdapterUtil.getInstance().loadView(v);
+    }
+    
+    /**
+     * 重置缩放
+     */
+    public static void resetScale(Context context) {
+        ScreenAdapterUtil.getInstance().reset(context);
     }
     
     /**

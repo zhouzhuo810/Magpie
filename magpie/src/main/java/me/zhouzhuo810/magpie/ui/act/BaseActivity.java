@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
@@ -552,16 +553,16 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         if (shouldSupportMultiLanguage()) {
             int language = SpUtil.getInt(Cons.SP_KEY_OF_CHOOSED_LANGUAGE);
             switch (language) {
-                case 0:
+                case LanguageUtil.SIMPLE_CHINESE:
                     super.attachBaseContext(LanguageUtil.attachBaseContext(newBase, Cons.SIMPLIFIED_CHINESE));
                     break;
-                case 1:
+                case LanguageUtil.TRADITIONAL_CHINESE:
                     super.attachBaseContext(LanguageUtil.attachBaseContext(newBase, Cons.TRADITIONAL_CHINESE));
                     break;
-                case 2:
+                case LanguageUtil.ENGLISH:
                     super.attachBaseContext(LanguageUtil.attachBaseContext(newBase, Cons.ENGLISH));
                     break;
-                case 3:
+                case LanguageUtil.VI:
                     super.attachBaseContext(LanguageUtil.attachBaseContext(newBase, Cons.VI));
                     break;
             }
@@ -569,6 +570,15 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
             super.attachBaseContext(newBase);
         }
     }
+    
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (shouldSupportMultiLanguage()) {
+            LanguageUtil.updateActivityLanguage(this);
+        }
+    }
+    
     
     @Override
     public <T extends BaseFragment> T findFragmentByClazzAsTag(Class<T> clazz) {
