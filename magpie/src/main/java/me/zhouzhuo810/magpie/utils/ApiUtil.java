@@ -17,6 +17,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiUtil {
 
+    private ApiUtil() {
+        throw new UnsupportedOperationException("u can't instantiate me...");
+    }
+    
     /**
      * 创建API
      *

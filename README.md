@@ -272,6 +272,11 @@ it supports:
 ### Update Logs
 
 
+> 1.2.4 (Developing)
+
+- Add `UriUtil`;
+- Add `copyStream` method to `IOUtil`;
+
 > 1.2.3 (Published)
 
 - Fix several bugs;
@@ -392,6 +397,12 @@ it supports:
 > 1.0.0 (Published)
 
 - 2018/9/2 initial commit.
+
+### Proguard
+
+For magpie, see [app/proguard-rules.pro](app/proguard-rules.pro)
+
+For magpie-tv, see [app-tv/proguard-rules.pro](app-tv/proguard-rules.pro)
 
 ### Thanks
 
