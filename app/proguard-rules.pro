@@ -38,10 +38,9 @@
 
 ##---------------Begin: proguard configuration for OkHttp3  ----------
 -dontwarn javax.annotation.**
--dontwarn javax.inject.**
--dontwarn okhttp3.logging.**
--keep class okhttp3.internal.**{*;}
--dontwarn okio.**
+-keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
+-dontwarn org.codehaus.mojo.animal_sniffer.*
+-dontwarn okhttp3.internal.platform.ConscryptPlatform
 ##---------------End: proguard configuration for OkHttp3  ----------
 
 
