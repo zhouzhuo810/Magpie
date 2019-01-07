@@ -30,4 +30,6 @@ public final class Cons {
     public static final String SP_KEY_OF_CHOOSED_LANGUAGE = "sp_key_of_choosed_language";
     
     public static final String SP_NAME = "magpie_sp";
+    
+    public static final String NOTICE_URL = "notice_url";
 }

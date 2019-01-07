@@ -21,7 +21,7 @@ allprojects {
 > For Phone And Pad.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.2.3'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.2.4'
 ```
 
 If you use this. That means you added dependencies below:
@@ -59,7 +59,7 @@ If you use this. That means you added dependencies below:
 > For Android TV.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.2.3'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.2.4'
 ```
 
 If you use this. That means you added dependencies below:
@@ -272,10 +272,12 @@ it supports:
 ### Update Logs
 
 
-> 1.2.4 (Developing)
+> 1.2.4 (Published)
 
 - Add `UriUtil`;
 - Add `copyStream` method to `IOUtil`;
+- Add `showNormalNoticeWithCopyAction` method in `NoticeUtil`;
+- Add `CopyUrlActivity` for copy Notification.
 
 > 1.2.3 (Published)
 

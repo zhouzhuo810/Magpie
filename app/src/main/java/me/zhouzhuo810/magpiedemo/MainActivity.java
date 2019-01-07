@@ -181,8 +181,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 startAct(TabActivity.class);
                 break;
             case R.id.btn_tools:
-                ToastUtil.showShortToast(SimpleUtil.getString(R.string.back_text));
-//                startAct(ToolsActivity.class);
+//                ToastUtil.showShortToast(SimpleUtil.getString(R.string.back_text));
+                startAct(ToolsActivity.class);
                 break;
             case R.id.btn_spinner:
                 startAct(SpinnerTestActivity.class);

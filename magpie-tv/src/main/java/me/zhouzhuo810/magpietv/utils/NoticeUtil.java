@@ -1,4 +1,4 @@
-package me.zhouzhuo810.magpie.utils;
+package me.zhouzhuo810.magpietv.utils;
 
 import android.app.Notification;
 import android.app.PendingIntent;
@@ -8,8 +8,9 @@ import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 
-import me.zhouzhuo810.magpie.cons.Cons;
-import me.zhouzhuo810.magpie.ui.act.CopyUrlActivity;
+import me.zhouzhuo810.magpietv.act.CopyUrlActivity;
+import me.zhouzhuo810.magpietv.cons.Cons;
+
 
 public class NoticeUtil {
     private NoticeUtil() {
