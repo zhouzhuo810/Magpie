@@ -2,9 +2,15 @@ package me.zhouzhuo810.magpiedemo;
 
 import android.Manifest;
 import android.app.Application;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 
@@ -17,6 +23,7 @@ import me.zhouzhuo810.magpie.cons.Cons;
 import me.zhouzhuo810.magpie.utils.BaseUtil;
 import me.zhouzhuo810.magpie.utils.CrashUtil;
 import me.zhouzhuo810.magpie.utils.LanguageUtil;
+import me.zhouzhuo810.magpie.utils.NoticeUtil;
 import me.zhouzhuo810.magpie.utils.SpUtil;
 
 public class MyApplication extends BaseApplication {
@@ -38,9 +45,12 @@ public class MyApplication extends BaseApplication {
             e.printStackTrace();
         }
         
+        NoticeUtil.initNoticeChannel("1", getString(R.string.app_name), "Magpie通知渠道", 0, true);
+        
         //Crash Handler
         //        initCrash();
     }
+    
     
     public static MyApplication getInstance() {
         return instance;

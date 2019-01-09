@@ -31,5 +31,7 @@ public final class Cons {
     
     public static final String SP_NAME = "magpie_sp";
     
+    public static final String NOTICE_ACTION = "notice_action";
+    
     public static final String NOTICE_URL = "notice_url";
 }

@@ -56,12 +56,6 @@
         </activity>
 
         <activity
-            android:name="me.zhouzhuo810.magpie.ui.act.CopyUrlActivity"
-            android:configChanges="screenSize|screenLayout|smallestScreenSize|fontScale|density|touchscreen"
-            android:screenOrientation="portrait"
-            />
-
-        <activity
             android:name=".DialogActivity"
             android:configChanges="screenSize|screenLayout|smallestScreenSize|fontScale|density|touchscreen"
             android:screenOrientation="portrait"/>

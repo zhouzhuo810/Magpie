@@ -1,10 +1,14 @@
 package me.zhouzhuo810.magpietv.utils;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 
@@ -166,6 +170,7 @@ public class NoticeUtil {
             .setSmallIcon(smallIcon)
             .setVibrate(vibrate ? new long[]{200, 200} : null);
         Intent intent = new Intent(context, CopyUrlActivity.class);
+        intent.putExtra(Cons.NOTICE_ACTION, "copy");
         intent.putExtra(Cons.NOTICE_URL, content);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent pi = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -176,5 +181,78 @@ public class NoticeUtil {
         nm.notify(id, notification);
     }
     
+    
+    /**
+     * 显示复制URL调试通知
+     *
+     * @param context    上下文
+     * @param title      标题
+     * @param content    内容
+     * @param autoCancel 是否自动取消
+     * @param onGoing    是否常驻
+     * @param smallIcon  小图标
+     * @param vibrate    是否震动
+     * @param channelId  通知渠道id
+     */
+    public static void showNormalNoticeWithShareAction(Context context, String title,
+                                                       String content, boolean autoCancel,
+                                                       boolean onGoing, int smallIcon, boolean vibrate, String channelId) {
+        NotificationCompat.Builder b = new NotificationCompat.Builder(context, channelId == null ? DEFAULT_CHANNEL_ID : channelId);
+        b.setContentTitle(title)
+            .setContentText(content)
+            .setWhen(System.currentTimeMillis())
+            .setAutoCancel(autoCancel)
+            .setOngoing(onGoing)
+            .setSmallIcon(smallIcon)
+            .setVibrate(vibrate ? new long[]{200, 200} : null);
+        Intent intent = new Intent(context, CopyUrlActivity.class);
+        intent.putExtra(Cons.NOTICE_ACTION, "share");
+        intent.putExtra(Cons.NOTICE_URL, content);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        PendingIntent pi = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        b.setContentIntent(pi);
+        Notification notification = b.build();
+        NotificationManagerCompat nm = NotificationManagerCompat.from(context);
+        final int id = (NOTICE_URL++) % 4 + 1;
+        nm.notify(id, notification);
+    }
+    
+    
+    
+    /**
+     * 初始化Android 8.0 通知渠道
+     *
+     * @param channelId   渠道id
+     * @param channelName 渠道名称
+     * @param channelDesc 渠道描述
+     * @param soundRawId  声音id(R.raw.xxx),use 0 if not necessary
+     */
+    public static void initNoticeChannel(String channelId, String channelName, String channelDesc, int soundRawId, boolean vibration) {
+        //8.0
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationManager mNotificationManager = (NotificationManager) BaseUtil.getApp().getSystemService(Context.NOTIFICATION_SERVICE);
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel mChannel = new NotificationChannel(channelId, channelName, importance);
+            mChannel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
+            // 配置通知渠道的属性
+            mChannel.setDescription(channelDesc);
+            // 设置通知出现时的闪灯（如果 android 设备支持的话）
+            mChannel.enableLights(true);
+            mChannel.setLightColor(Color.RED);
+            if (soundRawId != 0) {
+                mChannel.setSound(Uri.parse("android.resource://" + BaseUtil.getPackageInfo(BaseUtil.getApp()).packageName + "/" + soundRawId), null);
+            }
+            // 设置通知出现时的震动（如果 android 设备支持的话）
+            mChannel.enableVibration(vibration);
+            if (vibration) {
+                mChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500});
+            }
+            //最后在notificationmanager中创建该通知渠道
+            if (mNotificationManager != null) {
+                mNotificationManager.createNotificationChannel(mChannel);
+            }
+        }
+    }
+
     
 }

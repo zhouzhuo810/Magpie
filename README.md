@@ -21,7 +21,7 @@ allprojects {
 > For Phone And Pad.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.2.4'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.2.5'
 ```
 
 If you use this. That means you added dependencies below:
@@ -59,7 +59,7 @@ If you use this. That means you added dependencies below:
 > For Android TV.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.2.4'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.2.5'
 ```
 
 If you use this. That means you added dependencies below:
@@ -115,9 +115,25 @@ If you use this. That means you added dependencies below:
             android:value="px" />
 ```
 
-- init BaseUtil in your custom Application#onCreate().
+- init Magpie Context in your custom Application.
 
 ```java
+
+//方式1 (推荐)
+public class MyApplication extends BaseApplication {
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+        //初始化8.0通知渠道
+        NoticeUtil.initNoticeChannel("您的渠道id", "您的渠道名称", "您的渠道描述", 0, true);
+    }
+}
+
+Or
+
+//方式2
 public class MyApplication extends Application {
   
     @Override
@@ -126,6 +142,39 @@ public class MyApplication extends Application {
   
         BaseUtil.init(this);
     }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        if (shouldSupportMultiLanguage()) {
+            int language = SpUtil.getInt(base, Cons.SP_KEY_OF_CHOOSED_LANGUAGE);
+            switch (language) {
+                case LanguageUtil.SIMPLE_CHINESE:
+                    super.attachBaseContext(LanguageUtil.attachBaseContext(base, Cons.SIMPLIFIED_CHINESE));
+                    break;
+                case LanguageUtil.TRADITIONAL_CHINESE:
+                    super.attachBaseContext(LanguageUtil.attachBaseContext(base, Cons.TRADITIONAL_CHINESE));
+                    break;
+                case LanguageUtil.ENGLISH:
+                    super.attachBaseContext(LanguageUtil.attachBaseContext(base, Cons.ENGLISH));
+                    break;
+                case LanguageUtil.VI:
+                    super.attachBaseContext(LanguageUtil.attachBaseContext(base, Cons.VI));
+                    break;
+            }
+        } else {
+            super.attachBaseContext(base);
+        }
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (shouldSupportMultiLanguage()) {
+            LanguageUtil.updateApplicationLanguage();
+        }
+        SimpleUtil.resetScale(this);
+    }
+
 }
 ```
 
@@ -269,8 +318,23 @@ it supports:
 - RandomUtil
 > It's for generate a random number.
 
+- PackageUtil
+> It's for checking if app is installed.
+
+- ShareUtil
+> It's for sharing Text or File to other app.
+
 ### Update Logs
 
+> 1.2.5 (Published)
+
+- Add `NoticeUtil.initNoticeChannel()` method in `NoticeUtil`;
+- Add `NoticeUtil.showNormalNoticeWithCopyAction()` method in `NoticeUtil`;
+- Add `NoticeUtil.showNormalNoticeWithShareAction()` method in `NoticeUtil`;
+- Add `PackageUtil` for checking if app is installed;
+- Add `ShareUtil` for sharing to other app;
+- Add `createApiWithCopyNotice` method in `ApiUtil`;
+- Add `createApiWithShareNotice` method in `ApiUtil`;
 
 > 1.2.4 (Published)
 

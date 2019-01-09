@@ -4,6 +4,8 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import me.zhouzhuo810.magpie.utils.ApiUtil;
+import me.zhouzhuo810.magpie.utils.BaseUtil;
+import me.zhouzhuo810.magpiedemo.R;
 import me.zhouzhuo810.magpiedemo.api.entity.GetWeatherList;
 import okhttp3.ResponseBody;
 import retrofit2.http.GET;
@@ -32,13 +34,16 @@ public class Api {
         if (weatherApi == null) {
             synchronized (Api.class) {
                 if (weatherApi == null) {
-                    weatherApi = ApiUtil.createApi(
+                    weatherApi = ApiUtil.createApiWithShareNotice(
                         WeatherApi.class,
                         URL_RETROFIT,
                         20,
                         TimeUnit.SECONDS,
                         true,
-                        false
+                        false,
+                        R.mipmap.ic_launcher,
+                        "1",
+                        BaseUtil.getApp().getString(R.string.app_name)
                     );
                 }
             }

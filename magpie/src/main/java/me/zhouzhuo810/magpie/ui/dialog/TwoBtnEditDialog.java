@@ -28,7 +28,7 @@ import me.zhouzhuo810.magpie.utils.ScreenAdapterUtil;
  * 两个按钮输入对话框
  */
 public class TwoBtnEditDialog extends DialogFragment {
-
+    
     private int inputType = -1;
     private DialogInterface.OnDismissListener dismissListener;
     private OnTwoBtnEditClick onTwoBtnClick;
@@ -38,8 +38,8 @@ public class TwoBtnEditDialog extends DialogFragment {
     private String leftText;
     private String rightText;
     private View rootView;
-
-
+    
+    
     /**
      * 设置输入框EditText输入值得类型
      * <p>
@@ -61,7 +61,7 @@ public class TwoBtnEditDialog extends DialogFragment {
         this.inputType = type;
         return this;
     }
-
+    
     /**
      * 设置对话框关闭监听
      *
@@ -72,7 +72,7 @@ public class TwoBtnEditDialog extends DialogFragment {
         this.dismissListener = dismissListener;
         return this;
     }
-
+    
     /**
      * 设置按钮点击监听
      *
@@ -83,7 +83,7 @@ public class TwoBtnEditDialog extends DialogFragment {
         this.onTwoBtnClick = onTwoBtnClickListener;
         return this;
     }
-
+    
     /**
      * 设置左边按钮的文字
      *
@@ -94,7 +94,7 @@ public class TwoBtnEditDialog extends DialogFragment {
         this.leftText = leftBtnText;
         return this;
     }
-
+    
     /**
      * 设置右边按钮的文字
      *
@@ -105,7 +105,7 @@ public class TwoBtnEditDialog extends DialogFragment {
         this.rightText = rightBtnText;
         return this;
     }
-
+    
     /**
      * 设置输入框提示内容
      *
@@ -116,7 +116,7 @@ public class TwoBtnEditDialog extends DialogFragment {
         this.hint = hint;
         return this;
     }
-
+    
     /**
      * 设置标题
      *
@@ -127,7 +127,7 @@ public class TwoBtnEditDialog extends DialogFragment {
         this.title = title;
         return this;
     }
-
+    
     /**
      * 设置消息内容
      *
@@ -138,7 +138,7 @@ public class TwoBtnEditDialog extends DialogFragment {
         this.msg = msg;
         return this;
     }
-
+    
     @Override
     public void onStart() {
         super.onStart();
@@ -151,7 +151,7 @@ public class TwoBtnEditDialog extends DialogFragment {
             getDialog().getWindow().setLayout(dm.widthPixels * 4 / 5, getDialog().getWindow().getAttributes().height);
         }
     }
-
+    
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -178,13 +178,14 @@ public class TwoBtnEditDialog extends DialogFragment {
                 return handled;
             }
         });
-
-
+        
+        
         if (hint != null) {
             etMsg.setHint(hint);
         }
         if (msg != null) {
             etMsg.setText(msg);
+            etMsg.setSelection(0, msg.length());
         }
         if (onTwoBtnClick != null) {
             tvLeft.setOnClickListener(new View.OnClickListener() {
@@ -226,8 +227,8 @@ public class TwoBtnEditDialog extends DialogFragment {
         }
         return rootView;
     }
-
-
+    
+    
     @Override
     public void show(FragmentManager manager, String tag) {
         try {
@@ -245,8 +246,8 @@ public class TwoBtnEditDialog extends DialogFragment {
             }
         }, 300);
     }
-
-
+    
+    
     /**
      * 注意,不要用super.dismiss(),bug 同上show()
      * super.onDismiss就没问题
@@ -263,10 +264,10 @@ public class TwoBtnEditDialog extends DialogFragment {
                     TwoBtnEditDialog.super.dismissAllowingStateLoss();
                 }
             }, 150);
-
+            
         }
     }
-
+    
     @Override
     public void onDismiss(DialogInterface dialog) {
         super.onDismiss(dialog);
@@ -274,11 +275,11 @@ public class TwoBtnEditDialog extends DialogFragment {
             dismissListener.onDismiss(dialog);
         }
     }
-
+    
     public interface OnTwoBtnEditClick {
         void onLeftClick(String etContent);
-
+        
         void onRightClick(String etContent);
     }
-
+    
 }

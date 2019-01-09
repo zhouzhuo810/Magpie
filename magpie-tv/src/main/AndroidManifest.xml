@@ -1,2 +1,16 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="me.zhouzhuo810.magpietv" />
+<manifest package="me.zhouzhuo810.magpietv"
+          xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application>
+        <activity
+            android:name=".act.CopyUrlActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="standard"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden"/>
+
+
+        <activity android:name="com.tencent.mm.ui.tools.ShareImgUI"/>
+        <activity android:name="com.tencent.mobileqq.activity.JumpActivity"/>
+    </application>
+</manifest>
