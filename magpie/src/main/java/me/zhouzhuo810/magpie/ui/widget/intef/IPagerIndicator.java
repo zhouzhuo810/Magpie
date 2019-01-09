@@ -21,5 +21,13 @@ public interface IPagerIndicator {
      * @param animate  是否显示动画
      */
     void setCurrentItem(int position, boolean animate);
-
+    
+    
+    /**
+     * 动态更新文字
+     *
+     * @param position 位置
+     * @param title    标题
+     */
+    void updateText(int position, String title);
 }

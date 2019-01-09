@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import me.zhouzhuo810.magpie.R;
+import me.zhouzhuo810.magpie.ui.widget.adapter.BaseFragmentPagerAdapter;
 import me.zhouzhuo810.magpie.ui.widget.en.IndicatorType;
 import me.zhouzhuo810.magpie.ui.widget.intef.IPagerIndicator;
 import me.zhouzhuo810.magpie.ui.widget.intef.IResProvider;
@@ -273,6 +274,21 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
     public void setCurrentItem(int position, boolean animate) {
         if (mViewPager != null) {
             mViewPager.setCurrentItem(position, animate);
+        }
+    }
+    
+    @Override
+    public void updateText(int position, String title) {
+        if (mViewPager == null) {
+            return;
+        }
+        PagerAdapter adapter = mViewPager.getAdapter();
+        if (adapter != null) {
+            if (adapter instanceof BaseFragmentPagerAdapter) {
+                ((BaseFragmentPagerAdapter) adapter).setPageTitle(position, title);
+                TextView tv = (TextView) getItem(position);
+                tv.setText(adapter.getPageTitle(position));
+            }
         }
     }
     
@@ -732,4 +748,5 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
     private View getItem(int position) {
         return mIndicatorContainer.getChildAt(position);
     }
+    
 }

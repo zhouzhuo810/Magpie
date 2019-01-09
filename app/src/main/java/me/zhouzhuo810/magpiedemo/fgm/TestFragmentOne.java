@@ -2,14 +2,19 @@ package me.zhouzhuo810.magpiedemo.fgm;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
 import android.widget.TextView;
+
+import org.greenrobot.eventbus.EventBus;
 
 import me.zhouzhuo810.magpie.ui.fgm.BaseFragment;
 import me.zhouzhuo810.magpiedemo.R;
+import me.zhouzhuo810.magpiedemo.event.ChangeTextEvent;
 
 public class TestFragmentOne extends BaseFragment {
     
     private TextView tvTab;
+    private int mIndex;
     
     @Override
     public int getLayoutId() {
@@ -24,8 +29,8 @@ public class TestFragmentOne extends BaseFragment {
     @Override
     public void initData() {
         if (getArguments() != null) {
-            int index = getArguments().getInt("index");
-            tvTab.setText("Tab" + index);
+            mIndex = getArguments().getInt("index");
+            tvTab.setText("Tab" + mIndex);
         }
     }
     
@@ -43,7 +48,12 @@ public class TestFragmentOne extends BaseFragment {
     
     @Override
     public void initEvent() {
-    
+        tvTab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EventBus.getDefault().post(new ChangeTextEvent(mIndex));
+            }
+        });
     }
     
 }

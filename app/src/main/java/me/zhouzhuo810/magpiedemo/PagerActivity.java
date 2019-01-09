@@ -5,33 +5,38 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import me.zhouzhuo810.magpie.ui.act.BaseActivity;
 import me.zhouzhuo810.magpie.ui.widget.Indicator;
 import me.zhouzhuo810.magpie.ui.widget.adapter.BaseFragmentPagerAdapter;
+import me.zhouzhuo810.magpie.utils.ToastUtil;
+import me.zhouzhuo810.magpiedemo.event.ChangeTextEvent;
 import me.zhouzhuo810.magpiedemo.fgm.TestFragmentOne;
 
 public class PagerActivity extends BaseActivity {
-
+    
     private Indicator indicator;
     private ViewPager viewPager;
     private Indicator indicator2;
     private Indicator indicator3;
     private Indicator indicator4;
     private Indicator indicator5;
-
+    
     @Override
     public boolean shouldSupportMultiLanguage() {
         return false;
     }
-
+    
     @Override
     public int getLayoutId() {
         return R.layout.activity_pager;
     }
-
+    
     @Override
     public void initView(@Nullable Bundle savedInstanceState) {
         indicator = findViewById(R.id.indicator);
@@ -41,7 +46,7 @@ public class PagerActivity extends BaseActivity {
         indicator5 = findViewById(R.id.indicator5);
         viewPager = findViewById(R.id.view_pager);
     }
-
+    
     @Override
     public void initData() {
         List<String> titles = new ArrayList<>();
@@ -58,7 +63,9 @@ public class PagerActivity extends BaseActivity {
         titles.add("更多更长更长更长更长");
         final List<Fragment> fgms = new ArrayList<>();
         for (int i = 0; i < titles.size(); i++) {
-            fgms.add(TestFragmentOne.newInstance(TestFragmentOne.class, null));
+            Bundle bundle = new Bundle();
+            bundle.putInt("index", i);
+            fgms.add(TestFragmentOne.newInstance(TestFragmentOne.class, bundle));
         }
         viewPager.setOffscreenPageLimit(titles.size());
         viewPager.setAdapter(new BaseFragmentPagerAdapter(getSupportFragmentManager(), titles) {
@@ -66,12 +73,12 @@ public class PagerActivity extends BaseActivity {
             public int getSelectedIcon(int position) {
                 return R.mipmap.ic_launcher;
             }
-
+            
             @Override
             public int getUnselectedIcon(int position) {
                 return R.mipmap.ic_launcher_round;
             }
-
+            
             @Override
             protected Fragment getFragment(int position) {
                 return fgms.get(position);
@@ -83,9 +90,16 @@ public class PagerActivity extends BaseActivity {
         indicator4.setViewPager(viewPager);
         indicator5.setViewPager(viewPager);
     }
-
+    
     @Override
     public void initEvent() {
-
+    
     }
+    
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onChangeTextEvent(ChangeTextEvent event) {
+        ToastUtil.showShortToast("修改"+event.getIndex());
+        indicator.updateText(event.getIndex(), "修改"+event.getIndex());
+    }
+    
 }

@@ -40,7 +40,14 @@ public abstract class BaseFragmentPagerAdapter extends android.support.v4.app.Fr
     public int getCount() {
         return titles == null ? 0 : titles.size();
     }
-
+    
+    public void setPageTitle(int position, String title) {
+        if (position >= 0 && titles != null && position < titles.size()) {
+            titles.set(position, title);
+            notifyDataSetChanged();
+        }
+    }
+    
     @Override
     public CharSequence getPageTitle(int position) {
         return titles.get(position);
