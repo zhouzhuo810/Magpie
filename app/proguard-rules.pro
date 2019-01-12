@@ -47,7 +47,8 @@
 ##---------------Begin: proguard configuration for Retrofit  ----------
 -dontwarn retrofit2.**
 -keep class retrofit2.** { *; }
--keepattributes Signature-keepattributes Exceptions
+-keepattributes Signature
+-keepattributes Exceptions
 ##---------------End: proguard configuration for Retrofit  ----------
 
 
