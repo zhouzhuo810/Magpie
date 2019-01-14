@@ -31,7 +31,7 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
     protected boolean isVisible;
     protected long mCallLazyLoadCount;
     protected boolean mNeedLazeLoaded = true;
-    
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -84,7 +84,7 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
     public void overridePendingTransition(int enterAnim, int exitAnim) {
         getBaseAct().overridePendingTransition(enterAnim, exitAnim);
     }
-    
+
     @Override
     public <T extends View> T findViewById(@IdRes int id) {
         if (rootView == null) {
@@ -92,7 +92,7 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
         }
         return rootView.findViewById(id);
     }
-    
+
     @Override
     public IBaseActivity getBaseAct() {
         return (IBaseActivity) getActivity();
@@ -299,8 +299,8 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
         }
         getBaseAct().showListDialog(title, items, alignLeft, cancelable, onDismissListener, onItemClick);
     }
-    
-    
+
+
     @Override
     public void onResume() {
         super.onResume();
@@ -310,7 +310,7 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
             onVisible();
         }
     }
-    
+
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
@@ -328,7 +328,7 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
             onInvisible();
         }
     }
-    
+
     @Override
     public void hideListDialog() {
         if (getBaseAct() == null) {
@@ -336,28 +336,28 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
         }
         getBaseAct().hideListDialog();
     }
-    
+
     protected void onVisible() {
         if (needLazyLoadData()) {
             lazyLoadData();
         }
     }
-    
-    
+
+
     protected void onInvisible() {
-    
+
     }
-    
+
     @Override
     public void lazyLoadData() {
-    
+
     }
-    
+
     @Override
     public boolean isNeedLazyLoad() {
         return mNeedLazeLoaded;
     }
-    
+
     @Override
     public void refreshData(String... params) {
 
@@ -399,13 +399,13 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
         }
         return getBaseAct().openOutAnimation();
     }
-    
-    
+
+
     /**
      * 判断是否需要懒加载数据，此方法只会允许调用一次懒加载，如果需要界面每次重绘时都加载数据，覆写该方法，一直返回true即可
      *
      * @return {@code true} 需要懒加载，则方法{@link #lazyLoadData()}将被调用
-     *         {@code false} 不需要懒加载
+     * {@code false} 不需要懒加载
      */
     private boolean needLazyLoadData() {
         final boolean needLoad = mNeedLazeLoaded;
@@ -414,15 +414,15 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
         }
         return needLoad;
     }
-    
+
     public long getCallLazyLoadCount() {
         return mCallLazyLoadCount;
     }
-    
+
     public void clearCallLazyLoadCount() {
         mCallLazyLoadCount = 0;
     }
-    
+
     @Override
     public void cancelDisposable(Disposable disposable) {
         if (disposable != null && !disposable.isDisposed()) {

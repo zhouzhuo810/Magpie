@@ -324,7 +324,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     
     @Override
     public void showTwoBtnTextDialog(String title, String msg, String leftBtnString, String rightBtnString, boolean cancelable, DialogInterface.OnDismissListener onDismissListener, TwoBtnTextDialog.OnTwoBtnTextClick onTwoBtnClick) {
-        showTwoBtnTextDialog(title, msg, true, getString(R.string.magpie_cancel_text), getString(R.string.magpie_ok_text), cancelable, onDismissListener, onTwoBtnClick);
+        showTwoBtnTextDialog(title, msg, true, leftBtnString, rightBtnString, cancelable, onDismissListener, onTwoBtnClick);
     }
     
     @Override

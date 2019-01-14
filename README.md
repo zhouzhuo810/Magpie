@@ -326,6 +326,10 @@ it supports:
 
 ### Update Logs
 
+> 1.2.8 (Developing)
+
+- Fix `BaseActivity` several bugs.
+
 > 1.2.7 (Published)
 
 - Add `Indicator#updateText()` method in `Indicator`.
