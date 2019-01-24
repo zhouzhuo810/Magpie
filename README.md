@@ -329,6 +329,7 @@ it supports:
 > 1.2.8 (Developing)
 
 - Fix `BaseActivity` several bugs.
+- Add `setEnable` in `LvBaseAdapter` And `RvBaseAdapter`.
 
 > 1.2.7 (Published)
 

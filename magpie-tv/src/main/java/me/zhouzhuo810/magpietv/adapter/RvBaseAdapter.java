@@ -290,7 +290,13 @@ public abstract class RvBaseAdapter<T> extends RecyclerView.Adapter<RvBaseAdapte
             view.setChecked(checked);
             return this;
         }
-
+        
+        public ViewHolder setEnable(int viewId, boolean enable) {
+            View view = getView(viewId);
+            view.setEnabled(enable);
+            return this;
+        }
+        
         /**
          * 关于事件的
          */
