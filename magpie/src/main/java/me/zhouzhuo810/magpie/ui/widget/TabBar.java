@@ -563,7 +563,7 @@ public class TabBar extends LinearLayout {
                             case 1:
                                 iv1.setImageResource(pressIcons[1]);
                                 if (autoIconColor) {
-                                    ColorUtil.setIconColor(iv0, textColorPress);
+                                    ColorUtil.setIconColor(iv1, textColorPress);
                                 }
                                 tv1.setTextColor(textColorPress);
                                 if (showUnderLine) {
@@ -579,7 +579,7 @@ public class TabBar extends LinearLayout {
                             case 2:
                                 iv2.setImageResource(pressIcons[2]);
                                 if (autoIconColor) {
-                                    ColorUtil.setIconColor(iv0, textColorPress);
+                                    ColorUtil.setIconColor(iv2, textColorPress);
                                 }
                                 tv2.setTextColor(textColorPress);
                                 if (showUnderLine) {
@@ -595,7 +595,7 @@ public class TabBar extends LinearLayout {
                             case 3:
                                 iv3.setImageResource(pressIcons[3]);
                                 if (autoIconColor) {
-                                    ColorUtil.setIconColor(iv0, textColorPress);
+                                    ColorUtil.setIconColor(iv3, textColorPress);
                                 }
                                 tv3.setTextColor(textColorPress);
                                 if (showUnderLine) {
@@ -611,7 +611,7 @@ public class TabBar extends LinearLayout {
                             case 4:
                                 iv4.setImageResource(pressIcons[4]);
                                 if (autoIconColor) {
-                                    ColorUtil.setIconColor(iv0, textColorPress);
+                                    ColorUtil.setIconColor(iv4, textColorPress);
                                 }
                                 tv4.setTextColor(textColorPress);
                                 if (showUnderLine) {
@@ -643,28 +643,28 @@ public class TabBar extends LinearLayout {
                             case 1:
                                 iv1.setImageResource(normalIcons[1]);
                                 if (autoIconColor) {
-                                    ColorUtil.setIconColor(iv0, textColorNormal);
+                                    ColorUtil.setIconColor(iv1, textColorNormal);
                                 }
                                 tv1.setTextColor(textColorNormal);
                                 break;
                             case 2:
                                 iv2.setImageResource(normalIcons[2]);
                                 if (autoIconColor) {
-                                    ColorUtil.setIconColor(iv0, textColorNormal);
+                                    ColorUtil.setIconColor(iv2, textColorNormal);
                                 }
                                 tv2.setTextColor(textColorNormal);
                                 break;
                             case 3:
                                 iv3.setImageResource(normalIcons[3]);
                                 if (autoIconColor) {
-                                    ColorUtil.setIconColor(iv0, textColorNormal);
+                                    ColorUtil.setIconColor(iv3, textColorNormal);
                                 }
                                 tv3.setTextColor(textColorNormal);
                                 break;
                             case 4:
                                 iv4.setImageResource(normalIcons[4]);
                                 if (autoIconColor) {
-                                    ColorUtil.setIconColor(iv0, textColorNormal);
+                                    ColorUtil.setIconColor(iv4, textColorNormal);
                                 }
                                 tv4.setTextColor(textColorNormal);
                                 break;
