@@ -52,6 +52,7 @@
         <attr name="tb_showImg" format="boolean" />
         <attr name="tb_showText" format="boolean" />
         <attr name="tb_showUnderline" format="boolean" />
+        <attr name="tb_autoIconColor" format="boolean" />
         <attr name="tb_textSize" format="dimension|reference" />
         <attr name="tb_imageSize" format="dimension|reference" />
         <attr name="tb_textTopMargin" format="dimension|reference" />

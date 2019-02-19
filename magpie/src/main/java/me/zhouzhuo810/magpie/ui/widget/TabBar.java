@@ -17,6 +17,8 @@ import android.widget.TextView;
 import java.lang.annotation.Retention;
 
 import me.zhouzhuo810.magpie.R;
+import me.zhouzhuo810.magpie.utils.ColorUtil;
+import me.zhouzhuo810.magpie.utils.ImageUtil;
 import me.zhouzhuo810.magpie.utils.ScreenAdapterUtil;
 
 import static java.lang.annotation.RetentionPolicy.SOURCE;
@@ -69,6 +71,7 @@ public class TabBar extends LinearLayout {
     private boolean showImg;
     private boolean showText;
     private boolean showUnderLine;
+    private boolean autoIconColor;
 
     public static final int TAB_COUNT_TWO = 2;
     public static final int TAB_COUNT_THREE = 3;
@@ -160,6 +163,7 @@ public class TabBar extends LinearLayout {
             showImg = t.getBoolean(R.styleable.TabBar_tb_showImg, true);
             showText = t.getBoolean(R.styleable.TabBar_tb_showText, true);
             showUnderLine = t.getBoolean(R.styleable.TabBar_tb_showUnderline, false);
+            autoIconColor = t.getBoolean(R.styleable.TabBar_tb_autoIconColor, false);
 
             setVisible(mv0, showMarkView);
             setVisible(mv1, showMarkView);
@@ -542,6 +546,9 @@ public class TabBar extends LinearLayout {
                         switch (i) {
                             case 0:
                                 iv0.setImageResource(pressIcons[0]);
+                                if (autoIconColor) {
+                                    ColorUtil.setIconColor(iv0, textColorPress);
+                                }
                                 tv0.setTextColor(textColorPress);
                                 if (showUnderLine) {
                                     line0.setVisibility(VISIBLE);
@@ -555,6 +562,9 @@ public class TabBar extends LinearLayout {
                                 break;
                             case 1:
                                 iv1.setImageResource(pressIcons[1]);
+                                if (autoIconColor) {
+                                    ColorUtil.setIconColor(iv0, textColorPress);
+                                }
                                 tv1.setTextColor(textColorPress);
                                 if (showUnderLine) {
                                     line1.setVisibility(VISIBLE);
@@ -568,6 +578,9 @@ public class TabBar extends LinearLayout {
                                 break;
                             case 2:
                                 iv2.setImageResource(pressIcons[2]);
+                                if (autoIconColor) {
+                                    ColorUtil.setIconColor(iv0, textColorPress);
+                                }
                                 tv2.setTextColor(textColorPress);
                                 if (showUnderLine) {
                                     line2.setVisibility(VISIBLE);
@@ -581,6 +594,9 @@ public class TabBar extends LinearLayout {
                                 break;
                             case 3:
                                 iv3.setImageResource(pressIcons[3]);
+                                if (autoIconColor) {
+                                    ColorUtil.setIconColor(iv0, textColorPress);
+                                }
                                 tv3.setTextColor(textColorPress);
                                 if (showUnderLine) {
                                     line3.setVisibility(VISIBLE);
@@ -594,6 +610,9 @@ public class TabBar extends LinearLayout {
                                 break;
                             case 4:
                                 iv4.setImageResource(pressIcons[4]);
+                                if (autoIconColor) {
+                                    ColorUtil.setIconColor(iv0, textColorPress);
+                                }
                                 tv4.setTextColor(textColorPress);
                                 if (showUnderLine) {
                                     line4.setVisibility(VISIBLE);
@@ -616,22 +635,37 @@ public class TabBar extends LinearLayout {
                         switch (i) {
                             case 0:
                                 iv0.setImageResource(normalIcons[0]);
+                                if (autoIconColor) {
+                                    ColorUtil.setIconColor(iv0, textColorNormal);
+                                }
                                 tv0.setTextColor(textColorNormal);
                                 break;
                             case 1:
                                 iv1.setImageResource(normalIcons[1]);
+                                if (autoIconColor) {
+                                    ColorUtil.setIconColor(iv0, textColorNormal);
+                                }
                                 tv1.setTextColor(textColorNormal);
                                 break;
                             case 2:
                                 iv2.setImageResource(normalIcons[2]);
+                                if (autoIconColor) {
+                                    ColorUtil.setIconColor(iv0, textColorNormal);
+                                }
                                 tv2.setTextColor(textColorNormal);
                                 break;
                             case 3:
                                 iv3.setImageResource(normalIcons[3]);
+                                if (autoIconColor) {
+                                    ColorUtil.setIconColor(iv0, textColorNormal);
+                                }
                                 tv3.setTextColor(textColorNormal);
                                 break;
                             case 4:
                                 iv4.setImageResource(normalIcons[4]);
+                                if (autoIconColor) {
+                                    ColorUtil.setIconColor(iv0, textColorNormal);
+                                }
                                 tv4.setTextColor(textColorNormal);
                                 break;
                         }
