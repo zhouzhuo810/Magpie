@@ -268,7 +268,7 @@ public class TabBar extends LinearLayout {
         tv2.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         tv3.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         tv4.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-    
+        
         textSize = ScreenAdapterUtil.getInstance().getScaledValue(textSize);
     }
     
@@ -761,5 +761,53 @@ public class TabBar extends LinearLayout {
     
     public void setOnTabBarClickListener(OnTabBarClick onTabBarClick) {
         this.onTabBarClick = onTabBarClick;
+    }
+    
+    public ImageView getIv0() {
+        return iv0;
+    }
+    
+    public ImageView getIv1() {
+        return iv1;
+    }
+    
+    public ImageView getIv2() {
+        return iv2;
+    }
+    
+    public ImageView getIv3() {
+        return iv3;
+    }
+    
+    public ImageView getIv4() {
+        return iv4;
+    }
+    
+    public TextView getTv0() {
+        return tv0;
+    }
+    
+    public TextView getTv1() {
+        return tv1;
+    }
+    
+    public TextView getTv2() {
+        return tv2;
+    }
+    
+    public TextView getTv3() {
+        return tv3;
+    }
+    
+    public TextView getTv4() {
+        return tv4;
+    }
+    
+    public void setTextColorPress(int textColorPress) {
+        this.textColorPress = textColorPress;
+    }
+    
+    public void setTextColorNormal(int textColorNormal) {
+        this.textColorNormal = textColorNormal;
     }
 }

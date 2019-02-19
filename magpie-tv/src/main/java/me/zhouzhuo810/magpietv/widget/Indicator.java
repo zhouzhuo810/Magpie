@@ -749,4 +749,33 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
     private View getItem(int position) {
         return mIndicatorContainer.getChildAt(position);
     }
+    
+    
+    public void setTabTextColorSelect(int tabTextColorSelect) {
+        this.tabTextColorSelect = tabTextColorSelect;
+    }
+    
+    public void setTabTextColorUnSelect(int tabTextColorUnSelect) {
+        this.tabTextColorUnSelect = tabTextColorUnSelect;
+    }
+    
+    public void setUnderlineColor(int underlineColor) {
+        this.underlineColor = underlineColor;
+        underlinePaint.setColor(this.underlineColor);
+    }
+    
+    public void update() {
+        switch (indicatorType) {
+            case TabWithIcon:
+                selectIcon(currentPosition);
+                break;
+            case TabWithText:
+                selectText(currentPosition);
+                break;
+            case TabWithIconAndText:
+                selectIconAndText(currentPosition);
+                break;
+        }
+        invalidate();
+    }
 }

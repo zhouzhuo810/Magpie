@@ -21,7 +21,7 @@ allprojects {
 > For Phone And Pad.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.2.7'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.2.8'
 ```
 
 If you use this. That means you added dependencies below:
@@ -59,7 +59,7 @@ If you use this. That means you added dependencies below:
 > For Android TV.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.2.7'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.2.8'
 ```
 
 If you use this. That means you added dependencies below:
@@ -326,10 +326,14 @@ it supports:
 
 ### Update Logs
 
-> 1.2.8 (Developing)
+> 1.2.8 (Published)
 
 - Fix `BaseActivity` several bugs.
 - Add `setEnable` in `LvBaseAdapter` And `RvBaseAdapter`.
+- Add `FileChooser` util.
+- Add `OSUtils` util.
+- Add `PhotoUtil` util.
+- Add `StatusBarUtil` util.
 
 > 1.2.7 (Published)
 

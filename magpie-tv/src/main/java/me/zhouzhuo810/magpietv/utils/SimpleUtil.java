@@ -68,7 +68,7 @@ public class SimpleUtil {
     public static String getString(@StringRes int resId) {
         return BaseUtil.getApp().getString(resId);
     }
-
+    
     /**
      * 获取颜色资源
      *
@@ -78,7 +78,7 @@ public class SimpleUtil {
     public static int getColor(@ColorRes int resId) {
         return BaseUtil.getApp().getResources().getColor(resId);
     }
-
+    
     /**
      * 获取字符串数组资源
      *
@@ -129,4 +129,5 @@ public class SimpleUtil {
         }
         return new DecimalFormat(pattern.toString()).format(f);
     }
+    
 }

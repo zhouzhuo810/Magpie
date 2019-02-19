@@ -1,9 +1,12 @@
 package me.zhouzhuo810.magpietv.utils;
 
+import android.graphics.Color;
+import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
 import android.os.Build;
 import android.support.annotation.ColorRes;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.lang.reflect.Method;
@@ -45,6 +48,21 @@ public class ViewUtil {
             textView.setPaintFlags(textView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         } else {
             textView.setPaintFlags(textView.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+        }
+    }
+    
+    
+    //设置图标的颜色
+    public static void setIconColor(ImageView icon, int color) {
+        int r = Color.red(color);
+        int g = Color.green(color);
+        int b = Color.blue(color);
+        int a = Color.alpha(color);
+        float[] colorMatrix = new float[]{0, 0, 0, 0, r, 0, 0, 0, 0, g, 0, 0, 0, 0, b, 0, 0, 0, (float) a / 255, 0};
+        try {
+            icon.setColorFilter(new ColorMatrixColorFilter(colorMatrix));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

@@ -1447,7 +1447,7 @@ public class DateUtil {
     public static String get_MdHs() {
         return new SimpleDateFormat("MM-dd HH:mm", Locale.getDefault()).format(new Date());
     }
-
+    
     public static String get_yMd(Date date) {
         return new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(date);
     }
@@ -1499,6 +1499,7 @@ public class DateUtil {
     
     /**
      * 获取某天是星期几
+     *
      * @param y 年
      * @param m 月
      * @param d 日
@@ -1512,6 +1513,7 @@ public class DateUtil {
     
     /**
      * 获取某天距离该年元旦的天数
+     *
      * @param y 年
      * @param m 月
      * @param d 日
@@ -1528,6 +1530,7 @@ public class DateUtil {
     
     /**
      * 获取某月份的天数
+     *
      * @param y 年
      * @param m 月
      * @return 天数
@@ -1573,6 +1576,125 @@ public class DateUtil {
                 break;
         }
         return day;
+    }
+    
+    /**
+     * 获取y年m月的第一天
+     */
+    public static long getMonthFirstDay(int y, int m) {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, y);
+        c.set(Calendar.MONTH, m - 1);
+        c.set(Calendar.DAY_OF_MONTH, 1);
+        c.set(Calendar.HOUR_OF_DAY, 0);
+        c.set(Calendar.MINUTE, 0);
+        c.set(Calendar.SECOND, 0);
+        c.set(Calendar.MILLISECOND, 0);
+        return c.getTimeInMillis();
+    }
+    
+    /**
+     * 获取y年m月的下个月第一天
+     */
+    public static long getMonthLastDay(int y, int m) {
+        Calendar c = Calendar.getInstance();
+        if (m == 12) {
+            c.set(Calendar.YEAR, y + 1);
+            c.set(Calendar.MONTH, 0);
+            c.set(Calendar.DAY_OF_MONTH, 1);
+            c.set(Calendar.HOUR_OF_DAY, 0);
+            c.set(Calendar.MINUTE, 0);
+            c.set(Calendar.SECOND, 0);
+            c.set(Calendar.MILLISECOND, 0);
+        } else {
+            c.set(Calendar.YEAR, y);
+            c.set(Calendar.MONTH, m);
+            c.set(Calendar.DAY_OF_MONTH, 1);
+            c.set(Calendar.HOUR_OF_DAY, 0);
+            c.set(Calendar.MINUTE, 0);
+            c.set(Calendar.SECOND, 0);
+            c.set(Calendar.MILLISECOND, 0);
+        }
+        return c.getTimeInMillis();
+    }
+    
+    /**
+     * 获取y年m月d日对应周的第一天（按周一为第一天计算）
+     */
+    public static long getWeekFirstDay(int y, int m, int d) {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, y);
+        c.set(Calendar.MONTH, m - 1);
+        c.set(Calendar.DAY_OF_MONTH, d);
+        c.set(Calendar.HOUR_OF_DAY, 0);
+        c.set(Calendar.MINUTE, 0);
+        c.set(Calendar.SECOND, 0);
+        c.set(Calendar.MILLISECOND, 0);
+        int i = c.get(Calendar.DAY_OF_WEEK);
+        if (i == 1) {
+            c.add(Calendar.DAY_OF_YEAR, -6);
+        } else {
+            c.add(Calendar.DAY_OF_YEAR, -i + 2);
+        }
+        return c.getTimeInMillis();
+    }
+    
+    /**
+     * 获取y年m月d日对应周的上一周的第一天（按周一为第一天计算）
+     */
+    public static long getLastWeekFirstDay(int y, int m, int d) {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, y);
+        c.set(Calendar.MONTH, m - 1);
+        c.set(Calendar.DAY_OF_MONTH, d);
+        c.set(Calendar.HOUR_OF_DAY, 0);
+        c.set(Calendar.MINUTE, 0);
+        c.set(Calendar.SECOND, 0);
+        c.set(Calendar.MILLISECOND, 0);
+        int i = c.get(Calendar.DAY_OF_WEEK);
+        if (i == 1) {
+            c.add(Calendar.DAY_OF_YEAR, -6);
+        } else {
+            c.add(Calendar.DAY_OF_YEAR, -i + 2);
+        }
+        c.add(Calendar.DAY_OF_YEAR, -7);
+        return c.getTimeInMillis();
+    }
+    
+    /**
+     * 获取y年m月d日对应周的下一周的第一天（按周一为第一天计算）
+     */
+    public static long getWeekLastDay(int y, int m, int d) {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, y);
+        c.set(Calendar.MONTH, m - 1);
+        c.set(Calendar.DAY_OF_MONTH, d);
+        c.set(Calendar.HOUR_OF_DAY, 0);
+        c.set(Calendar.MINUTE, 0);
+        c.set(Calendar.SECOND, 0);
+        c.set(Calendar.MILLISECOND, 0);
+        int i = c.get(Calendar.DAY_OF_WEEK);
+        if (i == 1) {
+            c.add(Calendar.DAY_OF_YEAR, -6);
+        } else {
+            c.add(Calendar.DAY_OF_YEAR, -i + 2);
+        }
+        c.add(Calendar.DAY_OF_YEAR, 7);
+        return c.getTimeInMillis();
+    }
+    
+    /**
+     * 格式化日期
+     */
+    public static String formatDate(long timeMills, String pattern) {
+        return new SimpleDateFormat(pattern, Locale.getDefault()).format(new Date(timeMills));
+    }
+    
+    /**
+     * 格式化日期
+     */
+    public static String formatDate(Date date, String pattern) {
+        return new SimpleDateFormat(pattern, Locale.getDefault()).format(date);
     }
     
 }

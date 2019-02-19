@@ -6,7 +6,10 @@ import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
+import android.support.annotation.ColorInt;
+import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.util.Linkify;
@@ -287,6 +290,24 @@ public abstract class RvBaseAdapter<T> extends RecyclerView.Adapter<RvBaseAdapte
         public ViewHolder setEnable(int viewId, boolean enable) {
             View view = getView(viewId);
             view.setEnabled(enable);
+            return this;
+        }
+        
+        public ViewHolder setShapeColor(int viewId, @ColorInt int color) {
+            View view = getView(viewId);
+            if (view.getBackground() instanceof GradientDrawable) {
+                GradientDrawable drawable = (GradientDrawable) view.getBackground();
+                drawable.setColor(color);
+            }
+            return this;
+        }
+        
+        public ViewHolder setShapeColorRes(int viewId, @ColorRes int colorRes) {
+            View view = getView(viewId);
+            if (view.getBackground() instanceof GradientDrawable) {
+                GradientDrawable drawable = (GradientDrawable) view.getBackground();
+                drawable.setColor(mContext.getResources().getColor(colorRes));
+            }
             return this;
         }
         

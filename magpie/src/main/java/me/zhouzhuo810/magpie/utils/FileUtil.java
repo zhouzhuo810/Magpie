@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.UUID;
 
 /**
  * 文件操作工具类
@@ -114,5 +115,12 @@ public class FileUtil {
             }
         }
     }
-
+    
+    /**
+     * 随机生产文件名
+     */
+    public static String generateFileName() {
+        return UUID.randomUUID().toString();
+    }
+    
 }
