@@ -326,6 +326,11 @@ it supports:
 
 ### Update Logs
 
+> 1.3.1 (Developing)
+
+- Add `icon_bg_selector.xml`.
+- Add `getFileToByteArrayFromAssets()` method to `AssetsUtil`.
+
 > 1.3.0 (Published)
 
 - Add `AutoIconColor` attr in `TabBar`.

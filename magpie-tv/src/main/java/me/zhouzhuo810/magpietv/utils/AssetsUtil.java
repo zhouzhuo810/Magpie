@@ -4,6 +4,7 @@ import android.content.res.AssetManager;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 
 /**
@@ -34,5 +35,27 @@ public class AssetsUtil {
             e.printStackTrace();
         }
         return stringBuilder.toString();
+    }
+    
+    /**
+     * 获取assets文件的字节内容
+     *
+     * @param path 文件路径
+     * @return 内容
+     */
+    public static byte[] getFileToByteArrayFromAssets(String path) {
+        try {
+            //获取assets资源管理器
+            AssetManager assetManager = BaseUtil.getApp().getAssets();
+            InputStream is = assetManager.open(path);
+            int size = is.available();
+            byte[] bytes = new byte[size];
+            int read = is.read(bytes);
+            is.close();
+            return bytes;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
