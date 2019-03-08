@@ -99,12 +99,12 @@ public class StatusBarUtil {
      */
     public static boolean setStatusBarDarkTheme(Activity activity, boolean dark) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                setStatusBarFontIconDark(activity, TYPE_M, dark);
-            } else if (OSUtils.isMiui()) {
+            if (OSUtils.isMiui()) {
                 setStatusBarFontIconDark(activity, TYPE_MIUI, dark);
             } else if (OSUtils.isFlyme()) {
                 setStatusBarFontIconDark(activity, TYPE_FLYME, dark);
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                setStatusBarFontIconDark(activity, TYPE_M, dark);
             } else {//其他情况
                 return false;
             }
@@ -145,6 +145,7 @@ public class StatusBarUtil {
                 }
                 return true;
             }
+
         }
         return false;
         

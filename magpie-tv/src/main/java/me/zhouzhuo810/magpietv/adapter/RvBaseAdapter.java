@@ -303,7 +303,7 @@ public abstract class RvBaseAdapter<T> extends RecyclerView.Adapter<RvBaseAdapte
         public ViewHolder setShapeColor(int viewId, @ColorInt int color) {
             View view = getView(viewId);
             if (view.getBackground() instanceof GradientDrawable) {
-                GradientDrawable drawable = (GradientDrawable) view.getBackground();
+                GradientDrawable drawable = (GradientDrawable) view.getBackground().mutate();
                 drawable.setColor(color);
             }
             return this;
@@ -312,7 +312,7 @@ public abstract class RvBaseAdapter<T> extends RecyclerView.Adapter<RvBaseAdapte
         public ViewHolder setShapeColorRes(int viewId, @ColorRes int colorRes) {
             View view = getView(viewId);
             if (view.getBackground() instanceof GradientDrawable) {
-                GradientDrawable drawable = (GradientDrawable) view.getBackground();
+                GradientDrawable drawable = (GradientDrawable) view.getBackground().mutate();
                 drawable.setColor(mContext.getResources().getColor(colorRes));
             }
             return this;

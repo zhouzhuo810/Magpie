@@ -354,7 +354,7 @@ public abstract class LvBaseAdapter<T> extends BaseAdapter {
         public ViewHolder setShapeColor(int viewId, @ColorInt int color) {
             View view = getView(viewId);
             if (view.getBackground() instanceof GradientDrawable) {
-                GradientDrawable drawable = (GradientDrawable) view.getBackground();
+                GradientDrawable drawable = (GradientDrawable) view.getBackground().mutate();
                 drawable.setColor(color);
             }
             return this;
@@ -363,7 +363,7 @@ public abstract class LvBaseAdapter<T> extends BaseAdapter {
         public ViewHolder setShapeColorRes(int viewId, @ColorRes int colorRes) {
             View view = getView(viewId);
             if (view.getBackground() instanceof GradientDrawable) {
-                GradientDrawable drawable = (GradientDrawable) view.getBackground();
+                GradientDrawable drawable = (GradientDrawable) view.getBackground().mutate();
                 drawable.setColor(mContext.getResources().getColor(colorRes));
             }
             return this;
