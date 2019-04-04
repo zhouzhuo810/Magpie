@@ -21,22 +21,22 @@ allprojects {
 > For Phone And Pad.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.3.0'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.3.1'
 ```
 
 If you use this. That means you added dependencies below:
 ```
     //v7
-    api 'com.android.support:appcompat-v7:27.1.1'
+    api 'com.android.support:appcompat-v7:28.0.0'
     //RecyclerView
-    api 'com.android.support:recyclerview-v7:27.1.1'
+    api 'com.android.support:recyclerview-v7:28.0.0'
     //BaseRecyclerViewAdapterHelper
-    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.40'
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.46'
     //EventBus
     api 'org.greenrobot:eventbus:3.1.1'
     //Glide
-    api 'com.github.bumptech.glide:glide:4.8.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
+    api 'com.github.bumptech.glide:glide:4.9.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
     //RxJava2
     api "io.reactivex.rxjava2:rxjava:2.2.2"
     //RxAndroid2
@@ -59,15 +59,15 @@ If you use this. That means you added dependencies below:
 > For Android TV.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.3.0'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.3.1'
 ```
 
 If you use this. That means you added dependencies below:
 ```
     //v7
-    api 'com.android.support:appcompat-v7:27.1.1'
+    api 'com.android.support:appcompat-v7:28.0.0'
     //RecyclerView
-    api 'com.android.support:recyclerview-v7:27.1.1'
+    api 'com.android.support:recyclerview-v7:28.0.0'
     //EventBus
     api 'org.greenrobot:eventbus:3.1.1'
     //RxJava2
@@ -326,10 +326,11 @@ it supports:
 
 ### Update Logs
 
-> 1.3.1 (Developing)
+> 1.3.1 (Published)
 
 - Add `icon_bg_selector.xml`.
 - Add `getFileToByteArrayFromAssets()` method to `AssetsUtil`.
+- Upgrade support version to 28.0.0.
 
 > 1.3.0 (Published)
 
