@@ -32,7 +32,6 @@
   **[] $VALUES;
   public *;
 }
--keepresourcexmlelements manifest/application/meta-data@value=GlideModule
 ##---------------End: proguard configuration for Glide  ----------
 
 
