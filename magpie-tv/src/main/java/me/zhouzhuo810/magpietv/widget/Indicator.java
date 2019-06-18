@@ -206,13 +206,8 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
     }
     
     private void initParams() {
-        if (indicatorType == IndicatorType.TabWithIcon) {
-            defaultTabLayoutParams = new LinearLayout.LayoutParams(tabIconSize, tabIconSize);
-            expandedTabLayoutParams = new LinearLayout.LayoutParams(0, tabIconSize, 1.0f);
-        } else {
-            defaultTabLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
-            expandedTabLayoutParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1.0f);
-        }
+        defaultTabLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        expandedTabLayoutParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1.0f);
     }
     
     @Override
@@ -521,15 +516,15 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
                 
                 @Override
                 public void onPageScrollStateChanged(int state) {
-//                    switch (indicatorType) {
-//                        case TabWithIcon:
-//                        case TabWithText:
-//                        case TabWithIconAndText:
-//                            if (state == ViewPager.SCROLL_STATE_IDLE) {
-//                                scrollToChild(mViewPager.getCurrentItem(), 0);
-//                            }
-//                            break;
-//                    }
+                    //                    switch (indicatorType) {
+                    //                        case TabWithIcon:
+                    //                        case TabWithText:
+                    //                        case TabWithIconAndText:
+                    //                            if (state == ViewPager.SCROLL_STATE_IDLE) {
+                    //                                scrollToChild(mViewPager.getCurrentItem(), 0);
+                    //                            }
+                    //                            break;
+                    //                    }
                 }
             };
             mViewPager.addOnPageChangeListener(mOnPageChangeListener);
@@ -645,7 +640,6 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
             }
         }
     }
-    
     
     
     public void selectText(int position) {
