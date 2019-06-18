@@ -12,6 +12,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
 
         <!--设计图的宽,单位是像素,推荐用markman测量,量出来如果是750px那么请尽量去找ui设计师要一份android的设计图.-->

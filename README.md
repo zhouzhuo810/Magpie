@@ -21,7 +21,7 @@ allprojects {
 > For Phone And Pad.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.3.1'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.3.2'
 ```
 
 If you use this. That means you added dependencies below:
@@ -59,7 +59,7 @@ If you use this. That means you added dependencies below:
 > For Android TV.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.3.1'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.3.2'
 ```
 
 If you use this. That means you added dependencies below:
@@ -325,6 +325,11 @@ it supports:
 > It's for sharing Text or File to other app.
 
 ### Update Logs
+
+> 1.3.2 (Published)
+
+- Fix `Indicator` several bugs.
+- Fix `MarkView` several bugs.
 
 > 1.3.1 (Published)
 

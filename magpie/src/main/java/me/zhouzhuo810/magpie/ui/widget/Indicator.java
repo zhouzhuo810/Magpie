@@ -206,13 +206,8 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
     }
     
     private void initParams() {
-        if (indicatorType == IndicatorType.TabWithIcon) {
-            defaultTabLayoutParams = new LinearLayout.LayoutParams(tabIconSize, tabIconSize);
-            expandedTabLayoutParams = new LinearLayout.LayoutParams(0, tabIconSize, 1.0f);
-        } else {
-            defaultTabLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
-            expandedTabLayoutParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1.0f);
-        }
+        defaultTabLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        expandedTabLayoutParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1.0f);
     }
     
     @Override
@@ -381,14 +376,13 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
             return;
         }
         if (mViewPager.getAdapter() != null) {
+            if (!(mViewPager.getAdapter() instanceof IResProvider)) {
+                throw new RuntimeException("ViewPager 's Adapter must implement IResProvider.");
+            }
             for (int i = 0; i < mViewPager.getAdapter().getCount(); i++) {
                 ImageView iv = new ImageView(getContext());
-                if (mViewPager.getAdapter() instanceof IResProvider) {
-                    int icon = ((IResProvider) mViewPager.getAdapter()).getUnselectedIcon(i);
-                    iv.setImageResource(icon);
-                } else {
-                    throw new RuntimeException("ViewPager 's Adapter must implement IResProvider.");
-                }
+                int icon = ((IResProvider) mViewPager.getAdapter()).getUnselectedIcon(i);
+                iv.setImageResource(icon);
                 
                 TextView tv = new TextView(getContext());
                 tv.setGravity(Gravity.CENTER);
@@ -425,18 +419,21 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
             return;
         }
         if (mViewPager.getAdapter() != null) {
+            if (!(mViewPager.getAdapter() instanceof IResProvider)) {
+                throw new RuntimeException("ViewPager 's Adapter must implement IResProvider.");
+            }
+            LinearLayout.LayoutParams ivParams = new LinearLayout.LayoutParams(tabIconSize, tabIconSize);
             for (int i = 0; i < mViewPager.getAdapter().getCount(); i++) {
                 ImageView iv = new ImageView(getContext());
-                iv.setFocusable(true);
-                iv.setClickable(true);
-                if (mViewPager.getAdapter() instanceof IResProvider) {
-                    int icon = ((IResProvider) mViewPager.getAdapter()).getUnselectedIcon(i);
-                    iv.setImageResource(icon);
-                } else {
-                    throw new RuntimeException("ViewPager 's Adapter must implement IResProvider.");
-                }
+                int icon = ((IResProvider) mViewPager.getAdapter()).getUnselectedIcon(i);
+                iv.setImageResource(icon);
+                
+                LinearLayout ll = new LinearLayout(getContext());
+                ll.setGravity(Gravity.CENTER);
+                ll.addView(iv, 0, ivParams);
+                ll.setPadding(tabPadding, 0, tabPadding, 0);
                 final int finalI = i;
-                iv.setOnClickListener(new OnClickListener() {
+                ll.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         setCurrentItem(finalI, true);
@@ -446,7 +443,7 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
                     defaultTabLayoutParams.leftMargin = tabPadding;
                     defaultTabLayoutParams.rightMargin = tabPadding;
                 }
-                mIndicatorContainer.addView(iv, i, shouldExpand ? expandedTabLayoutParams : defaultTabLayoutParams);
+                mIndicatorContainer.addView(ll, i, shouldExpand ? expandedTabLayoutParams : defaultTabLayoutParams);
             }
         }
         
@@ -492,7 +489,7 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
                         case TabWithText:
                         case TabWithIconAndText:
                             if (position >= 0 && position < mIndicatorContainer.getChildCount()) {
-                                scrollToChild(position, (int) (positionOffset * mIndicatorContainer.getChildAt(position).getWidth()));
+                                scrollToChild(position, positionOffset);
                             }
                             break;
                     }
@@ -517,15 +514,15 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
                 
                 @Override
                 public void onPageScrollStateChanged(int state) {
-                    switch (indicatorType) {
-                        case TabWithIcon:
-                        case TabWithText:
-                        case TabWithIconAndText:
-                            if (state == ViewPager.SCROLL_STATE_IDLE) {
-                                scrollToChild(mViewPager.getCurrentItem(), 0);
-                            }
-                            break;
-                    }
+                    //                    switch (indicatorType) {
+                    //                        case TabWithIcon:
+                    //                        case TabWithText:
+                    //                        case TabWithIconAndText:
+                    //                            if (state == ViewPager.SCROLL_STATE_IDLE) {
+                    //                                scrollToChild(mViewPager.getCurrentItem(), 0);
+                    //                            }
+                    //                            break;
+                    //                    }
                 }
             };
             mViewPager.addOnPageChangeListener(mOnPageChangeListener);
@@ -594,14 +591,19 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
         };
     }
     
-    private void scrollToChild(int position, int offset) {
+    private void scrollToChild(int position, float offset) {
         
         if (tabCount == 0) {
             return;
         }
         
-        if (getItem(position) != null) {
-            int newScrollX = getItem(position).getLeft() + offset;
+        View selectedChild = getItem(position);
+        if (selectedChild != null) {
+            int selectedWidth = selectedChild.getWidth();
+            View nextChild = position + 1 < mIndicatorContainer.getChildCount() ? mIndicatorContainer.getChildAt(position + 1) : null;
+            int nextWidth = nextChild != null ? nextChild.getWidth() : 0;
+            int scrollOffset = (int) ((float) (selectedWidth + nextWidth) * 0.5F * offset);
+            int newScrollX = selectedChild.getLeft() + selectedWidth / 2 - this.getWidth() / 2 + scrollOffset;
             
             if (newScrollX != lastScrollX) {
                 lastScrollX = newScrollX;
@@ -611,24 +613,30 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
         
     }
     
-    public void selectIcon(int position) {
+    private void selectIcon(int position) {
         if (mViewPager == null) {
             return;
         }
         if (mViewPager.getAdapter() != null) {
             for (int i = 0; i < mViewPager.getAdapter().getCount(); i++) {
-                ImageView iv = (ImageView) getItem(i);
+                LinearLayout ll = (LinearLayout) getItem(i);
+                ImageView iv = (ImageView) ll.getChildAt(0);
                 if (i == position) {
+                    if (tabBgSelectId != -1) {
+                        ll.setBackgroundResource(tabBgSelectId);
+                    }
                     int icon = ((IResProvider) mViewPager.getAdapter()).getSelectedIcon(i);
                     iv.setImageResource(icon);
                 } else {
+                    if (tabBgNormalId != -1) {
+                        ll.setBackgroundResource(tabBgNormalId);
+                    }
                     int icon = ((IResProvider) mViewPager.getAdapter()).getUnselectedIcon(i);
                     iv.setImageResource(icon);
                 }
             }
         }
     }
-    
     
     public void selectText(int position) {
         if (mViewPager == null) {
@@ -655,6 +663,9 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
     }
     
     public void setTabTextIconOrientation(TabOrientation orientation) {
+        if (indicatorType != IndicatorType.TabWithIconAndText) {
+            return;
+        }
         this.tabTextIconOrientation = orientation;
         switch (orientation) {
             case VERTICAL:
@@ -706,6 +717,9 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
             return;
         }
         if (mViewPager.getAdapter() != null) {
+            if (!(mViewPager.getAdapter() instanceof IResProvider)) {
+                throw new RuntimeException("ViewPager 's Adapter must implement IResProvider.");
+            }
             for (int i = 0; i < mViewPager.getAdapter().getCount(); i++) {
                 LinearLayout ll = (LinearLayout) getItem(i);
                 ImageView iv = (ImageView) ll.getChildAt(0);
@@ -717,12 +731,8 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
                     if (tabBgSelectId != -1) {
                         ll.setBackgroundResource(tabBgSelectId);
                     }
-                    if (mViewPager.getAdapter() instanceof IResProvider) {
-                        int icon = ((IResProvider) mViewPager.getAdapter()).getSelectedIcon(i);
-                        iv.setImageResource(icon);
-                    } else {
-                        throw new RuntimeException("ViewPager 's Adapter must implement IResProvider.");
-                    }
+                    int icon = ((IResProvider) mViewPager.getAdapter()).getSelectedIcon(i);
+                    iv.setImageResource(icon);
                 } else {
                     if (horizontalHideIconMode && tabTextIconOrientation == TabOrientation.HORIZONTAL) {
                         iv.setVisibility(GONE);
@@ -734,12 +744,8 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
                     if (tabBgNormalId != -1) {
                         ll.setBackgroundResource(tabBgNormalId);
                     }
-                    if (mViewPager.getAdapter() instanceof IResProvider) {
-                        int icon = ((IResProvider) mViewPager.getAdapter()).getUnselectedIcon(i);
-                        iv.setImageResource(icon);
-                    } else {
-                        throw new RuntimeException("ViewPager 's Adapter must implement IResProvider.");
-                    }
+                    int icon = ((IResProvider) mViewPager.getAdapter()).getUnselectedIcon(i);
+                    iv.setImageResource(icon);
                 }
             }
         }
