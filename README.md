@@ -21,7 +21,7 @@ allprojects {
 > For Phone And Pad.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.3.3'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.3.4'
 ```
 
 If you use this. That means you added dependencies below:
@@ -59,7 +59,7 @@ If you use this. That means you added dependencies below:
 > For Android TV.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.3.3'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.3.4'
 ```
 
 If you use this. That means you added dependencies below:
@@ -325,6 +325,9 @@ it supports:
 > It's for sharing Text or File to other app.
 
 ### Update Logs
+
+> 1.3.4 (Published)
+- Add vertical `GapLine` support for `Indicator`.
 
 > 1.3.3 (Published)
 > 1.3.2 (Published)

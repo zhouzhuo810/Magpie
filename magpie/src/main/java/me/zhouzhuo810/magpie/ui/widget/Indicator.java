@@ -41,6 +41,7 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
     private Paint selectPaint;
     private Paint unSelectPaint;
     private Paint underlinePaint;
+    private Paint gapLinePaint;
     private int colorSelectPoint = 0xff438cff;
     private int colorUnSelectPoint = 0xff000000;
     private int selectPointSize = 100;
@@ -48,6 +49,10 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
     private int spacing = 8;
     
     private boolean showUnderline = true;
+    private boolean showGapLine = false;
+    private int gapLineColor = 0xff000000;
+    private int gapLineWidth = 1;
+    private int gapLinePadding = 0;
     private int tabTextColorSelect = 0xff438cff;
     private int tabTextColorUnSelect = 0xff000000;
     private int tabTextSizeUnSelect = 30;
@@ -126,6 +131,10 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
             tabTextSizeSelect = a.getDimensionPixelSize(R.styleable.Indicator_i_selectTabTextSize, 40);
             tabTextSizeUnSelect = a.getDimensionPixelSize(R.styleable.Indicator_i_normalTabTextSize, 40);
             tabIconTextMargin = a.getDimensionPixelSize(R.styleable.Indicator_i_tabIconTextMargin, 10);
+            showGapLine = a.getBoolean(R.styleable.Indicator_i_showGapLine, false);
+            gapLineWidth = a.getDimensionPixelSize(R.styleable.Indicator_i_gapLineWidth, 1);
+            gapLinePadding = a.getDimensionPixelSize(R.styleable.Indicator_i_gapLinePadding, 0);
+            gapLineColor = a.getColor(R.styleable.Indicator_i_gapLineColor, 0xff000000);
             showUnderline = a.getBoolean(R.styleable.Indicator_i_showUnderline, true);
             underlineHeight = a.getDimensionPixelSize(R.styleable.Indicator_i_underlineHeight, 10);
             underlinePadding = a.getDimensionPixelSize(R.styleable.Indicator_i_underlinePadding, 20);
@@ -145,6 +154,8 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
                 underlinePadding = ScreenAdapterUtil.getInstance().getScaledValue(underlinePadding);
                 tabPadding = ScreenAdapterUtil.getInstance().getScaledValue(tabPadding);
                 tabIconSize = ScreenAdapterUtil.getInstance().getScaledValue(tabIconSize);
+                gapLineWidth = ScreenAdapterUtil.getInstance().getScaledValue(gapLineWidth);
+                gapLinePadding = ScreenAdapterUtil.getInstance().getScaledValue(gapLinePadding);
             }
             
             switch (indicatorInt) {
@@ -195,6 +206,10 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
         underlinePaint.setColor(underlineColor);
         underlinePaint.setStyle(Paint.Style.FILL);
         underlinePaint.setAntiAlias(true);
+        gapLinePaint = new Paint();
+        gapLinePaint.setColor(gapLineColor);
+        gapLinePaint.setStyle(Paint.Style.FILL);
+        gapLinePaint.setAntiAlias(true);
     }
     
     private void initContainer(Context context) {
@@ -222,7 +237,23 @@ public class Indicator extends HorizontalScrollView implements IPagerIndicator {
             case TabWithIconAndText:
                 if (showUnderline)
                     drawUnderline(canvas);
+                if (showGapLine)
+                    drawGapLine(canvas);
                 break;
+        }
+    }
+    
+    private void drawGapLine(Canvas canvas) {
+        if (mViewPager != null) {
+            for (int i = 0; i < mIndicatorContainer.getChildCount() - 1; i++) {
+                View item = getItem(i);
+                if (item != null) {
+                    float lineLeft = item.getRight() - gapLineWidth / 2.0f;
+                    float topY = item.getTop() + gapLinePadding;
+                    float bottomY = item.getBottom() - gapLinePadding;
+                    canvas.drawRect(lineLeft, topY, lineLeft + gapLineWidth, bottomY, gapLinePaint);
+                }
+            }
         }
     }
     

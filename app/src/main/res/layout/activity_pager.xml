@@ -17,6 +17,11 @@
         app:i_shouldTabExpand="false"
         app:i_showUnderline="true"
         app:i_tabIconSize="@dimen/base_indicator_icon_size"
+        app:i_showGapLine="true"
+        app:i_gapLineColor="@color/colorBlack40"
+        app:i_gapLineWidth="2px"
+        app:i_gapLinePadding="10px"
+        app:i_underlinePadding="0px"
         app:i_underlineColor="@color/colorPrimary"
         app:i_underlineHeight="@dimen/base_indicator_underline_height" />
 
