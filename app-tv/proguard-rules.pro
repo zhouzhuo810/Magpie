@@ -34,4 +34,11 @@
 ##---------------End: proguard configuration for AndPermission  ----------
 
 
+##---------------Begin: proguard configuration for ToastUtils  ----------
+-keep class com.hjq.toast.** {*;}
+##---------------End: proguard configuration for ToastUtils  ----------
+
+
+
+
 

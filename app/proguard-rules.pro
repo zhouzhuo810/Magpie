@@ -102,6 +102,12 @@
  -keep interface me.jessyan.progressmanager.** { *; }
 ##---------------End: proguard configuration for ProgressManager  ----------
 
+##---------------Begin: proguard configuration for ToastUtils  ----------
+-keep class com.hjq.toast.** {*;}
+##---------------End: proguard configuration for ToastUtils  ----------
+
+
+
 
 
 

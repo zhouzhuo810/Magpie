@@ -21,7 +21,7 @@ allprojects {
 > For Phone And Pad.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.3.4'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.3.5'
 ```
 
 If you use this. That means you added dependencies below:
@@ -53,13 +53,15 @@ If you use this. That means you added dependencies below:
     api 'me.jessyan:progressmanager:1.5.0'
     //AndPermission
     api 'com.yanzhenjie:permission:2.0.0-rc12'
+    //ToastUtils
+    api 'com.hjq:toast:6.0'
 
 ```
 
 > For Android TV.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.3.4'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.3.5'
 ```
 
 If you use this. That means you added dependencies below:
@@ -78,7 +80,8 @@ If you use this. That means you added dependencies below:
     api 'me.zhouzhuo.zzhorizontalprogressbar:zz-horizontal-progressbar:1.1.0'
     //AndPermission
     api 'com.yanzhenjie:permission:2.0.0-rc12'
-
+    //ToastUtils
+    api 'com.hjq:toast:6.0'
 ```
 
 #### Screen Adapter
@@ -325,6 +328,9 @@ it supports:
 > It's for sharing Text or File to other app.
 
 ### Update Logs
+
+> 1.3.5 (Published)
+- Fix `Toast` not show when Notification Permission closed.
 
 > 1.3.4 (Published)
 - Add vertical `GapLine` support for `Indicator`.

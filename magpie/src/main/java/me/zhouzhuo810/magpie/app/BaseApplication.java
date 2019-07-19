@@ -3,6 +3,9 @@ package me.zhouzhuo810.magpie.app;
 import android.app.Application;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.view.Gravity;
+
+import com.hjq.toast.ToastUtils;
 
 import me.zhouzhuo810.magpie.cons.Cons;
 import me.zhouzhuo810.magpie.utils.BaseUtil;
@@ -17,6 +20,9 @@ public abstract class BaseApplication extends Application {
         super.onCreate();
     
         BaseUtil.init(this);
+    
+        ToastUtils.init(this);
+        ToastUtils.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.BOTTOM, 0, SimpleUtil.getScaledValue(200));
     }
     
     @Override

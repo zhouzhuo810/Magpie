@@ -9,8 +9,8 @@ android {
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 24
-        versionName "3.3"
+        versionCode 25
+        versionName "3.4"
     }
 
     buildTypes {
@@ -63,5 +63,7 @@ dependencies {
     api 'me.zhouzhuo.zzhorizontalprogressbar:zz-horizontal-progressbar:1.1.0'
     //AndPermission
     api 'com.yanzhenjie.permission:support:2.0.1'
+    //ToastUtils
+    api 'com.hjq:toast:6.0'
 
 }
