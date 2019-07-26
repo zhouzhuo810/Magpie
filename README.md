@@ -21,7 +21,7 @@ allprojects {
 > For Phone And Pad.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.3.5'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.3.6'
 ```
 
 If you use this. That means you added dependencies below:
@@ -54,14 +54,14 @@ If you use this. That means you added dependencies below:
     //AndPermission
     api 'com.yanzhenjie:permission:2.0.0-rc12'
     //ToastUtils
-    api 'com.hjq:toast:6.0'
+    api 'com.hjq:toast:8.0'
 
 ```
 
 > For Android TV.
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.3.5'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.3.6'
 ```
 
 If you use this. That means you added dependencies below:
@@ -81,7 +81,7 @@ If you use this. That means you added dependencies below:
     //AndPermission
     api 'com.yanzhenjie:permission:2.0.0-rc12'
     //ToastUtils
-    api 'com.hjq:toast:6.0'
+    api 'com.hjq:toast:8.0'
 ```
 
 #### Screen Adapter
