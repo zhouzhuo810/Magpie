@@ -21,7 +21,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.3.7'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.3.8'
 ```
 
 If you use this. That means you added dependencies below:
@@ -65,7 +65,7 @@ If you use this. That means you added dependencies below:
 > For Android TV(Support).
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.3.7'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.3.8'
 ```
 
 If you use this. That means you added dependencies below:
@@ -334,7 +334,7 @@ it supports:
 ### Update Logs
 
 
-> 1.3.7 (Published)
+> 1.3.8 (Published)
 - Fix showing `TwoBtnEditDialog` bugs in BaseActivity .
 
 
