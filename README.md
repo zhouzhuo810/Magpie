@@ -21,7 +21,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.3.6'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.3.7'
 ```
 
 If you use this. That means you added dependencies below:
@@ -65,7 +65,7 @@ If you use this. That means you added dependencies below:
 > For Android TV(Support).
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.3.6'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.3.7'
 ```
 
 If you use this. That means you added dependencies below:
@@ -332,6 +332,11 @@ it supports:
 > It's for sharing Text or File to other app.
 
 ### Update Logs
+
+
+> 1.3.7 (Published)
+- Fix showing `TwoBtnEditDialog` bugs in BaseActivity .
+
 
 > 1.3.5 (Published)
 - Fix `Toast` not show when Notification Permission closed.
