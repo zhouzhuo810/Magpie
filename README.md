@@ -21,7 +21,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.3.8'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.3.9'
 ```
 
 If you use this. That means you added dependencies below:
@@ -65,7 +65,7 @@ If you use this. That means you added dependencies below:
 > For Android TV(Support).
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.3.8'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.3.9'
 ```
 
 If you use this. That means you added dependencies below:
@@ -332,6 +332,10 @@ it supports:
 > It's for sharing Text or File to other app.
 
 ### Update Logs
+
+
+> 1.3.9 (Published)
+- Change the max line of ListDialog to 2.
 
 
 > 1.3.8 (Published)
