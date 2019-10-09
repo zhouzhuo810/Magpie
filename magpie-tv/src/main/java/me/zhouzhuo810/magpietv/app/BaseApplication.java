@@ -26,6 +26,7 @@ public abstract class BaseApplication extends Application {
     
     @Override
     protected void attachBaseContext(Context base) {
+        BaseUtil.updateContext(base);
         if (shouldSupportMultiLanguage()) {
             int language = SpUtil.getInt(base, Cons.SP_KEY_OF_CHOOSED_LANGUAGE);
             switch (language) {

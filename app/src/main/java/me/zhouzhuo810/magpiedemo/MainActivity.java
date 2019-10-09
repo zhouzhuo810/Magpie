@@ -65,6 +65,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         btnTools = (Button) findViewById(R.id.btn_tools);
         btnSpinner = (Button) findViewById(R.id.btn_spinner);
         tvResult = (TextView) findViewById(R.id.tv_result);
+        
+        btnLanguage.setText(SimpleUtil.getString(R.string.language_setting));
     }
 
     @Override

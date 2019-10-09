@@ -21,7 +21,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.3.9'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.4.0'
 ```
 
 If you use this. That means you added dependencies below:
@@ -65,7 +65,7 @@ If you use this. That means you added dependencies below:
 > For Android TV(Support).
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.3.9'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.4.0'
 ```
 
 If you use this. That means you added dependencies below:
@@ -333,6 +333,9 @@ it supports:
 
 ### Update Logs
 
+
+> 1.4.0 (Published)
+- 修复Application Context多语言获取strings不正确问题；
 
 > 1.3.9 (Published)
 - Change the max line of ListDialog to 2.

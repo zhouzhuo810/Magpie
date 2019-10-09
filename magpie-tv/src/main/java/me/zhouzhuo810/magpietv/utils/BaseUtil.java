@@ -1,5 +1,6 @@
 package me.zhouzhuo810.magpietv.utils;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.ComponentName;
 import android.content.Context;
@@ -13,7 +14,8 @@ import android.net.Uri;
  */
 public class BaseUtil {
 
-    private static Application mApp;
+    @SuppressLint("StaticFieldLeak")
+    private static Context mApp;
 
     private BaseUtil() {
         throw new UnsupportedOperationException("u can't instantiate me...");
@@ -29,8 +31,12 @@ public class BaseUtil {
         //顺便初始化屏幕适配工具类
         ScreenAdapterUtil.init(mApp);
     }
-
-    public static Application getApp() {
+    
+    public static void updateContext(Context app) {
+        mApp = app;
+    }
+    
+    public static Context getApp() {
         checkContextNull();
         return mApp;
     }

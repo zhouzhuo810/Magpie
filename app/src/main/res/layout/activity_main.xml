@@ -31,7 +31,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10px"
-        android:text="@string/language_setting"
         android:textAllCaps="false"
         android:textColor="@color/colorPrimary"
         android:textSize="40px" />
