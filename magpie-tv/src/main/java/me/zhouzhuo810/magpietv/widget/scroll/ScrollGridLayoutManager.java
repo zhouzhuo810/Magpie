@@ -50,7 +50,12 @@ public class ScrollGridLayoutManager extends GridLayoutManager {
                         //返回滑动一个pixel需要多少毫秒
 
                     }
-
+    
+                    @Override
+                    protected void onTargetFound(View targetView, RecyclerView.State state, Action action) {
+                        /*重写该函数使其滑动到底部时不减速*/
+                    }
+    
                     @Override
                     protected int calculateTimeForDeceleration(int dx) {
                         return 0;

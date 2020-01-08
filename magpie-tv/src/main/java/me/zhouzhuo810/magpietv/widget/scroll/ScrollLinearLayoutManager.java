@@ -48,7 +48,12 @@ public class ScrollLinearLayoutManager extends LinearLayoutManager {
                         return MILLISECONDS_PER_PIXEL / displayMetrics.density;
                         //返回滑动一个pixel需要多少毫秒
                     }
-
+    
+                    @Override
+                    protected void onTargetFound(View targetView, RecyclerView.State state, Action action) {
+                        /*重写该函数使其滑动到底部时不减速*/
+                    }
+    
                     @Override
                     protected int calculateTimeForScrolling(int dx) {
                         return super.calculateTimeForScrolling(dx);

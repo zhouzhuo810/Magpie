@@ -21,7 +21,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.4.0'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.4.1'
 ```
 
 If you use this. That means you added dependencies below:
@@ -35,24 +35,24 @@ If you use this. That means you added dependencies below:
     //EventBus
     api 'org.greenrobot:eventbus:3.1.1'
     //Glide
-    api 'com.github.bumptech.glide:glide:4.9.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+    api 'com.github.bumptech.glide:glide:4.10.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
     //RxJava2
-    api "io.reactivex.rxjava2:rxjava:2.2.2"
+    api "io.reactivex.rxjava2:rxjava:2.2.10"
     //RxAndroid2
-    api 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    api 'io.reactivex.rxjava2:rxandroid:2.1.1'
     //Retrofit2
-    api 'com.squareup.retrofit2:retrofit:2.4.0'
+    api 'com.squareup.retrofit2:retrofit:2.5.0'
     //Retrofit2+RxJava2
-    api 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
     //Retrofit2+Gson
-    api 'com.squareup.retrofit2:converter-gson:2.4.0'
+    api 'com.squareup.retrofit2:converter-gson:2.5.0'
     //OkHttp打印请求数据
-    api 'com.squareup.okhttp3:logging-interceptor:3.11.0'
+    api 'com.squareup.okhttp3:logging-interceptor:3.12.0'
     //OkHttp进度监听progressmanager
     api 'me.jessyan:progressmanager:1.5.0'
     //AndPermission
-    api 'com.yanzhenjie:permission:2.0.0-rc12'
+    api 'com.yanzhenjie.permission:support:2.0.1'
     //ToastUtils
     api 'com.hjq:toast:8.0'
 
@@ -65,7 +65,7 @@ If you use this. That means you added dependencies below:
 > For Android TV(Support).
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.4.0'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.4.1'
 ```
 
 If you use this. That means you added dependencies below:
@@ -77,13 +77,13 @@ If you use this. That means you added dependencies below:
     //EventBus
     api 'org.greenrobot:eventbus:3.1.1'
     //RxJava2
-    api "io.reactivex.rxjava2:rxjava:2.2.2"
+    api "io.reactivex.rxjava2:rxjava:2.2.10"
     //RxAndroid2
-    api 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    api 'io.reactivex.rxjava2:rxandroid:2.1.1'
     //zz-horizontal-progressbar
     api 'me.zhouzhuo.zzhorizontalprogressbar:zz-horizontal-progressbar:1.1.0'
     //AndPermission
-    api 'com.yanzhenjie:permission:2.0.0-rc12'
+    api 'com.yanzhenjie.permission:support:2.0.1'
     //ToastUtils
     api 'com.hjq:toast:8.0'
 ```
@@ -333,6 +333,9 @@ it supports:
 
 ### Update Logs
 
+> 1.4.1 (Published)
+- 修复TV滚动控件滚动到底部减速问题；
+- TitleBar添加`setOnLeftClickListener`方法。
 
 > 1.4.0 (Published)
 - 修复Application Context多语言获取strings不正确问题；
