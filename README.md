@@ -21,7 +21,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.4.1'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.4.2'
 ```
 
 If you use this. That means you added dependencies below:
@@ -65,7 +65,7 @@ If you use this. That means you added dependencies below:
 > For Android TV(Support).
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.4.1'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.4.2'
 ```
 
 If you use this. That means you added dependencies below:
@@ -332,6 +332,9 @@ it supports:
 > It's for sharing Text or File to other app.
 
 ### Update Logs
+
+> 1.4.2 (Published)
+- 修复RvBaseAdapter数组越界问题；
 
 > 1.4.1 (Published)
 - 修复TV滚动控件滚动到底部减速问题；
