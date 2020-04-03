@@ -42,6 +42,12 @@ public abstract class BaseApplication extends Application {
                 case LanguageUtil.VI:
                     super.attachBaseContext(LanguageUtil.attachBaseContext(base, Cons.VI));
                     break;
+                case LanguageUtil.PT:
+                    super.attachBaseContext(LanguageUtil.attachBaseContext(base, Cons.PT));
+                    break;
+                case LanguageUtil.RU:
+                    super.attachBaseContext(LanguageUtil.attachBaseContext(base, Cons.RU));
+                    break;
             }
         } else {
             super.attachBaseContext(base);

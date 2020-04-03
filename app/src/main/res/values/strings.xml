@@ -32,6 +32,8 @@
         <item>繁体中文</item>
         <item>英语</item>
         <item>越南文</item>
+        <item>俄罗斯语</item>
+        <item>葡萄牙语</item>
     </string-array>
     <string-array name="list_test_data">
         <item>测试内容1</item>

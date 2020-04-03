@@ -26,18 +26,22 @@ public class LanguageUtil {
     public static final int TRADITIONAL_CHINESE = 1;
     public static final int ENGLISH = 2;
     public static final int VI = 3;
+    public static final int PT = 4;
+    public static final int RU = 5;
     
-    @IntDef({SIMPLE_CHINESE, TRADITIONAL_CHINESE, ENGLISH, VI})
+    @IntDef({SIMPLE_CHINESE, TRADITIONAL_CHINESE, ENGLISH, VI, PT, RU})
     @Retention(RetentionPolicy.SOURCE)
     public @interface LANGUAGE {
     }
     
     
-    private static Map<String, Locale> mSupportLanguages = new HashMap<String, Locale>(4) {{
+    private static Map<String, Locale> mSupportLanguages = new HashMap<String, Locale>(6) {{
         put(Cons.SIMPLIFIED_CHINESE, Locale.SIMPLIFIED_CHINESE);
         put(Cons.TRADITIONAL_CHINESE, Locale.TRADITIONAL_CHINESE);
         put(Cons.ENGLISH, Locale.ENGLISH);
         put(Cons.VI, new Locale("vi"));
+        put(Cons.PT, new Locale("pt"));
+        put(Cons.RU, new Locale("ru"));
     }};
     
     
@@ -76,6 +80,12 @@ public class LanguageUtil {
             case LanguageUtil.VI:
                 locale = LanguageUtil.getSupportLanguage(Cons.VI);
                 break;
+            case LanguageUtil.PT:
+                locale = LanguageUtil.getSupportLanguage(Cons.PT);
+                break;
+            case LanguageUtil.RU:
+                locale = LanguageUtil.getSupportLanguage(Cons.RU);
+                break;
         }
         if (locale == null) {
             return;
@@ -109,6 +119,12 @@ public class LanguageUtil {
                 break;
             case LanguageUtil.VI:
                 locale = LanguageUtil.getSupportLanguage(Cons.VI);
+                break;
+            case LanguageUtil.PT:
+                locale = LanguageUtil.getSupportLanguage(Cons.PT);
+                break;
+            case LanguageUtil.RU:
+                locale = LanguageUtil.getSupportLanguage(Cons.RU);
                 break;
         }
         if (locale == null) {

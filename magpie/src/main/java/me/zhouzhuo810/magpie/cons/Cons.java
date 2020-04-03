@@ -24,6 +24,10 @@ public final class Cons {
     public static final String ENGLISH = "en";
     //越南文
     public static final String VI = "vi";
+    //葡萄牙文
+    public static final String PT = "pt";
+    //俄罗斯文
+    public static final String RU = "ru_RU";
     // 繁体中文
     public static final String TRADITIONAL_CHINESE = "zh-hant";
 

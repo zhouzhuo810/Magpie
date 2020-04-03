@@ -163,6 +163,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                                 LanguageUtil.setGlobalLanguage(LanguageUtil.VI);
                                 recreate();
                                 break;
+                            case 4:
+                                LanguageUtil.setGlobalLanguage(LanguageUtil.RU);
+                                recreate();
+                                break;
+                            case 5:
+                                LanguageUtil.setGlobalLanguage(LanguageUtil.PT);
+                                recreate();
+                                break;
                         }
                     }
                 });

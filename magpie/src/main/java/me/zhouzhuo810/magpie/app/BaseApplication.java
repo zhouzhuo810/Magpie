@@ -22,7 +22,8 @@ public abstract class BaseApplication extends Application {
         BaseUtil.init(this);
     
         ToastUtils.init(this);
-        ToastUtils.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.BOTTOM, 0, SimpleUtil.getScaledValue(200));
+        ToastUtils.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.BOTTOM,
+            0, SimpleUtil.getScaledValue(200));
     }
     
     @Override
@@ -42,6 +43,12 @@ public abstract class BaseApplication extends Application {
                     break;
                 case LanguageUtil.VI:
                     super.attachBaseContext(LanguageUtil.attachBaseContext(base, Cons.VI));
+                    break;
+                case LanguageUtil.PT:
+                    super.attachBaseContext(LanguageUtil.attachBaseContext(base, Cons.PT));
+                    break;
+                case LanguageUtil.RU:
+                    super.attachBaseContext(LanguageUtil.attachBaseContext(base, Cons.RU));
                     break;
             }
         } else {
