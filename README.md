@@ -21,7 +21,7 @@ allprojects {
 > For Phone And Pad (Support) .
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.4.3'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie:1.4.4'
 ```
 
 If you use this. That means you added dependencies below:
@@ -65,7 +65,7 @@ If you use this. That means you added dependencies below:
 > For Android TV(Support).
 
 ```
-    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.4.3'
+    implementation 'com.github.zhouzhuo810.Magpie:magpie-tv:1.4.4'
 ```
 
 If you use this. That means you added dependencies below:
@@ -332,6 +332,9 @@ it supports:
 > It's for sharing Text or File to other app.
 
 ### Update Logs
+
+> 1.4.4 (Published)
+- RxHelper参数int改成long；
 
 > 1.4.3 (Published)
 - 添加俄文和葡萄牙文支持；

@@ -45,7 +45,7 @@ public class RxHelper {
      * @param onNext 订阅
      * @return 用于取消订阅
      */
-    public static Disposable countDown(int count, @NonNull Consumer<Long> onNext, Action onComplete) {
+    public static Disposable countDown(long count, @NonNull Consumer<Long> onNext, Action onComplete) {
         return countDown(count, null, onNext, onComplete);
     }
     
@@ -58,7 +58,7 @@ public class RxHelper {
      * @param onNext     过程订阅
      * @return 用于取消订阅
      */
-    public static Disposable countDown(int count, Consumer<Disposable> onStart, @NonNull Consumer<Long> onNext, Action onComplete) {
+    public static Disposable countDown(long count, Consumer<Disposable> onStart, @NonNull Consumer<Long> onNext, Action onComplete) {
         Observable<Long> longObservable = Observable.intervalRange(0, count, 0, 1, TimeUnit.SECONDS)
             .compose(RxHelper.<Long>io_main());
         if (onStart != null) {
@@ -85,7 +85,7 @@ public class RxHelper {
      * @param onError    报错订阅
      * @return 用于取消订阅
      */
-    public static Disposable countDown(int count, Consumer<Disposable> onStart, @NonNull Consumer<Long> onNext, @NonNull Consumer<Throwable> onError, Action onComplete) {
+    public static Disposable countDown(long count, Consumer<Disposable> onStart, @NonNull Consumer<Long> onNext, @NonNull Consumer<Throwable> onError, Action onComplete) {
         Observable<Long> longObservable = Observable.intervalRange(0, count, 0, 1, TimeUnit.SECONDS)
             .compose(RxHelper.<Long>io_main());
         if (onStart != null) {
@@ -105,7 +105,7 @@ public class RxHelper {
      * @param onNext   完成订阅
      * @return 用户取消订阅
      */
-    public static Disposable timer(int period, TimeUnit timeUnit, @NonNull Consumer<Long> onNext) {
+    public static Disposable timer(long period, TimeUnit timeUnit, @NonNull Consumer<Long> onNext) {
         return Observable.timer(period, timeUnit)
             .compose(RxHelper.<Long>io_main())
             .subscribe(onNext, new Consumer<Throwable>() {
@@ -125,7 +125,7 @@ public class RxHelper {
      * @param onError  报错订阅
      * @return 用户取消订阅
      */
-    public static Disposable timer(int period, TimeUnit timeUnit, @NonNull Consumer<Long> onNext, @NonNull Consumer<Throwable> onError) {
+    public static Disposable timer(long period, TimeUnit timeUnit, @NonNull Consumer<Long> onNext, @NonNull Consumer<Throwable> onError) {
         return Observable.timer(period, timeUnit)
             .compose(RxHelper.<Long>io_main())
             .subscribe(onNext, onError);
@@ -139,7 +139,7 @@ public class RxHelper {
      * @param consumer 完成订阅
      * @return 用户取消订阅
      */
-    public static Disposable interval(int period, TimeUnit timeUnit, @NonNull Consumer<Long> consumer) {
+    public static Disposable interval(long period, TimeUnit timeUnit, @NonNull Consumer<Long> consumer) {
         return Observable.interval(0, period, timeUnit)
             .compose(RxHelper.<Long>io_main())
             .subscribe(consumer, new Consumer<Throwable>() {
@@ -159,7 +159,7 @@ public class RxHelper {
      * @param onError  报错订阅
      * @return 用户取消订阅
      */
-    public static Disposable interval(int period, TimeUnit timeUnit, @NonNull Consumer<Long> onNext, @NonNull Consumer<Throwable> onError) {
+    public static Disposable interval(long period, TimeUnit timeUnit, @NonNull Consumer<Long> onNext, @NonNull Consumer<Throwable> onError) {
         return Observable.interval(0, period, timeUnit)
             .compose(RxHelper.<Long>io_main())
             .subscribe(onNext, onError);
@@ -174,7 +174,7 @@ public class RxHelper {
      * @param onNext       完成订阅
      * @return 用户取消订阅
      */
-    public static Disposable interval(int initialDelay, int period, TimeUnit timeUnit, @NonNull Consumer<Long> onNext) {
+    public static Disposable interval(long initialDelay, long period, TimeUnit timeUnit, @NonNull Consumer<Long> onNext) {
         return Observable.interval(initialDelay, period, timeUnit)
             .compose(RxHelper.<Long>io_main())
             .subscribe(onNext, new Consumer<Throwable>() {
